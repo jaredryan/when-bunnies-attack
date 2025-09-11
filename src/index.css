@@ -3,13 +3,14 @@
             box-sizing: border-box;
     --primary: darkorange;
     --primarylight: orange;
-    --secondarylight: lightgreen;
-    --secondaryfont: green;
+    --secondarylight: palegreen;
     --background: white;
+    --tertiary: blanchedalmond;
+    --backgroundsecondary: cornsilk;
     --backgroundsecondary: cornsilk;
     --font: black;
     --primaryfont: darkorange;
-    --secondary: green;
+    --secondary: lightgreen;
     
     color: var(--font);
 }
@@ -66,6 +67,10 @@ h2 {
     margin-bottom: 24px;
 }
 
+.gameContainer h2 {
+    margin-top: 48px;
+}
+
 p {
     margin-bottom: 16px;
 }
@@ -82,12 +87,9 @@ button {
     text-align: center;
     border-radius: 6px;
     font-weight: 400;
-    padding: 4px 12px;
-}
-
-button:hover {
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
+    padding: 6px 18px;
+    font-size: 18px;
+    transition: background-color 0.5s;
 }
 
 button.gameButton {
@@ -112,6 +114,15 @@ button.gameButton:hover,
 
 .actionContainer:last-of-type button:hover {
     background-color: var(--secondarylight);
+}
+
+button.quit {
+    margin: 20px auto 0;
+    background-color: var(--tertiary);
+}
+
+button.quit:hover {
+    background-color: var(--backgroundsecondary);
 }
 
 @media (max-width: 1000px) {
@@ -149,7 +160,7 @@ button.gameButton:hover,
 }
 
 .pageContainer > * {
-    max-width: 660px;
+    max-width: 600px;
 }
 
 .actionContainer {

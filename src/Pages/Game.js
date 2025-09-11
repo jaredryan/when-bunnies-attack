@@ -4,14 +4,15 @@ const Game = (props) => (
         <h2>Menu</h2>
         <ul className="actionContainer">
             <li><button>Fight</button></li>
-            <li><button>Explore</button></li>
+            <li><button>Leave</button></li>
         </ul>
         <ul className="actionContainer">
             <li><button>Status</button></li>
             <li><button>Inventory</button></li>
-            <li><button>Map</button></li>
-            <li><button onClick={() => props.endGame(false)}>Quit</button></li>
+            <li><button>Map</button></li> {/* Doing this would be a new feature! */}
+            <li><button>History</button></li> {/* Doing this would be a new feature! */}
         </ul>
+        <button className="quit" onClick={() => props.endGame(false)}>Quit</button>
     </div>
 )
 
