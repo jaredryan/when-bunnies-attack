@@ -165,7 +165,8 @@ button.quit {
 }
 
 .pageContainer > * {
-    max-width: 600px;
+    max-width: 630px;
+    width: 100%;
 }
 
 .dialogueOptions {
