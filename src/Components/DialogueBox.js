@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import History from "./History"
 
-const Typewriter = ({ text, speed, done, onDone, skip }) => {
+const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
     const [displayed, setDisplayed] = useState("")
     const [history, setHistory] = useState([])
 
@@ -12,6 +12,12 @@ const Typewriter = ({ text, speed, done, onDone, skip }) => {
             onDone?.()
             setDisplayed("")
             setHistory([...history, text])
+            if (scrollRef?.current) {
+                scrollRef.current.scrollTo({
+                    top: scrollRef.current.scrollHeight,
+                    behavior: "smooth",
+                });
+            }
         }
 
         if (skip) {
@@ -24,17 +30,25 @@ const Typewriter = ({ text, speed, done, onDone, skip }) => {
         const interval = setInterval(() => {
             i++
 
-            if (i >= text.length) {
-                clearInterval(interval)
-                endTyping()
-                return
-            }
+            if (text) {
+                if (i >= text.length) {
+                    clearInterval(interval)
+                    endTyping()
+                    return
+                }
 
-            setDisplayed((prev) => prev + text[i])
+                setDisplayed((prev) => prev + text[i])
+                if (scrollRef?.current) {
+                    scrollRef.current.scrollTo({
+                        top: scrollRef.current.scrollHeight,
+                        behavior: "smooth",
+                    });
+                }
+            }
         }, speed)
 
         return () => clearInterval(interval)
-    }, [text, speed, skip, history, onDone, done])
+    }, [text, speed, skip, history, onDone, done, scrollRef])
 
     let textToDisplay = history
     if (displayed) textToDisplay = [...textToDisplay, displayed]
@@ -46,7 +60,9 @@ export default function DialogueBox({ lines, speed = 40 }) {
     const [current, setCurrent] = useState(0)
     const [done, setDone] = useState(false)
     const [skip, setSkip] = useState(false)
+    const [timeoutId, setTimeoutId] = useState(null)
     const [history, setHistory] = useState([])
+    const scrollRef = useRef(null);
 
     const advanceToNextLine = () => {
         setCurrent((c) => c + 1)
@@ -54,38 +70,43 @@ export default function DialogueBox({ lines, speed = 40 }) {
         setSkip(false)
     }
 
-    const handleNext = () => {
-        if (!done && !skip) {
-            // Skip typing, show full line
-            setSkip(true)
-        } else {
-            advanceToNextLine()
+    const handleSkip = () => {
+        if (!done) setSkip(true)
+        else {
+            if (timeoutId) clearTimeout(timeoutId)
+            if (current < lines.length - 1) {
+                advanceToNextLine()
+            }
         }
     }
 
     return (
-        <div className="p-4 border rounded bg-gray-900 text-white max-w-lg">
-            <Typewriter
-                text={lines[current]}
-                speed={speed}
-                skip={skip}
-                done={done}
-                onDone={() => {
-                    setDone(true)
-                    setHistory((h) => [...h, lines[current]])
-                    if (current < lines.length - 1)
-                        setTimeout(advanceToNextLine, 2000)
-                    }
-                }
-            />
+        <div className="dialogueBoxContainer">
+            <div ref={scrollRef} className="dialogueContainer">
+                <Typewriter
+                    text={lines[current]}
+                    speed={speed}
+                    skip={skip}
+                    done={done}
+                    scrollRef={scrollRef}
+                    onDone={() => {
+                        setDone(true)
+                        setHistory((h) => [...h, lines[current]])
+                        if (current < lines.length - 1) {
+                            const nextDialogueTimeoutId = setTimeout(advanceToNextLine, 1000)
+                            setTimeoutId(nextDialogueTimeoutId)
+                        }
+                    }}
+                />
+            </div>
             <div className="dialogueOptions">
                 <History history={history} />
                 <button
                     className="next"
-                    onClick={handleNext}
-                    disabled={current >= lines.length - 1}
+                    onClick={handleSkip}
+                    disabled={done && current >= lines.length - 1}
                 >
-                    {done || skip ? "Next" : "Skip"}
+                    Skip
                 </button>
             </div>
         </div>

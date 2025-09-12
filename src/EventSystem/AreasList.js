@@ -15,17 +15,15 @@ var swRoom0 = new Area("SW Room", [], 0, function() {
 		// Name established
 		player.name = readlineSync.question("Please enter your name: ");
 
-		console.log("\n\"...I'm " + player.name + '. My head hurts. I wonder if I actually forgot anything.');
+		console.log("\n\"...I'm " + player.name + '. My head hurts. I wonder what else I forgot.');
 		sleep.msleep(2000);
-		console.log("Like...for example, where I'm at. What is this place?\"\n");
+		console.log("Like...for example, where I'm at. Where the heck am I?\"\n");
 		sleep.msleep(2000);
-		console.log("As you look around, you notice that you are in a simple room. The walls");
+		console.log("As you look around, you notice that you are in a simple room.");
 		sleep.msleep(2000);
-		console.log("are a dull grey; the bed you are on is simple: wood, white sheets, and white");
+		console.log("The walls are a dull grey; the bed you are on is simple: wood, white sheets, and white blankets.");
 		sleep.msleep(2000);
-		console.log("blankets. There's a nightstand by the bed. You don't sense any danger, but");
-		sleep.msleep(2000);
-		console.log("you don't quite feel comfortable either.");
+		console.log("There's a nightstand by the bed. You don't sense any danger, but you don't quite feel comfortable either.");
 		sleep.msleep(2000);
 	}
 );

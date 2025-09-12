@@ -4,9 +4,16 @@ const Game = (props) => (
     <div className="gameContainer">
         <DialogueBox
             lines={[
-                "Once upon a time, there was a hero...",
-                "He set out on a long journey.",
-                "The path ahead was full of danger and wonder."
+                `"Ughhh...my head hurts."`,
+                `As you wake up, you look around, and see that you are in a drab room.`,
+                `Oh so very drab.`,
+                `"Clearly, the designer of this room watched a lot of HGTV."`,
+                `So very grey. With a splash of sage green on the bedstand. It's borderline sterile.`,
+                `It's just as off-putting as the headache you've got, which just reminded you that it's here to stay.`,
+                `"Well, this sucks. And uh...I don't exactly remember how I got here, and I don't know this room."`,
+                `Unsure if you just partied too hard last night or got kidnapped, you scratch your head.`,
+                `"I guess I'll take a look around...and I'll do that quietly, just in case."`,
+                `"Hopefully it'll come back to me."`,
             ]}
         />
         <h2>Menu</h2>
