@@ -10,8 +10,8 @@ const Winner = (props) => (
         <p>
             I'd give you some cake if I could (not carrot, of course), but since I can't,
             let me just take this moment to say "Thank you!" And if you had fun anyways,
-            share with a friend or click that big button below to play with your new friends
-            again.
+            please share with a friend or click that big button below to play with your new
+            friends again.
         </p>
         <button className="gameButton" onClick={props.startGame}>Play Again</button>
     </div>
