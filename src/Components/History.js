@@ -15,7 +15,7 @@ const Dialog = ({ open, onCancel, children }) => {
     }, [open]);
 
     return (
-        <dialog ref={dialogRef} onCancel={onCancel} className="dialog">
+        <dialog ref={dialogRef} onCancel={onCancel} className={`dialog ${open ? 'open' : 'closed'}`}>
             {children}
         </dialog>
     )
@@ -32,7 +32,7 @@ const History = (props) => {
                         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
-                <div>
+                <div className="scrollableHistory">
                     {props.history.map((line) => (
                         <p>{line}</p>
                     ))}
