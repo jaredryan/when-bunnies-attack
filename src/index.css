@@ -28,10 +28,6 @@ body, h1, h2, h3, h4, p, ul, li, a, button {
     padding: 0;
 }
 
-a {
-    text-decoration: none;
-}
-
 ul {
     list-style: none;
 }
@@ -163,7 +159,7 @@ button.quit {
 .pageContainer {
     padding: 50px;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -199,6 +195,7 @@ button.quit {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 16px;
 }
@@ -252,6 +249,10 @@ dialog::backdrop {
     p, li {
         font-size: 16px;
         line-height: 23px;
+    }
+
+    .pageContainer {
+        padding: 36px;
     }
 }
 

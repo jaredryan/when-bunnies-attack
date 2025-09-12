@@ -7,9 +7,12 @@ const Loser = (props) => (
             promptly died. You're not alone.
         </p>
         <p>
-            Some even went so far as to use something as barbaric as the "holy hand grenade."
+            Some even went so far as to use something as barbaric as the "
+            <a href="https://www.youtube.com/watch?v=tgj3nZWtOfA" target="_blank" className="emphasis">
+                holy hand grenade
+            </a>."
             How unsettling. Here, we're refined: we use knives and swords instead.
-            And a very handy <span className="emphasis">Restart</span> button.
+            And we have a very handy <span className="emphasis">Restart</span> button below.
         </p>
         <button className="gameButton" onClick={props.startGame}>Restart Game</button>
     </div>

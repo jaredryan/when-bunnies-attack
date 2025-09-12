@@ -39,10 +39,7 @@ const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
 
                 setDisplayed((prev) => prev + text[i])
                 if (scrollRef?.current) {
-                    scrollRef.current.scrollTo({
-                        top: scrollRef.current.scrollHeight,
-                        behavior: "smooth",
-                    });
+                    scrollRef.current.scrollTop = scrollRef.current.scrollHeight
                 }
             }
         }, speed)
