@@ -8,7 +8,12 @@ const Loser = (props) => (
         </p>
         <p>
             Some even went so far as to use something as barbaric as the "
-            <a href="https://www.youtube.com/watch?v=tgj3nZWtOfA" target="_blank" className="emphasis">
+            <a
+                href="https://www.youtube.com/watch?v=tgj3nZWtOfA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="emphasis"
+            >
                 holy hand grenade
             </a>."
             How unsettling. Here, we're refined: we use knives and swords instead.
