@@ -2,7 +2,6 @@
 
 // Require Statements
 var readlineSync = require("readline-sync");
-var sleep = require("sleep");
 
 /********** Set Player, Enemies, Items, and other useful information **********/
 

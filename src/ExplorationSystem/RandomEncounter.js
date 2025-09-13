@@ -1,27 +1,30 @@
 // The Final Escape Special Event
 function randomEncounterWalk(playerAreas) {
-	console.log("You see a sign saying it is about 3 kilometers to the exit.");
-	sleep.msleep(2000);
-	console.log("You start pushing forward.");
-	sleep.msleep(2000);
+	const entryMessage = [
+		`You see a sign saying it is about 3 kilometers to the exit.`
+		`You start pushing forward.`
+	]
 
 	// Loop for ~4 encounters
 	var player = playerAreas[0];
-	var i = 0;
-	while (i < 3) {
+	var distanceWalked = 0;
+	while (distanceWalked < 3) {
 		if (!walk(player)) {
 			gameInProgress = false;
 			return false;
 		}
-		i += 0.25;
-		console.log("You have walked " + i + " kilometers.");
+		distanceWalked += 0.25;
+
+		const progressMessage = `You have walked ${distanceWalked} kilometers.`
 	}
+
 	// Story
-	console.log("You made it all the way through, and the path seems clear.");
-	sleep.msleep(2000);
-	console.log("If you wish to continue or go back, no enemies will attack you.");
-	sleep.msleep(2000);
-	console.log("The " + areas[8].name + " is now available.");
+	const exitMessage = [
+		`You made it all the way through, and the path seems clear.`,
+		`If you wish to continue or go back, no enemies will attack you.`,
+		`The ${areas[8].name} is now available.`,
+	]
+
 	// Add new area
 	playerAreas[1][7].connectedAreas.push(8);
 	return false;
