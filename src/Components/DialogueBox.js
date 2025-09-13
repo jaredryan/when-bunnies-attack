@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import History from "./History";
 
-const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
+export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
   const [displayed, setDisplayed] = useState("");
   const [history, setHistory] = useState([]);
 
@@ -53,7 +53,7 @@ const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
   return textToDisplay.map((content) => <p className="gameLog">{content}</p>);
 };
 
-export default function DialogueBox({ lines, speed = 40 }) {
+const DialogueBox = ({ lines, speed = 40 }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
   const [skip, setSkip] = useState(false);
@@ -109,3 +109,5 @@ export default function DialogueBox({ lines, speed = 40 }) {
     </div>
   );
 }
+
+export default DialogueBox

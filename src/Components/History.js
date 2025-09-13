@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const Dialog = ({ open, onCancel, children }) => {
+export const Dialog = ({ open, onCancel, children }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {

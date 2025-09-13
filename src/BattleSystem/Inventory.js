@@ -1,6 +1,6 @@
 /* Displays all of the player's current items and prompts the user to choose one.
    It returns "Empty" if he or she does not have any items. */
-function selectItem(player) {
+export const selectItem = (player) => {
   // Display items
   console.log("Inventory:\n" + returnItemsString(player));
   var itemOptions = [];
@@ -18,7 +18,7 @@ function selectItem(player) {
 }
 
 // Allows the user to use the item
-function useItem(player, enemy, itemChoice) {
+export const useItem = (player, enemy, itemChoice) => {
   var item = player.inventory[itemChoice];
   if (item === undefined) {
     return false;
@@ -29,7 +29,7 @@ function useItem(player, enemy, itemChoice) {
 }
 
 // Prompts the user for an item to use. Returns false if it was unsuccessful
-function selectAndUseItem(player, enemy) {
+export const selectAndUseItem = (player, enemy) => {
   var itemChoice = selectItem(player, enemy);
   if (itemChoice === "Empty") {
     return false;

@@ -1,5 +1,5 @@
 // Returns true if the player is still alive, false if he or she died.
-function fight(enemyInfo, player) {
+const fight = (enemyInfo, player) => {
   enemy = new Enemy(enemyInfo[0], enemyInfo[1], enemyInfo[2], enemyInfo[3]);
   console.log("You encountered a " + enemy.name + "!");
   while (true) {
@@ -42,3 +42,5 @@ function fight(enemyInfo, player) {
     }
   }
 }
+
+export default fight

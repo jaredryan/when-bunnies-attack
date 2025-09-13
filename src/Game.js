@@ -1,17 +1,17 @@
 // Initialization
 
 // Require Statements
-var readlineSync = require("readline-sync");
+const readlineSync = require("readline-sync");
 
 /********** Set Player, Enemies, Items, and other useful information **********/
 
 // In-game variables
-var won = false;
-var gameInProgress = true;
-var voluntaryExit = false;
-var currentAreaIndex = 0;
-var connectedIndex;
-var area;
+let won = false;
+let gameInProgress = true;
+let voluntaryExit = false;
+let currentAreaIndex = 0;
+let connectedIndex;
+let area;
 
 while (gameInProgress) {
   area = areas[currentAreaIndex];

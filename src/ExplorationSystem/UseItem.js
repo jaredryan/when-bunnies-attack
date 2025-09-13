@@ -1,5 +1,5 @@
 // Allows the player to use an item while in the field
-function useItemInField(player) {
+const useItemInField = (player) => {
   var itemChoice = selectItem(player);
   if (itemChoice === "Empty" || itemChoice === -1) {
     return true;
@@ -19,3 +19,5 @@ function useItemInField(player) {
   player.inventory.splice(itemChoice, 1);
   return true;
 }
+
+export default useItemInField

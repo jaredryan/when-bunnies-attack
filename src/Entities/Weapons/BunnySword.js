@@ -1,1 +1,3 @@
-var bunnySword = new Weapon("Bunny Sword", 2);
+const bunnySword = new Weapon("Bunny Sword", 2);
+
+export default bunnySword

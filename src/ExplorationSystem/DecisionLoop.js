@@ -3,7 +3,7 @@
    out their consequences. The area is updated as needed.
    Once the loop of decisions in the current area is completed, the index of the
    next area in the areas array is returned. */
-function decisionLoop(area) {
+const decisionLoop = (area) => {
   var isRunning = true;
   area.story(); // run story dialogue and events for the first time entering the area
   while (isRunning) {
@@ -60,3 +60,5 @@ function decisionLoop(area) {
   }
   return newIndex;
 }
+
+export default decisionLoop

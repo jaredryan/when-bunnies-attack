@@ -1,4 +1,4 @@
-var throwingKnife = [
+const throwingKnife = [
   "Throwing Knife",
   "Use this to hurt the enemy 3 damage.",
   false,
@@ -6,3 +6,5 @@ var throwingKnife = [
     enemy.hp -= 3;
   },
 ];
+
+export default throwingKnife

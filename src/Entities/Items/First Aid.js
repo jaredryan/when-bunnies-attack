@@ -1,4 +1,4 @@
-var firstAidInfo = [
+const firstAidInfo = [
   "First Aid Kit",
   "Use this to recover 5 damage.",
   true,
@@ -6,3 +6,5 @@ var firstAidInfo = [
     recoverHP(player, 5);
   },
 ];
+
+export default firstAidInfo

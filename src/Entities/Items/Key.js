@@ -1,1 +1,3 @@
-var key = ["Key", "Opens secret passages", false, function () {}];
+const key = ["Key", "Opens secret passages", false, function () {}];
+
+export default key

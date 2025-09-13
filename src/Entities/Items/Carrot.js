@@ -1,4 +1,4 @@
-var carrot = [
+const carrot = [
   "Carrot",
   "Eat this to recover 3 damage.",
   true,
@@ -6,3 +6,5 @@ var carrot = [
     recoverHP(player, 3);
   },
 ];
+
+export default carrot

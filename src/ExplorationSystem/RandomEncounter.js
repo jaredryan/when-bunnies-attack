@@ -1,5 +1,5 @@
 // The Final Escape Special Event
-function randomEncounterWalk(playerAreas) {
+const randomEncounterWalk = (playerAreas) => {
   const entryMessage = [
     `You see a sign saying it is about 3 kilometers to the exit.``You start pushing forward.`,
   ];
@@ -31,14 +31,16 @@ function randomEncounterWalk(playerAreas) {
 
 /* Picks a random enemy from the current possibilities and returns a newly constructed
    version of that enemy. */
-function returnRandomIndex() {
+export const returnRandomIndex = () => {
   return enemies[Math.floor(Math.random() * enemies.length)];
 }
 
 // Returns true if the player makes it to the destination, false if he or she died
-function walk(player) {
+export const walk = (player) => {
   if (Math.random() < 0.34) {
     return fight(returnRandomIndex(), player);
   }
   return true;
 }
+
+export default randomEncounterWalk

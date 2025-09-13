@@ -7,3 +7,5 @@ function Item(name, description, isUseableInField, effect) {
     effect(player, enemy);
   };
 }
+
+export default Item

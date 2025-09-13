@@ -1,5 +1,5 @@
 // The Final Boss Special Event
-function finalEncounter(enemyPlayer) {
+const finalEncounter = (enemyPlayer) => {
   const entryMessage = [
     `Bunny Dictator: "Hmmm...?`,
     `I see. You\'ve woken up. Welcome.`,
@@ -23,3 +23,5 @@ function finalEncounter(enemyPlayer) {
     return false;
   }
 }
+
+export default finalEncounter

@@ -1,5 +1,5 @@
 // Obtain an item in the area. Stay in the area. PlayerItem is an array: [player, item, message]
-function getItems(playerItemMessage) {
+const getItems = (playerItemMessage) => {
   console.log(playerItemMessage[2]);
   for (var i = 0; i < playerItemMessage[1].length; i++) {
     var item = playerItemMessage[1][i];
@@ -8,3 +8,5 @@ function getItems(playerItemMessage) {
   }
   return true;
 }
+
+export default getItems

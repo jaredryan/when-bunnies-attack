@@ -1,5 +1,5 @@
 // Returns true if the attempt is successful, false otherwise.
-function fleeAttempt() {
+const fleeAttempt = () => {
   console.log(fleeAttemptMessage);
   if (Math.random() < 0.5) {
     console.log(fleeSuccessMessage);
@@ -9,3 +9,5 @@ function fleeAttempt() {
     return false;
   }
 }
+
+export default fleeAttempt

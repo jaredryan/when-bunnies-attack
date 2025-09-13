@@ -1,5 +1,5 @@
 // Version of fight where escape is not an option--for story events.
-function forcedFight(enemyInfo, player) {
+const forcedFight = (enemyInfo, player) => {
   enemy = new Enemy(enemyInfo[0], enemyInfo[1], enemyInfo[2], enemyInfo[3]);
   console.log("You encountered a " + enemy.name + "!");
   while (true) {
@@ -40,3 +40,5 @@ function forcedFight(enemyInfo, player) {
     }
   }
 }
+
+export default forcedFight

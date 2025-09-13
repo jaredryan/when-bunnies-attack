@@ -17,3 +17,5 @@ function Enemy(name, hp, attackPower, reward) {
     reward(player);
   };
 }
+
+export default Enemy

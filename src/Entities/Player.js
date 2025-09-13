@@ -1,5 +1,5 @@
 // PLAYER DEFINITION
-var player = {
+const player = {
   name: "Unknown",
   hp: 10,
   maxHP: 10,
@@ -73,3 +73,5 @@ var player = {
     }
   },
 };
+
+export default player

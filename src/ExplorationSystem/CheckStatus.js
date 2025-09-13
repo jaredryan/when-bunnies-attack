@@ -1,5 +1,5 @@
 // Checks status in the tree. Stay in the area.
-function checkStatus(player) {
+const checkStatus = (player) => {
   printStatus(player);
   return true;
 }

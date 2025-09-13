@@ -1,5 +1,5 @@
 // Leads to new decision tree.
-function unlockAreas(messageCurrentAreaIndexNewAreaIndex) {
+const unlockAreas = (messageCurrentAreaIndexNewAreaIndex) => {
   var info = messageCurrentAreaIndexNewAreaIndex;
   console.log(info[0]);
   for (var i = 0; i < info[2].length; i++) {
@@ -8,3 +8,5 @@ function unlockAreas(messageCurrentAreaIndexNewAreaIndex) {
   }
   return true;
 }
+
+export default unlockAreas
