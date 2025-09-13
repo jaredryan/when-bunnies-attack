@@ -5,6 +5,7 @@ This is the file associated with the Colossal Adventure Console RPG, which can b
 The RPG project is a text game that runs in the terminal through node. It contains 1000+ lines of code that that allows the user to play an RPG with scary bunnies. The game's mechanics and systems required a large amount of organized code, and a decent amount of code consists of lines of dialogue.
 
 The games includes the following:
+
 - A main character
 - Random enemies
 - Forced encounters

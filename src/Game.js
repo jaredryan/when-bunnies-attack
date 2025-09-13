@@ -14,15 +14,15 @@ var connectedIndex;
 var area;
 
 while (gameInProgress) {
-	area = areas[currentAreaIndex];
-	connectedIndex = decisionLoop(area);
-	currentAreaIndex = area.connectedAreas[connectedIndex];
+  area = areas[currentAreaIndex];
+  connectedIndex = decisionLoop(area);
+  currentAreaIndex = area.connectedAreas[connectedIndex];
 }
 
 if (voluntaryExit) {
-	console.log("\nGame terminated at user's request.\n");
+  console.log("\nGame terminated at user's request.\n");
 } else if (!won) {
-	lostGameMessage();
+  lostGameMessage();
 } else {
-	wonGameMessage();
+  wonGameMessage();
 }

@@ -1,45 +1,44 @@
 // The Final Escape Special Event
 function randomEncounterWalk(playerAreas) {
-	const entryMessage = [
-		`You see a sign saying it is about 3 kilometers to the exit.`
-		`You start pushing forward.`
-	]
+  const entryMessage = [
+    `You see a sign saying it is about 3 kilometers to the exit.``You start pushing forward.`,
+  ];
 
-	// Loop for ~4 encounters
-	var player = playerAreas[0];
-	var distanceWalked = 0;
-	while (distanceWalked < 3) {
-		if (!walk(player)) {
-			gameInProgress = false;
-			return false;
-		}
-		distanceWalked += 0.25;
+  // Loop for ~4 encounters
+  var player = playerAreas[0];
+  var distanceWalked = 0;
+  while (distanceWalked < 3) {
+    if (!walk(player)) {
+      gameInProgress = false;
+      return false;
+    }
+    distanceWalked += 0.25;
 
-		const progressMessage = `You have walked ${distanceWalked} kilometers.`
-	}
+    const progressMessage = `You have walked ${distanceWalked} kilometers.`;
+  }
 
-	// Story
-	const exitMessage = [
-		`You made it all the way through, and the path seems clear.`,
-		`If you wish to continue or go back, no enemies will attack you.`,
-		`The ${areas[8].name} is now available.`,
-	]
+  // Story
+  const exitMessage = [
+    `You made it all the way through, and the path seems clear.`,
+    `If you wish to continue or go back, no enemies will attack you.`,
+    `The ${areas[8].name} is now available.`,
+  ];
 
-	// Add new area
-	playerAreas[1][7].connectedAreas.push(8);
-	return false;
+  // Add new area
+  playerAreas[1][7].connectedAreas.push(8);
+  return false;
 }
 
 /* Picks a random enemy from the current possibilities and returns a newly constructed
    version of that enemy. */
 function returnRandomIndex() {
-	return enemies[Math.floor(Math.random() * enemies.length)];
+  return enemies[Math.floor(Math.random() * enemies.length)];
 }
 
 // Returns true if the player makes it to the destination, false if he or she died
 function walk(player) {
-	if (Math.random() < 0.34) {
-		return fight(returnRandomIndex(), player); 
-	}
-	return true;
+  if (Math.random() < 0.34) {
+    return fight(returnRandomIndex(), player);
+  }
+  return true;
 }

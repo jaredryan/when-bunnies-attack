@@ -1,276 +1,296 @@
 * {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    --primary: darkorange;
-    --primarylight: orange;
-    --secondarylight: palegreen;
-    --background: white;
-    --tertiary: blanchedalmond;
-    --backgroundsecondary: cornsilk;
-    --backgroundsecondaryrgb: 255, 248, 220;
-    --font: black;
-    --primaryfont: darkorange;
-    --secondary: lightgreen;
-    
-    color: var(--font);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  --primary: darkorange;
+  --primarylight: orange;
+  --secondarylight: palegreen;
+  --background: white;
+  --tertiary: blanchedalmond;
+  --backgroundsecondary: cornsilk;
+  --backgroundsecondaryrgb: 255, 248, 220;
+  --font: black;
+  --primaryfont: darkorange;
+  --secondary: lightgreen;
+
+  color: var(--font);
 }
 
 *:focus {
-    outline:none;
+  outline: none;
 }
 
 * a {
-    color: inherit;
+  color: inherit;
 }
 
-body, h1, h2, h3, h4, p, ul, li, a, button {
-    margin: 0;
-    padding: 0;
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+li,
+a,
+button {
+  margin: 0;
+  padding: 0;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
-p, li, button {
-    font-family: "Muli", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
+p,
+li,
+button {
+  font-family: "Muli", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
 
-p, li {
-    line-height: 22px;
+p,
+li {
+  line-height: 22px;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Roboto Slab', serif;
-    text-align: center;
-    margin: 0;
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Roboto Slab", serif;
+  text-align: center;
+  margin: 0;
 }
 
 h1 {
-    font-size: 60px;
-    letter-spacing: 0.6;
-    font-weight: 400;
-    margin-bottom: 32px;
+  font-size: 60px;
+  letter-spacing: 0.6;
+  font-weight: 400;
+  margin-bottom: 32px;
 }
 
-h2, button.gameButton {
-    font-size: 24px;
+h2,
+button.gameButton {
+  font-size: 24px;
 }
 
 h2 {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .gameContainer h2 {
-    margin-top: 48px;
+  margin-top: 48px;
 }
 
 p {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 p:last-of-type {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 button {
-    display: block;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 6px;
-    font-weight: 400;
-    padding: 6px 18px;
-    font-size: 18px;
-    transition: background-color 0.5s;
-    min-width: 115px;
+  display: block;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 400;
+  padding: 6px 18px;
+  font-size: 18px;
+  transition: background-color 0.5s;
+  min-width: 115px;
 }
 
 button.gameButton {
-    color: var(--font);
-    margin: 24px auto 0;
-    padding: 8px 24px;
+  color: var(--font);
+  margin: 24px auto 0;
+  padding: 8px 24px;
 }
 
 button:disabled {
-    background-color: lightgray !important;
-    cursor: default;
+  background-color: lightgray !important;
+  cursor: default;
 }
 
 button.gameButton,
 .actionContainer:first-of-type button,
 dialog.dialog button {
-    background-color: var(--primary);
+  background-color: var(--primary);
 }
 
 button.gameButton:hover,
 .actionContainer:first-of-type button:hover,
 dialog.dialog button:hover {
-    background-color: var(--primarylight);
+  background-color: var(--primarylight);
 }
 
 .actionContainer:last-of-type button {
-    background-color: var(--secondary);
+  background-color: var(--secondary);
 }
 
 .actionContainer:last-of-type button:hover {
-    background-color: var(--secondarylight);
+  background-color: var(--secondarylight);
 }
 
-.dialogueOptions button, button.quit {
-    background-color: var(--tertiary);
+.dialogueOptions button,
+button.quit {
+  background-color: var(--tertiary);
 }
 
-.dialogueOptions button:hover, button.quit:hover {
-    background-color: var(--backgroundsecondary);
+.dialogueOptions button:hover,
+button.quit:hover {
+  background-color: var(--backgroundsecondary);
 }
 
 button.quit {
-    margin: 20px auto 0;
+  margin: 20px auto 0;
 }
 
 @media (max-width: 1000px) {
-    h1 {
-        font-size: 50px;
-        letter-spacing: 0;
-    }
+  h1 {
+    font-size: 50px;
+    letter-spacing: 0;
+  }
 }
 
 @media (max-width: 750px) {
-    p, li {
-        font-size: 16px;
-        line-height: 23px;
-    }
+  p,
+  li {
+    font-size: 16px;
+    line-height: 23px;
+  }
 }
 
 @media (max-width: 480px) {
-    h1 {
-        font-size: 40px;
-    }
+  h1 {
+    font-size: 40px;
+  }
 }
 
 .emphasis {
-    color: var(--primaryfont);
+  color: var(--primaryfont);
 }
 
 .pageContainer {
-    padding: 50px;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding: 50px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .pageContainer > * {
-    max-width: 630px;
-    width: 100%;
+  max-width: 630px;
+  width: 100%;
 }
 
 .pageContainer > .gameContainer {
-    max-width: 400px;
+  max-width: 400px;
 }
 
 .dialogueContainer {
-    height: 200px;
-    overflow: scroll;
-    background-color: var(--backgroundsecondary);
-    padding: 20px;
+  height: 200px;
+  overflow: scroll;
+  background-color: var(--backgroundsecondary);
+  padding: 20px;
 }
 
 .dialogueOptions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 16px;
-    margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  margin-top: 24px;
 }
 
 .actionContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .actionContainer:last-of-type {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: 1;
-    margin: 0;
-    max-width: 600px;
-    width: calc(100% - 48px);
-    padding: 24px;
-    border: none;
-    border-radius: 6px;
-    box-shadow: 0px 4px 10px -4px black;
-    height: fit-content;
-    max-height: min(calc(100vh - 48px * 3), 550px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 1;
+  margin: 0;
+  max-width: 600px;
+  width: calc(100% - 48px);
+  padding: 24px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 4px 10px -4px black;
+  height: fit-content;
+  max-height: min(calc(100vh - 48px * 3), 550px);
 }
 
 dialog.open {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 dialog button.xButton {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    min-width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 dialog .scrollableHistory {
-    overflow: scroll;
-    flex-grow: 1;
+  overflow: scroll;
+  flex-grow: 1;
 }
 
 dialog button {
-    margin: 32px auto 0;
+  margin: 32px auto 0;
 }
 
 dialog::backdrop {
-    background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
-    backdrop-filter: blur(2px);
+  background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
+  backdrop-filter: blur(2px);
 }
 
 @media (max-width: 750px) {
-    p, li {
-        font-size: 16px;
-        line-height: 23px;
-    }
+  p,
+  li {
+    font-size: 16px;
+    line-height: 23px;
+  }
 
-    .pageContainer {
-        padding: 36px;
-    }
+  .pageContainer {
+    padding: 36px;
+  }
 }
 
 @media (max-width: 480px) {
-    h1 {
-        font-size: 40px;
-    }
+  h1 {
+    font-size: 40px;
+  }
 }

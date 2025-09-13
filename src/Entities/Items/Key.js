@@ -1,1 +1,1 @@
-var key = ["Key", "Opens secret passages", false, function(){}];
+var key = ["Key", "Opens secret passages", false, function () {}];
