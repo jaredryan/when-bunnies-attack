@@ -137,12 +137,16 @@ dialog.dialog button:hover {
 }
 
 .dialogueOptions button,
-button.quit {
+button.quit,
+dialog button.xButton,
+dialog button.secondary {
   background-color: var(--tertiary);
 }
 
 .dialogueOptions button:hover,
-button.quit:hover {
+button.quit:hover,
+dialog button.xButton:hover,
+dialog button.secondary:hover {
   background-color: var(--backgroundsecondary);
 }
 
@@ -275,6 +279,25 @@ dialog button {
 dialog::backdrop {
   background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
   backdrop-filter: blur(2px);
+}
+
+dialog.quitModal {
+  width: 300px;
+}
+
+dialog.quitModal .buttonContainer button {
+  min-width: 90px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @media (max-width: 750px) {
