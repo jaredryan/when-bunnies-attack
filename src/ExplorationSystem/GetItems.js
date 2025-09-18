@@ -8,6 +8,6 @@ const getItems = (itemMessage, player) => {
     player.addItem(new Item(...itemInfo));
   }
   return true;
-}
+};
 
-export default getItems
+export default getItems;

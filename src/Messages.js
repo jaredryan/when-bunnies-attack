@@ -1,4 +1,4 @@
-export const freeExplorationPrompt = `What do you want to do?`
+export const freeExplorationPrompt = `What do you want to do?`;
 
 export const fleeAttemptMessage = `You tried to run away!`;
 export const fleeSuccessMessage = `You successfully ran away!`;
@@ -43,7 +43,7 @@ export const swRoom0EntryMessage1 = [
   `Unsure if you just partied too hard last night or got kidnapped, you scratch your head.`,
   `"I guess I'll take a look around...and I'll do that quietly, just in case."`,
   `"Hopefully it'll come back to me."`,
-]
+];
 
 export const wRoom1EntryMessage1 = [
   `As you walk down the hallway, you notice a bunny. It looks so cute.`,
@@ -116,7 +116,7 @@ export const seRoom3EntryMessage1 = [
   `Bunny: "Ahem...?"`,
   `You: "(Oh, right.) I'm...actually, I don't remember."`,
   `Bunny: "Oh, well, nice to meet you anyway! Are you lost?"`,
-  `Bunny: "I can take you back to your room."`
+  `Bunny: "I can take you back to your room."`,
 ];
 
 export const seRoom3EntryMessage2 = [
@@ -216,6 +216,6 @@ const allMessages = {
   neRoom6ExitMessage,
   escape7EntryMessage,
   forestExit8EntryMessage,
-}
+};
 
-export default allMessages
+export default allMessages;

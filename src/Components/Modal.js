@@ -18,7 +18,7 @@ export const Modal = ({ open, onClose, children, className }) => {
     <dialog
       ref={dialogRef}
       onCancel={onClose}
-      className={`dialog ${open ? "open" : "closed"}${className ? ` ${className}` : ''}`}
+      className={`dialog ${open ? "open" : "closed"}${className ? ` ${className}` : ""}`}
     >
       <button className="xButton" onClick={onClose}>
         <svg

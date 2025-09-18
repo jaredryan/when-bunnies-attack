@@ -7,4 +7,4 @@ const throwingKnife = [
   },
 ];
 
-export default throwingKnife
+export default throwingKnife;

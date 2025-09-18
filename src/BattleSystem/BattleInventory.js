@@ -8,13 +8,12 @@ export const selectItem = (player, enemy) => {
       text: "Your inventory is empty",
       actions: [],
     };
-
   }
   for (let i = 0; i < player.inventory.length; i++) {
     const item = player.inventory[i];
     itemOptions.push({
       name: item.name,
-      execute: () => utilizeItem(player, enemy, i)
+      execute: () => utilizeItem(player, enemy, i),
     });
   }
 
@@ -22,11 +21,11 @@ export const selectItem = (player, enemy) => {
     text: "Which item would you like to use?",
     actions: itemOptions,
   };
-}
+};
 
 // Allows the user to use the item
 export const utilizeItem = (player, enemy, itemIndex) => {
   const item = player.inventory[itemIndex];
   item.use(player, enemy);
   player.inventory.splice(itemIndex, 1);
-}
+};

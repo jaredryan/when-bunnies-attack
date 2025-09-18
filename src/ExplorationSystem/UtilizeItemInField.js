@@ -1,4 +1,4 @@
-import { isUseable } from "./IsUsable";
+import isUseable from "./IsUsable";
 import { selectItem } from "../BattleSystem/BattleInventory";
 
 // Allows the player to use an item while in the field
@@ -21,6 +21,6 @@ const utilizeItemInField = (player) => {
   item.use(player);
   player.inventory.splice(itemChoice, 1);
   return true;
-}
+};
 
-export default utilizeItemInField
+export default utilizeItemInField;

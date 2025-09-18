@@ -74,7 +74,7 @@ const DialogueBox = ({ lines, speed = 40, onDone }) => {
       if (current < lines.length - 1) {
         advanceToNextLine();
       } else {
-        onDone()
+        onDone();
       }
     }
   };
@@ -95,7 +95,7 @@ const DialogueBox = ({ lines, speed = 40, onDone }) => {
               const nextDialogueTimeoutId = setTimeout(advanceToNextLine, 1000);
               setTimeoutId(nextDialogueTimeoutId);
             } else {
-              onDone()
+              onDone();
             }
           }}
         />
@@ -112,6 +112,6 @@ const DialogueBox = ({ lines, speed = 40, onDone }) => {
       </div>
     </div>
   );
-}
+};
 
-export default DialogueBox
+export default DialogueBox;

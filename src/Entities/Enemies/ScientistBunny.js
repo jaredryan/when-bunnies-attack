@@ -6,10 +6,8 @@ const scientistBunny = [
   3,
   [2, 2],
   function (player) {
-    player.addItem(
-      new Item(...bunnySteroid),
-    );
+    player.addItem(new Item(...bunnySteroid));
   },
 ];
 
-export default scientistBunny
+export default scientistBunny;

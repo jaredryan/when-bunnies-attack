@@ -6,10 +6,8 @@ const soldierBunny = [
   8,
   [1, 1],
   function (player) {
-    player.addItem(
-      new Item(...throwingKnife[0]),
-    );
+    player.addItem(new Item(...throwingKnife[0]));
   },
 ];
 
-export default soldierBunny
+export default soldierBunny;

@@ -7,8 +7,8 @@ function Event(name, consequence, argumentsArray, removable, nextEvent) {
   this.nextEvent = nextEvent;
 
   this.trigger = (player) => {
-    this.consequence(this.arguments, player)
-  }
+    this.consequence(this.arguments, player);
+  };
 }
 
 export default Event;

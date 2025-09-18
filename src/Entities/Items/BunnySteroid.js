@@ -9,4 +9,4 @@ const bunnySteroid = [
   },
 ];
 
-export default bunnySteroid
+export default bunnySteroid;

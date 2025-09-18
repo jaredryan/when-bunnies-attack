@@ -3,4 +3,4 @@ function Weapon(name, power) {
   this.power = power;
 }
 
-export default Weapon
+export default Weapon;

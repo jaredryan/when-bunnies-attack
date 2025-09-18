@@ -4,6 +4,6 @@ import { printStatus } from "../Utilities";
 const checkStatus = (player) => {
   printStatus(player);
   return true;
-}
+};
 
 export default checkStatus;

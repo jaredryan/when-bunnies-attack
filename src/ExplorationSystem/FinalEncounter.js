@@ -1,14 +1,14 @@
-import fight from '../BattleSystem/Fight';
+import fight from "../BattleSystem/Fight";
 
 // The Final Boss Special Event
 const finalEncounter = (enemy, player) => {
   const entryMessage = [
     `Bunny Dictator: "Hmmm...?`,
-    `I see. You\'ve woken up. Welcome.`,
-    `You probably don\'t understand what\'s going on.`,
+    `I see. You've woken up. Welcome.`,
+    `You probably don't understand what's going on.`,
     `This is our headquarters.`,
     `Our kind has been experimented on by humans for years.`,
-    `What humans didn\'t know is how intelligent we bunnies were.`,
+    `What humans didn't know is how intelligent we bunnies were.`,
     `One of our kind, who was formerly experimented on; she escaped.`,
     `She vowed that our times of abuse were over.`,
     `She established these headquarters as a place of protection and research."`,
@@ -25,6 +25,6 @@ const finalEncounter = (enemy, player) => {
   } else {
     return false;
   }
-}
+};
 
-export default finalEncounter
+export default finalEncounter;

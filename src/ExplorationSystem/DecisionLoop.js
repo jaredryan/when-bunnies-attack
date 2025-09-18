@@ -18,7 +18,7 @@
 // likely be running setActions(options), with the way things are currently set
 
 import { freeExplorationPrompt } from "../Messages";
-import generateDefaultEvents from '../EventSystem/DefaultEvents'
+import generateDefaultEvents from "../EventSystem/DefaultEvents";
 
 const decisionLoop = ({
   player,
@@ -45,7 +45,7 @@ const decisionLoop = ({
       actions.push({
         name: event.name,
         execute: () => {
-          area.runEvent(player, eventIndex)
+          area.runEvent(player, eventIndex);
         },
       });
     }
@@ -61,25 +61,25 @@ const decisionLoop = ({
     if (newAreas.length) {
       const leaveAreaAction = [
         [`Where do you want to go?`],
-        [...newAreas.map(availableArea => ({
-          name: availableArea.name,
-          execute: () => setNextArea(availableArea),
-        })), {
-          name: 'Stay',
-          execute: () => [
-            [`You decided to stay in the area.`],
-            []
-          ]
-        }]
+        [
+          ...newAreas.map((availableArea) => ({
+            name: availableArea.name,
+            execute: () => setNextArea(availableArea),
+          })),
+          {
+            name: "Stay",
+            execute: () => [[`You decided to stay in the area.`], []],
+          },
+        ],
       ];
-      
-      actions.push(leaveAreaAction)
+
+      actions.push(leaveAreaAction);
     }
   }
 
-  setText(text)
-  setPrimaryActions(actions)
-  setSecondaryActions(secondaryActions)
+  setText(text);
+  setPrimaryActions(actions);
+  setSecondaryActions(secondaryActions);
 };
 
 export default decisionLoop;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import QuitButton from "../Components/QuitButton";
 import DialogueBox from "../Components/DialogueBox";
@@ -6,18 +6,13 @@ import DialogueBox from "../Components/DialogueBox";
 import Player from "../Entities/Player";
 import areas from "../EventSystem/AreasList";
 import decisionLoop from "../ExplorationSystem/DecisionLoop";
-import {
-  leaveArea,
-  checkCurrentStatus,
-  utilizeItemInField,
-} from "../EventSystem/DefaultEvents";
 
-const Game = (props) => {
+const Game = ({ endGame }) => {
   // Components
   const [quitModalIsOpen, setQuitModalIsOpen] = useState(false);
 
   // Initialization
-  const player = new Player()
+  const player = useMemo(() => new Player(), []);
 
   const [area, setArea] = useState(areas[0]);
   const [text, setText] = useState([]);
@@ -29,11 +24,11 @@ const Game = (props) => {
   // Keep an eye on player status to end the game when they've won or lost
   useEffect(() => {
     if (player.hasWon) {
-      props.endGame(true)
+      endGame(true);
     } else if (player.hasDied) {
-      props.endGame(false)
+      endGame(false);
     }
-  }, [player]);
+  }, [player, endGame]);
 
   // Every time the dialogue changes, reset this flag to stop the player
   // from taking action until the dialogue is over.
@@ -43,7 +38,10 @@ const Game = (props) => {
 
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
-    if (textIsDoneAndActionsAreReady && (!primaryActions || !primaryActions.length)) {
+    if (
+      textIsDoneAndActionsAreReady &&
+      (!primaryActions || !primaryActions.length)
+    ) {
       decisionLoop({
         player,
         area,
@@ -53,11 +51,9 @@ const Game = (props) => {
         setPrimaryActions,
         setSecondaryActions,
         textIsDoneAndActionsAreReady,
-      })
+      });
     }
-  }, [area, textIsDoneAndActionsAreReady]);
-
-  
+  }, [area, textIsDoneAndActionsAreReady, primaryActions, player]);
 
   // NEW FORMAT
 
@@ -94,11 +90,13 @@ const Game = (props) => {
 
   const mapActions = (actions = []) => (
     <ul className="actionContainer">
-      {actions.map(action => (
-        <li key={action.name}><button onClick={action.execute}>{action.name}</button></li>
+      {actions.map((action) => (
+        <li key={action.name}>
+          <button onClick={action.execute}>{action.name}</button>
+        </li>
       ))}
     </ul>
-  )
+  );
 
   return (
     <div className="gameContainer">

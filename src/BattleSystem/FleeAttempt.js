@@ -1,4 +1,4 @@
-import messages from '../Messages.js';
+import messages from "../Messages.js";
 
 // Returns true if the attempt is successful, false otherwise.
 const fleeAttempt = () => {
@@ -10,6 +10,6 @@ const fleeAttempt = () => {
     console.log(messages.fleeFailureMessage);
     return false;
   }
-}
+};
 
-export default fleeAttempt
+export default fleeAttempt;

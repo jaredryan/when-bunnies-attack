@@ -32,7 +32,7 @@ const randomEncounterWalk = (areas, player) => {
   // Add new area
   areas[1][7].connectedAreas.push(8);
   return false;
-}
+};
 
 /* Picks a random enemy from the current possibilities and returns a newly constructed
    version of that enemy. */
@@ -41,7 +41,7 @@ const possibleEnemies = [bunny, scientistBunny, soldierBunny];
 
 const returnRandomIndex = () => {
   return possibleEnemies[Math.floor(Math.random() * possibleEnemies.length)];
-}
+};
 
 // Returns true if the player makes it to the destination, false if he or she died
 export const walk = (player) => {
@@ -49,6 +49,6 @@ export const walk = (player) => {
     return fight(returnRandomIndex(), player);
   }
   return true;
-}
+};
 
-export default randomEncounterWalk
+export default randomEncounterWalk;

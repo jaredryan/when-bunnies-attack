@@ -1,7 +1,7 @@
 import Area from "./Area";
-import bunny from "../Entities/Enemy/Bunny";
-import scientistBunny from "../Entities/Enemy/Scientist";
-import soldierBunny from "../Entities/Enemy/Soldier";
+import bunny from "../Entities/Enemies/Bunny";
+import scientistBunny from "../Entities/Enemies/ScientistBunny";
+import soldierBunny from "../Entities/Enemies/SoldierBunny";
 
 import fight from "../BattleSystem/Fight";
 
@@ -52,9 +52,7 @@ export const wRoom1 = new Area("W Room", [0, 4], 1, events.wRoom1, (player) => [
   },
   {
     text: messages.wRoom1EntryMessage2,
-    actions: [
-      fight(bunny, player, true)
-    ],
+    actions: [fight(bunny, player, true)],
   },
   {
     text: messages.wRoom1ExitMessage,
@@ -69,9 +67,7 @@ export const wRoom1 = new Area("W Room", [0, 4], 1, events.wRoom1, (player) => [
 export const lab2 = new Area("Lab", [1], 2, events.lab2, (player) => [
   {
     text: messages.lab2EntryMessage1,
-    actions: [
-      fight(scientistBunny, player, true)
-    ],
+    actions: [fight(scientistBunny, player, true)],
   },
   {
     text: messages.lab2ExitMessage,
@@ -110,15 +106,13 @@ export const seRoom3 = new Area(
     },
     {
       text: messages.seRoom3EntryMessage2,
-      actions: [
-        fight(bunny, player, true)
-      ],
+      actions: [fight(bunny, player, true)],
     },
     {
       text: messages.seRoom3ExitMessage,
       actions: [],
     },
-  ]
+  ],
 );
 
 /************************************ End Area *****************************************/
@@ -135,7 +129,7 @@ export const eRoom4 = new Area(
       text: messages.eRoom4EntryMessage,
       actions: [],
     },
-  ]
+  ],
 );
 
 /************************************ End Area *****************************************/
@@ -152,7 +146,7 @@ export const treasury5 = new Area(
       text: messages.treasury5EntryMessage,
       actions: [],
     },
-  ]
+  ],
 );
 
 /************************************ End Area *****************************************/
@@ -167,15 +161,13 @@ export const neRoom6 = new Area(
   (player) => [
     {
       text: messages.neRoom6EntryMessage,
-      actions: [
-        fight(soldierBunny, player, true)
-      ],
+      actions: [fight(soldierBunny, player, true)],
     },
     {
       text: messages.neRoom6ExitMessage,
       actions: [],
     },
-  ]
+  ],
 );
 
 /************************************ End Area *****************************************/
@@ -203,7 +195,7 @@ export const forestExit8 = new Area(
       text: messages.forestExit8EntryMessage,
       actions: [],
     },
-  ]
+  ],
 );
 
 /************************************ End Area *****************************************/
@@ -228,8 +220,8 @@ const areas = [
 //    escape7 => randomEncounterWalk
 //    swRoom0 => checkRoom0, swRoom[2]
 
-areas[7].events.unshift(...events.escape7(areas))
-areas[0].events[2].nextEvent = areas[0].events[2].nextEvent(areas)
+areas[7].events.unshift(...events.escape7(areas));
+areas[0].events[2].nextEvent = areas[0].events[2].nextEvent(areas);
 
 /*********************************** Add Events ****************************************/
 

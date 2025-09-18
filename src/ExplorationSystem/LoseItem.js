@@ -4,6 +4,6 @@ const loseItem = (itemMessage, player) => {
   const item = itemMessage[0];
   player.removeItem(item);
   return true;
-}
+};
 
-export default loseItem
+export default loseItem;

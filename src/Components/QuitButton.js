@@ -1,4 +1,4 @@
-import Modal from './Modal'
+import Modal from "./Modal";
 
 const QuitButton = (props) => (
   <>
@@ -8,15 +8,13 @@ const QuitButton = (props) => (
         <button autoFocus onClick={props.onCancel} className="secondary">
           No
         </button>
-        <button onClick={props.onQuit}>
-          Yes
-        </button>
+        <button onClick={props.onQuit}>Yes</button>
       </div>
     </Modal>
     <button className="quit" onClick={props.openModal}>
       Quit
     </button>
   </>
-)
+);
 
-export default QuitButton
+export default QuitButton;

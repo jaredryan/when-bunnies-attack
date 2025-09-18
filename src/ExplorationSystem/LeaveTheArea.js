@@ -2,6 +2,6 @@
 const leaveTheArea = () => {
   console.log("You decide to leave the area.");
   return false;
-}
+};
 
-export default leaveTheArea
+export default leaveTheArea;

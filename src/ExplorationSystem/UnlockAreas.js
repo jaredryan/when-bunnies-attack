@@ -9,6 +9,6 @@ const unlockAreas = (currentAreaIndexNewAreaIndexesAreas) => {
     currentArea.connectedAreas.push(newAreaIndex);
   }
   return true;
-}
+};
 
-export default unlockAreas
+export default unlockAreas;

@@ -15,22 +15,22 @@ function Enemy(name, hp, attackPower, reward) {
 
     console.log(`You took ${damage} damage!`);
 
-    player.takeDamage(damage);    
+    player.takeDamage(damage);
   };
 
   this.reward = function (player) {
     console.log(`${player.name} defeated the ${this.name}!`);
-    
+
     reward(player);
   };
 
   this.takeDamage = function (damage) {
-    this.hp -= damage
+    this.hp -= damage;
 
     if (this.hp <= 0) {
-      this.hasDied = true
+      this.hasDied = true;
     }
-  }
+  };
 }
 
-export default Enemy
+export default Enemy;

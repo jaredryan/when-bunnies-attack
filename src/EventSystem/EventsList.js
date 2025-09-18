@@ -1,23 +1,21 @@
-import displayMessage from '../ExplorationSystem/DisplayMessage'
-import loseItemAndUnlockAreas from '../ExplorationSystem/LoseItemAndUnlockAreas'
-import unlockAreas from '../ExplorationSystem/UnlockAreas'
-import heal from '../ExplorationSystem/Heal'
-import randomEncounterWalk from '../ExplorationSystem/RandomEncounterWalk'
-import finalEncounter from '../ExplorationSystem/FinalEncounter'
-import getWeapon from '../ExplorationSystem/GetWeapon'
-import getItems from '../ExplorationSystem/GetItems'
+import displayMessage from "../ExplorationSystem/DisplayMessage";
+import loseItemAndUnlockAreas from "../ExplorationSystem/LoseItemAndUnlockAreas";
+import unlockAreas from "../ExplorationSystem/UnlockAreas";
+import heal from "../ExplorationSystem/Heal";
+import randomEncounterWalk from "../ExplorationSystem/RandomEncounterWalk";
+import finalEncounter from "../ExplorationSystem/FinalEncounter";
+import getWeapon from "../ExplorationSystem/GetWeapon";
+import getItems from "../ExplorationSystem/GetItems";
 
-import finalBoss from '../Entities/Enemies/FinalBoss'
+import finalBoss from "../Entities/Enemies/FinalBoss";
 
-import knife from '../Entities/Weapons/Knife'
-import surgicalKnife from '../Entities/Weapons/SurgicalKnife'
-import bunnySword from '../Entities/Weapons/BunnySword'
+import knife from "../Entities/Weapons/Knife";
+import surgicalKnife from "../Entities/Weapons/SurgicalKnife";
+import bunnySword from "../Entities/Weapons/BunnySword";
 
-import Item from '../Entities/Item'
-import carrot from '../Entities/Items/Carrot'
-import key from '../Entities/Items/Key'
-
-
+import Item from "../Entities/Item";
+import carrot from "../Entities/Items/Carrot";
+import key from "../Entities/Items/Key";
 
 /************************************* Area0 *******************************************/
 
@@ -45,13 +43,14 @@ export const checkRoom0 = new Event(
     "As you examined the bed, you saw something shining and decided to examine it closer.",
   ],
   "switch",
-  (areas) => new Event(
-    "Open the door",
-    loseItemAndUnlockAreas,
-    [key, "You used the key to open the door.", [0], [1, 3], areas],
-    true,
-    {},
-  ),
+  (areas) =>
+    new Event(
+      "Open the door",
+      loseItemAndUnlockAreas,
+      [key, "You used the key to open the door.", [0], [1, 3], areas],
+      true,
+      {},
+    ),
 );
 
 /************************************ End Area *****************************************/
@@ -63,7 +62,7 @@ export const swRoom0 = [checkCupboard0, checkDoor0, checkRoom0];
 export const checkRoom1 = new Event(
   "Examine the room",
   displayMessage,
-  "You look around the room. You see a door and a hallway. There is a poster on the wall that looks like a...bunny army soluting a bunny dictator. Cute but disturbing.",
+  "You look around the room. You see a door and a hallway. There is a poster on the wall that looks like a...bunny army saluting a bunny dictator. Cute but disturbing.",
   true,
   {},
 );
@@ -105,7 +104,7 @@ export const checkRoom2 = new Event(
 
 /************************************ End Area *****************************************/
 
-export const lab2 = [checkRoom2]
+export const lab2 = [checkRoom2];
 
 /************************************* Area3 *******************************************/
 
@@ -119,7 +118,7 @@ export const checkRoom3 = new Event(
 
 /************************************ End Area *****************************************/
 
-export const seRoom3 = [checkRoom3]
+export const seRoom3 = [checkRoom3];
 
 /************************************* Area4 *******************************************/
 
@@ -190,13 +189,14 @@ export const neRoom6 = [checkRoom6];
 
 /************************************* Area5 *******************************************/
 
-export const checkRoom7 = (areas) => new Event(
-  "Proceed through the forest",
-  randomEncounterWalk,
-  [areas],
-  true,
-  {},
-);
+export const checkRoom7 = (areas) =>
+  new Event(
+    "Proceed through the forest",
+    randomEncounterWalk,
+    [areas],
+    true,
+    {},
+  );
 
 /************************************ End Area *****************************************/
 
@@ -236,6 +236,6 @@ const eventsByArea = {
   neRoom6,
   escape7,
   forestExit8,
-}
+};
 
-export default eventsByArea
+export default eventsByArea;

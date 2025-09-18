@@ -1,5 +1,5 @@
 // AREA CONSTRUCTOR
-import defaultEvents from './DefaultEvents'
+import defaultEvents from "./DefaultEvents";
 
 function Area(name, connectedAreas, number, events, story) {
   this.name = name;
@@ -10,13 +10,11 @@ function Area(name, connectedAreas, number, events, story) {
 
   this.runStory = (player) => {
     const story = this.story.shift();
-    return story
-      ? story(player)
-      : { text: null, actions: [] }
+    return story ? story(player) : { text: null, actions: [] };
   };
 
   this.runEvent = (player, eventIndex) => {
-    const event = this.events[eventIndex]
+    const event = this.events[eventIndex];
 
     // Handle event list in area: if it's a one-time shot or leads
     // to another event, update the area's events accordingly
@@ -26,7 +24,7 @@ function Area(name, connectedAreas, number, events, story) {
       this.events.splice(eventIndex, 1);
     }
 
-    return event.trigger(player)
+    return event.trigger(player);
   };
 }
 

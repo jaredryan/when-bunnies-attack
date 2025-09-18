@@ -1,5 +1,3 @@
-
-
 const carrot = [
   "Carrot",
   "Eat this to recover 3 damage.",
@@ -9,4 +7,4 @@ const carrot = [
   },
 ];
 
-export default carrot
+export default carrot;

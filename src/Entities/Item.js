@@ -8,4 +8,4 @@ function Item(name, description, isUseableInField, effect) {
   };
 }
 
-export default Item
+export default Item;

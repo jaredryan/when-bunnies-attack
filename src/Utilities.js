@@ -11,12 +11,14 @@ export const printStatus = (player) => {
 // Returns a string consisting of the player's current items
 export const returnItemsString = (player) => {
   if (player.inventory.length === 0) {
-    return "Empty"
+    return "Empty";
   }
 
   const items = [];
   for (var i = 0; i < player.inventory.length; i++) {
-    items.push(`${player.inventory[i].name}: ${player.inventory[i].description}`)
+    items.push(
+      `${player.inventory[i].name}: ${player.inventory[i].description}`,
+    );
   }
-  return items.join('\n')
+  return items.join("\n");
 };

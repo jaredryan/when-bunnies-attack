@@ -3,8 +3,8 @@ const firstAidInfo = [
   "Use this to recover 5 damage.",
   true,
   function (player, _enemy) {
-    player.heal(5)
+    player.heal(5);
   },
 ];
 
-export default firstAidInfo
+export default firstAidInfo;

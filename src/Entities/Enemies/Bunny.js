@@ -6,10 +6,8 @@ const bunny = [
   5,
   [1, 1],
   function (player) {
-    player.addItem(
-      new Item(...FirstAid),
-    );
+    player.addItem(new Item(...FirstAid));
   },
 ];
 
-export default bunny
+export default bunny;

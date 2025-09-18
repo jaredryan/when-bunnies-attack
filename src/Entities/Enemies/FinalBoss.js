@@ -3,8 +3,8 @@ const finalBoss = [
   14,
   [2, 3],
   function (player) {
-    player.hasWon = true
+    player.hasWon = true;
   },
 ];
 
-export default finalBoss
+export default finalBoss;

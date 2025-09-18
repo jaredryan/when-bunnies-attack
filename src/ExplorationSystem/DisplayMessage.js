@@ -2,6 +2,6 @@
 const displayMessage = (message) => {
   console.log(message);
   return true;
-}
+};
 
-export default displayMessage
+export default displayMessage;
