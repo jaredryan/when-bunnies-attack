@@ -1,3 +1,5 @@
+import Event from "./Event";
+
 import displayMessage from "../ExplorationSystem/DisplayMessage";
 import loseItemAndUnlockAreas from "../ExplorationSystem/LoseItemAndUnlockAreas";
 import unlockAreas from "../ExplorationSystem/UnlockAreas";
@@ -39,7 +41,7 @@ export const checkRoom0 = new Event(
   "Examine the room",
   getItems,
   [
-    [Item(key)],
+    [new Item(...key)],
     "As you examined the bed, you saw something shining and decided to examine it closer.",
   ],
   "switch",
@@ -200,7 +202,7 @@ export const checkRoom7 = (areas) =>
 
 /************************************ End Area *****************************************/
 
-export const escape7 = (areas) => [checkRoom7(areas)];
+export const escape7 = [checkRoom7];
 
 /************************************* Area5 *******************************************/
 

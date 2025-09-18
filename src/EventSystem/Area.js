@@ -1,9 +1,8 @@
 // AREA CONSTRUCTOR
-import defaultEvents from "./DefaultEvents";
 
 function Area(name, connectedAreas, number, events, story) {
   this.name = name;
-  this.events = [...events, ...defaultEvents];
+  this.events = events;
   this.connectedAreas = connectedAreas;
   this.story = story; // array of story events
   this.number = number;

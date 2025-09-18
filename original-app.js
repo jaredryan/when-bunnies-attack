@@ -1,4 +1,12 @@
-// Initialization
+// OLD FORM OF RUNNING THE GAME
+
+// Run the story dialogue in that area, then make decisions within that given area...
+// ....that logic is held within the DECISIONLOOP function
+
+// Eventually, they will leave that area, so that's why in above line DECISIONLOOP eventually returns an index
+// That, in turn, can be passed around to then figure out and set the next area
+
+// Then the process repeats, until you die or beat the game
 
 // Require Statements
 var readlineSync = require("readline-sync");
@@ -443,7 +451,7 @@ function getWeapon(playerWeaponMessage) {
 }
 
 // Allows the player to use an item while in the field
-function useItemInField(player) {
+function utilizeItemInField(player) {
   var itemChoice = selectItem(player);
   if (itemChoice === "Empty" || itemChoice === -1) {
     return true;
@@ -658,7 +666,7 @@ function selectItem(player, enemy) {
 }
 
 // Allows the user to use the item
-function useItem(player, enemy, itemChoice) {
+function utilizeItem(player, enemy, itemChoice) {
   var item = player.inventory[itemChoice];
   if (item === undefined) {
     return false;
@@ -674,7 +682,7 @@ function selectAndUseItem(player, enemy) {
   if (itemChoice === "Empty") {
     return false;
   }
-  return useItem(player, enemy, itemChoice);
+  return utilizeItem(player, enemy, itemChoice);
 }
 
 // Returns a string consisting of the player's current items
@@ -778,9 +786,9 @@ var checkCurrentStatus = new Event(
   false,
   {},
 );
-var useItemInField = new Event(
+var utilizeItemInField = new Event(
   "Use an item",
-  useItemInField,
+  utilizeItemInField,
   player,
   false,
   {},
@@ -791,7 +799,7 @@ var leaveArea = new Event("Leave the area", leaveTheArea, "", false, {});
 // AREA CONSTRUCTOR
 function Area(name, connectedAreas, number, story) {
   this.name = name;
-  this.events = [leaveArea, checkCurrentStatus, useItemInField];
+  this.events = [leaveArea, checkCurrentStatus, utilizeItemInField];
   this.connectedAreas = connectedAreas;
   this.story = story;
   this.number = number;
@@ -1090,8 +1098,8 @@ var areas = [
 // 								   false,
 // 								   {}
 // 								  );
-// var useItemInField = new Event("Use an item",
-// 							   useItemInField,
+// var utilizeItemInField = new Event("Use an item",
+// 							   utilizeItemInField,
 // 							   player,
 // 							   false,
 // 					   		   {}

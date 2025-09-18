@@ -29,8 +29,9 @@ const decisionLoop = ({
   setPrimaryActions,
   setSecondaryActions,
   textIsDoneAndActionsAreReady,
+  setTextIsDoneAndActionsAreReady
 }) => {
-  const secondaryActions = generateDefaultEvents(player);
+  const secondaryActions = Object.values(generateDefaultEvents(player));
 
   // Let the story control text and actions until it's done
   let { text, actions } = area.runStory(player);
@@ -77,7 +78,12 @@ const decisionLoop = ({
     }
   }
 
-  setText(text);
+  console.log('Decision Loop', { text, actions, secondaryActions });
+
+  if (text) {
+    setTextIsDoneAndActionsAreReady(false)
+    setText(text);
+  }
   setPrimaryActions(actions);
   setSecondaryActions(secondaryActions);
 };

@@ -30,18 +30,14 @@ const Game = ({ endGame }) => {
     }
   }, [player, endGame]);
 
-  // Every time the dialogue changes, reset this flag to stop the player
-  // from taking action until the dialogue is over.
-  useEffect(() => {
-    setTextIsDoneAndActionsAreReady(false);
-  }, [text]);
-
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
+    console.log(textIsDoneAndActionsAreReady)
+    console.log(typeof textIsDoneAndActionsAreReady)
     if (
-      textIsDoneAndActionsAreReady &&
-      (!primaryActions || !primaryActions.length)
+      textIsDoneAndActionsAreReady && (!primaryActions || !primaryActions.length)
     ) {
+      console.log("Running decision loop");
       decisionLoop({
         player,
         area,
@@ -51,9 +47,10 @@ const Game = ({ endGame }) => {
         setPrimaryActions,
         setSecondaryActions,
         textIsDoneAndActionsAreReady,
+        setTextIsDoneAndActionsAreReady,
       });
     }
-  }, [area, textIsDoneAndActionsAreReady, primaryActions, player]);
+  }, [area, textIsDoneAndActionsAreReady, player]);
 
   // NEW FORMAT
 
@@ -102,19 +99,22 @@ const Game = ({ endGame }) => {
     <div className="gameContainer">
       <DialogueBox
         lines={text || []}
-        onDone={() => setTextIsDoneAndActionsAreReady(true)}
+        onDone={() => {
+          console.log("DialogueBox is done, flipping flag to true");
+          setTextIsDoneAndActionsAreReady(true)
+        }}
       />
       <h2>Menu</h2>
       {/* Primary actions = actions unique to that area */}
-      {textIsDoneAndActionsAreReady ? mapActions(primaryActions) : null}
+      {textIsDoneAndActionsAreReady ? mapActions(console.log({ primaryActions }) || primaryActions) : null}
       {/* Secondary actions = actions always available: leave area, inventory */}
       {/* Consider adding a new Map action button to make navigation better. */}
-      {textIsDoneAndActionsAreReady ? mapActions(secondaryActions) : null}
+      {textIsDoneAndActionsAreReady ? mapActions(console.log({ secondaryActions }) || secondaryActions) : null}
       <QuitButton
         open={quitModalIsOpen}
         openModal={() => setQuitModalIsOpen(true)}
         onCancel={() => setQuitModalIsOpen(false)}
-        onQuit={() => props.endGame(false)}
+        onQuit={() => endGame(false)}
       />
     </div>
   );

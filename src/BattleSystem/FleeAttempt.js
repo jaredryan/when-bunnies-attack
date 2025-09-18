@@ -1,4 +1,4 @@
-import messages from "../Messages.js";
+import messages from "../Messages";
 
 // Returns true if the attempt is successful, false otherwise.
 const fleeAttempt = () => {

@@ -5,12 +5,7 @@ import { printStatus } from "../Utilities";
 
 // Returns true if the player is still alive, false if he or she died.
 const fight = (enemyInfo, player, isForced = false) => {
-  const enemy = new Enemy(
-    enemyInfo[0],
-    enemyInfo[1],
-    enemyInfo[2],
-    enemyInfo[3],
-  );
+  const enemy = new Enemy(...enemyInfo);
 
   console.log(`You encountered a ${enemy.name}!`);
   while (true) {

@@ -172,7 +172,8 @@ export const escape7EntryMessage = [
   `A bit of an ominous one, at that`,
   `How does it look ominous, you ask?`,
   `Well...no other structures within sight, one path, and dense vegetation.`,
-  `In other words, you're alone; one way in, one way out; and so many hiding spots.``Turning around, you gaze back at the building you just came out of.`,
+  `In other words, you're alone; one way in, one way out; and so many hiding spots.`,
+  `Turning around, you gaze back at the building you just came out of.`,
   `It looks like a small fortress.`,
   `"Thank God I'm out of there. But...uh...now what?`,
   `I have to walk this path out of here from the spooky forest.`,
@@ -180,7 +181,9 @@ export const escape7EntryMessage = [
   `Maybe if you weren't so exhausted, you could try to clear your own path.`,
   `Beyond that, you don't know if or when backup bunnies will arrive might come out from the fortress.`,
   `You just need to get out of there is quick as you can, and hope for the best.`,
-  `So, obvious it may be, and perhaps even unwise, you start walking on the path through the forest.``You can only hope that if you encounter any enemies, you'll spot them first.``Or perhaps duck into the forest real quick to ditch them, before eventually coming back on the path.`,
+  `So, obvious it may be, and perhaps even unwise, you start walking on the path through the forest.`,
+  `You can only hope that if you encounter any enemies, you'll spot them first.`,
+  `Or perhaps duck into the forest real quick to ditch them, before eventually coming back on the path.`,
   `"I know this is probably stupid...but let's just get on with it.".`,
   `You start trek on the lone path through the forest.`,
 ];
@@ -188,7 +191,8 @@ export const escape7EntryMessage = [
 export const forestExit8EntryMessage = [
   `As you into a small clearing in the forest and into the clearing, you see another bunny and some sort of machine.`,
   `Past the bunny, you can see the rays of the morning sun.`,
-  `Either there's another clearing past this one, or you're finally at the forest's edge.``The bunny senses your presence, turns around, and speaks:`,
+  `Either there's another clearing past this one, or you're finally at the forest's edge.`,
+  `The bunny senses your presence, turns around, and speaks:`,
 ];
 
 const allMessages = {

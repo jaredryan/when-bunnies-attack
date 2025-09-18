@@ -12,7 +12,7 @@ const finalEncounter = (enemy, player) => {
     `One of our kind, who was formerly experimented on; she escaped.`,
     `She vowed that our times of abuse were over.`,
     `She established these headquarters as a place of protection and research."`,
-    `...``"But I see that you killed my closest comrades.`,
+    `..."But I see that you killed my closest comrades.`,
     `There is nothing left for me here, now.`,
     `But for her, our founder — and my mother —`,
     `I will see that her dream continues."`,
