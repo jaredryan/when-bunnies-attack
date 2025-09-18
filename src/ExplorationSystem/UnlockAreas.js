@@ -1,10 +1,12 @@
 // Leads to new decision tree.
-const unlockAreas = (messageCurrentAreaIndexNewAreaIndex) => {
-  var info = messageCurrentAreaIndexNewAreaIndex;
-  console.log(info[0]);
-  for (var i = 0; i < info[2].length; i++) {
-    console.log("The " + areas[info[2][i]].name + " is now available.");
-    areas[info[1]].connectedAreas.push(info[2][i]);
+const unlockAreas = (currentAreaIndexNewAreaIndexesAreas) => {
+  const areas = currentAreaIndexNewAreaIndexesAreas[2];
+
+  const currentArea = areas[currentAreaIndexNewAreaIndexesAreas[0]];
+
+  for (const newAreaIndex of currentAreaIndexNewAreaIndexesAreas[1]) {
+    console.log(`The ${areas[newAreaIndex].name} is now available.`);
+    currentArea.connectedAreas.push(newAreaIndex);
   }
   return true;
 }

@@ -53,7 +53,7 @@ export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
   return textToDisplay.map((content) => <p className="gameLog">{content}</p>);
 };
 
-const DialogueBox = ({ lines, speed = 40 }) => {
+const DialogueBox = ({ lines, speed = 40, onDone }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
   const [skip, setSkip] = useState(false);
@@ -73,6 +73,8 @@ const DialogueBox = ({ lines, speed = 40 }) => {
       if (timeoutId) clearTimeout(timeoutId);
       if (current < lines.length - 1) {
         advanceToNextLine();
+      } else {
+        onDone()
       }
     }
   };
@@ -92,6 +94,8 @@ const DialogueBox = ({ lines, speed = 40 }) => {
             if (current < lines.length - 1) {
               const nextDialogueTimeoutId = setTimeout(advanceToNextLine, 1000);
               setTimeoutId(nextDialogueTimeoutId);
+            } else {
+              onDone()
             }
           }}
         />

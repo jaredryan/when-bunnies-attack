@@ -1,5 +1,11 @@
 // Default Events Available for All Areas
-export const checkCurrentStatus = new Event(
+
+import checkStatus from '../ExplorationSystem/CheckStatus'
+import utilizeItem from '../ExplorationSystem/UtilizeItemInField'
+import leaveTheArea from '../ExplorationSystem/LeaveTheArea'
+
+
+export const checkCurrentStatus = (player) => new Event(
   "Check your current status",
   checkStatus,
   player,
@@ -7,18 +13,26 @@ export const checkCurrentStatus = new Event(
   {},
 );
 
-export const useItemInField = new Event(
+export const utilizeItemInField = (player) => new Event(
   "Use an item",
-  useItemInField,
+  utilizeItem,
   player,
   false,
   {},
 );
 
-export const leaveArea = new Event(
+export const leaveArea = (player) => new Event(
   "Leave the area",
   leaveTheArea,
   "",
   false,
   {},
 );
+
+const generateDefaultEvents = (player) => ({
+  checkCurrentStatus: checkCurrentStatus(player),
+  utilizeItemInField: utilizeItemInField(player),
+  leaveArea: leaveArea(player),
+})
+
+export default generateDefaultEvents

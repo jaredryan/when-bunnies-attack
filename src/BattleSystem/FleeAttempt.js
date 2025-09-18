@@ -1,11 +1,13 @@
+import messages from '../Messages.js';
+
 // Returns true if the attempt is successful, false otherwise.
 const fleeAttempt = () => {
-  console.log(fleeAttemptMessage);
+  console.log(messages.fleeAttemptMessage);
   if (Math.random() < 0.5) {
-    console.log(fleeSuccessMessage);
+    console.log(messages.fleeSuccessMessage);
     return true;
   } else {
-    console.log(fleeFailureMessage);
+    console.log(messages.fleeFailureMessage);
     return false;
   }
 }

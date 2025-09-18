@@ -1,3 +1,5 @@
+export const freeExplorationPrompt = `What do you want to do?`
+
 export const fleeAttemptMessage = `You tried to run away!`;
 export const fleeSuccessMessage = `You successfully ran away!`;
 export const fleeFailureMessage = `You were unable to escape!`;
@@ -28,20 +30,20 @@ export const wonGameMessage = [
 
 /********************************* Area Messages ***************************************/
 
-export const swRoom0EntryMessage1 = [
-  `"....ughhh"`,
-  `"...what happened?"`,
-  `As you wake up and look around, a name comes to mind...`,
-  `"I must have hit my head. Can't believe I almost forgot. It's..."`,
-];
+// Sample new intro dialogue
 
-export const swRoom0EntryMessage2 = (player) => [
-  `"...I'm ${player.name}. My head hurts. I wonder what else I forgot.`,
-  `Like...for example, where I'm at. Where the heck am I?"`,
-  `As you look around, you notice that you are in a simple room.`,
-  `The walls are a dull grey; the bed you are on is simple: wood, white sheets, and white blankets.`,
-  `There's a nightstand by the bed. You don't sense any danger, but you don't quite feel comfortable either.`,
-];
+export const swRoom0EntryMessage1 = [
+  `"Ughhh...my head hurts."`,
+  `As you wake up, you look around, and see that you are in a drab room.`,
+  `Oh so very drab.`,
+  `"Clearly, the designer of this room watched a lot of HGTV."`,
+  `So very grey. With a splash of sage green on the bedstand. It's borderline sterile.`,
+  `It's just as off-putting as the headache you've got, which just reminded you that it's here to stay.`,
+  `"Well, this sucks. And uh...I don't exactly remember how I got here, and I don't know this room."`,
+  `Unsure if you just partied too hard last night or got kidnapped, you scratch your head.`,
+  `"I guess I'll take a look around...and I'll do that quietly, just in case."`,
+  `"Hopefully it'll come back to me."`,
+]
 
 export const wRoom1EntryMessage1 = [
   `As you walk down the hallway, you notice a bunny. It looks so cute.`,
@@ -49,6 +51,7 @@ export const wRoom1EntryMessage1 = [
   `Bunny: "Hi, how are you feeling? We found you the other day."`,
   `You: "...!!!!! (aka, internal screaming)"`,
   `Bunny: "What's wrong? Ain't you ever seen a talking bunny before?"`,
+  `Bunny: "Anyways, are you feeling better?"`,
 ];
 
 export const wRoom1EntryMessage2 = [
@@ -104,24 +107,21 @@ export const lab2ExitMessage = [
   `"Was that bunny...a scientist?! This just keeps getting weirder!"`,
 ];
 
-export const seRoom3EntryMessage1 = (player) => [
+export const seRoom3EntryMessage1 = [
   `Walking through the hallway, you come across a bunny. It looks adorable.`,
   `You slowly approach it and take a closer look.`,
   `It turns around and stares at you. After a couple of seconds...`,
   `Bunny: "Hi, you must be new here. I'm Bob. Who are you?"`,
   `You: ......`,
   `Bunny: "Ahem...?"`,
-  `You: "(Oh, right.) I'm ${player.name}."`,
-  `Bunny: "Nice to meet you, ${player.name}. Are you lost?"`,
+  `You: "(Oh, right.) I'm...actually, I don't remember."`,
+  `Bunny: "Oh, well, nice to meet you anyway! Are you lost?"`,
+  `Bunny: "I can take you back to your room."`
 ];
 
 export const seRoom3EntryMessage2 = [
   `...`,
   `Bunny: "How about I just make you come with me instead?!`,
-];
-
-export const seRoom3EntryQuestion = [
-  `Bunny: "I'll take you back to your room."`,
 ];
 
 export const seRoom3EntryAnswerResponsePairs = [
@@ -190,3 +190,32 @@ export const forestExit8EntryMessage = [
   `Past the bunny, you can see the rays of the morning sun.`,
   `Either there's another clearing past this one, or you're finally at the forest's edge.``The bunny senses your presence, turns around, and speaks:`,
 ];
+
+const allMessages = {
+  freeExplorationPrompt,
+  fleeAttemptMessage,
+  fleeSuccessMessage,
+  fleeFailureMessage,
+  lostGameMessage,
+  wonGameMessage,
+  swRoom0EntryMessage1,
+  wRoom1EntryMessage1,
+  wRoom1EntryMessage2,
+  wRoom1EntryQuestion,
+  wRoom1EntryAnswerResponsePairs,
+  wRoom1ExitMessage,
+  lab2EntryMessage1,
+  lab2ExitMessage,
+  seRoom3EntryMessage1,
+  seRoom3EntryMessage2,
+  seRoom3EntryAnswerResponsePairs,
+  seRoom3ExitMessage,
+  eRoom4EntryMessage,
+  treasury5EntryMessage,
+  neRoom6EntryMessage,
+  neRoom6ExitMessage,
+  escape7EntryMessage,
+  forestExit8EntryMessage,
+}
+
+export default allMessages

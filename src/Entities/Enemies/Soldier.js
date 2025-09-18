@@ -1,16 +1,15 @@
-var soldierBunny = [
+import Item from "../Item.js";
+import throwingKnife from "../Items/ThrowingKnife.js";
+
+const soldierBunny = [
   "Soldier Bunny",
   8,
   [1, 1],
   function (player) {
-    console.log("You recovered 3 HP.");
     player.addItem(
-      new Item(
-        throwingKnife[0],
-        throwingKnife[1],
-        throwingKnife[2],
-        throwingKnife[3],
-      ),
+      new Item(...throwingKnife[0]),
     );
   },
 ];
+
+export default soldierBunny

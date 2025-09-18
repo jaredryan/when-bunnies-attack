@@ -1,9 +1,30 @@
+import displayMessage from '../ExplorationSystem/DisplayMessage'
+import loseItemAndUnlockAreas from '../ExplorationSystem/LoseItemAndUnlockAreas'
+import unlockAreas from '../ExplorationSystem/UnlockAreas'
+import heal from '../ExplorationSystem/Heal'
+import randomEncounterWalk from '../ExplorationSystem/RandomEncounterWalk'
+import finalEncounter from '../ExplorationSystem/FinalEncounter'
+import getWeapon from '../ExplorationSystem/GetWeapon'
+import getItems from '../ExplorationSystem/GetItems'
+
+import finalBoss from '../Entities/Enemies/FinalBoss'
+
+import knife from '../Entities/Weapons/Knife'
+import surgicalKnife from '../Entities/Weapons/SurgicalKnife'
+import bunnySword from '../Entities/Weapons/BunnySword'
+
+import Item from '../Entities/Item'
+import carrot from '../Entities/Items/Carrot'
+import key from '../Entities/Items/Key'
+
+
+
 /************************************* Area0 *******************************************/
 
 export const checkCupboard0 = new Event(
   "Examine the cupboard",
   getWeapon,
-  [player, knife, "You searched the cupboard and found a knife."],
+  [knife, "You searched the cupboard and found a knife."],
   true,
   {},
 );
@@ -20,15 +41,14 @@ export const checkRoom0 = new Event(
   "Examine the room",
   getItems,
   [
-    player,
-    [key],
+    [Item(key)],
     "As you examined the bed, you saw something shining and decided to examine it closer.",
   ],
   "switch",
-  new Event(
+  (areas) => new Event(
     "Open the door",
     loseItemAndUnlockAreas,
-    [player, key, "You used the key to open the door.", [0], [1, 3]],
+    [key, "You used the key to open the door.", [0], [1, 3], areas],
     true,
     {},
   ),
@@ -36,7 +56,7 @@ export const checkRoom0 = new Event(
 
 /************************************ End Area *****************************************/
 
-swRoom0.events.push(checkCupboard0, checkDoor0, checkRoom0);
+export const swRoom0 = [checkCupboard0, checkDoor0, checkRoom0];
 
 /************************************* Area1 *******************************************/
 
@@ -62,7 +82,7 @@ export const checkDoor1 = new Event(
 
 /************************************ End Area *****************************************/
 
-wRoom1.events.push(checkDoor1, checkRoom1);
+export const wRoom1 = [checkDoor1, checkRoom1];
 
 /************************************* Area2 *******************************************/
 
@@ -75,7 +95,6 @@ export const checkRoom2 = new Event(
     "Inspect the dissection table",
     getWeapon,
     [
-      player,
       surgicalKnife,
       "After inspection and being scarred for life, you decide to take the surgical knife with you.",
     ],
@@ -86,7 +105,7 @@ export const checkRoom2 = new Event(
 
 /************************************ End Area *****************************************/
 
-lab2.events.push(checkRoom2);
+export const lab2 = [checkRoom2]
 
 /************************************* Area3 *******************************************/
 
@@ -100,7 +119,7 @@ export const checkRoom3 = new Event(
 
 /************************************ End Area *****************************************/
 
-seRoom3.events.push(checkRoom3);
+export const seRoom3 = [checkRoom3]
 
 /************************************* Area4 *******************************************/
 
@@ -115,14 +134,14 @@ export const checkRoom4 = new Event(
 export const checkArmory4 = new Event(
   "Search the armory",
   getWeapon,
-  [player, bunnySword, "You searched the armory and found a bunny sword."],
+  [bunnySword, "You searched the armory and found a bunny sword."],
   true,
   {},
 );
 
 /************************************ End Area *****************************************/
 
-eRoom4.events.push(checkRoom4, checkArmory4);
+export const eRoom4 = [checkRoom4, checkArmory4];
 
 /************************************* Area5 *******************************************/
 
@@ -130,7 +149,6 @@ export const lootRoom5 = new Event(
   "Loot the treasury",
   getItems,
   [
-    player,
     [carrot, carrot],
     "At first, you were very greedy. But then you realized you could only take two carrots with you.",
   ],
@@ -141,14 +159,14 @@ export const lootRoom5 = new Event(
 export const heal5 = new Event(
   "Eat as much as possible",
   heal,
-  [player, "You ate like a champ and recovered all your health."],
+  ["You ate like a champ and recovered all your health."],
   false,
   {},
 );
 
 /************************************ End Area *****************************************/
 
-treasury5.events.push(lootRoom5, heal5);
+export const treasury5 = [lootRoom5, heal5];
 
 /************************************* Area6 *******************************************/
 
@@ -168,21 +186,21 @@ export const checkRoom6 = new Event(
 
 /************************************ End Area *****************************************/
 
-neRoom6.events.push(checkRoom6);
+export const neRoom6 = [checkRoom6];
 
 /************************************* Area5 *******************************************/
 
-export const checkRoom7 = new Event(
+export const checkRoom7 = (areas) => new Event(
   "Proceed through the forest",
   randomEncounterWalk,
-  [player, areas],
+  [areas],
   true,
   {},
 );
 
 /************************************ End Area *****************************************/
 
-escape7.events.push(checkRoom7);
+export const escape7 = (areas) => [checkRoom7(areas)];
 
 /************************************* Area5 *******************************************/
 
@@ -197,13 +215,27 @@ export const checkRoom8 = new Event(
 export const finalBattle8 = new Event(
   "Fight!!!",
   finalEncounter,
-  [finalBoss, player],
+  [finalBoss],
   true,
   {},
 );
 
 /************************************ End Area *****************************************/
 
-forestExit8.events.push(checkRoom8, finalBattle8);
+export const forestExit8 = [checkRoom8, finalBattle8];
 
-/*********************************** END EVENTS ****************************************/
+/********************************* Export EVENTS ***************************************/
+
+const eventsByArea = {
+  swRoom0,
+  wRoom1,
+  lab2,
+  seRoom3,
+  eRoom4,
+  treasury5,
+  neRoom6,
+  escape7,
+  forestExit8,
+}
+
+export default eventsByArea

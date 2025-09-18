@@ -1,15 +1,20 @@
+import fight from "../BattleSystem/Fight";
+import bunny from "../Entities/Enemies/Bunny";
+import scientistBunny from "../Entities/Enemies/ScientistBunny";
+import soldierBunny from "../Entities/Enemies/SoldierBunny";
+
 // The Final Escape Special Event
-const randomEncounterWalk = (playerAreas) => {
+const randomEncounterWalk = (areas, player) => {
   const entryMessage = [
-    `You see a sign saying it is about 3 kilometers to the exit.``You start pushing forward.`,
+    `You see a sign saying it is about 3 kilometers to the exit.`,
+    `You start pushing forward.`,
   ];
 
   // Loop for ~4 encounters
-  var player = playerAreas[0];
   var distanceWalked = 0;
   while (distanceWalked < 3) {
     if (!walk(player)) {
-      gameInProgress = false;
+      // You died!
       return false;
     }
     distanceWalked += 0.25;
@@ -25,14 +30,17 @@ const randomEncounterWalk = (playerAreas) => {
   ];
 
   // Add new area
-  playerAreas[1][7].connectedAreas.push(8);
+  areas[1][7].connectedAreas.push(8);
   return false;
 }
 
 /* Picks a random enemy from the current possibilities and returns a newly constructed
    version of that enemy. */
-export const returnRandomIndex = () => {
-  return enemies[Math.floor(Math.random() * enemies.length)];
+
+const possibleEnemies = [bunny, scientistBunny, soldierBunny];
+
+const returnRandomIndex = () => {
+  return possibleEnemies[Math.floor(Math.random() * possibleEnemies.length)];
 }
 
 // Returns true if the player makes it to the destination, false if he or she died

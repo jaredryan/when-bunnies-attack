@@ -1,77 +1,61 @@
 // PLAYER DEFINITION
-const player = {
-  name: "Unknown",
-  hp: 10,
-  maxHP: 10,
-  attackPower: [0, 1], // [min, max]
-  weapon: 0,
-  inventory: [],
-  // maxInventory: 10,
-  addItem: function (item) {
-    console.log("\nYou found a " + item.name + ".");
+function Player () {
+  this.name = "Unknown"
+  this.hp = 10
+  this.maxHP = 10
+  this.attackPower = [0, 1] // [min, max]
+  this.weapon = 0
+  this.inventory = []
+  this.hasWon = false
+  this.hasDied = false
+
+  this.addItem = (item) => {
+    console.log(`You found a ${item.name}.`);
     this.inventory.push(item);
+  }
 
-    /* Slightly buggy code to limit the inventory to just a few items. The bug
-		   is that it doesn't actually splice out the item to be discarded, like it
-		   should. This game doesn't push the 35 item limit of readline-sync, so
-		   I just commented it out instead of keeping this system in place. */
+  this.removeItem = (item) => {
+    const removeIndex = this.inventory.indexOf(item);
+    this.inventory.splice(removeIndex, 1);
+  }
 
-    // if (this.inventory.length >= this.maxInventory) {
-    // 	// Creates a display of the current items in the directory for the prompt
-    // 	console.log("Inventory:\n" + returnItemsString(player));
-    // 	var itemOptions = [];
-    // 	for (var i = 0; i < this.inventory.length; i++) {
-    // 		itemOptions.push(this.inventory[i].name);
-    // 	}
-    // 	// Loop to make sure the user selects a non-cancel button
-    // 	var index = readlineSync.keyInSelect(itemOptions, "Which item would you like to discard?");
-    // 	while (index === -1) {
-    // 		console.log("Please select one of the other options.");
-    // 		index = readlineSync.keyInSelect(itemOptions, "Which item would you like to discard?");
-    // 		continue;
-
-    // 	}
-    // 	// Loop that will double check that the user wants to remove an item before removing it.
-    // 	var isNotCertain = true;
-    // 	while (isNotCertain) {
-    // 		var choice = readlineSync.keyInSelect(["Yes", "No"], "Are you sure you want to discard the " + itemOptions[index] + "?");
-    // 		if (choice === 0) {
-    // 			this.inventory.splice(index, 1, item);
-    // 			isNotCertain = false;
-    // 		} else if (choice === 1) {
-    // 			index = readlineSync.keyInSelect(itemOptions, "Which item would you like to discard?");
-    // 		} else {
-    // 			console.log('Please select "Yes" or "No".');
-    // 		}
-    // 	}
-    // }
-  },
-  removeItem: function (item) {
-    this.inventory.pop(item);
-  },
-  attack: function (enemy) {
-    console.log("\nYou attack!");
-    var damage =
+  this.attack = (enemy) => {
+    console.log(`You attack!`);
+    const damage =
       Math.floor(
         Math.random() * (this.attackPower[1] - this.attackPower[0] + 1),
       ) +
       this.attackPower[0] +
       this.weapon;
-    enemy.hp -= damage;
-    console.log(enemy.name + " took " + damage + " damage!");
-  },
-  equipWeapon: function (weapon) {
+    enemy.takeDamage(damage);
+    console.log(`${enemy.name} took ${damage} damage!`);
+  }
+
+  this.takeDamage = (damage) => {
+    this.hp -= damage
+    if (this.hp <= 0) {
+      this.hasDied = true
+    }
+  }
+
+  this.heal = (hp) => {
+    const newHp = this.hp + hp
+
+    this.hp = newHp <= this.maxHP
+      ? newHp
+      : this.maxHP
+  }
+
+  this.equipWeapon = (weapon) => {
     if (weapon.power > this.weapon) {
-      console.log("You equipped the " + weapon.name + ".");
+      console.log(`You equipped the ${weapon.name}.`);
       this.weapon = weapon.power;
     } else {
       console.log(
-        "You discarded the " +
-          weapon.name +
-          " because it is weaker than your current weapon.",
+        `You discarded the ${weapon.name} because it is weaker than your current weapon.`
       );
     }
-  },
+  }
 };
 
-export default player
+export default Player

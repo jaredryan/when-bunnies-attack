@@ -1,9 +1,10 @@
-var finalBoss = [
+const finalBoss = [
   "Captain Whiskers",
   14,
   [2, 3],
   function (player) {
-    won = true;
-    gameInProgress = false;
+    player.hasWon = true
   },
 ];
+
+export default finalBoss

@@ -1,5 +1,7 @@
+import fight from '../BattleSystem/Fight';
+
 // The Final Boss Special Event
-const finalEncounter = (enemyPlayer) => {
+const finalEncounter = (enemy, player) => {
   const entryMessage = [
     `Bunny Dictator: "Hmmm...?`,
     `I see. You\'ve woken up. Welcome.`,
@@ -17,8 +19,9 @@ const finalEncounter = (enemyPlayer) => {
     `And annihilate all who stand in my way!!!"`,
   ];
 
-  if (!forcedFight(enemyPlayer[0], enemyPlayer[1])) {
-    gameInProgress = false;
+  if (!fight(enemy[0], player, true)) {
+    // gameInProgress = false;
+    return true;
   } else {
     return false;
   }
