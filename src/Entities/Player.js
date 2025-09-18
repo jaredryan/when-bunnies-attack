@@ -10,7 +10,6 @@ function Player() {
   this.hasDied = false;
 
   this.addItem = (item) => {
-    console.log(`You found a ${item.name}.`);
     this.inventory.push(item);
   };
 
@@ -45,14 +44,15 @@ function Player() {
   };
 
   this.equipWeapon = (weapon) => {
+    console.log(weapon)
+    console.log(this.weapon)
     if (weapon.power > this.weapon) {
-      console.log(`You equipped the ${weapon.name}.`);
+      
       this.weapon = weapon.power;
-    } else {
-      console.log(
-        `You discarded the ${weapon.name} because it is weaker than your current weapon.`,
-      );
+      return `You equipped the ${weapon.name}.`;
     }
+
+    return `You discarded the ${weapon.name} because it is weaker than your current weapon.`
   };
 }
 

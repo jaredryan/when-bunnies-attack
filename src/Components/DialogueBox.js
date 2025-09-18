@@ -76,10 +76,6 @@ const DialogueBox = ({ lines, speed = 40, onDone, resetBox }) => {
     setTimeoutId(null);
   }, [lines]);
 
-  useEffect(() => {
-
-  }, [resetBox])
-
   const advanceToNextLine = () => {
     setCurrent((c) => c + 1);
     setDone(false);

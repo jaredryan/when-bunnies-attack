@@ -2,13 +2,19 @@ import loseItem from "./LoseItem";
 import unlockAreas from "./UnlockAreas";
 
 const loseItemAndUnlockAreas = (
-  itemMessageCurAreaIndexNewAreaIndexAreas,
+  item,
+  message,
+  currentAreaIndex,
+  newAreaIndexes,
+  areas,
   player,
 ) => {
-  var info = itemMessageCurAreaIndexNewAreaIndexAreas;
-  loseItem([info[0], info[1]], player);
-  unlockAreas([info[2], info[3], info[4]]);
-  return true;
+  const loseItemMessage = loseItem(item, message, player);
+  const unlockAreasMessage = unlockAreas(currentAreaIndex, newAreaIndexes, areas);
+  return [
+    ...loseItemMessage,
+    ...unlockAreasMessage,
+  ];
 };
 
 export default loseItemAndUnlockAreas;

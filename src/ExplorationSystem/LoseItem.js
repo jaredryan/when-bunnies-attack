@@ -1,9 +1,7 @@
 // Lose an item
-const loseItem = (itemMessage, player) => {
-  console.log(itemMessage[1]);
-  const item = itemMessage[0];
+const loseItem = (item, message, player) => {
   player.removeItem(item);
-  return true;
+  return message;
 };
 
 export default loseItem;

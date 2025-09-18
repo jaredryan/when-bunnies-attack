@@ -1,13 +1,18 @@
 import Item from "../Entities/Item";
 
 // Obtain an item in the area. Stay in the area. PlayerItem is an array: [item, message]
-const getItems = (itemMessage, player) => {
-  console.log(itemMessage[1]);
-  const items = itemMessage[0];
+const getItems = (items, message, player) => {
+  const itemsAcquiredLog = []
   for (const itemInfo of items) {
+    itemsAcquiredLog.push(itemInfo[0])
     player.addItem(new Item(...itemInfo));
   }
-  return true;
+
+  const itemMessageString = `You obtained: ${itemsAcquiredLog.join(', ')}`
+  return [
+    ...message,
+    itemMessageString,
+  ];
 };
 
 export default getItems;

@@ -46,7 +46,13 @@ const decisionLoop = ({
       actions.push({
         name: event.name,
         execute: () => {
-          area.runEvent(player, eventIndex);
+          // Events change game state and display information based on the change
+          // They don't create new actions directly...instead, they change the
+          // list of events in the area. So, setText to display new message,
+          // and empty out Actions so they can't take action until the event is over
+          const text = area.runEvent(player, eventIndex)
+          setText(text);
+          setPrimaryActions([]);
         },
       });
     }
@@ -80,7 +86,6 @@ const decisionLoop = ({
         })
       }
       
-
       actions.push(leaveAreaAction);
     }
   } else {

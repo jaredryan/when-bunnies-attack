@@ -195,11 +195,15 @@ const areas = [
 ];
 
 // Pass in "areas" to the event that need it,
+//    wRoom1 => checkDoor1, wRoom1[0]
 //    escape7 => randomEncounterWalk
-//    swRoom0 => checkRoom0, swRoom[2]
+//    swRoom0 => checkRoom0, swRoom[2].nextEvent
+//    neRoom6 => checkRoom6, neRoom6[0].nextEvent
 
+areas[1].events[0] = areas[1].events[0](areas);
 areas[7].events[0] = areas[7].events[0](areas);
 areas[0].events[2].nextEvent = areas[0].events[2].nextEvent(areas);
+areas[6].events[0].nextEvent = areas[6].events[0].nextEvent(areas);
 
 /*********************************** Add Events ****************************************/
 
