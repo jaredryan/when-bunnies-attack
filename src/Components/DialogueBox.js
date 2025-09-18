@@ -1,9 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import History from "./History";
 
-export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
+export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef, reset }) => {
   const [displayed, setDisplayed] = useState("");
   const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    if (reset) {
+      setDisplayed("");
+      setHistory([]);
+    }
+  }, [reset])
 
   useEffect(() => {
     if (done) return;
@@ -53,13 +60,25 @@ export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef }) => {
   return textToDisplay.map((content) => <p className="gameLog">{content}</p>);
 };
 
-const DialogueBox = ({ lines, speed = 40, onDone }) => {
+const DialogueBox = ({ lines, speed = 40, onDone, resetBox }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
   const [skip, setSkip] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const [history, setHistory] = useState([]);
   const scrollRef = useRef(null);
+
+  // Reset state when lines prop changes
+  useEffect(() => {
+    setCurrent(0);
+    setDone(false);
+    setSkip(false);
+    setTimeoutId(null);
+  }, [lines]);
+
+  useEffect(() => {
+
+  }, [resetBox])
 
   const advanceToNextLine = () => {
     setCurrent((c) => c + 1);
@@ -98,6 +117,7 @@ const DialogueBox = ({ lines, speed = 40, onDone }) => {
               onDone();
             }
           }}
+          reset={resetBox}
         />
       </div>
       <div className="dialogueOptions">

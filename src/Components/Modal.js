@@ -32,9 +32,9 @@ export const Modal = ({ open, onClose, children, className }) => {
           <path
             d="M18 6L6 18M6 6L18 18"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>

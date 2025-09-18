@@ -28,16 +28,16 @@ const decisionLoop = ({
   setText,
   setPrimaryActions,
   setSecondaryActions,
-  textIsDoneAndActionsAreReady,
-  setTextIsDoneAndActionsAreReady
 }) => {
   const secondaryActions = Object.values(generateDefaultEvents(player));
 
   // Let the story control text and actions until it's done
   let { text, actions } = area.runStory(player);
 
-  if (!text && !actions) {
+  if (!text && (!actions || !actions.length)) {
     // After scripted story is done, allow exploration to trigger events
+    console.log("Free exploration in area, generating events.");
+    
     text = freeExplorationPrompt;
     actions = [];
 
@@ -60,30 +60,36 @@ const decisionLoop = ({
     }
 
     if (newAreas.length) {
-      const leaveAreaAction = [
-        [`Where do you want to go?`],
-        [
-          ...newAreas.map((availableArea) => ({
-            name: availableArea.name,
-            execute: () => setNextArea(availableArea),
-          })),
-          {
-            name: "Stay",
-            execute: () => [[`You decided to stay in the area.`], []],
-          },
-        ],
-      ];
+      const leaveAreaAction = {
+        name: "Leave the Area",
+        execute: () => ({
+          text: [`Where do you want to go?`],
+          actions:  [
+            ...newAreas.map((availableArea) => ({
+              name: availableArea.name,
+              execute: () => setNextArea(availableArea),
+            })),
+            {
+              name: "Stay",
+              execute: () => ({ 
+                text: [`You decided to stay in the area.`],
+                actions: []
+              })
+            },
+          ],
+        })
+      }
+      
 
       actions.push(leaveAreaAction);
     }
+  } else {
+    console.log("Running area story, no exploration yet.");
   }
 
   console.log('Decision Loop', { text, actions, secondaryActions });
 
-  if (text) {
-    setTextIsDoneAndActionsAreReady(false)
-    setText(text);
-  }
+  setText(text);
   setPrimaryActions(actions);
   setSecondaryActions(secondaryActions);
 };

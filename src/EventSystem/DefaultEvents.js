@@ -4,6 +4,8 @@ import checkStatus from "../ExplorationSystem/CheckStatus";
 import utilizeItem from "../ExplorationSystem/UtilizeItemInField";
 import leaveTheArea from "../ExplorationSystem/LeaveTheArea";
 
+import Event from "./Event";
+
 export const checkCurrentStatus = (player) =>
   new Event("Check your current status", checkStatus, player, false, {});
 

@@ -1,4 +1,4 @@
-export const freeExplorationPrompt = `What do you want to do?`;
+export const freeExplorationPrompt = [`What do you want to do?`];
 
 export const fleeAttemptMessage = `You tried to run away!`;
 export const fleeSuccessMessage = `You successfully ran away!`;

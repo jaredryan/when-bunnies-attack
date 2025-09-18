@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import QuitButton from "../Components/QuitButton";
 import DialogueBox from "../Components/DialogueBox";
@@ -10,16 +10,17 @@ import decisionLoop from "../ExplorationSystem/DecisionLoop";
 const Game = ({ endGame }) => {
   // Components
   const [quitModalIsOpen, setQuitModalIsOpen] = useState(false);
+  const isLoopRunning = useRef(false);
+  const isNewArea = useRef(false);
 
   // Initialization
   const player = useMemo(() => new Player(), []);
 
   const [area, setArea] = useState(areas[0]);
   const [text, setText] = useState([]);
+  const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
   const [secondaryActions, setSecondaryActions] = useState([]);
-  const [textIsDoneAndActionsAreReady, setTextIsDoneAndActionsAreReady] =
-    useState(true);
 
   // Keep an eye on player status to end the game when they've won or lost
   useEffect(() => {
@@ -32,12 +33,11 @@ const Game = ({ endGame }) => {
 
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
-    console.log(textIsDoneAndActionsAreReady)
-    console.log(typeof textIsDoneAndActionsAreReady)
-    if (
-      textIsDoneAndActionsAreReady && (!primaryActions || !primaryActions.length)
-    ) {
-      console.log("Running decision loop");
+    if (!isLoopRunning.current) {
+      isLoopRunning.current = true;
+      isNewArea.current = true;
+
+      setShowActions(false)
       decisionLoop({
         player,
         area,
@@ -46,11 +46,9 @@ const Game = ({ endGame }) => {
         setText,
         setPrimaryActions,
         setSecondaryActions,
-        textIsDoneAndActionsAreReady,
-        setTextIsDoneAndActionsAreReady,
       });
     }
-  }, [area, textIsDoneAndActionsAreReady, player]);
+  }, [area, player]);
 
   // NEW FORMAT
 
@@ -95,21 +93,49 @@ const Game = ({ endGame }) => {
     </ul>
   );
 
+  console.log({ text, primaryActions, secondaryActions });
+
+  const resetDialogueForNewArea = () => {
+    if (isNewArea.current) {
+      isNewArea.current = false;
+      return true
+    }
+
+    return false
+  }
+
   return (
     <div className="gameContainer">
       <DialogueBox
         lines={text || []}
         onDone={() => {
-          console.log("DialogueBox is done, flipping flag to true");
-          setTextIsDoneAndActionsAreReady(true)
+          // If the current story segment was text only,
+          // run decision loop again to get actions
+          if (!primaryActions || !primaryActions.length) {
+            setShowActions(false)
+            decisionLoop({
+              player,
+              area,
+              areas,
+              setNextArea: (area) => setArea(area),
+              setText,
+              setPrimaryActions,
+              setSecondaryActions,
+            });
+          } else {
+            // Otherwise, stop game execution and show actions
+            isLoopRunning.current = false
+            setShowActions(true);
+          }
         }}
+        resetBox={resetDialogueForNewArea()}
       />
       <h2>Menu</h2>
       {/* Primary actions = actions unique to that area */}
-      {textIsDoneAndActionsAreReady ? mapActions(console.log({ primaryActions }) || primaryActions) : null}
+      {showActions ? mapActions(console.log({ primaryActions }) || primaryActions) : null}
       {/* Secondary actions = actions always available: leave area, inventory */}
       {/* Consider adding a new Map action button to make navigation better. */}
-      {textIsDoneAndActionsAreReady ? mapActions(console.log({ secondaryActions }) || secondaryActions) : null}
+      {showActions ? mapActions(console.log({ secondaryActions }) || secondaryActions) : null}
       <QuitButton
         open={quitModalIsOpen}
         openModal={() => setQuitModalIsOpen(true)}
