@@ -7,9 +7,11 @@ function Area(name, connectedAreas, number, events, story) {
   this.story = story; // array of story events
   this.number = number;
 
-  this.runStory = (player) => {
+  this.runStory = (player, setText, setPrimaryActions) => {
     const story = this.story.shift();
-    return story ? story(player) : { text: null, actions: [] };
+    return story
+      ? story(player, setText, setPrimaryActions)
+      : { text: null, actions: [] };
   };
 
   this.runEvent = (player, eventIndex) => {

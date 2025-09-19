@@ -136,8 +136,8 @@ export const seRoom3EntryAnswerResponsePairs = [
 ];
 
 export const seRoom3ExitMessage = [
-  `"He...she...it...?`,
-  `They spoke to me! And attacked me! What's going on?!"`,
+  `"He...she...it...?"`,
+  `"They spoke to me! And attacked me! What's going on?!"`,
 ];
 
 export const eRoom4EntryMessage = [

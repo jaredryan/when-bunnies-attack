@@ -12,7 +12,7 @@ import events from "./EventsList";
 
 /************************************* Area0 *******************************************/
 
-export const swRoom0 = new Area("SW Room", [], 0, events.swRoom0, [
+export const swRoom0 = new Area("Southwest Room", [], 0, events.swRoom0, [
   (_player) => ({
     text: messages.swRoom0EntryMessage1,
     actions: [],
@@ -23,30 +23,30 @@ export const swRoom0 = new Area("SW Room", [], 0, events.swRoom0, [
 
 /************************************* Area1 *******************************************/
 
-export const wRoom1 = new Area("W Room", [0, 4], 1, events.wRoom1, [
-  (_player) => ({
+export const wRoom1 = new Area("West Room", [0, 4], 1, events.wRoom1, [
+  (_player, setText, setPrimaryActions) => ({
     text: messages.wRoom1EntryMessage1,
     actions: [
       {
         name: messages.wRoom1EntryAnswerResponsePairs[0].answer,
-        execute: () => ({
-          text: messages.wRoom1EntryAnswerResponsePairs[0].response,
-          actions: [],
-        }),
+        execute: () => {
+          setText(messages.wRoom1EntryAnswerResponsePairs[0].response)
+          setPrimaryActions([])
+        },
       },
       {
         name: messages.wRoom1EntryAnswerResponsePairs[1].answer,
-        execute: () => ({
-          text: messages.wRoom1EntryAnswerResponsePairs[1].response,
-          actions: [],
-        }),
+        execute: () => {
+          setText(messages.wRoom1EntryAnswerResponsePairs[1].response)
+          setPrimaryActions([])
+        },
       },
       {
         name: messages.wRoom1EntryAnswerResponsePairs[2].answer,
-        execute: () => ({
-          text: messages.wRoom1EntryAnswerResponsePairs[2].response,
-          actions: [],
-        }),
+        execute: () => {
+          setText(messages.wRoom1EntryAnswerResponsePairs[2].response)
+          setPrimaryActions([])
+        },
       },
     ],
   }),
@@ -66,7 +66,7 @@ export const wRoom1 = new Area("W Room", [0, 4], 1, events.wRoom1, [
 
 /************************************* Area2 *******************************************/
 
-export const lab2 = new Area("Lab", [1], 2, events.lab2, [
+export const lab2 = new Area("Laboratory", [1], 2, events.lab2, [
   (_player) => ({
     text: messages.lab2EntryMessage1,
     actions: [
@@ -83,23 +83,23 @@ export const lab2 = new Area("Lab", [1], 2, events.lab2, [
 
 /************************************* Area3 *******************************************/
 
-export const seRoom3 = new Area("SE Room", [0, 4], 3, events.seRoom3, [
-  (player) => ({
-    text: messages.seRoom3EntryMessage1(player),
+export const seRoom3 = new Area("Southeast Room", [0, 4], 3, events.seRoom3, [
+  (_player, setText, setPrimaryActions) => ({
+    text: messages.seRoom3EntryMessage1,
     actions: [
       {
         name: messages.seRoom3EntryAnswerResponsePairs[0].answer,
-        execute: () => ({
-          text: [],
-          actions: [],
-        }),
+        execute: () => {
+          setText([])
+          setPrimaryActions([])
+        },
       },
       {
         name: messages.seRoom3EntryAnswerResponsePairs[1].answer,
-        execute: () => ({
-          text: [],
-          actions: [],
-        }),
+        execute: () => {
+          setText([])
+          setPrimaryActions([])
+        },
       },
     ],
   }),
@@ -119,7 +119,7 @@ export const seRoom3 = new Area("SE Room", [0, 4], 3, events.seRoom3, [
 
 /************************************* Area4 *******************************************/
 
-export const eRoom4 = new Area("E Room", [1, 3, 6], 4, events.eRoom4, [
+export const eRoom4 = new Area("East Room", [1, 3, 6], 4, events.eRoom4, [
   (_player) => ({
     text: messages.eRoom4EntryMessage,
     actions: [],
@@ -141,7 +141,7 @@ export const treasury5 = new Area("Treasury", [4], 5, events.treasury5, [
 
 /************************************* Area6 *******************************************/
 
-export const neRoom6 = new Area("NE Room", [4, 7], 6, events.neRoom6, [
+export const neRoom6 = new Area("Northeast Room", [4, 7], 6, events.neRoom6, [
   (_player) => ({
     text: messages.neRoom6EntryMessage,
     actions: [

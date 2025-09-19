@@ -32,7 +32,7 @@ const decisionLoop = ({
   const secondaryActions = Object.values(generateDefaultEvents(player));
 
   // Let the story control text and actions until it's done
-  let { text, actions } = area.runStory(player);
+  let { text, actions } = area.runStory(player, setText, setPrimaryActions);
 
   if (!text && (!actions || !actions.length)) {
     // After scripted story is done, allow exploration to trigger events
@@ -68,22 +68,22 @@ const decisionLoop = ({
     if (newAreas.length) {
       const leaveAreaAction = {
         name: "Leave the Area",
-        execute: () => ({
-          text: [`Where do you want to go?`],
-          actions:  [
+        execute: () => {
+          setText([`Where do you want to go?`])
+          setPrimaryActions([
             ...newAreas.map((availableArea) => ({
               name: availableArea.name,
               execute: () => setNextArea(availableArea),
             })),
             {
               name: "Stay",
-              execute: () => ({ 
-                text: [`You decided to stay in the area.`],
-                actions: []
-              })
-            },
-          ],
-        })
+              execute: () => {
+                setText([`You decided to stay in the area.`])
+                setPrimaryActions([])
+              }
+            }
+          ])
+        }
       }
       
       actions.push(leaveAreaAction);

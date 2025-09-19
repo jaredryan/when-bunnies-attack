@@ -44,15 +44,14 @@ function Player() {
   };
 
   this.equipWeapon = (weapon) => {
-    console.log(weapon)
-    console.log(this.weapon)
+    const lowerCaseWeapon = weapon.name.split(' ').map(word => word.toLowerCase()).join(' ')
     if (weapon.power > this.weapon) {
       
       this.weapon = weapon.power;
-      return `You equipped the ${weapon.name}.`;
+      return `You equipped the ${lowerCaseWeapon}.`;
     }
 
-    return `You discarded the ${weapon.name} because it is weaker than your current weapon.`
+    return `You discarded the ${lowerCaseWeapon} because it is weaker than your current weapon.`
   };
 }
 

@@ -85,11 +85,14 @@ const Game = ({ endGame }) => {
 
   const mapActions = (actions = []) => (
     <ul className="actionContainer">
-      {actions.map((action) => (
-        <li key={action.name}>
-          <button onClick={action.execute}>{action.name}</button>
-        </li>
-      ))}
+      {showActions
+        ? actions.map((action) => (
+          <li key={action.name}>
+            <button onClick={action.execute}>{action.name}</button>
+          </li>
+        ))
+        : null
+      }
     </ul>
   );
 
@@ -102,6 +105,20 @@ const Game = ({ endGame }) => {
     }
 
     return false
+  }
+
+  if (!text && (!primaryActions || !primaryActions.length)) {
+    isLoopRunning.current = true;
+    setShowActions(false)
+    decisionLoop({
+      player,
+      area,
+      areas,
+      setNextArea: (area) => setArea(area),
+      setText,
+      setPrimaryActions,
+      setSecondaryActions,
+    });
   }
 
   return (
@@ -132,10 +149,10 @@ const Game = ({ endGame }) => {
       />
       <h2>Menu</h2>
       {/* Primary actions = actions unique to that area */}
-      {showActions ? mapActions(console.log({ primaryActions }) || primaryActions) : null}
+      {mapActions(primaryActions)}
       {/* Secondary actions = actions always available: leave area, inventory */}
       {/* Consider adding a new Map action button to make navigation better. */}
-      {showActions ? mapActions(console.log({ secondaryActions }) || secondaryActions) : null}
+      {mapActions(secondaryActions)}
       <QuitButton
         open={quitModalIsOpen}
         openModal={() => setQuitModalIsOpen(true)}
