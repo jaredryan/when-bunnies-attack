@@ -74,10 +74,10 @@ export const checkDoor1 = (areas) => new Event(
   `Examine the door`,
   unlockAreas,
   [
-    [`You check the door and see that it is unlocked. It looks like it leads to a laboratory of some sort.`],
     [1],
     [2],
     areas,
+    [`You check the door and see that it is unlocked. It looks like it leads to a laboratory of some sort.`],
   ],
   true,
   {},
@@ -162,7 +162,7 @@ export const lootRoom5 = new Event(
 export const heal5 = new Event(
   `Eat as much as possible`,
   heal,
-  [`You ate like a champ and recovered all your health.`],
+  [[`You ate like a champ and recovered all your health.`]],
   false,
   {},
 );
@@ -182,10 +182,10 @@ export const checkRoom6 = new Event(
     `Inspect the poster`,
     unlockAreas,
     [
-      [`Upon closer inspection, you find the key to the treasury.`],
       [4],
       [5],
-      areas
+      areas,
+      [`Upon closer inspection, you find the key to the treasury.`],
     ],
     true,
     {},

@@ -81,16 +81,9 @@ export const wRoom1EntryAnswerResponsePairs = [
   {
     answer: `You: "Where am I?"`,
     response: [
-      `Bunny: "Uh no, you must have hit your head. Let me lead you back to your room."`,
+      `Bunny: "Oh no, you must have hit your head. Let me lead you back to your room."`,
     ],
-  },
-  {
-    answer: null,
-    response: [
-      `Bunny: "Uh no, you can't talk. You must have hit your head."`,
-      `Let me lead you back to your room."`,
-    ],
-  },
+  }
 ];
 
 export const wRoom1ExitMessage = [
