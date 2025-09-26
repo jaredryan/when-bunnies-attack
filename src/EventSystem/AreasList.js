@@ -12,7 +12,7 @@ import events from "./EventsList";
 
 /************************************* Area0 *******************************************/
 
-export const swRoom0 = new Area("Southwest Room", [], 0, events.swRoom0, [
+export const swRoom0 = new Area("Southwest Room", 'SW', [], 0, events.swRoom0, [
   (_player) => ({
     text: messages.swRoom0EntryMessage1,
     actions: [],
@@ -23,7 +23,7 @@ export const swRoom0 = new Area("Southwest Room", [], 0, events.swRoom0, [
 
 /************************************* Area1 *******************************************/
 
-export const wRoom1 = new Area("West Room", [0, 4], 1, events.wRoom1, [
+export const wRoom1 = new Area("West Room", 'W', [0, 4], 1, events.wRoom1, [
   (_player, setText, setPrimaryActions) => ({
     text: messages.wRoom1EntryMessage1,
     actions: [
@@ -66,7 +66,7 @@ export const wRoom1 = new Area("West Room", [0, 4], 1, events.wRoom1, [
 
 /************************************* Area2 *******************************************/
 
-export const lab2 = new Area("Laboratory", [1], 2, events.lab2, [
+export const lab2 = new Area("Laboratory", 'Lab', [1], 2, events.lab2, [
   (_player) => ({
     text: messages.lab2EntryMessage1,
     actions: [
@@ -83,7 +83,7 @@ export const lab2 = new Area("Laboratory", [1], 2, events.lab2, [
 
 /************************************* Area3 *******************************************/
 
-export const seRoom3 = new Area("Southeast Room", [0, 4], 3, events.seRoom3, [
+export const seRoom3 = new Area("Southeast Room", 'SE', [0, 4], 3, events.seRoom3, [
   (_player, setText, setPrimaryActions) => ({
     text: messages.seRoom3EntryMessage1,
     actions: [
@@ -119,7 +119,7 @@ export const seRoom3 = new Area("Southeast Room", [0, 4], 3, events.seRoom3, [
 
 /************************************* Area4 *******************************************/
 
-export const eRoom4 = new Area("East Room", [1, 3, 6], 4, events.eRoom4, [
+export const eRoom4 = new Area("East Room", 'E', [1, 3, 6], 4, events.eRoom4, [
   (_player) => ({
     text: messages.eRoom4EntryMessage,
     actions: [],
@@ -130,7 +130,7 @@ export const eRoom4 = new Area("East Room", [1, 3, 6], 4, events.eRoom4, [
 
 /************************************* Area5 *******************************************/
 
-export const treasury5 = new Area("Treasury", [4], 5, events.treasury5, [
+export const treasury5 = new Area("Treasury", 'TR', [4], 5, events.treasury5, [
   (_player) => ({
     text: messages.treasury5EntryMessage,
     actions: [],
@@ -141,7 +141,7 @@ export const treasury5 = new Area("Treasury", [4], 5, events.treasury5, [
 
 /************************************* Area6 *******************************************/
 
-export const neRoom6 = new Area("Northeast Room", [4, 7], 6, events.neRoom6, [
+export const neRoom6 = new Area("Northeast Room", 'NE', [4, 7], 6, events.neRoom6, [
   (_player) => ({
     text: messages.neRoom6EntryMessage,
     actions: [
@@ -158,7 +158,7 @@ export const neRoom6 = new Area("Northeast Room", [4, 7], 6, events.neRoom6, [
 
 /************************************* Area7 *******************************************/
 
-export const escape7 = new Area("Forest", [6], 7, events.escape7, (player) => [
+export const escape7 = new Area("Forest", 'Path', [6], 7, events.escape7, (player) => [
   (_player) => ({
     text: messages.escape7EntryMessage,
     actions: [],
@@ -169,7 +169,7 @@ export const escape7 = new Area("Forest", [6], 7, events.escape7, (player) => [
 
 /************************************* Area7 *******************************************/
 
-export const forestExit8 = new Area("Forest Exit", [7], 8, events.forestExit8, [
+export const forestExit8 = new Area("Forest Exit", 'Exit', [7], 8, events.forestExit8, [
   (_player) => ({
     text: messages.forestExit8EntryMessage,
     actions: [],

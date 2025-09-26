@@ -57,7 +57,7 @@ export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef, reset }
   let textToDisplay = history;
   if (displayed) textToDisplay = [...textToDisplay, displayed];
 
-  return textToDisplay.map((content) => <p className="gameLog">{content}</p>);
+  return textToDisplay.map((content) => <p key={content} className="gameLog">{content}</p>);
 };
 
 const DialogueBox = ({ lines, speed = 40, onDone, resetBox }) => {

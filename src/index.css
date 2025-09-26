@@ -128,11 +128,11 @@ dialog.dialog button:hover {
   background-color: var(--primarylight);
 }
 
-.actionContainer:last-of-type button {
+.actionContainer:last-of-type > li > button {
   background-color: var(--secondary);
 }
 
-.actionContainer:last-of-type button:hover {
+.actionContainer:last-of-type > li > button:hover {
   background-color: var(--secondarylight);
 }
 
@@ -300,6 +300,79 @@ dialog.quitModal .buttonContainer button {
   justify-content: space-around;
   align-items: center;
 }
+
+
+
+
+
+
+
+.map {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+}
+
+.room {
+  width: 50px !important;
+  height: 50px !important;
+  padding: 16px;
+  border-radius: 50%;
+  background-color: var(--secondarylight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row.verticalConnectors .room {
+  height: 25px !important;
+}
+
+.room.active {
+  background-color: var(--primarylight);
+}
+
+.connector {
+  width: 25px;
+  height: 25px;
+  border-radius: 0 !important;
+  background-color: black;
+}
+
+.connector.room.vertical {
+  width: 6px !important;
+  padding: 0;
+  margin: 0 22px;
+}
+
+.vertical {
+  /* padding: 0 10px; */
+}
+
+.horizontal {
+  height: 6px !important;
+  padding: 0;
+}
+
+.placeholder {
+  background-color: transparent;
+}
+
+
+
+
+
+
 
 @media (max-width: 750px) {
   p,

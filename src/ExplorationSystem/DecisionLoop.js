@@ -20,6 +20,28 @@
 import { freeExplorationPrompt } from "../Messages";
 import generateDefaultEvents from "../EventSystem/DefaultEvents";
 
+const giveSecondaryActionsSetTextAndActions = ({ actions, setText, setPrimaryActions, player }) => (
+  actions.map(event => ({
+    name: event.name,
+    execute: () => {
+      const { text, actions } = event.trigger(player)
+      setText(text)
+      let actionsWithSetTextAndActions = []
+      if (actions.length) {
+        actionsWithSetTextAndActions = actions.map((action) => ({
+          ...action,
+          execute: () => {
+            const text = action.execute()
+            setText(text)
+            setPrimaryActions([])
+          }
+        }))
+      }
+      setPrimaryActions(actionsWithSetTextAndActions)
+    }
+  }))
+)
+
 const decisionLoop = ({
   player,
   area,
@@ -29,7 +51,11 @@ const decisionLoop = ({
   setPrimaryActions,
   setSecondaryActions,
 }) => {
-  const secondaryActions = Object.values(generateDefaultEvents(player));
+  let secondaryActions = Object.values(generateDefaultEvents(player))
+  secondaryActions = giveSecondaryActionsSetTextAndActions({
+    player, setText, setPrimaryActions,
+    actions: secondaryActions,
+  })
 
   // Let the story control text and actions until it's done
   let { text, actions } = area.runStory(player, setText, setPrimaryActions);

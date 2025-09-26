@@ -9,7 +9,7 @@ const History = (props) => {
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="scrollableHistory">
           {props.history.map((line) => (
-            <p>{line}</p>
+            <p key={line}>{line}</p>
           ))}
         </div>
         <button autoFocus onClick={() => setOpen(false)}>

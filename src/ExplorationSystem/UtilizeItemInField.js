@@ -3,24 +3,29 @@ import { selectItem } from "../BattleSystem/BattleInventory";
 
 // Allows the player to use an item while in the field
 const utilizeItemInField = (player) => {
-  var itemChoice = selectItem(player);
-  if (itemChoice === "Empty" || itemChoice === -1) {
-    return true;
+  const { text, actions } = selectItem(player)
+
+  const updatedActions = []
+  for (let i = 0; i < player.inventory.length; i++) {
+    const action = actions[i]
+    const item = player.inventory[i]
+    updatedActions.push({
+      name: action.name,
+      execute: () => {
+        if (!isUseable(true, item)) {
+          return [`You examine the ${item.name}, then put it back into your inventory.`]
+        } else if (player.hp === player.maxHP) {
+          return [`You are already at full health.`]
+        }
+        return action.execute()
+      }
+    })
   }
-  var item = player.inventory[itemChoice];
-  if (item === undefined || !isUseable(true, item)) {
-    console.log(
-      `You examine the ${item.name} and put it back into your inventory.`,
-    );
-    return true;
+
+  return {
+    text,
+    actions: updatedActions
   }
-  if (isUseable(true, item) && player.hp === player.maxHP) {
-    console.log(`You are already at full health.`);
-    return true;
-  }
-  item.use(player);
-  player.inventory.splice(itemChoice, 1);
-  return true;
 };
 
 export default utilizeItemInField;

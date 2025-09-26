@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import QuitButton from "../Components/QuitButton";
+import MapButton from "../Components/MapButton";
 import DialogueBox from "../Components/DialogueBox";
 
 import Player from "../Entities/Player";
@@ -10,6 +11,7 @@ import decisionLoop from "../ExplorationSystem/DecisionLoop";
 const Game = ({ endGame }) => {
   // Components
   const [quitModalIsOpen, setQuitModalIsOpen] = useState(false);
+  const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
   const isLoopRunning = useRef(false);
   const isNewArea = useRef(false);
 
@@ -29,7 +31,7 @@ const Game = ({ endGame }) => {
     } else if (player.hasDied) {
       endGame(false);
     }
-  }, [player, endGame]);
+  }, [player.hasWon, player.hasDied, endGame]);
 
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
@@ -37,7 +39,8 @@ const Game = ({ endGame }) => {
       isLoopRunning.current = true;
       isNewArea.current = true;
 
-      setShowActions(false)
+      area.visit();
+      setShowActions(false);
       decisionLoop({
         player,
         area,
@@ -83,33 +86,29 @@ const Game = ({ endGame }) => {
   // It might also need stuff like player data, how to fight, etc...So maybe more data needs to be initialized
   // and passed. Or it might be initialized elsewhere. One step at a time, though.
 
-  const mapActions = (actions = []) => (
-    <ul className="actionContainer">
-      {showActions
-        ? actions.map((action) => (
+  const mapActions = (actions = []) =>
+    !showActions
+      ? null
+      : actions.map((action) => (
           <li key={action.name}>
             <button onClick={action.execute}>{action.name}</button>
           </li>
-        ))
-        : null
-      }
-    </ul>
-  );
+        ));
 
   console.log({ text, primaryActions, secondaryActions });
 
   const resetDialogueForNewArea = () => {
     if (isNewArea.current) {
       isNewArea.current = false;
-      return true
+      return true;
     }
 
-    return false
-  }
+    return false;
+  };
 
   if (!text && (!primaryActions || !primaryActions.length)) {
     isLoopRunning.current = true;
-    setShowActions(false)
+    setShowActions(false);
     decisionLoop({
       player,
       area,
@@ -129,7 +128,7 @@ const Game = ({ endGame }) => {
           // If the current story segment was text only,
           // run decision loop again to get actions
           if (!primaryActions || !primaryActions.length) {
-            setShowActions(false)
+            setShowActions(false);
             decisionLoop({
               player,
               area,
@@ -141,7 +140,7 @@ const Game = ({ endGame }) => {
             });
           } else {
             // Otherwise, stop game execution and show actions
-            isLoopRunning.current = false
+            isLoopRunning.current = false;
             setShowActions(true);
           }
         }}
@@ -149,10 +148,22 @@ const Game = ({ endGame }) => {
       />
       <h2>Menu</h2>
       {/* Primary actions = actions unique to that area */}
-      {mapActions(primaryActions)}
-      {/* Secondary actions = actions always available: leave area, inventory */}
-      {/* Consider adding a new Map action button to make navigation better. */}
-      {mapActions(secondaryActions)}
+      <ul className="actionContainer">{mapActions(primaryActions)}</ul>
+      {/* Secondary actions = actions always available: status, inventory, map */}
+      <ul className="actionContainer">
+        {mapActions(secondaryActions)}
+        {!showActions ? null : (
+          <li key={"Open map"}>
+            <MapButton
+              open={mapModalIsOpen}
+              openModal={() => setMapModalIsOpen(true)}
+              onCancel={() => setMapModalIsOpen(false)}
+              areas={areas}
+              area={area}
+            />
+          </li>
+        )}
+      </ul>
       <QuitButton
         open={quitModalIsOpen}
         openModal={() => setQuitModalIsOpen(true)}

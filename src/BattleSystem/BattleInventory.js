@@ -1,3 +1,5 @@
+import { returnItemsStringArray } from "../Utilities";
+
 /* Displays all of the player's current items and prompts the user to choose one.
    It returns "Empty" if he or she does not have any items. */
 export const selectItem = (player, enemy) => {
@@ -5,7 +7,7 @@ export const selectItem = (player, enemy) => {
   const itemOptions = [];
   if (!player.inventory || player.inventory.length === 0) {
     return {
-      text: "Your inventory is empty",
+      text: ["Your inventory is empty."],
       actions: [],
     };
   }
@@ -18,7 +20,10 @@ export const selectItem = (player, enemy) => {
   }
 
   return {
-    text: "Which item would you like to use?",
+    text: [
+      "Which item would you like to use?",
+      ...returnItemsStringArray(player)
+    ],
     actions: itemOptions,
   };
 };
@@ -26,6 +31,6 @@ export const selectItem = (player, enemy) => {
 // Allows the user to use the item
 export const utilizeItem = (player, enemy, itemIndex) => {
   const item = player.inventory[itemIndex];
-  item.use(player, enemy);
   player.inventory.splice(itemIndex, 1);
+  return item.use(player, enemy);
 };

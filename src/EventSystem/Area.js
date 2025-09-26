@@ -1,11 +1,17 @@
 // AREA CONSTRUCTOR
 
-function Area(name, connectedAreas, number, events, story) {
+function Area(name, mapName, connectedAreas, number, events, story) {
   this.name = name;
+  this.mapName = mapName;
   this.events = events;
   this.connectedAreas = connectedAreas;
   this.story = story; // array of story events
   this.number = number;
+  this.visited = false;
+  
+  this.visit = () => {
+    this.visited = true
+  }
 
   this.runStory = (player, setText, setPrimaryActions) => {
     const story = this.story.shift();
