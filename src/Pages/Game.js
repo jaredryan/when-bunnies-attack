@@ -4,6 +4,9 @@ import QuitButton from "../Components/QuitButton";
 import MapButton from "../Components/MapButton";
 import DialogueBox from "../Components/DialogueBox";
 
+import isUseable from "../ExplorationSystem/IsUsable";
+import { utilizeItem } from "../BattleSystem/BattleInventory";
+
 import Item from '../Entities/Item'
 import carrot from '../Entities/Items/Carrot'
 import throwingKnife from '../Entities/Items/ThrowingKnife'
@@ -182,13 +185,24 @@ const Game = ({ endGame }) => {
               </button>
             </div>
             {!inventoryIsOpen ? null : <ul className="inventoryList">
-              {player.inventory.slice(0, 7).map((item, index) => (
+              {player.inventory.map((item, index) => (
                 <li key={item.name + index} className="item">
                   <p className="tooltip">
                     {item.name}
                     <span class="tooltipText">{item.description}</span>
                   </p>
-                  <button onClick={() => console.log(`Used ${item.name}`)}>Use</button>
+                  <button onClick={() => {
+                    if (!isUseable(true, item)) {
+                      setText([`You examine the ${item.name}, then put it back into your inventory.`])
+                    } else if (player.hp === player.maxHP) {
+                      setText([`You are already at full health.`])
+                    } else {
+                      setText(utilizeItem(player, null, index))
+                    }
+                  }}
+                  >
+                    Use
+                  </button>
                 </li>
               ))}
             </ul>}
