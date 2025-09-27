@@ -1,22 +1,3 @@
-/* Format of decisions: pass in area. The area contains information about all of
-   its possible events. It uses this information to display options, and to carry
-   out their consequences. The area is updated as needed.
-   Once the loop of decisions in the current area is completed, the index of the
-   next area in the areas array is returned. */
-
-// TO-DO --
-
-// The decision loop will be firing off functions based off of game state now.
-// A notable change is that instead of returning the index when the loop is done, we
-// will run setNextArea(index)...so instead "return index", "setNextArea(index)"
-//
-// Other things..."area.story()"" is just initial story, I may not be running it from here
-// anymore, as I want original text right away with the new area, so I might be running
-// it directly from the game component
-//
-// The "options" seem to correspond directly to the available unique actions, so I will
-// likely be running setActions(options), with the way things are currently set
-
 import { freeExplorationPrompt } from "../Messages";
 
 const decisionLoop = ({

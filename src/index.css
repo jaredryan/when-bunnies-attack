@@ -290,16 +290,6 @@ dialog::backdrop {
   backdrop-filter: blur(2px);
 }
 
-dialog.quitModal {
-  width: 300px;
-}
-
-dialog.quitModal .buttonContainer button {
-  min-width: 90px;
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .buttonContainer {
   display: flex;
   flex-direction: row;
