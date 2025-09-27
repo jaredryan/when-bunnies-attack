@@ -117,41 +117,35 @@ button:disabled {
 }
 
 button.gameButton,
-.actionContainer:first-of-type button,
+.actionContainer.primary button,
 dialog.dialog button {
   background-color: var(--primary);
 }
 
 button.gameButton:hover,
-.actionContainer:first-of-type button:hover,
+.actionContainer.primary button:hover,
 dialog.dialog button:hover {
   background-color: var(--primarylight);
 }
 
-.actionContainer:last-of-type > li > button {
+button.map {
   background-color: var(--secondary);
 }
 
-.actionContainer:last-of-type > li > button:hover {
+button.map:hover {
   background-color: var(--secondarylight);
 }
 
 .dialogueOptions button,
-button.quit,
 dialog button.xButton,
 dialog button.secondary {
   background-color: var(--tertiary);
 }
 
 .dialogueOptions button:hover,
-button.quit:hover,
 dialog button.xButton:hover,
 dialog button.secondary:hover {
   background-color: var(--backgroundsecondary);
-}
-
-button.quit {
-  margin: 20px auto 0;
 }
 
 @media (max-width: 1000px) {
@@ -182,7 +176,6 @@ button.quit {
 .pageContainer {
   padding: 50px;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -215,16 +208,32 @@ button.quit {
 
 .actionContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 16px;
-  min-height: 32px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 }
 
-.actionContainer:last-of-type {
-  margin-bottom: 0;
+button.map {
+  width: 24.5px;
+  padding: 0;
+  margin: 0;
+  height: 24.5px;
+  border-radius: 50%;
+  min-width: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.map svg {
+  width: 20px;
+  height: 20px;
+}
+
+.actionContainer > li > button {
+  width: 100%;
+  min-width: unset;
+  font-size: 16px;
 }
 
 dialog {
@@ -372,6 +381,7 @@ dialog.quitModal .buttonContainer button {
   display: flex;
   flex-direction: column;
   gap: 48px;
+  flex-grow: 1;
 }
 
 .twoColumns {
@@ -401,6 +411,7 @@ dialog.quitModal .buttonContainer button {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  gap: 4px;
 }
 
 .status .attributeRow {
@@ -415,39 +426,32 @@ dialog.quitModal .buttonContainer button {
   font-weight: 500;
 }
 
-.inventory {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 12px;
-}
-
-.inventory .inventoryList {
+.inventoryList {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   gap: 6px;
+  margin-top: 12px;
 }
 
-.inventory h3 {
+.inventoryList h3 {
   text-align: left;
 }
 
-.inventory .item {
+.inventoryList .item {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 6px;
 }
 
-.inventory .item b {
+.inventoryList .item b {
   font-weight: 600;
   margin-right: 4px;
 }
 
-.inventory .item button {
+.inventoryList .item button {
   font-size: 16px;
   padding: 6px;
   height: 44px;

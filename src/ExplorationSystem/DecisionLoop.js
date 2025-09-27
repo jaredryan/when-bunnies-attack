@@ -18,29 +18,6 @@
 // likely be running setActions(options), with the way things are currently set
 
 import { freeExplorationPrompt } from "../Messages";
-import generateDefaultEvents from "../EventSystem/DefaultEvents";
-
-const giveSecondaryActionsSetTextAndActions = ({ actions, setText, setPrimaryActions, player }) => (
-  actions.map(event => ({
-    name: event.name,
-    execute: () => {
-      const { text, actions } = event.trigger(player)
-      setText(text)
-      let actionsWithSetTextAndActions = []
-      if (actions.length) {
-        actionsWithSetTextAndActions = actions.map((action) => ({
-          ...action,
-          execute: () => {
-            const text = action.execute()
-            setText(text)
-            setPrimaryActions([])
-          }
-        }))
-      }
-      setPrimaryActions(actionsWithSetTextAndActions)
-    }
-  }))
-)
 
 const decisionLoop = ({
   player,
@@ -50,12 +27,6 @@ const decisionLoop = ({
   setText,
   setPrimaryActions,
 }) => {
-  let secondaryActions = Object.values(generateDefaultEvents(player))
-  secondaryActions = giveSecondaryActionsSetTextAndActions({
-    player, setText, setPrimaryActions,
-    actions: secondaryActions,
-  })
-
   // Let the story control text and actions until it's done
   let { text, actions } = area.runStory(player, setText, setPrimaryActions);
 
@@ -117,11 +88,10 @@ const decisionLoop = ({
     console.log("Running area story, no exploration yet.");
   }
 
-  console.log('Decision Loop', { text, actions, secondaryActions });
+  console.log('Decision Loop', { text, actions });
 
   setText(text);
   setPrimaryActions(actions);
-  setSecondaryActions(secondaryActions);
 };
 
 export default decisionLoop;

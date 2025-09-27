@@ -15,6 +15,7 @@ const Game = ({ endGame }) => {
   // Components
   const [quitModalIsOpen, setQuitModalIsOpen] = useState(false);
   const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
+  const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
   const isLoopRunning = useRef(false);
   const isNewArea = useRef(false);
 
@@ -158,45 +159,39 @@ const Game = ({ endGame }) => {
               <h3 className="attribute">Attack:</h3>
               <h3 className="value">{player.attackPower[0]} - {player.attackPower[1]}</h3>
             </div>
-          </div>
-          <div className="inventory">
-            <h3>Inventory:</h3>
-            <ul className="inventoryList">
-              {player.inventory.map((item, index) => (
+            <div className="attributeRow">
+              <h3 className="attribute">Map:</h3>
+              <MapButton
+                open={mapModalIsOpen}
+                openModal={() => setMapModalIsOpen(true)}
+                onCancel={() => setMapModalIsOpen(false)}
+                areas={areas}
+                area={area}
+              />
+            </div>
+            <div className="attributeRow">
+              <h3 className="attribute">Inventory:</h3>
+              <button className="map" onClick={() => setInventoryIsOpen(!inventoryIsOpen)} aria-label="Toggle inventory">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                  <path d="M264 112L376 112C380.4 112 384 115.6 384 120L384 160L256 160L256 120C256 115.6 259.6 112 264 112zM208 120L208 160L128 160C92.7 160 64 188.7 64 224L64 320L576 320L576 224C576 188.7 547.3 160 512 160L432 160L432 120C432 89.1 406.9 64 376 64L264 64C233.1 64 208 89.1 208 120zM576 368L384 368L384 384C384 401.7 369.7 416 352 416L288 416C270.3 416 256 401.7 256 384L256 368L64 368L64 480C64 515.3 92.7 544 128 544L512 544C547.3 544 576 515.3 576 480L576 368z"/>
+                </svg>
+              </button>
+            </div>
+            {!inventoryIsOpen ? null : <ul className="inventoryList">
+              {player.inventory.slice(0, 7).map((item, index) => (
                 <li key={item.name + index} className="item">
                   <p><b>{item.name}:</b>{item.description}</p>
                   <button onClick={() => console.log(`Used ${item.name}`)}>Use</button>
                 </li>
               ))}
-            </ul>
+            </ul>}
           </div>
+          
         </div>
         <div className="right column">
-          <div className="secondary actionMenu">
-            <h3>General</h3>
-            <ul className="actionContainer">
-              <li>
-                <MapButton
-                  open={mapModalIsOpen}
-                  openModal={() => setMapModalIsOpen(true)}
-                  onCancel={() => setMapModalIsOpen(false)}
-                  areas={areas}
-                  area={area}
-                />
-              </li>
-              <li>
-                <QuitButton
-                  open={quitModalIsOpen}
-                  openModal={() => setQuitModalIsOpen(true)}
-                  onCancel={() => setQuitModalIsOpen(false)}
-                  onQuit={() => endGame(false)}
-                />
-              </li>
-            </ul>
-          </div>
-          <div className="primary actionMenu">
-            <h3>Actions</h3>
-            <ul className="actionContainer">{mapActions(primaryActions)}</ul>
+          <div className="actionMenu">
+            <h3>Actions:</h3>
+            <ul className="actionContainer primary">{mapActions(primaryActions)}</ul>
           </div>
         </div>
       </div>
