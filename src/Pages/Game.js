@@ -6,6 +6,8 @@ import DialogueBox from "../Components/DialogueBox";
 
 import Item from '../Entities/Item'
 import carrot from '../Entities/Items/Carrot'
+import throwingKnife from '../Entities/Items/ThrowingKnife'
+import key from '../Entities/Items/Key'
 
 import Player from "../Entities/Player";
 import areas from "../EventSystem/AreasList";
@@ -15,7 +17,7 @@ const Game = ({ endGame }) => {
   // Components
   const [quitModalIsOpen, setQuitModalIsOpen] = useState(false);
   const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
-  const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
+  const [inventoryIsOpen, setInventoryIsOpen] = useState(true);
   const isLoopRunning = useRef(false);
   const isNewArea = useRef(false);
 
@@ -89,6 +91,8 @@ const Game = ({ endGame }) => {
   // and passed. Or it might be initialized elsewhere. One step at a time, though.
 
   player.addItem(new Item(...carrot))
+  player.addItem(new Item(...throwingKnife))
+  player.addItem(new Item(...key))
 
   const mapActions = (actions = []) =>
     !showActions
@@ -180,7 +184,10 @@ const Game = ({ endGame }) => {
             {!inventoryIsOpen ? null : <ul className="inventoryList">
               {player.inventory.slice(0, 7).map((item, index) => (
                 <li key={item.name + index} className="item">
-                  <p><b>{item.name}:</b>{item.description}</p>
+                  <p className="tooltip">
+                    {item.name}
+                    <span class="tooltipText">{item.description}</span>
+                  </p>
                   <button onClick={() => console.log(`Used ${item.name}`)}>Use</button>
                 </li>
               ))}

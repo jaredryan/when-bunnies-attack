@@ -433,6 +433,7 @@ dialog.quitModal .buttonContainer button {
   text-align: left;
   gap: 6px;
   margin-top: 12px;
+  width: 100%;
 }
 
 .inventoryList h3 {
@@ -442,8 +443,10 @@ dialog.quitModal .buttonContainer button {
 .inventoryList .item {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .inventoryList .item b {
@@ -454,7 +457,7 @@ dialog.quitModal .buttonContainer button {
 .inventoryList .item button {
   font-size: 16px;
   padding: 6px;
-  height: 44px;
+  /* height: 44px; */
   width: 44px;
   min-width: unset;
 }
@@ -466,7 +469,46 @@ dialog.quitModal .buttonContainer button {
 }
 
 .actionMenu h3 {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+}
+
+.tooltip {
+  position: relative;
+  /* display: inline-block; */
+  border-bottom: 1px dotted black; /* Add dots under the hoverable text */
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltipText {
+  visibility: hidden; /* Hidden by default */
+  width: max-content;
+  max-width: 176px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 6px 18px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1; /* Ensure tooltip is displayed above content */
+  left: 0;
+  bottom: calc(100% + 8px);
+}
+
+.tooltipText::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 16px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+/* Show the tooltip text on hover */
+.tooltip:hover .tooltipText {
+  visibility: visible;
 }
 
 
