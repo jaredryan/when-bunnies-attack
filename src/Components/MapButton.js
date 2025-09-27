@@ -65,21 +65,31 @@ const generateMap = (currentArea, areas) => {
 
   const map = (
     <div className="map">
+      <div className="exit row">
+        <div className="room placeholder" />
+        <div className="horizontal connector placeholder" />
+        <div className="room placeholder" />
+        <div className="horizontal connector placeholder" />
+        {generateRoom(areas[8])}
+      </div>
+      <div className="verticalConnectors row">
+        <div className="vertical connector room placeholder" />
+        <div className="vertical connector placeholder" />
+        <div className="vertical connector room placeholder" />
+        <div className="vertical connector placeholder" />
+        <div className={generateConditionalConnectorClassNames(7, 8, 'vertical')} />
+      </div>
       <div className="north row">
         {generateRoom(areas[2])}
         <div className="horizontal connector placeholder" />
         {generateRoom(areas[6])}
         <div className={generateConditionalConnectorClassNames(6, 7, 'horizontal')} />
         {generateRoom(areas[7])}
-        <div className={generateConditionalConnectorClassNames(7, 8, 'horizontal')} />
-        {generateRoom(areas[8])}
       </div>
       <div className="verticalConnectors row">
         <div className={generateConditionalConnectorClassNames(1, 2, 'vertical')} />
         <div className="vertical connector placeholder" />
         <div className={generateConditionalConnectorClassNames(4, 6, 'vertical')} />
-        <div className="vertical connector placeholder" />
-        <div className="vertical connector room placeholder" />
         <div className="vertical connector placeholder" />
         <div className="vertical connector room placeholder" />
       </div>
@@ -89,8 +99,6 @@ const generateMap = (currentArea, areas) => {
         {generateRoom(areas[4])}
         <div className={generateConditionalConnectorClassNames(4, 5, 'horizontal')} />
         {generateRoom(areas[5])}
-        <div className="horizontal connector placeholder" />
-        <div className="room placeholder" />
       </div>
       <div className="verticalConnectors row">
         <div className={generateConditionalConnectorClassNames(0, 1, 'vertical')} />
@@ -98,15 +106,11 @@ const generateMap = (currentArea, areas) => {
         <div className={generateConditionalConnectorClassNames(3, 4, 'vertical', true)} />
         <div className="vertical connector placeholder" />
         <div className="vertical connector room placeholder" />
-        <div className="vertical connector placeholder" />
-        <div className="vertical connector room placeholder" />
       </div>
       <div className="south row">
         {generateRoom(areas[0])}
         <div className={generateConditionalConnectorClassNames(0, 3, 'horizontal')} />
         {generateRoom(areas[3])}
-        <div className="horizontal connector placeholder" />
-        <div className="room placeholder" />
         <div className="horizontal connector placeholder" />
         <div className="room placeholder" />
       </div>

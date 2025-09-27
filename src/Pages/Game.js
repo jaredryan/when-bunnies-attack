@@ -141,6 +141,7 @@ const Game = ({ endGame }) => {
               </button>
             </div>
             {!inventoryIsOpen ? null : <ul className="inventoryList">
+              {player.inventory.length ? null : <p>Empty</p>}
               {player.inventory.map((item, index) => (
                 <li key={item.name + index} className="item">
                   <p className="tooltip">

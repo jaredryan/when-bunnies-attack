@@ -230,8 +230,12 @@ button.map svg {
   height: 20px;
 }
 
+.actionContainer > li,
 .actionContainer > li > button {
   width: 100%;
+}
+
+.actionContainer > li > button {
   min-width: unset;
   font-size: 16px;
 }
