@@ -4,6 +4,9 @@ import QuitButton from "../Components/QuitButton";
 import MapButton from "../Components/MapButton";
 import DialogueBox from "../Components/DialogueBox";
 
+import Item from '../Entities/Item'
+import carrot from '../Entities/Items/Carrot'
+
 import Player from "../Entities/Player";
 import areas from "../EventSystem/AreasList";
 import decisionLoop from "../ExplorationSystem/DecisionLoop";
@@ -22,7 +25,6 @@ const Game = ({ endGame }) => {
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
-  const [secondaryActions, setSecondaryActions] = useState([]);
 
   // Keep an eye on player status to end the game when they've won or lost
   useEffect(() => {
@@ -48,7 +50,6 @@ const Game = ({ endGame }) => {
         setNextArea: (area) => setArea(area),
         setText,
         setPrimaryActions,
-        setSecondaryActions,
       });
     }
   }, [area, player]);
@@ -86,6 +87,8 @@ const Game = ({ endGame }) => {
   // It might also need stuff like player data, how to fight, etc...So maybe more data needs to be initialized
   // and passed. Or it might be initialized elsewhere. One step at a time, though.
 
+  player.addItem(new Item(...carrot))
+
   const mapActions = (actions = []) =>
     !showActions
       ? null
@@ -95,7 +98,7 @@ const Game = ({ endGame }) => {
           </li>
         ));
 
-  console.log({ text, primaryActions, secondaryActions });
+  console.log({ text, primaryActions });
 
   const resetDialogueForNewArea = () => {
     if (isNewArea.current) {
@@ -116,7 +119,6 @@ const Game = ({ endGame }) => {
       setNextArea: (area) => setArea(area),
       setText,
       setPrimaryActions,
-      setSecondaryActions,
     });
   }
 
@@ -136,7 +138,6 @@ const Game = ({ endGame }) => {
               setNextArea: (area) => setArea(area),
               setText,
               setPrimaryActions,
-              setSecondaryActions,
             });
           } else {
             // Otherwise, stop game execution and show actions
@@ -146,30 +147,59 @@ const Game = ({ endGame }) => {
         }}
         resetBox={resetDialogueForNewArea()}
       />
-      <h2>Menu</h2>
-      {/* Primary actions = actions unique to that area */}
-      <ul className="actionContainer">{mapActions(primaryActions)}</ul>
-      {/* Secondary actions = actions always available: status, inventory, map */}
-      <ul className="actionContainer">
-        {mapActions(secondaryActions)}
-        {!showActions ? null : (
-          <li key={"Open map"}>
-            <MapButton
-              open={mapModalIsOpen}
-              openModal={() => setMapModalIsOpen(true)}
-              onCancel={() => setMapModalIsOpen(false)}
-              areas={areas}
-              area={area}
-            />
-          </li>
-        )}
-      </ul>
-      <QuitButton
-        open={quitModalIsOpen}
-        openModal={() => setQuitModalIsOpen(true)}
-        onCancel={() => setQuitModalIsOpen(false)}
-        onQuit={() => endGame(false)}
-      />
+      <div className="twoColumns">
+        <div className="left column">
+          <div className="status">
+            <div className="attributeRow">
+              <h3 className="attribute">HP:</h3>
+              <h3 className="value">{player.hp} / {player.maxHP}</h3>
+            </div>
+            <div className="attributeRow">
+              <h3 className="attribute">Attack:</h3>
+              <h3 className="value">{player.attackPower[0]} - {player.attackPower[1]}</h3>
+            </div>
+          </div>
+          <div className="inventory">
+            <h3>Inventory:</h3>
+            <ul className="inventoryList">
+              {player.inventory.map((item, index) => (
+                <li key={item.name + index} className="item">
+                  <p><b>{item.name}:</b>{item.description}</p>
+                  <button onClick={() => console.log(`Used ${item.name}`)}>Use</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="right column">
+          <div className="secondary actionMenu">
+            <h3>General</h3>
+            <ul className="actionContainer">
+              <li>
+                <MapButton
+                  open={mapModalIsOpen}
+                  openModal={() => setMapModalIsOpen(true)}
+                  onCancel={() => setMapModalIsOpen(false)}
+                  areas={areas}
+                  area={area}
+                />
+              </li>
+              <li>
+                <QuitButton
+                  open={quitModalIsOpen}
+                  openModal={() => setQuitModalIsOpen(true)}
+                  onCancel={() => setQuitModalIsOpen(false)}
+                  onQuit={() => endGame(false)}
+                />
+              </li>
+            </ul>
+          </div>
+          <div className="primary actionMenu">
+            <h3>Actions</h3>
+            <ul className="actionContainer">{mapActions(primaryActions)}</ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

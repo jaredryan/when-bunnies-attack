@@ -49,7 +49,6 @@ const decisionLoop = ({
   setNextArea,
   setText,
   setPrimaryActions,
-  setSecondaryActions,
 }) => {
   let secondaryActions = Object.values(generateDefaultEvents(player))
   secondaryActions = giveSecondaryActionsSetTextAndActions({
