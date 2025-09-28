@@ -1,12 +1,12 @@
-import Item from "../Item.js";
-import FirstAid from "../Items/FirstAid.js";
+import firstAid from "../Items/FirstAid.js";
+import getItems from "../../ExplorationSystem/GetItems.js";
 
 const bunny = [
   "Bunny",
   5,
   [1, 1],
   function (player) {
-    player.addItem(new Item(...FirstAid));
+    return getItems([firstAid], [], player);
   },
 ];
 

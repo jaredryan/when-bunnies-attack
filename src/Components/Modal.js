@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const Modal = ({ open, onClose, children, className }) => {
+export const Modal = ({ open, onClose, children, className, noClose = false }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const Modal = ({ open, onClose, children, className }) => {
       onCancel={onClose}
       className={`dialog ${open ? "open" : "closed"}${className ? ` ${className}` : ""}`}
     >
-      <button className="xButton" onClick={onClose}>
+      {noClose ? null : <button className="xButton" onClick={onClose}>
         <svg
           aria-hidden="true"
           width="16"
@@ -37,7 +37,7 @@ export const Modal = ({ open, onClose, children, className }) => {
             strokeLinejoin="round"
           />
         </svg>
-      </button>
+      </button>}
       {children}
     </dialog>
   );

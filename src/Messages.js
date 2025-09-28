@@ -1,8 +1,12 @@
 export const freeExplorationPrompt = [`What do you want to do?`];
 
-export const fleeAttemptMessage = `You tried to run away!`;
-export const fleeSuccessMessage = `You successfully ran away!`;
-export const fleeFailureMessage = `You were unable to escape!`;
+export const fleeAttemptMessage = [`You tried to run away!`];
+export const fleeSuccessMessage = [`You successfully ran away!`];
+export const fleeFailureMessage = [`You were unable to escape!`];
+
+const winBattleMessage = (enemy) => ([
+  `You defeated ${enemy.name}!`
+])
 
 export const lostGameMessage = [
   `"Everything is going dark..."`,

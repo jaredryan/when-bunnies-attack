@@ -14,7 +14,7 @@ const utilizeItemInField = (player) => {
       execute: () => {
         if (!isUseable(true, item)) {
           return [`You examine the ${item.name}, then put it back into your inventory.`]
-        } else if (player.hp === player.maxHP) {
+        } else if (player.hp === player.maxHp) {
           return [`You are already at full health.`]
         }
         return action.execute()

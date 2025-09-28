@@ -2,7 +2,7 @@
 function Player() {
   this.name = "Unknown";
   this.hp = 10;
-  this.maxHP = 10;
+  this.maxHp = 10;
   this.attackPower = [0, 1]; // [min, max]
   this.weapon = 0;
   this.inventory = [];
@@ -19,7 +19,6 @@ function Player() {
   };
 
   this.attack = (enemy) => {
-    console.log(`You attack!`);
     const damage =
       Math.floor(
         Math.random() * (this.attackPower[1] - this.attackPower[0] + 1),
@@ -27,7 +26,9 @@ function Player() {
       this.attackPower[0] +
       this.weapon;
     enemy.takeDamage(damage);
-    console.log(`${enemy.name} took ${damage} damage!`);
+    return [
+      `You attack! ${enemy.name} took ${damage} damage.`
+    ]
   };
 
   this.takeDamage = (damage) => {
@@ -40,7 +41,7 @@ function Player() {
   this.heal = (hp) => {
     const newHp = this.hp + hp;
 
-    this.hp = newHp <= this.maxHP ? newHp : this.maxHP;
+    this.hp = newHp <= this.maxHp ? newHp : this.maxHp;
   };
 
   this.equipWeapon = (weapon) => {

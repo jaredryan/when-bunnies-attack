@@ -4,7 +4,7 @@ export const printStatus = (player) => {
   const maxPower = player.attackPower[1] + player.weapon;
   return [
     `Name: ${player.name}`,
-    `HP: ${player.hp} / ${player.maxHP}`,
+    `HP: ${player.hp} / ${player.maxHp}`,
     `Attack: ${minPower} - ${maxPower}`,
     `Inventory:`,
     ...returnItemsStringArray(player),

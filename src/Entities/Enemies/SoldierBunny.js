@@ -1,12 +1,13 @@
 import Item from "../Item.js";
 import throwingKnife from "../Items/ThrowingKnife.js";
+import getItems from "../../ExplorationSystem/GetItems.js";
 
 const soldierBunny = [
   "Soldier Bunny",
   8,
   [1, 1],
   function (player) {
-    player.addItem(new Item(...throwingKnife[0]));
+    return getItems([throwingKnife], [], player);
   },
 ];
 

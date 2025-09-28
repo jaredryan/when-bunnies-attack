@@ -2,6 +2,8 @@ import Modal from "./Modal";
 
 // MAP
 
+//                   FE (8)
+//                   |
 // L (2)    NE (6) - FW (7) - FE (8)
 // |        |
 // W (1) -  E (4)  - TR (5)

@@ -28,10 +28,6 @@ const fight = (enemyInfo, player, isForced = false) => {
         name: "Run",
         execute: () => fleeAttempt(),
       },
-      {
-        name: "Check Status",
-        execute: () => printStatus(player),
-      },
     ];
 
     if (isForced) {
