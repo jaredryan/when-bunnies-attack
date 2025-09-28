@@ -13,6 +13,11 @@ import decisionLoop from "../ExplorationSystem/DecisionLoop";
 
 import messages from "../Messages";
 
+
+
+import Enemy from "../Entities/Enemy";
+import ScientistBunny from "../Entities/Enemies/ScientistBunny";
+
 const Game = ({ endGame }) => {
   // Components
   
@@ -28,7 +33,11 @@ const Game = ({ endGame }) => {
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
-  const [encounter, setEncounter] = useState(null); // { enemy: Enemy, noRetreat: true/false }
+
+  const [encounter, setEncounter] = useState({ 
+    enemy: new Enemy(...ScientistBunny),
+    noRetreat: true
+  }); // { enemy: Enemy, noRetreat: true/false }
 
   // Keep an eye on player status to end the game when they've won or lost
   useEffect(() => {

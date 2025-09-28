@@ -1,4 +1,3 @@
-import Item from "../Item.js";
 import throwingKnife from "../Items/ThrowingKnife.js";
 import getItems from "../../ExplorationSystem/GetItems.js";
 

@@ -4,7 +4,7 @@ export const fleeAttemptMessage = [`You tried to run away!`];
 export const fleeSuccessMessage = [`You successfully ran away!`];
 export const fleeFailureMessage = [`You were unable to escape!`];
 
-const winBattleMessage = (enemy) => ([
+export const winBattleMessage = (enemy) => ([
   `You defeated ${enemy.name}!`
 ])
 

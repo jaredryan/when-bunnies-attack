@@ -21,7 +21,7 @@ const Battle = ({
     defaultTurnStartText,
   ]);
   const [canAct, setCanAct] = useState(true);
-  const [inventoryIsOpen, setInventoryIsOpen] = useState(true);
+  const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
 
   // You win!
   useEffect(() => {
@@ -51,6 +51,8 @@ const Battle = ({
     const text = action();
     setText(text);
   };
+
+  console.log({ enemy });
 
   return (
     <Modal open={open} className="battleModal" noClose={true}>
@@ -84,16 +86,24 @@ const Battle = ({
           </h3>
         </div>
       </div>
-      <div>{text}</div>
+      <div className="battleMessage">
+        {text.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+      </div>
       <div className="actions">
         {!canAct ? null : (
           <>
-            <button onClick={playerAction(() => player.attack(enemy))}>
+            <button
+              onClick={() => {
+                setCanAct(false);
+                const text = player.attack(enemy);
+                setText(text);
+              }}
+            >
               Attack
             </button>
-            <button onClick={playerAction(() => player.attack(enemy))}>
-              Inventory
-            </button>
+            <button onClick={() => setInventoryIsOpen(!inventoryIsOpen)}>Inventory</button>
             {noRetreat ? null : (
               <button
                 onClick={() => {
@@ -132,12 +142,12 @@ const Battle = ({
                     } else if (player.hp === player.maxHp) {
                       setText([
                         `You are already at full health.`,
-                        defaultTurnStartText
+                        defaultTurnStartText,
                       ]);
                     } else {
-                      setCanAct(false)
+                      setCanAct(false);
                       setText(utilizeItem(player, enemy, index));
-                      setInventoryIsOpen(false)
+                      setInventoryIsOpen(false);
                     }
                   }}
                 >
@@ -146,7 +156,9 @@ const Battle = ({
               </li>
             ))}
           </ul>
-          <button onClick={() => setInventoryIsOpen(false)}>Close Inventory</button>
+          <button onClick={() => setInventoryIsOpen(false)}>
+            Close Inventory
+          </button>
         </>
       )}
     </Modal>

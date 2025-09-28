@@ -1,4 +1,3 @@
-import Item from "../Item.js";
 import bunnySteroid from "../Items/BunnySteroid.js";
 import getItems from "../../ExplorationSystem/GetItems.js";
 
