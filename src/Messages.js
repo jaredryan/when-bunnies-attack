@@ -217,6 +217,7 @@ const allMessages = {
   neRoom6ExitMessage,
   escape7EntryMessage,
   forestExit8EntryMessage,
+  winBattleMessage,
 };
 
 export default allMessages;

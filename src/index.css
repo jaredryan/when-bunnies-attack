@@ -408,7 +408,7 @@ dialog::backdrop {
   gap: 4px;
 }
 
-.status .attributeRow {
+.attributeRow {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -416,7 +416,7 @@ dialog::backdrop {
   width: 100%;
 }
 
-.status .attributeRow .value {
+.attributeRow .value {
   font-weight: 500;
 }
 
@@ -503,6 +503,173 @@ dialog::backdrop {
 /* Show the tooltip text on hover */
 .tooltip:hover .tooltipText {
   visibility: visible;
+}
+
+.battleModal {
+  width: 100vw;
+  height: unset;
+  max-height: unset;
+  max-width: 100vw;
+  border-radius: 0;
+  background-color: transparent;
+  animation: show-background 0.001s forwards 1.5s;
+}
+
+dialog.battleModal::backdrop {
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
+.battleModalContent {
+  visibility: hidden;
+  opacity: 0;
+  animation: appear 0.001s forwards 1.5s;
+}
+
+.battleTransitionOverlay {
+  background-color: black;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.battleTransitionOverlay {
+  background-color: black;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.fade-black {
+  animation: fade-black 3s forwards;
+}
+
+.pixel-shrink {
+  animation: pixel-shrink 3s forwards;
+}
+
+.wipe-horizontal {
+  animation: wipe-horizontal 3s forwards;
+}
+
+.wipe-vertical {
+  animation: wipe-vertical 3s forwards;
+}
+
+.battleModalContent {
+  width: 100%;
+  max-width: 400px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+dialog.battleModal button.secondary {
+  background-color: var(--secondary);
+}
+
+dialog.battleModal button.secondary:hover {
+  background-color: var(--secondarylight);
+}
+
+dialog.battleModal button.tertiary {
+  background-color: var(--tertiary);
+}
+
+dialog.battleModal button.tertiary:hover {
+  background-color: var(--backgroundsecondary);
+}
+
+.enemyStatus, .playerStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.attributes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.enemyStatus .attributeRow, .playerStatus .attributeRow{
+  width: 176px; 
+}
+
+dialog.battleModal h2 {
+  margin: 0;
+}
+
+.battleModalContent .actionsMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.battleModalContent .actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+.battleModalContent .actions button {
+  margin: 0;
+  flex-grow: 1;
+  min-width: 87px;
+  width: 33%;
+}
+
+
+
+@keyframes show-background {
+  0% { background-color: transparent; }
+  50% { background-color: transparent; }
+  100% { background-color: var(--background);  }
+}
+
+@keyframes appear {
+  0% { opacity: 0;  visibility: hidden; }
+  50% { opacity: 0;  visibility: hidden; }
+  100% { opacity: 1;  visibility: visible;  }
+}
+
+@keyframes wipe-horizontal {
+  0% { transform: translateX(-100%); opacity: 1;}
+  50% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 1; }
+}
+
+@keyframes pixel-shrink {
+  0%   { transform: scale(0.05); opacity: 1; }
+  50%  { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes fade-black {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes wipe-vertical {
+  0%   { transform: translateY(-100%); opacity: 1;}
+  50%  { transform: translateY(0); opacity: 1;}
+  100% { transform: translateY(-100%); opacity: 1; }
 }
 
 

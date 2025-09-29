@@ -38,10 +38,17 @@ function Player() {
     }
   };
 
-  this.heal = (hp) => {
-    const newHp = this.hp + hp;
+  this.heal = (hpToHeal) => {
+    let newHp = this.hp + hpToHeal;
+    let hpHealed = hpToHeal
 
-    this.hp = newHp <= this.maxHp ? newHp : this.maxHp;
+    if (newHp > this.maxHp) {
+      hpHealed -= (newHp - this.maxHp)
+      newHp = this.maxHp
+    }
+
+    this.hp = newHp
+    return [`You recovered ${hpHealed} health.`]
   };
 
   this.equipWeapon = (weapon) => {

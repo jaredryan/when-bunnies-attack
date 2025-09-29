@@ -3,7 +3,7 @@ const throwingKnife = [
   "Use this to hurt an enemy 3 damage.",
   false,
   true,
-  function (player, enemy) {
+  function (_player, enemy) {
     enemy.takeDamage(3);
     
     return [

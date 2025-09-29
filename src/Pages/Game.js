@@ -13,14 +13,17 @@ import decisionLoop from "../ExplorationSystem/DecisionLoop";
 
 import messages from "../Messages";
 
-
-
 import Enemy from "../Entities/Enemy";
-import ScientistBunny from "../Entities/Enemies/ScientistBunny";
+import SoldierBunny from "../Entities/Enemies/SoldierBunny";
+
+import carrot from "../Entities/Items/Carrot";
+import throwingKnife from "../Entities/Items/ThrowingKnife";
+import key from "../Entities/Items/Key";
+import Item from "../Entities/Item";
 
 const Game = ({ endGame }) => {
   // Components
-  
+
   const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
   const [inventoryIsOpen, setInventoryIsOpen] = useState(true);
   const isLoopRunning = useRef(false);
@@ -29,14 +32,18 @@ const Game = ({ endGame }) => {
   // Initialization
   const player = useMemo(() => new Player(), []);
 
+  player.addItem(new Item(...carrot))
+  player.addItem(new Item(...throwingKnife))
+  player.addItem(new Item(...key))
+
   const [area, setArea] = useState(areas[0]);
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
 
-  const [encounter, setEncounter] = useState({ 
-    enemy: new Enemy(...ScientistBunny),
-    noRetreat: true
+  const [encounter, setEncounter] = useState({
+    enemy: new Enemy(...SoldierBunny),
+    noRetreat: false,
   }); // { enemy: Enemy, noRetreat: true/false }
 
   // Keep an eye on player status to end the game when they've won or lost
@@ -109,20 +116,22 @@ const Game = ({ endGame }) => {
           enemy={encounter?.enemy}
           noRetreat={encounter?.noRetreat}
           wonBattle={() => {
-            const savedEnemy = encounter?.enemy
-            setEncounter(null)
+            const savedEnemy = encounter?.enemy;
+            setEncounter(null);
+
+            console.log({ savedEnemy, messages, winBattleMessage: messages.winBattleMessage })
             setText([
               ...messages.winBattleMessage(savedEnemy),
-              ...savedEnemy.reward(),
-            ])
+              ...savedEnemy.reward(player),
+            ]);
           }}
           fledBattle={() => {
-            setEncounter(null)
-            setText(messages.fleeSuccessMessage)
+            setEncounter(null);
+            setText(messages.fleeSuccessMessage);
           }}
           lostBattle={() => {
-            setEncounter(null)
-            endGame(false)
+            setEncounter(null);
+            endGame(false);
           }}
         />
       )}

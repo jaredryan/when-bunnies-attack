@@ -4,14 +4,7 @@ const firstAidInfo = [
   true,
   true,
   function (player, _enemy) {
-    let damageHealed = 5
-    let damageTaken = player.maxHp - player.hp
-    if (damageTaken < 5) {
-      damageHealed = damageTaken
-    }
-    
-    player.heal(5);
-    return [`You recovered ${damageHealed} health`]
+    return player.heal(5);
   },
 ];
 

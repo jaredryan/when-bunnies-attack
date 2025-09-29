@@ -4,14 +4,7 @@ const carrot = [
   true,
   true,
   function (player, _enemy) {
-    let damageHealed = 3
-    let damageTaken = player.maxHp - player.hp
-    if (damageTaken < 3) {
-      damageHealed = damageTaken
-    }
-    
-    player.heal(3);
-    return [`You recovered ${damageHealed} health`]
+    return player.heal(3);
   },
 ];
 

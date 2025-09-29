@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const Modal = ({ open, onClose, children, className, noClose = false }) => {
+export const Modal = ({ open, onClose, children, className, noClose = false, style }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -19,6 +19,7 @@ export const Modal = ({ open, onClose, children, className, noClose = false }) =
       ref={dialogRef}
       onCancel={onClose}
       className={`dialog ${open ? "open" : "closed"}${className ? ` ${className}` : ""}`}
+      style={style}
     >
       {noClose ? null : <button className="xButton" onClick={onClose}>
         <svg
