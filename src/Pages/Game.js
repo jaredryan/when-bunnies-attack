@@ -13,14 +13,6 @@ import decisionLoop from "../ExplorationSystem/DecisionLoop";
 
 import messages from "../Messages";
 
-import Enemy from "../Entities/Enemy";
-import SoldierBunny from "../Entities/Enemies/SoldierBunny";
-
-import carrot from "../Entities/Items/Carrot";
-import throwingKnife from "../Entities/Items/ThrowingKnife";
-import key from "../Entities/Items/Key";
-import Item from "../Entities/Item";
-
 const Game = ({ endGame }) => {
   // Components
 
@@ -32,19 +24,12 @@ const Game = ({ endGame }) => {
   // Initialization
   const player = useMemo(() => new Player(), []);
 
-  player.addItem(new Item(...carrot))
-  player.addItem(new Item(...throwingKnife))
-  player.addItem(new Item(...key))
-
   const [area, setArea] = useState(areas[0]);
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
 
-  const [encounter, setEncounter] = useState({
-    enemy: new Enemy(...SoldierBunny),
-    noRetreat: false,
-  }); // { enemy: Enemy, noRetreat: true/false }
+  const [encounter, setEncounter] = useState(null); // { enemy: Enemy, noRetreat: true/false }
 
   // Keep an eye on player status to end the game when they've won or lost
   useEffect(() => {
