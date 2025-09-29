@@ -1,13 +1,13 @@
 const throwingKnife = [
   "Throwing Knife",
-  "Hurt an enemy 3 damage.",
+  "Hurt an enemy 4 damage.",
   false,
   true,
   function (_player, enemy) {
-    enemy.takeDamage(3);
+    enemy.takeDamage(4);
     
     return [
-      `You attack! The throwing knife dealt 3 damage.`
+      `You attack! The throwing knife dealt 4 damage.`
     ]
   },
 ];
