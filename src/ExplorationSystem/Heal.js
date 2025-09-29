@@ -1,7 +1,7 @@
 // Completely heal player
 const heal = (message, player) => {
   player.heal(player.maxHp);
-  return message
+  return { text: message };
 };
 
 export default heal;

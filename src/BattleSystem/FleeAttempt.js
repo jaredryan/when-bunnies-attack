@@ -5,13 +5,13 @@ const fleeAttempt = () => {
   if (Math.random() < 0.5) {
     return {
       success: true,
-      text: messages.fleeSuccessMessage
-    }
+      text: messages.fleeSuccessMessage,
+    };
   } else {
     return {
       success: false,
-      text: messages.fleeFailureMessage
-    }
+      text: messages.fleeFailureMessage,
+    };
   }
 };
 

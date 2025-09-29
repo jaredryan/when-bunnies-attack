@@ -10,11 +10,12 @@ const loseItemAndUnlockAreas = (
   player,
 ) => {
   const loseItemMessage = loseItem(item, message, player);
-  const unlockAreasMessage = unlockAreas(currentAreaIndex, newAreaIndexes, areas);
-  return [
-    ...loseItemMessage,
-    ...unlockAreasMessage,
-  ];
+  const unlockAreasMessage = unlockAreas(
+    currentAreaIndex,
+    newAreaIndexes,
+    areas,
+  );
+  return { text: [...loseItemMessage.text, ...unlockAreasMessage.text] };
 };
 
 export default loseItemAndUnlockAreas;

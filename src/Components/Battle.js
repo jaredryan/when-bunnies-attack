@@ -20,7 +20,6 @@ const battleEntranceAnimationClassNames = [
 const Battle = ({
   player,
   enemy,
-  open,
   wonBattle,
   lostBattle,
   fledBattle,
@@ -74,7 +73,7 @@ const Battle = ({
 
   return (
     <Modal
-      open={open}
+      open={true}
       className="battleModal"
       noClose={true}
       style={{ height: "calc(var(--vh, 1vh) * 100)" }}

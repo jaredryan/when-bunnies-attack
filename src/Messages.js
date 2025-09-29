@@ -4,9 +4,7 @@ export const fleeAttemptMessage = [`You tried to run away!`];
 export const fleeSuccessMessage = [`You successfully ran away!`];
 export const fleeFailureMessage = [`You were unable to escape!`];
 
-export const winBattleMessage = (enemy) => ([
-  `You defeated ${enemy.name}!`
-])
+export const winBattleMessage = (enemy) => [`You defeated ${enemy.name}!`];
 
 export const lostGameMessage = [
   `"Everything is going dark..."`,
@@ -87,7 +85,7 @@ export const wRoom1EntryAnswerResponsePairs = [
     response: [
       `Bunny: "Oh no, you must have hit your head. Let me lead you back to your room."`,
     ],
-  }
+  },
 ];
 
 export const wRoom1ExitMessage = [

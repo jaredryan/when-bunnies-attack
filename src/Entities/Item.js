@@ -4,10 +4,7 @@ function Item(name, description, isUseableInField, isUseableInBattle, effect) {
   this.isUseableInField = isUseableInField;
   this.isUseableInBattle = isUseableInBattle;
   this.use = function (player, enemy) {
-    return [
-      `You used the ${this.name}!`,
-      ...effect(player, enemy)
-    ];
+    return [`You used the ${this.name}!`, ...effect(player, enemy)];
   };
 }
 

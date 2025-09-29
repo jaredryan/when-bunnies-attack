@@ -1,4 +1,4 @@
-const firstAidInfo = [
+const firstAidKitInfo = [
   "First Aid Kit",
   "Recover 5 damage.",
   true,
@@ -8,4 +8,4 @@ const firstAidInfo = [
   },
 ];
 
-export default firstAidInfo;
+export default firstAidKitInfo;

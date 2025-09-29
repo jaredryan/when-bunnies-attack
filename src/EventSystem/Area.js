@@ -8,10 +8,10 @@ function Area(name, mapName, connectedAreas, number, events, story) {
   this.story = story; // array of story events
   this.number = number;
   this.visited = false;
-  
+
   this.visit = () => {
-    this.visited = true
-  }
+    this.visited = true;
+  };
 
   this.runStory = ({ player, setText, setPrimaryActions, setEncounter }) => {
     const story = this.story.shift();

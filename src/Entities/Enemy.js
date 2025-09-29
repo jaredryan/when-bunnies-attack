@@ -14,9 +14,7 @@ function Enemy(name, hp, attackPower, reward) {
 
     player.takeDamage(damage);
 
-    return [
-      `${this.name} attacks! You took ${damage} damage.`
-    ]
+    return [`${this.name} attacks! You took ${damage} damage.`];
   };
 
   this.reward = function (player) {

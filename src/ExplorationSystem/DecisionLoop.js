@@ -10,12 +10,17 @@ const decisionLoop = ({
   setEncounter,
 }) => {
   // Let the story control text and actions until it's done
-  let { text, actions, encounter } = area.runStory({ player, setText, setPrimaryActions, setEncounter });
+  let { text, actions, encounter } = area.runStory({
+    player,
+    setText,
+    setPrimaryActions,
+    setEncounter,
+  });
 
   if (!text && (!actions || !actions.length) && !encounter) {
     // After scripted story is done, allow exploration to trigger events
     console.log("Free exploration in area, generating events.");
-    
+
     text = freeExplorationPrompt;
     actions = [];
 
@@ -28,9 +33,14 @@ const decisionLoop = ({
           // They don't create new actions directly...instead, they change the
           // list of events in the area. So, setText to display new message,
           // and empty out Actions so they can't take action until the event is over
-          const text = area.runEvent(player, eventIndex)
+          const {
+            text = "",
+            actions = [],
+            encounter = null,
+          } = area.runEvent(player, eventIndex);
           setText(text);
-          setPrimaryActions([]);
+          setPrimaryActions(actions);
+          setEncounter(encounter);
         },
       });
     }
@@ -47,7 +57,7 @@ const decisionLoop = ({
       const leaveAreaAction = {
         name: "Leave the Area",
         execute: () => {
-          setText([`Where do you want to go?`])
+          setText([`Where do you want to go?`]);
           setPrimaryActions([
             ...newAreas.map((availableArea) => ({
               name: availableArea.name,
@@ -56,25 +66,25 @@ const decisionLoop = ({
             {
               name: "Stay",
               execute: () => {
-                setText([`You decided to stay in the area.`])
-                setPrimaryActions([])
-              }
-            }
-          ])
-        }
-      }
-      
+                setText([`You decided to stay in the area.`]);
+                setPrimaryActions([]);
+              },
+            },
+          ]);
+        },
+      };
+
       actions.push(leaveAreaAction);
     }
   } else {
     console.log("Running area story, no exploration yet.");
   }
 
-  console.log('Decision Loop', { text, actions });
+  console.log("Decision Loop", { text, actions });
 
   setText(text);
   setPrimaryActions(actions);
-  setEncounter(encounter)
+  setEncounter(encounter);
 };
 
 export default decisionLoop;

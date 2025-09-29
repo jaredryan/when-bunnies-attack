@@ -6,7 +6,7 @@ const bunny = [
   6,
   [1, 1],
   function (player) {
-    return getItems([carrot], [], player);
+    return getItems([carrot], [], player).text;
   },
 ];
 

@@ -5,7 +5,7 @@ const useViewportHeight = () => {
     const setVH = () => {
       document.documentElement.style.setProperty(
         "--vh",
-        `${window.innerHeight * 0.01}px`
+        `${window.innerHeight * 0.01}px`,
       );
     };
 
@@ -13,6 +13,6 @@ const useViewportHeight = () => {
     window.addEventListener("resize", setVH);
     return () => window.removeEventListener("resize", setVH);
   }, []);
-}
+};
 
-export default useViewportHeight
+export default useViewportHeight;

@@ -1,7 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import History from "./History";
 
-export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef, reset }) => {
+export const Typewriter = ({
+  text,
+  speed,
+  done,
+  onDone,
+  skip,
+  scrollRef,
+  reset,
+}) => {
   const [displayed, setDisplayed] = useState("");
   const [history, setHistory] = useState([]);
 
@@ -10,7 +18,7 @@ export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef, reset }
       setDisplayed("");
       setHistory([]);
     }
-  }, [reset])
+  }, [reset]);
 
   useEffect(() => {
     if (done) return;
@@ -57,10 +65,20 @@ export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef, reset }
   let textToDisplay = history;
   if (displayed) textToDisplay = [...textToDisplay, displayed];
 
-  return textToDisplay.map((content) => <p key={content} className="gameLog">{content}</p>);
+  return textToDisplay.map((content) => (
+    <p key={content} className="gameLog">
+      {content}
+    </p>
+  ));
 };
 
-const DialogueBox = ({ lines, speed = 40, onDone, resetBox, windowOnly = false }) => {
+const DialogueBox = ({
+  lines,
+  speed = 40,
+  onDone,
+  resetBox,
+  windowOnly = false,
+}) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
   const [skip, setSkip] = useState(false);
@@ -116,16 +134,18 @@ const DialogueBox = ({ lines, speed = 40, onDone, resetBox, windowOnly = false }
           reset={resetBox}
         />
       </div>
-      {windowOnly ? null : <div className="dialogueOptions">
-        <History history={history} />
-        <button
-          className="next"
-          onClick={handleSkip}
-          disabled={done && current >= lines.length - 1}
-        >
-          Skip
-        </button>
-      </div>}
+      {windowOnly ? null : (
+        <div className="dialogueOptions">
+          <History history={history} />
+          <button
+            className="next"
+            onClick={handleSkip}
+            disabled={done && current >= lines.length - 1}
+          >
+            Skip
+          </button>
+        </div>
+      )}
     </div>
   );
 };

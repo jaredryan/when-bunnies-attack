@@ -1,4 +1,4 @@
-import messages from "../../Messages"
+import messages from "../../Messages";
 
 const finalBoss = [
   "Captain Whiskers",
@@ -6,7 +6,7 @@ const finalBoss = [
   [2, 3],
   function (player) {
     player.hasWon = true;
-    return messages.wonGameMessage
+    return messages.wonGameMessage;
   },
 ];
 

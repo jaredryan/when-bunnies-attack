@@ -28,6 +28,7 @@ const Game = ({ endGame }) => {
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
+  const [runEncounter, setRunEncounter] = useState(false);
   const [encounter, setEncounter] = useState(null); // { enemy: Enemy, noRetreat: true/false }
 
   // Keep an eye on player status to end the game when they've won or lost
@@ -93,14 +94,14 @@ const Game = ({ endGame }) => {
 
   return (
     <div className="gameContainer">
-      {encounter && (
+      {runEncounter && (
         <Battle
-          open={!!encounter}
           player={player}
           enemy={encounter?.enemy}
           noRetreat={encounter?.noRetreat}
           wonBattle={() => {
             const savedEnemy = encounter?.enemy;
+            setRunEncounter(false);
             setEncounter(null);
             setText([
               ...messages.winBattleMessage(savedEnemy),
@@ -108,10 +109,12 @@ const Game = ({ endGame }) => {
             ]);
           }}
           fledBattle={() => {
+            setRunEncounter(false);
             setEncounter(null);
             setText(messages.fleeSuccessMessage);
           }}
           lostBattle={() => {
+            setRunEncounter(false);
             setEncounter(null);
             endGame(false);
           }}
@@ -122,7 +125,9 @@ const Game = ({ endGame }) => {
         onDone={() => {
           // If the current story segment was text only,
           // run decision loop again to get actions
-          if ((!primaryActions || !primaryActions.length) && !encounter) {
+          if (encounter) {
+            setRunEncounter(true);
+          } else if (!primaryActions || !primaryActions.length) {
             setShowActions(false);
             decisionLoop({
               player,

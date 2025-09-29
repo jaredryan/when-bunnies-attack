@@ -303,12 +303,6 @@ dialog::backdrop {
   align-items: center;
 }
 
-
-
-
-
-
-
 .map {
   display: flex;
   flex-direction: column;
@@ -369,7 +363,6 @@ dialog::backdrop {
 .placeholder {
   background-color: transparent;
 }
-
 
 .gameContainer {
   display: flex;
@@ -490,7 +483,6 @@ button.closeInventory svg {
 }
 
 .inventoryList.battle .item {
-
 }
 
 .inventoryList .item b {
@@ -640,7 +632,8 @@ dialog.battleModal button.tertiary:hover {
   background-color: var(--backgroundsecondary);
 }
 
-.enemyStatus, .playerStatus {
+.enemyStatus,
+.playerStatus {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -654,8 +647,9 @@ dialog.battleModal button.tertiary:hover {
   align-items: center;
 }
 
-.enemyStatus .attributeRow, .playerStatus .attributeRow{
-  width: 176px; 
+.enemyStatus .attributeRow,
+.playerStatus .attributeRow {
+  width: 176px;
 }
 
 dialog.battleModal h2 {
@@ -710,49 +704,90 @@ dialog.battleModal h2 {
   background-color: rgba(var(--backgroundsecondaryrgb), 0.5);
 }
 
-
-
 @keyframes show-background {
-  0% { background-color: transparent; }
-  50% { background-color: transparent; }
-  100% { background-color: var(--background);  }
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: var(--background);
+  }
 }
 
 @keyframes appear {
-  0% { opacity: 0;  visibility: hidden; }
-  50% { opacity: 0;  visibility: hidden; }
-  100% { opacity: 1;  visibility: visible;  }
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  50% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 @keyframes wipe-horizontal {
-  0% { transform: translateX(-100%); opacity: 1;}
-  50% { transform: translateX(0); opacity: 1; }
-  100% { transform: translateX(-100%); opacity: 1; }
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
 }
 
 @keyframes pixel-shrink {
-  0%   { transform: scale(0.05); opacity: 1; }
-  50%  { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0); opacity: 0; }
+  0% {
+    transform: scale(0.05);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
 
 @keyframes fade-black {
-  0%   { opacity: 0; }
-  50%  { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes wipe-vertical {
-  0%   { transform: translateY(-100%); opacity: 1;}
-  50%  { transform: translateY(0); opacity: 1;}
-  100% { transform: translateY(-100%); opacity: 1; }
+  0% {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
 }
-
-
-
-
-
-
 
 @media (max-width: 750px) {
   p,

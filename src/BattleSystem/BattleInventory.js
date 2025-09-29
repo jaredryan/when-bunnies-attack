@@ -22,7 +22,7 @@ export const selectItem = (player, enemy) => {
   return {
     text: [
       "Which item would you like to use?",
-      ...returnItemsStringArray(player)
+      ...returnItemsStringArray(player),
     ],
     actions: itemOptions,
   };

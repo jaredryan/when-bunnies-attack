@@ -6,7 +6,7 @@ const scientistBunny = [
   4,
   [2, 2],
   function (player) {
-    return getItems([bunnySteroid], [], player);
+    return getItems([bunnySteroid], [], player).text;
   },
 ];
 

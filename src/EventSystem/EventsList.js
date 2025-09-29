@@ -9,8 +9,6 @@ import finalEncounter from "../ExplorationSystem/FinalEncounter";
 import getWeapon from "../ExplorationSystem/GetWeapon";
 import getItems from "../ExplorationSystem/GetItems";
 
-import finalBoss from "../Entities/Enemies/FinalBoss";
-
 import knife from "../Entities/Weapons/Knife";
 import surgicalKnife from "../Entities/Weapons/SurgicalKnife";
 import bunnySword from "../Entities/Weapons/BunnySword";
@@ -31,7 +29,11 @@ export const checkCupboard0 = new Event(
 export const checkDoor0 = new Event(
   `Examine the door`,
   displayMessage,
-  [[`You check the door and notice it is locked. It seems sturdy, but you notice a keyhole.`]],
+  [
+    [
+      `You check the door and notice it is locked. It seems sturdy, but you notice a keyhole.`,
+    ],
+  ],
   true,
   {},
 );
@@ -41,7 +43,9 @@ export const checkRoom0 = new Event(
   getItems,
   [
     [key],
-    [`As you examined the bed, you saw something shining and decided to examine it closer.`],
+    [
+      `As you examined the bed, you saw something shining and decided to examine it closer.`,
+    ],
   ],
   "switch",
   (areas) =>
@@ -64,24 +68,29 @@ export const checkRoom1 = new Event(
   `Examine the room`,
   displayMessage,
   [
-    [`You look around the room. You see a door and a hallway. There is a poster on the wall that looks like a...bunny army saluting a bunny dictator. Cute but disturbing.`
-  ]],
-  true,
-  {},
-);
-
-export const checkDoor1 = (areas) => new Event(
-  `Examine the door`,
-  unlockAreas,
-  [
-    [1],
-    [2],
-    areas,
-    [`You check the door and see that it is unlocked. It looks like it leads to a laboratory of some sort.`],
+    [
+      `You look around the room. You see a door and a hallway. There is a poster on the wall that looks like a...bunny army saluting a bunny dictator. Cute but disturbing.`,
+    ],
   ],
   true,
   {},
 );
+
+export const checkDoor1 = (areas) =>
+  new Event(
+    `Examine the door`,
+    unlockAreas,
+    [
+      [1],
+      [2],
+      areas,
+      [
+        `You check the door and see that it is unlocked. It looks like it leads to a laboratory of some sort.`,
+      ],
+    ],
+    true,
+    {},
+  );
 
 /************************************ End Area *****************************************/
 
@@ -92,14 +101,20 @@ export const wRoom1 = [checkDoor1, checkRoom1];
 export const checkRoom2 = new Event(
   `Examine the room`,
   displayMessage,
-  [[`You look around the lab. You see what looks like a human body on the table. Are they performing a dissection on them?`]],
+  [
+    [
+      `You look around the lab. You see what looks like a human body on the table. Are they performing a dissection on them?`,
+    ],
+  ],
   "switch",
   new Event(
     `Inspect the dissection table`,
     getWeapon,
     [
       surgicalKnife,
-      [`After inspection and being scarred for life, you decide to take the surgical knife with you.`],
+      [
+        `After inspection and being scarred for life, you decide to take the surgical knife with you.`,
+      ],
     ],
     true,
     {},
@@ -115,7 +130,11 @@ export const lab2 = [checkRoom2];
 export const checkRoom3 = new Event(
   `Examine the room`,
   displayMessage,
-  [[`You look around the room. It's empty. The hallway continues down into another room.`]],
+  [
+    [
+      `You look around the room. It's empty. The hallway continues down into another room.`,
+    ],
+  ],
   true,
   {},
 );
@@ -137,7 +156,12 @@ export const checkRoom4 = new Event(
 export const checkArmory4 = new Event(
   `Search the armory`,
   getWeapon,
-  [bunnySword, [`You searched the armory and found a bunny sword. It's small, but dangerous.`]],
+  [
+    bunnySword,
+    [
+      `You searched the armory and found a bunny sword. It's small, but dangerous.`,
+    ],
+  ],
   true,
   {},
 );
@@ -153,7 +177,9 @@ export const lootRoom5 = new Event(
   getItems,
   [
     [carrot, carrot],
-    [`At first, you were very greedy. But then you realized you could only take two carrots with you.`],
+    [
+      `At first, you were very greedy. But then you realized you could only take two carrots with you.`,
+    ],
   ],
   true,
   {},
@@ -176,20 +202,25 @@ export const treasury5 = [lootRoom5, heal5];
 export const checkRoom6 = new Event(
   `Examine the room`,
   displayMessage,
-  [[`You look around the room. It appears to be the main entrance to the building. You also see two dictator bunny posters. One of them looks a little funny...`]],
-  "switch",
-  (areas) => new Event(
-    `Inspect the poster`,
-    unlockAreas,
+  [
     [
-      [4],
-      [5],
-      areas,
-      [`Upon closer inspection, you find the key to the treasury.`],
+      `You look around the room. It appears to be the main entrance to the building. You also see two dictator bunny posters. One of them looks a little funny...`,
     ],
-    true,
-    {},
-  ),
+  ],
+  "switch",
+  (areas) =>
+    new Event(
+      `Inspect the poster`,
+      unlockAreas,
+      [
+        [4],
+        [5],
+        areas,
+        [`Upon closer inspection, you find the key to the treasury.`],
+      ],
+      true,
+      {},
+    ),
 );
 
 /************************************ End Area *****************************************/
@@ -216,18 +247,16 @@ export const escape7 = [checkRoom7];
 export const checkRoom8 = new Event(
   `Examine the area`,
   displayMessage,
-  [[`You look around. You see a militaristic bunny and a large machine...a tank, maybe? Yikes. If you want to escape, you'll have to fight it.`]],
+  [
+    [
+      `You look around. You see a militaristic bunny and a large machine...a tank, maybe? Yikes. If you want to escape, you'll have to fight it.`,
+    ],
+  ],
   true,
   {},
 );
 
-export const finalBattle8 = new Event(
-  `Fight!!!`,
-  finalEncounter,
-  [finalBoss],
-  true,
-  {},
-);
+export const finalBattle8 = new Event(`Fight!!!`, finalEncounter, [], true, {});
 
 /************************************ End Area *****************************************/
 
