@@ -1,6 +1,6 @@
 const carrot = [
   "Carrot",
-  "Eat this to recover 3 damage.",
+  "Recover 3 damage.",
   true,
   true,
   function (player, _enemy) {

@@ -420,14 +420,46 @@ dialog::backdrop {
   font-weight: 500;
 }
 
+.inventoryPopup {
+  background-color: white;
+  position: absolute;
+  z-index: 4;
+  width: 100%;
+  max-width: 400px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+button.closeInventory {
+  min-width: unset;
+  margin: 0;
+  width: 100%;
+  height: 32.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ter;
+}
+
+button.closeInventory svg {
+  height: 24px;
+  width: 24px;
+}
+
 .inventoryList {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   gap: 6px;
-  margin-top: 12px;
   width: 100%;
+}
+
+.inventoryList.battle {
+  padding: 0 50px 50px;
 }
 
 .inventoryList h3 {
@@ -441,6 +473,24 @@ dialog::backdrop {
   gap: 6px;
   justify-content: space-between;
   width: 100%;
+}
+
+.inventoryList.battle .item {
+  align-items: stretch;
+  text-align: left;
+}
+
+.inventoryList.battle .itemName {
+  text-align: left;
+}
+
+.inventoryList.battle button {
+  margin: 0;
+  height: unset;
+}
+
+.inventoryList.battle .item {
+
 }
 
 .inventoryList .item b {
@@ -571,6 +621,7 @@ dialog.battleModal::backdrop {
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  position: relative;
 }
 
 dialog.battleModal button.secondary {
@@ -640,6 +691,23 @@ dialog.battleModal h2 {
 
 .battleMessage .dialogueContainer {
   height: 150px;
+}
+
+.battleModalContentOverlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: transparent;
+  transition: background-color 0.5s;
+}
+
+.battleModalContentOverlay.visible {
+  display: block;
+  background-color: rgba(var(--backgroundsecondaryrgb), 0.5);
 }
 
 

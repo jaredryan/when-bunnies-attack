@@ -1,6 +1,6 @@
 const throwingKnife = [
   "Throwing Knife",
-  "Use this to hurt an enemy 3 damage.",
+  "Hurt an enemy 3 damage.",
   false,
   true,
   function (_player, enemy) {
