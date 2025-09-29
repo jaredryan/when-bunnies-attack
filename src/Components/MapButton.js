@@ -48,8 +48,6 @@ const generateMap = (currentArea, areas) => {
       classNames.push('room')
     }
 
-    console.log({ visited: area?.visited, connected: area?.connectedAreas, connectionIndex })
-
     if (!area?.visited || !area?.connectedAreas.includes(connectionIndex)) {
       if (!checkInverse) {
         classNames.push('placeholder')

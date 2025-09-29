@@ -7,7 +7,6 @@ import { printStatus } from "../Utilities";
 const fight = (enemyInfo, player, isForced = false) => {
   const enemy = new Enemy(...enemyInfo);
 
-  console.log(`You encountered a ${enemy.name}!`);
   while (true) {
     // Player's turn
     const text = "Your turn:";

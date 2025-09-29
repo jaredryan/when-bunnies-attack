@@ -42,7 +42,6 @@ const Battle = ({
       Math.floor(Math.random() * battleEntranceAnimationClassNames.length)
     ];
     setAnimationClass(` ${randomAnimationClassName}`);
-    console.log(`Chosen className: ${randomAnimationClassName}`)
   }, [])
 
   // You win!
@@ -66,11 +65,9 @@ const Battle = ({
         const text = enemy.attack(player);
         setText([...text, defaultTurnStartText]);
         setCanAct(true);
-      }, 0)
+      }, 2000)
     }
   }, [canAct]);
-
-  console.log({ enemy });
 
   return (
     <Modal open={open} className="battleModal" noClose={true} style={{ height: "calc(var(--vh, 1vh) * 100)" }}>

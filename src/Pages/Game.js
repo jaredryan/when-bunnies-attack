@@ -83,8 +83,6 @@ const Game = ({ endGame }) => {
           </li>
         ));
 
-  console.log({ text, primaryActions });
-
   const resetDialogueForNewArea = () => {
     if (isNewArea.current) {
       isNewArea.current = false;
@@ -118,8 +116,6 @@ const Game = ({ endGame }) => {
           wonBattle={() => {
             const savedEnemy = encounter?.enemy;
             setEncounter(null);
-
-            console.log({ savedEnemy, messages, winBattleMessage: messages.winBattleMessage })
             setText([
               ...messages.winBattleMessage(savedEnemy),
               ...savedEnemy.reward(player),
