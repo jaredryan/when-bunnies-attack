@@ -3,8 +3,9 @@ function Player() {
   this.name = "Unknown";
   this.hp = 10;
   this.maxHp = 10;
-  this.attackPower = [0, 1]; // [min, max]
+  this.attackPowerRange = [0, 1];
   this.weapon = 0;
+  this.attackPower = this.attackPowerRange.map(power => power + this.weapon) // [min, max]
   this.inventory = [];
   this.hasWon = false;
   this.hasDied = false;
@@ -19,12 +20,9 @@ function Player() {
   };
 
   this.attack = (enemy) => {
-    const damage =
-      Math.floor(
-        Math.random() * (this.attackPower[1] - this.attackPower[0] + 1),
-      ) +
-      this.attackPower[0] +
-      this.weapon;
+    const damage = this.attackPower[
+      Math.floor(Math.random() * this.attackPower.length)
+    ];
     enemy.takeDamage(damage);
     return [
       `You attack! ${enemy.name} took ${damage} damage.`
@@ -56,7 +54,8 @@ function Player() {
     if (weapon.power > this.weapon) {
       
       this.weapon = weapon.power;
-      return `You equipped the ${lowerCaseWeapon}.`;
+      this.attackPower = this.attackPowerRange.map((power) => power + this.weapon)
+      return `You equipped the ${lowerCaseWeapon}. Your attack is now ${this.attackPower.join(' - ')}.`;
     }
 
     return `You discarded the ${lowerCaseWeapon} because it is weaker than your current weapon.`

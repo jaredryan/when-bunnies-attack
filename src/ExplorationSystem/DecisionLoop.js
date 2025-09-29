@@ -7,11 +7,12 @@ const decisionLoop = ({
   setNextArea,
   setText,
   setPrimaryActions,
+  setEncounter,
 }) => {
   // Let the story control text and actions until it's done
-  let { text, actions } = area.runStory(player, setText, setPrimaryActions);
+  let { text, actions, encounter } = area.runStory({ player, setText, setPrimaryActions, setEncounter });
 
-  if (!text && (!actions || !actions.length)) {
+  if (!text && (!actions || !actions.length) && !encounter) {
     // After scripted story is done, allow exploration to trigger events
     console.log("Free exploration in area, generating events.");
     
@@ -73,6 +74,7 @@ const decisionLoop = ({
 
   setText(text);
   setPrimaryActions(actions);
+  setEncounter(encounter)
 };
 
 export default decisionLoop;

@@ -13,11 +13,11 @@ function Area(name, mapName, connectedAreas, number, events, story) {
     this.visited = true
   }
 
-  this.runStory = (player, setText, setPrimaryActions) => {
+  this.runStory = ({ player, setText, setPrimaryActions, setEncounter }) => {
     const story = this.story.shift();
     return story
-      ? story(player, setText, setPrimaryActions)
-      : { text: null, actions: [] };
+      ? story({ player, setText, setPrimaryActions, setEncounter })
+      : { text: null, actions: [], encounter: null };
   };
 
   this.runEvent = (player, eventIndex) => {

@@ -1,9 +1,9 @@
 import Area from "./Area";
+import Enemy from "../Entities/Enemy";
 import bunny from "../Entities/Enemies/Bunny";
 import scientistBunny from "../Entities/Enemies/ScientistBunny";
 import soldierBunny from "../Entities/Enemies/SoldierBunny";
 
-import fight from "../BattleSystem/Fight";
 
 import messages from "../Messages";
 import events from "./EventsList";
@@ -13,9 +13,10 @@ import events from "./EventsList";
 /************************************* Area0 *******************************************/
 
 export const swRoom0 = new Area("Southwest Room", 'SW', [], 0, events.swRoom0, [
-  (_player) => ({
+  () => ({
     text: messages.swRoom0EntryMessage1,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -24,7 +25,7 @@ export const swRoom0 = new Area("Southwest Room", 'SW', [], 0, events.swRoom0, [
 /************************************* Area1 *******************************************/
 
 export const wRoom1 = new Area("West Room", 'W', [0, 4], 1, events.wRoom1, [
-  (_player, setText, setPrimaryActions) => ({
+  ({ setText, setPrimaryActions }) => ({
     text: messages.wRoom1EntryMessage1,
     actions: [
       {
@@ -49,16 +50,25 @@ export const wRoom1 = new Area("West Room", 'W', [0, 4], 1, events.wRoom1, [
         },
       },
     ],
+    encounter: null,
   }),
-  (_player) => ({
+  () => ({
     text: messages.wRoom1EntryMessage2,
-    actions: [
-      /* fight(bunny, player, true) */
-    ],
+    actions: [],
+    encounter: null,
   }),
-  (_player) => ({
+  () => ({
+    text: [],
+    actions: [],
+    encounter: {
+      enemy: new Enemy(...bunny),
+      noRetreat: true
+    },
+  }),
+  () => ({
     text: messages.wRoom1ExitMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -67,15 +77,23 @@ export const wRoom1 = new Area("West Room", 'W', [0, 4], 1, events.wRoom1, [
 /************************************* Area2 *******************************************/
 
 export const lab2 = new Area("Laboratory", 'Lab', [1], 2, events.lab2, [
-  (_player) => ({
+  () => ({
     text: messages.lab2EntryMessage1,
-    actions: [
-      /* fight(scientistBunny, _, true) */
-    ],
+    actions: [],
+    encounter: null,
   }),
-  (_player) => ({
+  () => ({
+    text: [],
+    actions: [],
+    encounter: {
+      enemy: new Enemy(...scientistBunny),
+      noRetreat: true
+    },
+  }),
+  () => ({
     text: messages.lab2ExitMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -84,7 +102,7 @@ export const lab2 = new Area("Laboratory", 'Lab', [1], 2, events.lab2, [
 /************************************* Area3 *******************************************/
 
 export const seRoom3 = new Area("Southeast Room", 'SE', [0, 4], 3, events.seRoom3, [
-  (_player, setText, setPrimaryActions) => ({
+  ({ setText, setPrimaryActions }) => ({
     text: messages.seRoom3EntryMessage1,
     actions: [
       {
@@ -102,16 +120,25 @@ export const seRoom3 = new Area("Southeast Room", 'SE', [0, 4], 3, events.seRoom
         },
       },
     ],
+    encounter: null,
   }),
-  (_player) => ({
+  () => ({
     text: messages.seRoom3EntryMessage2,
-    actions: [
-      /* fight(bunny, player, true) */
-    ],
+    actions: [],
+    encounter: null,
   }),
-  (_player) => ({
+  () => ({
+    text: [],
+    actions: [],
+    encounter: {
+      enemy: new Enemy(...bunny),
+      noRetreat: true
+    },
+  }),
+  () => ({
     text: messages.seRoom3ExitMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -120,9 +147,10 @@ export const seRoom3 = new Area("Southeast Room", 'SE', [0, 4], 3, events.seRoom
 /************************************* Area4 *******************************************/
 
 export const eRoom4 = new Area("East Room", 'E', [1, 3, 6], 4, events.eRoom4, [
-  (_player) => ({
+  () => ({
     text: messages.eRoom4EntryMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -131,9 +159,10 @@ export const eRoom4 = new Area("East Room", 'E', [1, 3, 6], 4, events.eRoom4, [
 /************************************* Area5 *******************************************/
 
 export const treasury5 = new Area("Treasury", 'TR', [4], 5, events.treasury5, [
-  (_player) => ({
+  () => ({
     text: messages.treasury5EntryMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -142,15 +171,23 @@ export const treasury5 = new Area("Treasury", 'TR', [4], 5, events.treasury5, [
 /************************************* Area6 *******************************************/
 
 export const neRoom6 = new Area("Northeast Room", 'NE', [4, 7], 6, events.neRoom6, [
-  (_player) => ({
+  () => ({
     text: messages.neRoom6EntryMessage,
-    actions: [
-      /* fight(soldierBunny, player, true) */
-    ],
+    actions: [],
+    encounter: null,
   }),
-  (_player) => ({
+  () => ({
+    text: [],
+    actions: [],
+    encounter: {
+      enemy: new Enemy(...soldierBunny),
+      noRetreat: true
+    },
+  }),
+  () => ({
     text: messages.neRoom6ExitMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -159,9 +196,10 @@ export const neRoom6 = new Area("Northeast Room", 'NE', [4, 7], 6, events.neRoom
 /************************************* Area7 *******************************************/
 
 export const escape7 = new Area("Forest", 'Path', [6], 7, events.escape7, (player) => [
-  (_player) => ({
+  () => ({
     text: messages.escape7EntryMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 
@@ -170,9 +208,10 @@ export const escape7 = new Area("Forest", 'Path', [6], 7, events.escape7, (playe
 /************************************* Area7 *******************************************/
 
 export const forestExit8 = new Area("Forest Exit", 'Exit', [7], 8, events.forestExit8, [
-  (_player) => ({
+  () => ({
     text: messages.forestExit8EntryMessage,
     actions: [],
+    encounter: null,
   }),
 ]);
 

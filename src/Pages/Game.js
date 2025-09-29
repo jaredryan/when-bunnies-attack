@@ -28,7 +28,6 @@ const Game = ({ endGame }) => {
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
-
   const [encounter, setEncounter] = useState(null); // { enemy: Enemy, noRetreat: true/false }
 
   // Keep an eye on player status to end the game when they've won or lost
@@ -55,6 +54,7 @@ const Game = ({ endGame }) => {
         setNextArea: (area) => setArea(area),
         setText,
         setPrimaryActions,
+        setEncounter,
       });
     }
   }, [area, player]);
@@ -77,7 +77,7 @@ const Game = ({ endGame }) => {
     return false;
   };
 
-  if (!text && (!primaryActions || !primaryActions.length)) {
+  if (!text && (!primaryActions || !primaryActions.length) && !encounter) {
     isLoopRunning.current = true;
     setShowActions(false);
     decisionLoop({
@@ -87,6 +87,7 @@ const Game = ({ endGame }) => {
       setNextArea: (area) => setArea(area),
       setText,
       setPrimaryActions,
+      setEncounter,
     });
   }
 
@@ -121,7 +122,7 @@ const Game = ({ endGame }) => {
         onDone={() => {
           // If the current story segment was text only,
           // run decision loop again to get actions
-          if (!primaryActions || !primaryActions.length) {
+          if ((!primaryActions || !primaryActions.length) && !encounter) {
             setShowActions(false);
             decisionLoop({
               player,
@@ -130,6 +131,7 @@ const Game = ({ endGame }) => {
               setNextArea: (area) => setArea(area),
               setText,
               setPrimaryActions,
+              setEncounter,
             });
           } else {
             // Otherwise, stop game execution and show actions
