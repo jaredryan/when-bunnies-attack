@@ -570,7 +570,7 @@ dialog.battleModal::backdrop {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 24px;
 }
 
 dialog.battleModal button.secondary {
@@ -632,6 +632,14 @@ dialog.battleModal h2 {
   flex-grow: 1;
   min-width: 87px;
   width: 33%;
+}
+
+.battleMessage {
+  width: 100%;
+}
+
+.battleMessage .dialogueContainer {
+  height: 150px;
 }
 
 

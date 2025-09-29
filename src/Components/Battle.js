@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
+import DialogueBox from "./DialogueBox";
 import messages from "../Messages";
 import fleeAttempt from "../BattleSystem/FleeAttempt";
 import { utilizeItem } from "../BattleSystem/BattleInventory";
@@ -25,23 +26,29 @@ const Battle = ({
   fledBattle,
   noRetreat = false,
 }) => {
-  const [text, setTextttt] = useState([
-    `You encountered a ${enemy.name}!`,
-    defaultTurnStartText,
-  ]);
-  const setText = (newText) => setTextttt([...text, ...newText])
-  const [canAct, setCanAct] = useState(true);
+  const [text, setText] = useState([]);
+  const [isPlayersTurn, setIsPlayersTurn] = useState(true);
+  const [turnIsFinished, setTurnIsFinished] = useState(false);
   const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
-
+  
   useViewportHeight()
 
   useEffect(() => {
+    // Choose random encounter animation to trigger on entering a battle
     const randomAnimationClassName =
     battleEntranceAnimationClassNames[
       Math.floor(Math.random() * battleEntranceAnimationClassNames.length)
     ];
     setAnimationClass(` ${randomAnimationClassName}`);
+
+    // Wait 3 seconds for animation ^ to end before starting dialogue
+    setTimeout(() => {
+      setText([
+        `You encountered a ${enemy.name}!`,
+        defaultTurnStartText,
+      ])
+    }, 3000)
   }, [])
 
   // You win!
@@ -60,14 +67,13 @@ const Battle = ({
 
   // Enemy turn
   useEffect(() => {
-    if (!canAct) {
-      setTimeout(() => {
-        const text = enemy.attack(player);
-        setText([...text, defaultTurnStartText]);
-        setCanAct(true);
-      }, 2000)
+    if (!isPlayersTurn && turnIsFinished) {
+      setTurnIsFinished(false)
+      const text = enemy.attack(player);
+      setText([...text, defaultTurnStartText]);
+      setIsPlayersTurn(true);
     }
-  }, [canAct]);
+  }, [isPlayersTurn, turnIsFinished]);
 
   return (
     <Modal open={open} className="battleModal" noClose={true} style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
@@ -90,10 +96,12 @@ const Battle = ({
             </div>
           </div>
         </div>
-        <div className="battleMessage">
-          {text.map((line) => (
-            <p key={line}>{line}</p>
-          ))}
+        <div className="battleMessage">        
+          <DialogueBox
+            lines={text || []}
+            onDone={() => setTurnIsFinished(true)}
+            windowOnly
+          />
         </div>
         <div className="playerStatus">
           <h2>You</h2>
@@ -115,11 +123,12 @@ const Battle = ({
         <div className="actionsMenu">
           <h2>Menu</h2>
           <div className="actions">
-            {!canAct ? null : (
+            {(!isPlayersTurn || !turnIsFinished) ? null : (
               <>
                 <button
                   onClick={() => {
-                    setCanAct(false);
+                    setTurnIsFinished(false);
+                    setIsPlayersTurn(false);
                     const text = player.attack(enemy);
                     setText(text);
                   }}
@@ -131,7 +140,8 @@ const Battle = ({
                 {noRetreat ? null : (
                   <button
                     onClick={() => {
-                      setCanAct(false);
+                      setTurnIsFinished(false);
+                      setIsPlayersTurn(false);
                       setText(messages.fleeAttemptMessage);
                       const { text, success } = fleeAttempt();
                       setText(text);
@@ -139,7 +149,7 @@ const Battle = ({
                         fledBattle();
                       }
                     }}
-                    className="tertiary"   
+                    className="tertiary"
                   >
                     Flee
                   </button>
@@ -171,7 +181,8 @@ const Battle = ({
                           defaultTurnStartText,
                         ]);
                       } else {
-                        setCanAct(false);
+                        setTurnIsFinished(false);
+                        setIsPlayersTurn(false);
                         setText(utilizeItem(player, enemy, index));
                         setInventoryIsOpen(false);
                       }

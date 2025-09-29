@@ -60,7 +60,7 @@ export const Typewriter = ({ text, speed, done, onDone, skip, scrollRef, reset }
   return textToDisplay.map((content) => <p key={content} className="gameLog">{content}</p>);
 };
 
-const DialogueBox = ({ lines, speed = 40, onDone, resetBox }) => {
+const DialogueBox = ({ lines, speed = 40, onDone, resetBox, windowOnly = false }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
   const [skip, setSkip] = useState(false);
@@ -116,7 +116,7 @@ const DialogueBox = ({ lines, speed = 40, onDone, resetBox }) => {
           reset={resetBox}
         />
       </div>
-      <div className="dialogueOptions">
+      {windowOnly ? null : <div className="dialogueOptions">
         <History history={history} />
         <button
           className="next"
@@ -125,7 +125,7 @@ const DialogueBox = ({ lines, speed = 40, onDone, resetBox }) => {
         >
           Skip
         </button>
-      </div>
+      </div>}
     </div>
   );
 };
