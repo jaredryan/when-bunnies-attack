@@ -130,7 +130,7 @@ export const seRoom3 = new Area(
       actions: [],
       encounter: null,
     }),
-  ],
+  ]
 );
 
 /************************************ End Area *****************************************/
@@ -181,27 +181,20 @@ export const neRoom6 = new Area(
       actions: [],
       encounter: null,
     }),
-  ],
+  ]
 );
 
 /************************************ End Area *****************************************/
 
 /************************************* Area7 *******************************************/
 
-export const escape7 = new Area(
-  "Forest",
-  "Path",
-  [6],
-  7,
-  events.escape7,
-  (player) => [
-    () => ({
-      text: messages.escape7EntryMessage,
-      actions: [],
-      encounter: null,
-    }),
-  ],
-);
+export const escape7 = new Area("Forest", "Path", [6], 7, events.escape7, [
+  () => ({
+    text: messages.escape7EntryMessage,
+    actions: [],
+    encounter: null,
+  }),
+]);
 
 /************************************ End Area *****************************************/
 
@@ -219,7 +212,7 @@ export const forestExit8 = new Area(
       actions: [],
       encounter: null,
     }),
-  ],
+  ]
 );
 
 /************************************ End Area *****************************************/

@@ -43,7 +43,7 @@ const Battle = ({
 
     // Wait 3 seconds for animation ^ to end before starting dialogue
     setTimeout(() => {
-      setText([`You encountered a ${enemy.name}!`, defaultTurnStartText]);
+      setText([`You encountered ${enemy.name}!`, defaultTurnStartText]);
     }, 3000);
   }, []);
 
@@ -54,20 +54,23 @@ const Battle = ({
     }
   }, [enemy.hasDied]);
 
-  // You lose :(
-  useEffect(() => {
-    if (player.hasDied) {
-      lostBattle();
-    }
-  }, [player.hasDied]);
-
   // Enemy turn
   useEffect(() => {
     if (!isPlayersTurn && turnIsFinished) {
       setTurnIsFinished(false);
       const text = enemy.attack(player);
-      setText([...text, defaultTurnStartText]);
-      setIsPlayersTurn(true);
+      if (player.hasDied) {
+        setText([
+          ...text,
+          `"Ahhh...it hurts."`,
+          `Your vision starts to blur, and you lose strength in your limbs.`,
+          `You can't move. Then, everything fades to black.`,
+          `...`,
+        ])
+      } else {
+        setText([...text, defaultTurnStartText]);
+        setIsPlayersTurn(true);
+      }
     }
   }, [isPlayersTurn, turnIsFinished]);
 
@@ -108,7 +111,12 @@ const Battle = ({
         <div className="battleMessage">
           <DialogueBox
             lines={text || []}
-            onDone={() => setTurnIsFinished(true)}
+            onDone={() => {
+              setTurnIsFinished(true)
+              if (player.hasDied) {
+                lostBattle();
+              }
+            }}
             windowOnly
           />
         </div>

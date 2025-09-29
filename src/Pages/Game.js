@@ -33,9 +33,7 @@ const Game = ({ endGame }) => {
 
   // Keep an eye on player status to end the game when they've won or lost
   useEffect(() => {
-    if (player.hasWon) {
-      endGame(true);
-    } else if (player.hasDied) {
+    if (player.hasDied) {
       endGame(false);
     }
   }, [player.hasWon, player.hasDied, endGame]);
@@ -125,7 +123,9 @@ const Game = ({ endGame }) => {
         onDone={() => {
           // If the current story segment was text only,
           // run decision loop again to get actions
-          if (encounter) {
+          if (player.hasWon) {
+            endGame(true);
+          } else if (encounter) {
             setRunEncounter(true);
           } else if (!primaryActions || !primaryActions.length) {
             setShowActions(false);

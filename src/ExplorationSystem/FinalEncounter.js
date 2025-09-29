@@ -22,7 +22,10 @@ const finalEncounter = () => {
 
   return {
     text: message,
-    encounter: new Enemy(...finalBoss),
+    encounter: {
+      enemy: new Enemy(...finalBoss),
+      noRetreat: true,
+    }
   };
 };
 

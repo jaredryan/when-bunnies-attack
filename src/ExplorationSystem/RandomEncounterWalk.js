@@ -1,37 +1,74 @@
-import fight from "../BattleSystem/Fight";
+import Enemy from "../Entities/Enemy";
 import bunny from "../Entities/Enemies/Bunny";
 import scientistBunny from "../Entities/Enemies/ScientistBunny";
 import soldierBunny from "../Entities/Enemies/SoldierBunny";
 
 // The Final Escape Special Event
-const randomEncounterWalk = (areas, player) => {
-  const entryMessage = [
-    `You see a sign saying it is about 3 kilometers to the exit.`,
-    `You start pushing forward.`,
-  ];
+const randomEncounterWalk = (areas, _player) => {
+  const forestPathArea = areas[7];
+  const forestExit = areas[8];
 
-  // Loop for ~4 encounters
-  var distanceWalked = 0;
-  while (distanceWalked < 3) {
-    if (!walk(player)) {
-      // You died!
-      return false;
+  const generateNewStoryEvents = () => {
+    const newStoryEvents = []
+
+    // Loop for ~4 encounters
+    let distanceWalked = 0;
+    while (distanceWalked < 3) {
+      if (Math.random() < 0.34) {
+        newStoryEvents.push(() => ({
+          text: '',
+          actions: [],
+          encounter: {
+            enemy: new Enemy(...getRandomEnemyInfo()),
+            noRetreat: false,
+          },
+        }));
+      }
+      distanceWalked += 0.25;
+
+      const text = [`You have walked ${distanceWalked} / 3 kilometers.`]
+      newStoryEvents.push(() => ({
+        text,
+        actions: [],
+        encounter: null,
+      }));
     }
-    distanceWalked += 0.25;
 
-    const progressMessage = `You have walked ${distanceWalked} kilometers.`;
-  }
+    newStoryEvents.push(() => {
+      // Add forest clearing to map / traversable rooms
+      forestPathArea.connectedAreas.push(8);
 
-  // Story
-  const exitMessage = [
-    `You made it all the way through, and the path seems clear.`,
-    `If you wish to continue or go back, no enemies will attack you.`,
-    `The ${areas[8].name} is now available.`,
-  ];
+      return ({
+        text: [
+          `You made it all the way through, and the path seems clear.`,
+          `If you wish to continue or go back, no enemies will attack you.`,
+          `The ${forestExit.name} is now available.`,
+        ],
+        actions: [],
+        encounter: null,
+      })
+    })
 
-  // Add new area
-  areas[1][7].connectedAreas.push(8);
-  return false;
+    return newStoryEvents
+  };
+
+  forestPathArea.story = generateNewStoryEvents();
+
+    
+
+  return {
+    text: [
+      `As you walk towards the path, you see a sign saying it is about 3 kilometers to the exit.`,
+      `You look down the path and don't see any enemies.`,
+      `You can only hope that your luck holds.`,
+      `Noticing how thick the vegetation is, you make a mental note that if you do encounter any enemies, you might be able to flee by darting off into the woods.`,
+      `Just don't go too far off, come back onto the path after you lose them, and then you shouldn't lose your way.`,
+      `"All right, then."`,
+      `You start walking.`,
+    ],
+    actions: [],
+    encounter: null,
+  };
 };
 
 /* Picks a random enemy from the current possibilities and returns a newly constructed
@@ -39,16 +76,8 @@ const randomEncounterWalk = (areas, player) => {
 
 const possibleEnemies = [bunny, scientistBunny, soldierBunny];
 
-const returnRandomIndex = () => {
+const getRandomEnemyInfo = () => {
   return possibleEnemies[Math.floor(Math.random() * possibleEnemies.length)];
-};
-
-// Returns true if the player makes it to the destination, false if he or she died
-export const walk = (player) => {
-  if (Math.random() < 0.34) {
-    return fight(returnRandomIndex(), player);
-  }
-  return true;
 };
 
 export default randomEncounterWalk;
