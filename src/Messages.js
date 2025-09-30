@@ -90,7 +90,7 @@ export const wRoom1EntryMessage1 = [
 
 export const wRoom1EntryMessage2 = [
   `...`,
-  `Bunny: "What's with the suspicious look?`,
+  `Bunny: "What's with the suspicious look?"`,
   `...`,
   `Bunny: "Fine, I'll take you back by force!"`,
 ];
@@ -126,8 +126,8 @@ export const wRoom1ExitMessage = [
 
 export const lab2EntryMessage1 = [
   `You step into the lab.`,
-  `Bunny in a lab coat: "Hey, what are you doing in here?!`,
-  `Get out of here!"`,
+  `Bunny in a lab coat: "Hey, what are you doing in here?!"`,
+  `Bunny in a lab coat: "Get out of here!"`,
 ];
 
 export const lab2ExitMessage = [
@@ -148,7 +148,7 @@ export const seRoom3EntryMessage1 = [
 
 export const seRoom3EntryMessage2 = [
   `...`,
-  `Bob: "How about I just make you come with me instead?!`,
+  `Bob: "How about I just make you come with me instead?!"`,
 ];
 
 export const seRoom3EntryAnswerResponsePairs = [

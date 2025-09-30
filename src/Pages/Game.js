@@ -41,26 +41,11 @@ const Game = ({ endGame }) => {
 
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
-    if (!isLoopRunning.current) {
-      isLoopRunning.current = true;
-      isNewArea.current = true;
-
-      area.visit();
-      setShowActions(false);
-      decisionLoop({
-        player,
-        area,
-        areas,
-        setNextArea: (area) => setArea(area),
-        setText,
-        setPrimaryActions,
-        setEncounter,
-      });
-    }
+    isNewArea.current = true
   }, [area, player]);
 
   const mapActions = (actions = []) =>
-    !showActions
+    (!showActions || isNewArea.current)
       ? null
       : actions.map((action) => (
           <li key={action.name} className="primaryActionListItem">
@@ -74,7 +59,7 @@ const Game = ({ endGame }) => {
               }}
               className={`primaryActionButton${
                 triggeringAction ? " exiting" : ""
-              }`}
+              }${action.className ? ` ${action.className}` : ''}`}
             >
               {action.name}
             </button>
@@ -158,6 +143,21 @@ const Game = ({ endGame }) => {
           // and actions
           if (player.hasWon) {
             setTimeout(() => endGame(true), 2000);
+          } else if (isNewArea.current) {
+            isLoopRunning.current = true;
+            isNewArea.current = false;
+
+            area.visit();
+            setShowActions(false);
+            decisionLoop({
+              player,
+              area,
+              areas,
+              setNextArea: (area) => setArea(area),
+              setText,
+              setPrimaryActions,
+              setEncounter,
+            });
           } else if (encounter) {
             // If encounter is in place, run it after dialogue is finished
             setRunEncounter(true);
@@ -253,6 +253,7 @@ const Game = ({ endGame }) => {
                       }}
                       disabled={
                         !showActions ||
+                        isNewArea.current ||
                         !primaryActions.length ||
                         !!area.story.length
                       }

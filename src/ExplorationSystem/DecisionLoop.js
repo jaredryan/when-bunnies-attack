@@ -59,7 +59,11 @@ const decisionLoop = ({
           setPrimaryActions([
             ...newAreas.map((availableArea) => ({
               name: availableArea.name,
-              execute: () => setNextArea(availableArea),
+              execute: () => {
+                setText([`You went to ${availableArea.name}.`]);
+                setPrimaryActions([]);
+                setNextArea(availableArea)
+              },
             })),
             {
               name: "Stay",
@@ -67,6 +71,7 @@ const decisionLoop = ({
                 setText([`You decided to stay in the area.`]);
                 setPrimaryActions([]);
               },
+              className: "secondary",
             },
           ]);
         },

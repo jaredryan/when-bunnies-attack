@@ -130,11 +130,13 @@ button.primary:hover {
   background-color: var(--primarylight);
 }
 
-button.map {
+button.map,
+.actionContainer .primaryActionButton.secondary {
   background-color: var(--secondary);
 }
 
-button.map:hover {
+button.map:hover,
+.actionContainer .primaryActionButton.secondary:hover {
   background-color: var(--secondarylight);
 }
 
