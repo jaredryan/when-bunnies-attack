@@ -14,7 +14,7 @@ const randomEncounterWalk = (areas, _player) => {
     // Loop for ~4 encounters
     let distanceWalked = 0;
     while (distanceWalked < 3) {
-      if (Math.random() < 0) {
+      if (Math.random() < 0.34) {
         newStoryEvents.push(() => ({
           text: [],
           actions: [],
