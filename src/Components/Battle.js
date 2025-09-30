@@ -45,14 +45,14 @@ const Battle = ({
     setTimeout(() => {
       setText([`You encountered ${enemy.name}!`, defaultTurnStartText]);
     }, 3000);
-  }, []);
+  }, [enemy.name]);
 
   // You win!
   useEffect(() => {
     if (enemy.hasDied) {
       wonBattle();
     }
-  }, [enemy.hasDied]);
+  }, [enemy.hasDied, wonBattle]);
 
   // Enemy turn
   useEffect(() => {
@@ -72,7 +72,7 @@ const Battle = ({
         setIsPlayersTurn(true);
       }
     }
-  }, [isPlayersTurn, turnIsFinished]);
+  }, [isPlayersTurn, turnIsFinished, enemy, player]);
 
   return (
     <Modal
