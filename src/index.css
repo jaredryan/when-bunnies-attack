@@ -468,6 +468,10 @@ button.closeInventory svg {
   width: 100%;
 }
 
+.inventoryList .empty {
+  margin-top: 6px;
+}
+
 .inventoryList.battle .item {
   align-items: stretch;
   text-align: left;
@@ -557,6 +561,10 @@ button.closeInventory svg {
   animation: show-background 0.001s forwards 1.5s;
 }
 
+dialog.battleModal {
+  padding: 0 !important;
+}
+
 dialog.battleModal::backdrop {
   background-color: transparent;
   backdrop-filter: none;
@@ -607,7 +615,7 @@ dialog.battleModal::backdrop {
 
 .battleModalContent {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   padding: 50px;
   display: flex;
   flex-direction: column;
@@ -662,14 +670,19 @@ dialog.battleModal h2 {
   align-items: center;
   gap: 24px;
   width: 100%;
+  max-width: 300px;
 }
 
 .battleModalContent .actions {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   width: 100%;
   gap: 16px;
+  justify-content: space-around;
+}
+
+.battleModalContent .actions.showFlee {
+  justify-content: space-between;
 }
 
 .battleModalContent .actions button {
@@ -677,6 +690,7 @@ dialog.battleModal h2 {
   flex-grow: 1;
   min-width: 87px;
   width: 33%;
+  max-width: 120px;
 }
 
 .battleMessage {
@@ -796,7 +810,7 @@ dialog.battleModal h2 {
     line-height: 23px;
   }
 
-  .pageContainer {
+  .pageContainer, .battleModalContent {
     padding: 36px;
   }
 }

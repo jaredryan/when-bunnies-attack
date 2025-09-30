@@ -139,7 +139,7 @@ const Battle = ({
         </div>
         <div className="actionsMenu">
           <h2>Menu</h2>
-          <div className="actions">
+          <div className={`actions${noRetreat ? '' : ' showFlee'}`}>
             <button
               onClick={() => {
                 setTurnIsFinished(false);

@@ -76,13 +76,17 @@ const Game = ({ endGame }) => {
     return false;
   };
 
-  if (!isLoopRunning.current && (!text || !text.length) && (!primaryActions || !primaryActions.length)) {
+  if (
+    !isLoopRunning.current &&
+    (!text || !text.length) &&
+    (!primaryActions || !primaryActions.length)
+  ) {
     // If there is no text or actions, but there is an encounter, that
     // means no more dialogue is left before battle, so trigger battle
     if (encounter && !runEncounter) {
       isLoopRunning.current = true;
 
-      setRunEncounter(true)
+      setRunEncounter(true);
     } else {
       // Run decision loop if there are no text or actions available yet
 
@@ -137,7 +141,7 @@ const Game = ({ endGame }) => {
           // After text is done, check if player has won, and for encounters
           // and actions
           if (player.hasWon) {
-            setTimeout(() => endGame(true), 2000)
+            setTimeout(() => endGame(true), 2000);
           } else if (encounter) {
             // If encounter is in place, run it after dialogue is finished
             setRunEncounter(true);
@@ -194,14 +198,24 @@ const Game = ({ endGame }) => {
                 onClick={() => setInventoryIsOpen(!inventoryIsOpen)}
                 aria-label="Toggle inventory"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                  <path d="M264 112L376 112C380.4 112 384 115.6 384 120L384 160L256 160L256 120C256 115.6 259.6 112 264 112zM208 120L208 160L128 160C92.7 160 64 188.7 64 224L64 320L576 320L576 224C576 188.7 547.3 160 512 160L432 160L432 120C432 89.1 406.9 64 376 64L264 64C233.1 64 208 89.1 208 120zM576 368L384 368L384 384C384 401.7 369.7 416 352 416L288 416C270.3 416 256 401.7 256 384L256 368L64 368L64 480C64 515.3 92.7 544 128 544L512 544C547.3 544 576 515.3 576 480L576 368z" />
-                </svg>
+                {inventoryIsOpen ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                    {/* <!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                    <path d="M88 289.6L64.4 360.2L64.4 160C64.4 124.7 93.1 96 128.4 96L267.1 96C280.9 96 294.4 100.5 305.5 108.8L343.9 137.6C349.4 141.8 356.2 144 363.1 144L480.4 144C515.7 144 544.4 172.7 544.4 208L544.4 224L179 224C137.7 224 101 250.4 87.9 289.6zM509.8 512L131 512C98.2 512 75.1 479.9 85.5 448.8L133.5 304.8C140 285.2 158.4 272 179 272L557.8 272C590.6 272 613.7 304.1 603.3 335.2L555.3 479.2C548.8 498.8 530.4 512 509.8 512z" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                    {/* <!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                    <path d="M512 512L128 512C92.7 512 64 483.3 64 448L64 272L576 272L576 448C576 483.3 547.3 512 512 512zM576 224L64 224L64 160C64 124.7 92.7 96 128 96L266.7 96C280.5 96 294 100.5 305.1 108.8L343.5 137.6C349 141.8 355.8 144 362.7 144L512 144C547.3 144 576 172.7 576 208L576 224z" />
+                  </svg>
+                )}
               </button>
             </div>
             {!inventoryIsOpen ? null : (
               <ul className="inventoryList">
-                {player.inventory.length ? null : <p>Empty</p>}
+                {player.inventory.length ? null : (
+                  <p className="empty">Empty</p>
+                )}
                 {player.inventory.map((item, index) => (
                   <li key={item.name + index} className="item">
                     <p className="tooltip">
