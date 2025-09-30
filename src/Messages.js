@@ -1,17 +1,17 @@
 export const freeExplorationPrompt = [`What do you want to do?`];
+export const battleTurnStartText = "What will you do?";
 
 export const fleeAttemptMessage = [`You tried to run away!`];
 export const fleeSuccessMessage = [`You successfully ran away!`];
 export const fleeFailureMessage = [`You were unable to escape!`];
 
 export const winBattleMessage = (enemy) => [`You defeated ${enemy.name}!`];
-
-export const lostGameMessage = [
-  `"Everything is going dark..."`,
-  `..`,
-  `.`,
-  `You were never seen again.`,
-];
+export const dieInBattleMessage = [
+  `"Ahhh...it hurts."`,
+  `Your vision starts to blur, and you lose strength in your limbs.`,
+  `You can't move. Then, everything fades to black.`,
+  `...`,
+]
 
 export const wonGameMessage = (hasCarrot) => {
   const beginning = [
@@ -101,13 +101,13 @@ export const wRoom1EntryQuestion = [
 
 export const wRoom1EntryAnswerResponsePairs = [
   {
-    answer: `You: "Yes"`,
+    answer: `You: "Yes."`,
     response: [
       `Bunny: "That's great! Let me lead you back to your room so you can finish your recovery."`,
     ],
   },
   {
-    answer: `You: "No"`,
+    answer: `You: "No."`,
     response: [
       `Bunny: "Uh oh! Let me lead you back to your room so you can finish your recovery."`,
     ],
@@ -153,11 +153,11 @@ export const seRoom3EntryMessage2 = [
 
 export const seRoom3EntryAnswerResponsePairs = [
   {
-    answer: `You: "Can I talk to you about what's going on? I'm confused."`,
+    answer: `You: "I'm not sure. Where am I?"`,
     response: seRoom3EntryMessage2,
   },
   {
-    answer: `You: "I want to keep looking around, if that's okay."`,
+    answer: `You: "I want to keep wondering around."`,
     response: seRoom3EntryMessage2,
   },
 ];
@@ -255,11 +255,12 @@ export const finalBossEncounter = [
 
 const allMessages = {
   freeExplorationPrompt,
+  battleTurnStartText,
   fleeAttemptMessage,
   fleeSuccessMessage,
   fleeFailureMessage,
   winBattleMessage,
-  lostGameMessage,
+  dieInBattleMessage,
   wonGameMessage,
   swRoom0EntryMessage1,
   wRoom1EntryMessage1,

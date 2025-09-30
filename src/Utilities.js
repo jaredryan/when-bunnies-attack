@@ -2,7 +2,7 @@ import messages from "./Messages";
 
 // Returns true if the attempt is successful, false otherwise.
 export const fleeAttempt = () => {
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.34) {
     return {
       success: true,
       text: messages.fleeSuccessMessage,
