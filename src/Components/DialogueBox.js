@@ -88,6 +88,7 @@ const DialogueBox = ({
   const [skip, setSkip] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const [history, setHistory] = useState([]);
+  const [historyIsOpen, setHistoryIsOpen] = useState(false);
   const scrollRef = useRef(null);
 
   // Reset state when lines prop changes
@@ -136,12 +137,16 @@ const DialogueBox = ({
             }
           }}
           reset={resetBox}
-          paused={paused}
+          paused={paused || historyIsOpen}
         />
       </div>
       {windowOnly ? null : (
         <div className="dialogueOptions">
-          <History history={history} />
+          <History
+            history={history}
+            open={historyIsOpen}
+            setOpen={setHistoryIsOpen}
+          />
           <button
             className="next"
             onClick={handleSkip}
