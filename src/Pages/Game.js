@@ -165,6 +165,7 @@ const Game = ({ endGame }) => {
           }
         }}
         resetBox={resetDialogueForNewArea()}
+        paused={mapModalIsOpen}
       />
       <div className="twoColumns">
         <div className="left column">
@@ -220,7 +221,7 @@ const Game = ({ endGame }) => {
                   <li key={item.name + index} className="item">
                     <p className="tooltip">
                       {item.name}
-                      <span class="tooltipText">{item.description}</span>
+                      <span className="tooltipText">{item.description}</span>
                     </p>
                     <button
                       onClick={() => {

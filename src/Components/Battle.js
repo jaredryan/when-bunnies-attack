@@ -197,7 +197,7 @@ const Battle = ({
                 <li key={item.name + index} className="item">
                   <div className="itemInformation">
                     <h4 className="itemName">{item.name}</h4>
-                    <p class="itemDescription">{item.description}</p>
+                    <p className="itemDescription">{item.description}</p>
                   </div>
                   <button
                     onClick={() => {

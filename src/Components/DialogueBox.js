@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import History from "./History";
 
 export const Typewriter = ({
@@ -9,24 +9,28 @@ export const Typewriter = ({
   skip,
   scrollRef,
   reset,
+  paused,
 }) => {
   const [displayed, setDisplayed] = useState("");
   const [history, setHistory] = useState([]);
+  const indexRef = useRef(-1);
 
   useEffect(() => {
     if (reset) {
       setDisplayed("");
       setHistory([]);
+      indexRef.current = -1;
     }
   }, [reset]);
 
   useEffect(() => {
-    if (done) return;
+    if (done || paused) return;
 
     const endTyping = () => {
       onDone?.();
       setDisplayed("");
       setHistory([...history, text]);
+      indexRef.current = -1;
       if (scrollRef?.current) {
         scrollRef.current.scrollTo({
           top: scrollRef.current.scrollHeight,
@@ -41,18 +45,17 @@ export const Typewriter = ({
       return;
     }
 
-    let i = -1;
     const interval = setInterval(() => {
-      i++;
+      indexRef.current++;
 
       if (text) {
-        if (i >= text.length) {
+        if (indexRef.current >= text.length) {
           clearInterval(interval);
           endTyping();
           return;
         }
 
-        setDisplayed((prev) => prev + text[i]);
+        setDisplayed((prev) => prev + text[indexRef.current]);
         if (scrollRef?.current) {
           scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
@@ -60,7 +63,7 @@ export const Typewriter = ({
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text, speed, skip, history, onDone, done, scrollRef]);
+  }, [text, speed, skip, history, onDone, done, scrollRef, paused]);
 
   let textToDisplay = history;
   if (displayed) textToDisplay = [...textToDisplay, displayed];
@@ -78,6 +81,7 @@ const DialogueBox = ({
   onDone,
   resetBox,
   windowOnly = false,
+  paused = false,
 }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
@@ -132,6 +136,7 @@ const DialogueBox = ({
             }
           }}
           reset={resetBox}
+          paused={paused}
         />
       </div>
       {windowOnly ? null : (
@@ -150,4 +155,11 @@ const DialogueBox = ({
   );
 };
 
-export default DialogueBox;
+const arePropsEqual = (prevProps, nextProps) =>
+  JSON.stringify(prevProps.lines) === JSON.stringify(nextProps.lines) &&
+  prevProps.speed === nextProps.speed &&
+  prevProps.resetBox === nextProps.resetBox &&
+  prevProps.windowOnly === nextProps.windowOnly &&
+  prevProps.paused === nextProps.paused;
+
+export default memo(DialogueBox, arePropsEqual);
