@@ -155,7 +155,7 @@ const generateMap = (currentArea, areas) => {
   return map;
 };
 
-const MapButton = (props) => console.log({ areas: props.areas }) || (
+const MapButton = (props) => (
   <>
     <Modal open={props.open} onClose={props.onCancel} className="mapModal">
       {generateMap(props.area, props.areas)}

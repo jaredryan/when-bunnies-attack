@@ -17,7 +17,7 @@ export const swRoom0 = new Area("Southwest Room", "SW", [], 0, events.swRoom0, [
     actions: [],
     encounter: null,
   }),
-]);
+], true);
 
 /*********************************** End Area ******************************************/
 
@@ -121,7 +121,7 @@ export const seRoom3 = new Area(
       text: messages.seRoom3EntryMessage2,
       actions: [],
       encounter: {
-        enemy: new Enemy(...bunny),
+        enemy: new Enemy('Bob, the Bunny', ...bunny.slice(1)),
         noRetreat: true,
       },
     }),

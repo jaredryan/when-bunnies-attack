@@ -114,7 +114,7 @@ const Battle = ({
             onDone={() => {
               setTurnIsFinished(true)
               if (player.hasDied) {
-                lostBattle();
+                setTimeout(() => lostBattle(), 2000);
               }
             }}
             windowOnly

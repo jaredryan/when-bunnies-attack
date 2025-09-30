@@ -1,7 +1,7 @@
 // PLAYER DEFINITION
 function Player() {
   this.name = "Unknown";
-  this.hp = 1;
+  this.hp = 10;
   this.maxHp = 10;
   this.attackPowerRange = [0, 1];
   this.weapon = 0;

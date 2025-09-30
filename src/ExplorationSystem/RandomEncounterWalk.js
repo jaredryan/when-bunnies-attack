@@ -14,9 +14,9 @@ const randomEncounterWalk = (areas, _player) => {
     // Loop for ~4 encounters
     let distanceWalked = 0;
     while (distanceWalked < 3) {
-      if (Math.random() < 0.34) {
+      if (Math.random() < 0) {
         newStoryEvents.push(() => ({
-          text: '',
+          text: [],
           actions: [],
           encounter: {
             enemy: new Enemy(...getRandomEnemyInfo()),
@@ -53,8 +53,6 @@ const randomEncounterWalk = (areas, _player) => {
   };
 
   forestPathArea.story = generateNewStoryEvents();
-
-    
 
   return {
     text: [

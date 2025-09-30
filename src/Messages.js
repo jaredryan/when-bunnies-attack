@@ -14,9 +14,9 @@ export const lostGameMessage = [
 ];
 
 export const wonGameMessage = [
-  `That's it. It's finished. You escaped the clutches of those bunnies.`,
+  `That's it. It's done. You escaped the clutches of those bunnies.`,
   `...`,
-  `At least you think you did. To be sure, You take a quick look around.`,
+  `At least you think you did. To be sure, you take a quick look around.`,
   `There's a...BUNNY!!!!!!!!`,
   `"DIE BUNNY!!!"`,
   `Right before you strike, you realize it's just a normal bunny.`,
@@ -108,15 +108,15 @@ export const seRoom3EntryMessage1 = [
   `It turns around and stares at you. After a couple of seconds...`,
   `Bunny: "Hi, you must be new here. I'm Bob. Who are you?"`,
   `You: ......`,
-  `Bunny: "Ahem...?"`,
-  `You: "(Oh, right.) I'm...actually, I don't remember."`,
-  `Bunny: "Oh, well, nice to meet you anyway! Are you lost?"`,
-  `Bunny: "I can take you back to your room."`,
+  `Bob: "Ahem...?"`,
+  `You: (Oh, right.) "I'm...actually, I don't remember."`,
+  `Bob: "Oh, well, nice to meet you anyway! Are you lost?"`,
+  `Bob: "I can take you back to your room."`,
 ];
 
 export const seRoom3EntryMessage2 = [
   `...`,
-  `Bunny: "How about I just make you come with me instead?!`,
+  `Bob: "How about I just make you come with me instead?!`,
 ];
 
 export const seRoom3EntryAnswerResponsePairs = [
@@ -131,8 +131,7 @@ export const seRoom3EntryAnswerResponsePairs = [
 ];
 
 export const seRoom3ExitMessage = [
-  `"He...she...it...?"`,
-  `"They spoke to me! And attacked me! What's going on?!"`,
+  `"He spoke to me! And attacked me! What's going on?!"`,
 ];
 
 export const eRoom4EntryMessage = [
@@ -177,7 +176,7 @@ export const escape7EntryMessage = [
 ];
 
 export const forestExit8EntryMessage = [
-  `As you into a small clearing in the forest and into the clearing, you see another bunny and some sort of machine.`,
+  `As you walk into a small clearing in the forest and into the clearing, you see another bunny and some sort of machine.`,
   `Past the bunny, you can see the rays of the morning sun.`,
   `Either there's another clearing past this one, or you're finally at the forest's edge.`,
   `The bunny senses your presence and turns around.`,

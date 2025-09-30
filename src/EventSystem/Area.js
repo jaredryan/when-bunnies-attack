@@ -1,13 +1,13 @@
 // AREA CONSTRUCTOR
 
-function Area(name, mapName, connectedAreas, number, events, story) {
+function Area(name, mapName, connectedAreas, number, events, story, visited = false) {
   this.name = name;
   this.mapName = mapName;
   this.events = events;
   this.connectedAreas = connectedAreas;
   this.story = story; // array of story events
   this.number = number;
-  this.visited = false;
+  this.visited = visited;
 
   this.visit = () => {
     this.visited = true;

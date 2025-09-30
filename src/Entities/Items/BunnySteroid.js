@@ -12,7 +12,8 @@ const bunnySteroid = [
       Number.parseInt(dealtDamageMessage.split(" ").at(-2), 10) + 4;
 
     return [
-      `You attack! Enpowered by drugs, you dealt ${damageDealt} damage.``Exhausted from the attack, you feel your resilience drop. You take 2 damage.`,
+      `You attack! Enpowered by drugs, you dealt ${damageDealt} damage.`,
+      `Exhausted from the attack, you feel your resilience drop. You took 2 damage.`,
     ];
   },
 ];

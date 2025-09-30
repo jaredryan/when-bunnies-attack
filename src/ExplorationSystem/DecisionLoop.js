@@ -17,10 +17,8 @@ const decisionLoop = ({
     setEncounter,
   });
 
-  if (!text && (!actions || !actions.length) && !encounter) {
+  if ((!text || !text.length) && (!actions || !actions.length) && !encounter) {
     // After scripted story is done, allow exploration to trigger events
-    console.log("Free exploration in area, generating events.");
-
     text = freeExplorationPrompt;
     actions = [];
 
@@ -34,7 +32,7 @@ const decisionLoop = ({
           // list of events in the area. So, setText to display new message,
           // and empty out Actions so they can't take action until the event is over
           const {
-            text = "",
+            text = [],
             actions = [],
             encounter = null,
           } = area.runEvent(player, eventIndex);
@@ -76,11 +74,7 @@ const decisionLoop = ({
 
       actions.push(leaveAreaAction);
     }
-  } else {
-    console.log("Running area story, no exploration yet.");
   }
-
-  console.log("Decision Loop", { text, actions });
 
   setText(text);
   setPrimaryActions(actions);

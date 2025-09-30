@@ -22,7 +22,7 @@ const Game = ({ endGame }) => {
   const isNewArea = useRef(false);
 
   // Initialization
-  const player = useMemo(() => console.log('generatePlayer') || new Player(), []);
+  const player = useMemo(() => new Player(), []);
 
   const [area, setArea] = useState(areas[0]);
   const [text, setText] = useState([]);
@@ -76,18 +76,28 @@ const Game = ({ endGame }) => {
     return false;
   };
 
-  if (!text && (!primaryActions || !primaryActions.length) && !encounter) {
-    isLoopRunning.current = true;
-    setShowActions(false);
-    decisionLoop({
-      player,
-      area,
-      areas,
-      setNextArea: (area) => setArea(area),
-      setText,
-      setPrimaryActions,
-      setEncounter,
-    });
+  if (!isLoopRunning.current && (!text || !text.length) && (!primaryActions || !primaryActions.length)) {
+    // If there is no text or actions, but there is an encounter, that
+    // means no more dialogue is left before battle, so trigger battle
+    if (encounter && !runEncounter) {
+      isLoopRunning.current = true;
+
+      setRunEncounter(true)
+    } else {
+      // Run decision loop if there are no text or actions available yet
+
+      isLoopRunning.current = true;
+      setShowActions(false);
+      decisionLoop({
+        player,
+        area,
+        areas,
+        setNextArea: (area) => setArea(area),
+        setText,
+        setPrimaryActions,
+        setEncounter,
+      });
+    }
   }
 
   return (
@@ -105,15 +115,18 @@ const Game = ({ endGame }) => {
               ...messages.winBattleMessage(savedEnemy),
               ...savedEnemy.reward(player),
             ]);
+            isLoopRunning.current = false;
           }}
           fledBattle={() => {
             setRunEncounter(false);
             setEncounter(null);
             setText(messages.fleeSuccessMessage);
+            isLoopRunning.current = false;
           }}
           lostBattle={() => {
             setRunEncounter(false);
             setEncounter(null);
+            isLoopRunning.current = false;
             endGame(false);
           }}
         />
@@ -121,13 +134,20 @@ const Game = ({ endGame }) => {
       <DialogueBox
         lines={text || []}
         onDone={() => {
-          // If the current story segment was text only,
-          // run decision loop again to get actions
+          // After text is done, check if player has won, and for encounters
+          // and actions
           if (player.hasWon) {
-            endGame(true);
+            setTimeout(() => endGame(true), 2000)
           } else if (encounter) {
+            // If encounter is in place, run it after dialogue is finished
             setRunEncounter(true);
-          } else if (!primaryActions || !primaryActions.length) {
+          } else if (primaryActions && primaryActions.length) {
+            // If actions are available, show them, now dialogue is done
+            isLoopRunning.current = false;
+            setShowActions(true);
+          } else {
+            // If no encounter or actions, then just keep running decision
+            // loop to give us more story until we can take action.
             setShowActions(false);
             decisionLoop({
               player,
@@ -138,10 +158,6 @@ const Game = ({ endGame }) => {
               setPrimaryActions,
               setEncounter,
             });
-          } else {
-            // Otherwise, stop game execution and show actions
-            isLoopRunning.current = false;
-            setShowActions(true);
           }
         }}
         resetBox={resetDialogueForNewArea()}
