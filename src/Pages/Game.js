@@ -4,8 +4,7 @@ import MapButton from "../Components/MapButton";
 import DialogueBox from "../Components/DialogueBox";
 import Battle from "../Components/Battle";
 
-import isUseable from "../ExplorationSystem/IsUsable";
-import { utilizeItem } from "../BattleSystem/BattleInventory";
+import { utilizeItem, isUseable } from "../Utilities";
 
 import Player from "../Entities/Player";
 import areas from "../EventSystem/AreasList";

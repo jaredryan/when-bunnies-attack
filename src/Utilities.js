@@ -1,21 +1,27 @@
-// Prints current status of the player
-export const printStatus = (player) => {
-  const minPower = player.attackPower[0] + player.weapon;
-  const maxPower = player.attackPower[1] + player.weapon;
-  return [
-    `Name: ${player.name}`,
-    `HP: ${player.hp} / ${player.maxHp}`,
-    `Attack: ${minPower} - ${maxPower}`,
-    `Inventory:`,
-    ...returnItemsStringArray(player),
-  ];
+import messages from "./Messages";
+
+// Returns true if the attempt is successful, false otherwise.
+export const fleeAttempt = () => {
+  if (Math.random() < 0.5) {
+    return {
+      success: true,
+      text: messages.fleeSuccessMessage,
+    };
+  } else {
+    return {
+      success: false,
+      text: messages.fleeFailureMessage,
+    };
+  }
 };
 
-// Returns a string consisting of the player's current items
-export const returnItemsStringArray = (player) => {
-  if (player.inventory.length === 0) {
-    return ["Empty"];
-  }
+// Checks if the item is usable under the current circumstances
+export const isUseable = (inField, item) =>
+  inField ? item.isUseableInField : item.isUseableInBattle;
 
-  return player.inventory.map((item) => `${item.name}: ${item.description}`);
+// Allows the user to use the item
+export const utilizeItem = (player, enemy, itemIndex) => {
+  const item = player.inventory[itemIndex];
+  player.inventory.splice(itemIndex, 1);
+  return item.use(player, enemy);
 };

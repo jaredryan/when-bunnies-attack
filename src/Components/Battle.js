@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import DialogueBox from "./DialogueBox";
 import messages from "../Messages";
-import fleeAttempt from "../BattleSystem/FleeAttempt";
-import { utilizeItem } from "../BattleSystem/BattleInventory";
-import isUseable from "../ExplorationSystem/IsUsable";
+import { utilizeItem, fleeAttempt, isUseable } from "../Utilities";
 
 import useViewportHeight from "./useViewportHeight";
 
