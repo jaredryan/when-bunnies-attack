@@ -26,7 +26,25 @@ const Battle = ({
   const [isPlayersTurn, setIsPlayersTurn] = useState(true);
   const [turnIsFinished, setTurnIsFinished] = useState(false);
   const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
+  const [inventoryIsClosing, setInventoryIsClosing] = useState(false);
+  const [inventoryIsOpening, setInventoryIsOpening] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
+
+  const closeInventory = () => {
+    setInventoryIsClosing(true)
+    setTimeout(() => {
+      setInventoryIsClosing(false);
+      setInventoryIsOpen(false)
+    }, 500);
+  }
+
+  const openInventory = () => {
+    setInventoryIsOpening(true)
+    setTimeout(() => {
+      setInventoryIsOpening(false);
+      setInventoryIsOpen(true)
+    }, 500);
+  }
 
   useViewportHeight();
 
@@ -40,7 +58,7 @@ const Battle = ({
 
     // Wait 3 seconds for animation ^ to end before starting dialogue
     setTimeout(() => {
-      setText([`You encountered ${enemy.name}!`, messages.battleTurnStartText]);
+      setText([messages.startBattleMessage(enemy.name), messages.battleTurnStartPrompt]);
     }, 3000);
   }, [enemy.name]);
 
@@ -59,7 +77,7 @@ const Battle = ({
       if (player.hasDied) {
         setText([...text, messages.dieInBattleMessage]);
       } else {
-        setText([...text, messages.battleTurnStartText]);
+        setText([...text, messages.battleTurnStartPrompt]);
         setIsPlayersTurn(true);
       }
     }
@@ -144,7 +162,13 @@ const Battle = ({
               Attack
             </button>
             <button
-              onClick={() => setInventoryIsOpen(!inventoryIsOpen)}
+              onClick={() => {
+                if (inventoryIsOpen) {
+                  closeInventory()
+                } else {
+                  openInventory()
+                }
+              }}
               className="secondary"
               disabled={!isPlayersTurn || !turnIsFinished}
             >
@@ -176,7 +200,9 @@ const Battle = ({
           enemy={enemy}
           setText={setText}
           inventoryIsOpen={inventoryIsOpen}
-          setInventoryIsOpen={setInventoryIsOpen}
+          inventoryIsClosing={inventoryIsClosing}
+          inventoryIsOpening={inventoryIsOpening}
+          closeInventory={closeInventory}
           itemUsageConsequences={() => {
             setTurnIsFinished(false);
             setIsPlayersTurn(false);

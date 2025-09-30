@@ -1,4 +1,4 @@
-import { freeExplorationPrompt } from "../Messages";
+import messages from "../Messages";
 
 const decisionLoop = ({
   player,
@@ -19,7 +19,7 @@ const decisionLoop = ({
 
   if ((!text || !text.length) && (!actions || !actions.length) && !encounter) {
     // After scripted story is done, allow exploration to trigger events
-    text = freeExplorationPrompt;
+    text = messages.freeExplorationPrompt;
     actions = [];
 
     for (let eventIndex = 0; eventIndex < area.events.length; eventIndex++) {
@@ -53,22 +53,22 @@ const decisionLoop = ({
 
     if (newAreas.length) {
       const leaveAreaAction = {
-        name: "Leave the Area",
+        name: messages.leaveAreaButton,
         execute: () => {
-          setText([`Where do you want to go?`]);
+          setText(messages.leaveRoomPrompt);
           setPrimaryActions([
             ...newAreas.map((availableArea) => ({
               name: availableArea.name,
               execute: () => {
-                setText([`You went to ${availableArea.name}.`]);
+                setText(messages.travelToRoomMessage(availableArea.name));
                 setPrimaryActions([]);
                 setNextArea(availableArea)
               },
             })),
             {
-              name: "Stay",
+              name: messages.stayInAreaButton,
               execute: () => {
-                setText([`You decided to stay in the area.`]);
+                setText(messages.stayInRoomMessage);
                 setPrimaryActions([]);
               },
               className: "secondary",

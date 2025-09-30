@@ -422,13 +422,18 @@ dialog::backdrop {
   font-weight: 500;
 }
 
-.inventoryPopup {
+.inventoryContainer {
   background-color: white;
   position: absolute;
   z-index: 4;
   width: 100%;
   max-width: 400px;
   bottom: 0;
+}
+
+.inventoryPopup {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -443,7 +448,6 @@ button.closeInventory {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ter;
 }
 
 button.closeInventory svg {
@@ -479,6 +483,8 @@ button.closeInventory svg {
 
 .inventoryList .empty {
   margin-top: 6px;
+  text-align: center;
+  width: 100%;
 }
 
 .inventoryList.battle .item {
@@ -633,11 +639,13 @@ dialog.battleModal::backdrop {
   position: relative;
 }
 
-dialog.battleModal button.secondary {
+dialog.battleModal button.secondary,
+.inventoryPopup button.secondary {
   background-color: var(--secondary);
 }
 
-dialog.battleModal button.secondary:hover {
+dialog.battleModal button.secondary,
+.inventoryPopup button.secondary:hover {
   background-color: var(--secondarylight);
 }
 
@@ -816,12 +824,42 @@ dialog.battleModal h2 {
   overflow: hidden;
 }
 
+.inventoryContainer {
+  overflow: hidden;
+}
+
+.inventoryPopup {
+  animation: slide-up 0.5s forwards;
+}
+
+.inventoryPopup.exiting {
+  animation: slide-down 0.5s forwards;
+}
+
 .primaryActionButton {
   animation: slide-left 0.5s forwards;
 }
 
 .primaryActionButton.exiting {
   animation: slide-right 0.5s forwards;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 @keyframes slide-left {
@@ -839,15 +877,6 @@ dialog.battleModal h2 {
   }
   100% {
     transform: translateX(100%);
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 

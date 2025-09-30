@@ -1,11 +1,17 @@
 export const freeExplorationPrompt = [`What do you want to do?`];
-export const battleTurnStartText = "What will you do?";
+export const leaveAreaButton = "Leave the Area"
+export const leaveRoomPrompt = [`You decided to leave the room. Where do you want to go?`]
+export const travelToRoomMessage = (areaName) => [`You went to ${areaName}.`]
+export const stayInAreaButton = "Stay"
+export const stayInRoomMessage = [`You decided to leave the room. Where do you want to go?`]
+export const startBattleMessage = (enemyName) => `You encountered ${enemyName}!`
+export const battleTurnStartPrompt = "What will you do?";
 
 export const fleeAttemptMessage = [`You tried to run away!`];
 export const fleeSuccessMessage = [`You successfully ran away!`];
 export const fleeFailureMessage = [`You were unable to escape!`];
 
-export const winBattleMessage = (enemy) => [`You defeated ${enemy.name}!`];
+export const winBattleMessage = (enemyName) => [`You defeated ${enemyName}!`];
 export const dieInBattleMessage = [
   `"Ahhh...it hurts."`,
   `Your vision starts to blur, and you lose strength in your limbs.`,
@@ -255,7 +261,13 @@ export const finalBossEncounter = [
 
 const allMessages = {
   freeExplorationPrompt,
-  battleTurnStartText,
+  leaveAreaButton,
+  leaveRoomPrompt,
+  travelToRoomMessage,
+  stayInAreaButton,
+  stayInRoomMessage,
+  startBattleMessage,
+  battleTurnStartPrompt,
   fleeAttemptMessage,
   fleeSuccessMessage,
   fleeFailureMessage,

@@ -3,8 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import MapButton from "../Components/MapButton";
 import DialogueBox from "../Components/DialogueBox";
 import Battle from "../Components/Battle";
-
-import { utilizeItem, isUseable } from "../Utilities";
+import InventoryList from "../Components/InventoryList";
 
 import Player from "../Entities/Player";
 import areas from "../EventSystem/AreasList";
@@ -16,9 +15,27 @@ const Game = ({ endGame }) => {
   // Components
 
   const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
-  const [inventoryIsOpen, setInventoryIsOpen] = useState(true);
+  const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
+  const [inventoryIsClosing, setInventoryIsClosing] = useState(false);
+  const [inventoryIsOpening, setInventoryIsOpening] = useState(false);
   const isLoopRunning = useRef(false);
   const isNewArea = useRef(false);
+
+  const closeInventory = () => {
+    setInventoryIsClosing(true)
+    setTimeout(() => {
+      setInventoryIsClosing(false);
+      setInventoryIsOpen(false)
+    }, 500);
+  }
+
+  const openInventory = () => {
+    setInventoryIsOpening(true)
+    setTimeout(() => {
+      setInventoryIsOpening(false);
+      setInventoryIsOpen(true)
+    }, 500);
+  }
 
   // Initialization
   const player = useMemo(() => new Player(), []);
@@ -106,6 +123,20 @@ const Game = ({ endGame }) => {
 
   return (
     <div className="gameContainer">
+      <InventoryList 
+        player={player}
+        setText={setText}
+        inventoryIsOpen={inventoryIsOpen}
+        inventoryIsOpening={inventoryIsOpening}
+        inventoryIsClosing={inventoryIsClosing}
+        closeInventory={closeInventory}
+        disabled={
+          !showActions ||
+          isNewArea.current ||
+          !primaryActions.length ||
+          !!area.story.length
+        }
+      />
       {runEncounter && (
         <Battle
           player={player}
@@ -116,7 +147,7 @@ const Game = ({ endGame }) => {
             setRunEncounter(false);
             setEncounter(null);
             setText([
-              ...messages.winBattleMessage(savedEnemy),
+              ...messages.winBattleMessage(savedEnemy.name),
               ...savedEnemy.reward(player),
             ]);
             isLoopRunning.current = false;
@@ -211,7 +242,13 @@ const Game = ({ endGame }) => {
               <h3 className="attribute">Inventory:</h3>
               <button
                 className="map"
-                onClick={() => setInventoryIsOpen(!inventoryIsOpen)}
+                onClick={() => {
+                  if (inventoryIsOpen) {
+                    closeInventory()
+                  } else {
+                    openInventory()
+                  }
+                }}
                 aria-label="Toggle inventory"
               >
                 {inventoryIsOpen ? (
@@ -227,43 +264,6 @@ const Game = ({ endGame }) => {
                 )}
               </button>
             </div>
-            {!inventoryIsOpen ? null : (
-              <ul className="inventoryList">
-                {player.inventory.length ? null : (
-                  <p className="empty">Empty</p>
-                )}
-                {player.inventory.map((item, index) => (
-                  <li key={item.name + index} className="item">
-                    <p className="tooltip">
-                      {item.name}
-                      <span className="tooltipText">{item.description}</span>
-                    </p>
-                    <button
-                      onClick={() => {
-                        if (!isUseable(true, item)) {
-                          setText([
-                            `You examine the ${item.name}, then put it back into your inventory.`,
-                          ]);
-                        } else if (player.hp === player.maxHp) {
-                          setText([`You are already at full health.`]);
-                        } else {
-                          setText(utilizeItem(player, null, index));
-                        }
-                      }}
-                      disabled={
-                        !showActions ||
-                        isNewArea.current ||
-                        !primaryActions.length ||
-                        !!area.story.length
-                      }
-                      className="primary"
-                    >
-                      Use
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
           </div>
         </div>
         <div className="right column">
