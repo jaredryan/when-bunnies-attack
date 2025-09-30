@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash/cloneDeep';
+
 import Area from "./Area";
 import Enemy from "../Entities/Enemy";
 import bunny from "../Entities/Enemies/Bunny";
@@ -244,6 +246,6 @@ areas[7].events[0] = areas[7].events[0](areas);
 areas[0].events[2].nextEvent = areas[0].events[2].nextEvent(areas);
 areas[6].events[0].nextEvent = areas[6].events[0].nextEvent(areas);
 
-/*********************************** Add Events ****************************************/
+export const generateAreas = () => cloneDeep(areas)
 
 export default areas;

@@ -5,7 +5,7 @@ import getItems from "../../ExplorationSystem/GetItems";
 const soldierBunny = [
   "Soldier Bunny",
   8,
-  [1, 3],
+  [1, 2],
   function (player) {
     return getItems([firstAidKit, throwingKnife], [], player).text;
   },

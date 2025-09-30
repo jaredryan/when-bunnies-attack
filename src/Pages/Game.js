@@ -8,7 +8,7 @@ import isUseable from "../ExplorationSystem/IsUsable";
 import { utilizeItem } from "../BattleSystem/BattleInventory";
 
 import Player from "../Entities/Player";
-import areas from "../EventSystem/AreasList";
+import { generateAreas } from "../EventSystem/AreasList";
 import decisionLoop from "../ExplorationSystem/DecisionLoop";
 
 import messages from "../Messages";
@@ -23,6 +23,7 @@ const Game = ({ endGame }) => {
 
   // Initialization
   const player = useMemo(() => new Player(), []);
+  const areas = useMemo(() => generateAreas(), []);
 
   const [area, setArea] = useState(areas[0]);
   const [text, setText] = useState([]);
