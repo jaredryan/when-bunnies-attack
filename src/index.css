@@ -118,13 +118,15 @@ button:disabled {
 
 button.gameButton,
 .actionContainer.primary button,
-dialog.dialog button {
+dialog.dialog button,
+button.primary {
   background-color: var(--primary);
 }
 
 button.gameButton:hover,
 .actionContainer.primary button:hover,
-dialog.dialog button:hover {
+dialog.dialog button:hover,
+button.primary:hover {
   background-color: var(--primarylight);
 }
 
@@ -803,6 +805,45 @@ dialog.battleModal h2 {
   }
   100% {
     transform: translateY(-100%);
+    opacity: 1;
+  }
+}
+
+.primaryActionListItem {
+  overflow: hidden;
+}
+
+.primaryActionButton {
+  animation: slide-left 0.5s forwards;
+}
+
+.primaryActionButton.exiting {
+  animation: slide-right 0.5s forwards;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
   }
 }

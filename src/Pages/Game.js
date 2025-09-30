@@ -28,6 +28,7 @@ const Game = ({ endGame }) => {
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
+  const [triggeringAction, setTriggeringAction] = useState(false);
   const [runEncounter, setRunEncounter] = useState(false);
   const [encounter, setEncounter] = useState(null); // { enemy: Enemy, noRetreat: true/false }
 
@@ -62,8 +63,21 @@ const Game = ({ endGame }) => {
     !showActions
       ? null
       : actions.map((action) => (
-          <li key={action.name}>
-            <button onClick={action.execute}>{action.name}</button>
+          <li key={action.name} className="primaryActionListItem">
+            <button
+              onClick={() => {
+                setTriggeringAction(true);
+                setTimeout(() => {
+                  action.execute();
+                  setTriggeringAction(false);
+                }, 500);
+              }}
+              className={`primaryActionButton${
+                triggeringAction ? " exiting" : ""
+              }`}
+            >
+              {action.name}
+            </button>
           </li>
         ));
 
@@ -103,6 +117,8 @@ const Game = ({ endGame }) => {
       });
     }
   }
+
+  console.log({ showActions, primaryActions });
 
   return (
     <div className="gameContainer">
@@ -235,6 +251,12 @@ const Game = ({ endGame }) => {
                           setText(utilizeItem(player, null, index));
                         }
                       }}
+                      disabled={
+                        !showActions ||
+                        !primaryActions.length ||
+                        !!area.story.length
+                      }
+                      className="primary"
                     >
                       Use
                     </button>
