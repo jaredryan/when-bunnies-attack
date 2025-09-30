@@ -191,6 +191,10 @@ dialog button.secondary:hover {
   max-width: 400px;
 }
 
+.titleContainer {
+  text-align: center;
+}
+
 .dialogueContainer {
   height: 200px;
   overflow: scroll;

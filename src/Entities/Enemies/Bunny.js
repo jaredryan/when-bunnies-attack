@@ -3,7 +3,7 @@ import getItems from "../../ExplorationSystem/GetItems.js";
 
 const bunny = [
   "Bunny",
-  6,
+  5,
   [1, 1],
   function (player) {
     return getItems([carrot], [], player).text;

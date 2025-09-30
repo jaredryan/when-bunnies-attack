@@ -13,22 +13,54 @@ export const lostGameMessage = [
   `You were never seen again.`,
 ];
 
-export const wonGameMessage = [
-  `That's it. It's done. You escaped the clutches of those bunnies.`,
-  `...`,
-  `At least you think you did. To be sure, you take a quick look around.`,
-  `There's a...BUNNY!!!!!!!!`,
-  `"DIE BUNNY!!!"`,
-  `Right before you strike, you realize it's just a normal bunny.`,
-  `It looks like it wants food and is asking you for some.`,
-  `"Awww...sorry little guy. I don't have anything."`,
-  `You walk away.`,
-  `As you walk away and disappear out of sight,`,
-  `the bunny slowly approaches the bunny dictator...`,
-  `..`,
-  `.`,
-  `\nCongratulations, you won the game!!! And escaped...probably.\n`,
-];
+export const wonGameMessage = (hasCarrot) => {
+  const beginning = [
+    `That's it. It's done. You escaped the clutches of those bunnies.`,
+    `...`,
+    `At least, you think so. To be sure, you take a quick look around.`,
+    `...`,
+    `Shoot, there's a bunny!`,
+    `"DIE BUNNY!!!"`,
+    `Right before you strike, you realize it's just a normal bunny.`,
+    `As you lower your weapon, the frightened bunny calms down, then after a few seconds, it slowly makes it way over to you.`,
+    `It looks at you expectedly.`,
+  ]
+
+  const middle = hasCarrot ? [
+    "Fine...",
+    `You pull a carrot out of your bag and kneel down.`,
+    "Here you go, little buddy.",
+    "You get up with a small smile.",
+  ] : [
+    `"Awww...sorry little guy. I don't have anything."`,
+  ]
+    
+
+  const end = [
+    `You walk away, towards the exit.`,
+    `Stepping through the brush, you've arrived at a meadow.`,
+    `You see a small hill in the distance, and after a few minutes, you make your way to the top.`,
+    `Surveying the land around, you see a town.`,
+    `"Oh, thank goodness, civilization."`,
+    `Your legs give out from underneath you, out of mixture of relief and exhaustion.`,
+    `After a short break, you gather your strength, get up, and start walking to the town.`,
+    `:)`,
+    `...`,
+    `..`,
+    `.`,
+    `Meanwhile, back in the forest...`,
+    `The friendly bunny you encountered earlier approaches the bunny dictator.`,
+    `...`,
+    `..`,
+    `.`,
+  ]
+
+  return [
+    ...beginning,
+    ...middle,
+    ...end,
+  ]
+};
 
 /********************************* Area Messages ***************************************/
 
@@ -143,11 +175,12 @@ export const eRoom4EntryMessage = [
 
 export const treasury5EntryMessage = [
   `You step into the treasury.`,
-  `"No bunnies. No other talking animals...`,
-  `Finally.`,
-  `I can rest a little bit here."`,
+  `"No bunnies. No other talking animals."`,
+  `...`,
+  `"Finally."`,
+  `"I can rest a little bit here."`,
   `Gold is piled up all around the room. And...carrots.`,
-  `Oh so many carrots.`,
+  `About a third of it all is just carrots.`,
   `"Figures..."`,
 ];
 
@@ -164,22 +197,60 @@ export const neRoom6ExitMessage = [
 export const escape7EntryMessage = [
   `As you step outside of the building, you realize that you are in a forest.`,
   `A bit of an ominous one, at that: no other structures within sight, one path, and dense vegetation.`,
-  `In other words, you're alone; one way in, one way out; and so many hiding spots to be ambushed from.`,
+  `In other words, you're alone; one way in, one way out; and many hiding spots to be ambushed from.`,
   `Turning around, you gaze back at the building you just came out of.`,
   `It looks like a small fortress.`,
-  `"Thank God, I'm out of there. But...uh...now what?`,
-  `Only one way out? This can't possibly go well."`,
+  `"Thank God, I'm out of there. But...uh...now what?"`,
+  `"Only one way out? This can't possibly go well."`,
   `Maybe if you weren't so exhausted, you could try to clear your own path.`,
   `Beyond that, you don't know if or when backup bunnies will arrive might come out from the fortress.`,
   `You just need to get out of there is quick as you can, and hope for the best.`,
-  `"Sigh...doesn't look like I have much choice. Let's get this over with."`,
+  `You quietly curse, then take a deep breath.`,
+  `"Doesn't look like I have much choice. Let's just get this over with."`,
 ];
 
+export const escape7StartRandomEncounterWalk = [
+  `As you walk towards the path, you see a sign saying it is about 3 kilometers to the exit.`,
+  `You look down the path and don't see any enemies.`,
+  `You can only hope that your luck holds.`,
+  `Noticing how thick the vegetation is, you make a mental note that if you do encounter any enemies, you might be able to flee by darting off into the woods.`,
+  `Just don't go too far off, come back onto the path after you lose them, and then you shouldn't lose your way.`,
+  `"All right, then."`,
+  `You start walking.`,
+]
+
+export const escape7DistanceWalked = (distanceWalked) => ([
+  `You have walked ${distanceWalked} / 3 kilometers.`
+])
+
+export const escape7EndRandomEncounterWalk = (areaName) => ([
+  `You made it all the way through, and the path seems clear.`,
+  `If you wish to continue or go back, no enemies will attack you.`,
+  `The ${areaName} is now available.`,
+])
+
+
 export const forestExit8EntryMessage = [
-  `As you walk into a small clearing in the forest and into the clearing, you see another bunny and some sort of machine.`,
+  `As you walk into a small clearing in the forest, you see another bunny and some sort of machine.`,
   `Past the bunny, you can see the rays of the morning sun.`,
   `Either there's another clearing past this one, or you're finally at the forest's edge.`,
   `The bunny senses your presence and turns around.`,
+];
+
+export const finalBossEncounter = [
+  `Bunny: "I see. You've woken up."`,
+  `"You probably don't understand what's going on."`,
+  `"This is our headquarters."`,
+  `"Our kind has been experimented on by humans for years."`,
+  `"What humans didn't know is how intelligent we bunnies were."`,
+  `"One of our kind, who was experimented on — she escaped."`,
+  `"Vowing that our times of abuse were over, she established these headquarters as a place of protection and research."`,
+  `...`,
+  `Bunny: "That being said, if you're here, that means you must have defeated all of my friends inside."`,
+  `"That means I'll have to start all over."`,
+  `"But for her, our founder — and my mother — I will see her dream through, at any cost."`,
+  `"And I will annihilate all who stand in my way!!!"`,
+  `The bunny dictator hops into his small tank.`,
 ];
 
 const allMessages = {
@@ -187,6 +258,7 @@ const allMessages = {
   fleeAttemptMessage,
   fleeSuccessMessage,
   fleeFailureMessage,
+  winBattleMessage,
   lostGameMessage,
   wonGameMessage,
   swRoom0EntryMessage1,
@@ -206,8 +278,11 @@ const allMessages = {
   neRoom6EntryMessage,
   neRoom6ExitMessage,
   escape7EntryMessage,
+  escape7StartRandomEncounterWalk,
+  escape7DistanceWalked,
+  escape7EndRandomEncounterWalk,
   forestExit8EntryMessage,
-  winBattleMessage,
+  finalBossEncounter,
 };
 
 export default allMessages;

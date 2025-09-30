@@ -176,9 +176,10 @@ export const lootRoom5 = new Event(
   `Loot the treasury`,
   getItems,
   [
-    [carrot, carrot],
+    [carrot, carrot, carrot],
     [
-      `At first, you were very greedy. But then you realized you could only take two carrots with you.`,
+      `At you started sifting through the treasury, you realized that gold would just weigh you down.`, 
+      `You find a few small coins, and grab a few carrots for the road.`,
     ],
   ],
   true,
@@ -186,9 +187,12 @@ export const lootRoom5 = new Event(
 );
 
 export const heal5 = new Event(
-  `Eat as much as possible`,
+  `Eat, eat, EAT`,
   heal,
-  [[`You ate like a champ and recovered all your health.`]],
+  [[
+    `You ate like a champ and recovered all your health.`,
+    `You're starting to get a little sick of carrots, though.`,
+  ]],
   false,
   {},
 );
@@ -249,7 +253,9 @@ export const checkRoom8 = new Event(
   displayMessage,
   [
     [
-      `You look around. You see a militaristic bunny and a large machine...a tank, maybe? Yikes. If you want to escape, you'll have to fight it.`,
+      `You look around. You see a militaristic bunny and a mid-sized machine...it looks like a tank, but bunny-sized, around 3 feet tall.`,
+      `It's watching you carefully, and standing between you and the path out.`,
+      `If you want to escape the forest, you'll have to fight it.`,
     ],
   ],
   true,

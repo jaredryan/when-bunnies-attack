@@ -1,27 +1,11 @@
 import Enemy from "../Entities/Enemy";
 import finalBoss from "../Entities/Enemies/FinalBoss";
+import messages from '../Messages'
 
 // The Final Boss Special Event
 const finalEncounter = () => {
-  const message = [
-    `Bunny Dictator: "Hmmm...?`,
-    `I see. You've woken up. Welcome.`,
-    `You probably don't understand what's going on.`,
-    `This is our headquarters.`,
-    `Our kind has been experimented on by humans for years.`,
-    `What humans didn't know is how intelligent we bunnies were.`,
-    `One of our kind, who was formerly experimented on; she escaped.`,
-    `She vowed that our times of abuse were over.`,
-    `She established these headquarters as a place of protection and research."`,
-    `..."But I see that you killed my closest comrades.`,
-    `There is nothing left for me here, now.`,
-    `But for her, our founder — and my mother —`,
-    `I will see that her dream continues."`,
-    `And annihilate all who stand in my way!!!"`,
-  ];
-
   return {
-    text: message,
+    text: messages.finalBossEncounter,
     encounter: {
       enemy: new Enemy(...finalBoss),
       noRetreat: true,
