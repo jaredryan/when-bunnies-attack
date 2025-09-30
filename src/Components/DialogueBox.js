@@ -65,8 +65,8 @@ export const Typewriter = ({
   let textToDisplay = history;
   if (displayed) textToDisplay = [...textToDisplay, displayed];
 
-  return textToDisplay.map((content) => (
-    <p key={content} className="gameLog">
+  return textToDisplay.map((content, index) => (
+    <p key={content + index} className="gameLog">
       {content}
     </p>
   ));

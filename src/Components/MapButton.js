@@ -4,7 +4,7 @@ import Modal from "./Modal";
 
 //                   FE (8)
 //                   |
-// L (2)    NE (6) - FW (7) - FE (8)
+// L (2)    NE (6) - FW (7)
 // |        |
 // W (1) -  E (4)  - TR (5)
 // |        |
@@ -155,7 +155,7 @@ const generateMap = (currentArea, areas) => {
   return map;
 };
 
-const MapButton = (props) => (
+const MapButton = (props) => console.log({ areas: props.areas }) || (
   <>
     <Modal open={props.open} onClose={props.onCancel} className="mapModal">
       {generateMap(props.area, props.areas)}

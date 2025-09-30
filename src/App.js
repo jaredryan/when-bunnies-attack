@@ -20,6 +20,28 @@ const App = () => {
     setHasWon(null);
   };
 
+  // State management is slightly off in this game, refreshing the browser
+  // is the easiest solution to restart the game. Use params to tell the
+  // site to immediately start the game after the refresh.
+  const restartGame = () => {
+    window.location.reload();
+    window.location.href = `${window.location.pathname}?restart=true`;
+  };
+
+  // If restarting the game, restart param will be set on url, so you know
+  // to start the game immediately after refresh, then clear the param
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const restart = searchParams.get('restart');
+
+    if (restart === 'true') {
+      const currentUrl = new URL(window.location.href);
+      const newUrlWithoutParams = currentUrl.origin + currentUrl.pathname
+      window.history.replaceState({}, '', newUrlWithoutParams);
+      startGame()
+    }
+  }, []);
+
   const endGame = (hasWon) => {
     setGameInProgress(false);
     setHasWon(hasWon);
@@ -28,8 +50,8 @@ const App = () => {
   let page = <Title startGame={startGame} />;
 
   if (gameInProgress) page = <Game endGame={endGame} />;
-  else if (hasWon === false) page = <Loser startGame={startGame} />;
-  else if (hasWon === true) page = <Winner startGame={startGame} />;
+  else if (hasWon === false) page = <Loser startGame={restartGame} />;
+  else if (hasWon === true) page = <Winner startGame={restartGame} />;
 
   return (
     <div
