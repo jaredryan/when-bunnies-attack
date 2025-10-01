@@ -78,7 +78,7 @@ export const swRoom0EntryMessage1 = [
   `As you wake up, you look around, and see that you are in a drab room.`,
   `Oh so very drab.`,
   `"Clearly, the designer of this room watched a lot of HGTV."`,
-  `So very grey. With a splash of sage green on the bedstand. It's borderline sterile.`,
+  `So very grey. And beige. With a splash of sage green on the bedstand. It's borderline sterile.`,
   `It's just as off-putting as the headache you've got, which just reminded you that it's here to stay.`,
   `"Well, this sucks. And uh...I don't exactly remember how I got here, and I don't know this room."`,
   `Unsure if you just partied too hard last night or got kidnapped, you scratch your head.`,

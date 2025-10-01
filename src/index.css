@@ -307,7 +307,7 @@ dialog {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  max-height: min(calc(100vh - 48px * 3), 550px);
+  max-height: min(calc(var(--vh, 1vh) * 100 - 48px * 2), 550px);
 }
 
 dialog.open {
@@ -405,6 +405,36 @@ dialog::backdrop {
   gap: 12px;
 }
 
+.mapLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mapLegend li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.mapLegend li div {
+  height: 18px;
+  width: 18px;
+}
+
+.mapLegend li div.primary {
+  background-color: var(--primary);
+}
+
+.mapLegend li div.secondary {
+  background-color: var(--secondary);
+}
+
+.mapLegend li div.tertiary {
+  background-color: var(--tertiary);
+}
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -445,6 +475,10 @@ dialog::backdrop {
 
 .room.active {
   background-color: var(--primarylight);
+}
+
+.room.visible {
+  background-color: var(--tertiary);
 }
 
 .connector {
@@ -568,7 +602,9 @@ dialog::backdrop {
   width: 100%;
   max-width: 400px;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1164,7 +1200,8 @@ dialog.battleModal h2 {
   100% {
     -webkit-transform: scale(0);
             transform: scale(0);
-    opacity: 0;
+    opacity: 1;
+    visibility: hidden;
   }
 }
 
@@ -1182,7 +1219,8 @@ dialog.battleModal h2 {
   100% {
     -webkit-transform: scale(0);
             transform: scale(0);
-    opacity: 0;
+    opacity: 1;
+    visibility: hidden;
   }
 }
 

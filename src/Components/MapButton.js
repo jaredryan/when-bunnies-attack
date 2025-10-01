@@ -21,18 +21,36 @@ const mapIcon = (
   </svg>
 );
 
+const generateSetOfVisitableAreas = (areas) => {
+  const visitableAreas = new Set()
+  for (const area of areas) {
+    if (area.visited) {
+      for (const index of area.connectedAreas) {
+        visitableAreas.add(index)
+      }
+    }
+  }
+
+  return visitableAreas
+}
+
 const generateMap = (currentArea, areas) => {
+  const visitableAreas = generateSetOfVisitableAreas(areas)
+
   const generateRoom = (area) => {
     const classNames = ["room"];
     let content = "";
-
-    if (!area.visited) {
-      classNames.push("placeholder");
-    } else {
+    
+    if (area.visited) {
       content = area.mapName;
       if (currentArea.name === area.name) {
         classNames.push("active");
       }
+    } else if (visitableAreas.has(area.number)) {
+      content = area.mapName;
+      classNames.push("visible");
+    } else {
+      classNames.push("placeholder");
     }
 
     return (
@@ -158,6 +176,11 @@ const generateMap = (currentArea, areas) => {
 const MapButton = (props) => (
   <>
     <Modal open={props.open} onClose={props.onCancel} className="mapModal">
+      <ul className="mapLegend">
+        <li><div className="primary" /><p>You are here</p></li>
+        <li><div className="secondary" /><p>Visited</p></li>
+        <li><div className="tertiary" /><p>Available</p></li>
+      </ul>
       {generateMap(props.area, props.areas)}
       <div className="buttonContainer">
         <button autoFocus onClick={props.onCancel}>
