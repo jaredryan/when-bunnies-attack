@@ -256,7 +256,7 @@ const Game = ({ endGame }) => {
               />
             </div>
             <div className="attributeRow">
-              <h3 className="attribute">Inventory:</h3>
+              <h3 className="attribute">Items:</h3>
               <button
                 className="map"
                 onClick={() => {
@@ -285,7 +285,7 @@ const Game = ({ endGame }) => {
         </div>
         <div className="right column">
           <div className="actionMenu">
-            <h3>Actions:</h3>
+            <div className="headerContainer"><h3>Actions:</h3></div>
             <ul className="actionContainer primary">
               {mapActions(primaryActions)}
             </ul>

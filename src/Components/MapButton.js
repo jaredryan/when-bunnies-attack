@@ -237,7 +237,6 @@ const MapButton = ({
     <>
       <Modal open={open} onClose={cancelMap} className="mapModal">
         {!isChoosingNextArea ? null : <h3>{messages.leaveRoomMapPrompt}</h3>}
-        
         {generateMap({ currentArea, areas, setNextArea, isChoosingNextArea, cancelMap })}
         <div className="buttonContainer">
           <button

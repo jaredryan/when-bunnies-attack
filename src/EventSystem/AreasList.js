@@ -31,7 +31,7 @@ export const wRoom1 = new Area("West Room", "W", [0, 4], 1, events.wRoom1, [
         name: messages.wRoom1EntryAnswerResponsePairs[0].answer,
         execute: () => {
           setText([
-            messages.wRoom1EntryAnswerResponsePairs[0].answer,
+            `You: ${messages.wRoom1EntryAnswerResponsePairs[0].answer}`,
             ...messages.wRoom1EntryAnswerResponsePairs[0].response,
           ]);
           setPrimaryActions([]);
@@ -41,7 +41,7 @@ export const wRoom1 = new Area("West Room", "W", [0, 4], 1, events.wRoom1, [
         name: messages.wRoom1EntryAnswerResponsePairs[1].answer,
         execute: () => {
           setText([
-            messages.wRoom1EntryAnswerResponsePairs[1].answer,
+            `You: ${messages.wRoom1EntryAnswerResponsePairs[1].answer}`,
             ...messages.wRoom1EntryAnswerResponsePairs[1].response,
           ]);
           setPrimaryActions([]);
@@ -51,7 +51,7 @@ export const wRoom1 = new Area("West Room", "W", [0, 4], 1, events.wRoom1, [
         name: messages.wRoom1EntryAnswerResponsePairs[2].answer,
         execute: () => {
           setText([
-            messages.wRoom1EntryAnswerResponsePairs[2].answer,
+            `You: ${messages.wRoom1EntryAnswerResponsePairs[2].answer}`,
             ...messages.wRoom1EntryAnswerResponsePairs[2].response,
           ]);
           setPrimaryActions([]);
@@ -112,14 +112,14 @@ export const seRoom3 = new Area(
         {
           name: messages.seRoom3EntryAnswerResponsePairs[0].answer,
           execute: () => {
-            setText([messages.seRoom3EntryAnswerResponsePairs[0].answer]);
+            setText([`You: ${messages.seRoom3EntryAnswerResponsePairs[0].answer}`]);
             setPrimaryActions([]);
           },
         },
         {
           name: messages.seRoom3EntryAnswerResponsePairs[1].answer,
           execute: () => {
-            setText([messages.seRoom3EntryAnswerResponsePairs[1].answer]);
+            setText([`You: ${messages.seRoom3EntryAnswerResponsePairs[1].answer}`]);
             setPrimaryActions([]);
           },
         },

@@ -118,27 +118,57 @@ button:disabled {
   cursor: default;
 }
 
+.actionMenu .headerContainer {
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionContainer.primary button {
+  height: 32px;
+  /* border-bottom: 1px solid var(--primarylight);  */
+  background-color: transparent;
+  /* border-radius: 10px; */
+}
+
+.actionContainer.primary button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 10px);
+  height: 1px;
+  background-color: var(--primarylight);
+}
+
+
+.actionContainer.primary li:last-child button {
+  /* border-bottom: none; */
+}
+
+.actionContainer.primary button:hover {
+  background-color: var(--primarylight);
+}
+
 button.gameButton,
-.actionContainer.primary button,
 dialog.dialog button,
 button.primary {
   background-color: var(--primary);
 }
 
 button.gameButton:hover,
-.actionContainer.primary button:hover,
 dialog.dialog button:hover,
 button.primary:hover {
   background-color: var(--primarylight);
 }
 
-button.map,
-.actionContainer .primaryActionButton.secondary {
+button.map {
   background-color: var(--secondary);
 }
 
-button.map:hover,
-.actionContainer .primaryActionButton.secondary:hover {
+button.map:hover {
   background-color: var(--secondarylight);
 }
 
@@ -249,17 +279,13 @@ dialog button.secondary:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  gap: 8px;
-  /* height: 158px; if not accounting for Leave the Area */
-  height: 185px; /* accounting for leaving the area, 5 thin slots in East Room */
+  gap: 12px;
+  min-height: 175px;
 }
 
 button.map {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   margin: 0;
   border-radius: 50%;
@@ -276,8 +302,8 @@ button.map {
 }
 
 button.map svg {
-  width: 21px;
-  height: 21px;
+  width: 22px;
+  height: 22px;
 }
 
 .actionContainer > li,
@@ -550,7 +576,7 @@ dialog::backdrop {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  gap: 48px;
+  gap: 32px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -564,20 +590,19 @@ dialog::backdrop {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 24px;
-  width: 50%;
 }
 
 .left {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  min-width: 120px;
+  width: 120px;
 }
 
 .right {
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  flex-grow: 1;
+  max-width: 200px;
 }
 
 .status {
@@ -592,7 +617,7 @@ dialog::backdrop {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 100%;
-  gap: 8px;
+  gap: 12px;
 }
 
 .attributeRow {
@@ -610,7 +635,7 @@ dialog::backdrop {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  height: 30px;
+  height: 32px;
 }
 
 .attributeRow .value {
@@ -790,13 +815,7 @@ button.closeInventory svg {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-}
-
-.actionMenu h3 {
-  margin-bottom: 20px;
+  gap: 12px;
 }
 
 .tooltip {
@@ -966,6 +985,7 @@ dialog.battleModal button.tertiary:hover {
           flex-direction: column;
   gap: 24px;
   width: 100%;
+  max-width: 180px;
 }
 
 .attributes {
@@ -986,7 +1006,7 @@ dialog.battleModal button.tertiary:hover {
 
 .enemyStatus .attributeRow,
 .playerStatus .attributeRow {
-  width: 176px;
+  width: 120px;
 }
 
 dialog.battleModal h2 {
@@ -1044,7 +1064,7 @@ dialog.battleModal h2 {
 }
 
 .battleMessage .dialogueContainer {
-  height: 150px;
+  height: 142px;
 }
 
 .battleModalContentOverlay {
@@ -1352,6 +1372,7 @@ dialog.battleModal h2 {
 }
 
 .primaryActionButton {
+  text-align: left;
   -webkit-animation: slide-left 0.5s forwards;
           animation: slide-left 0.5s forwards;
 }

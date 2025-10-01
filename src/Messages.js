@@ -109,13 +109,13 @@ export const wRoom1EntryQuestion = [
 
 export const wRoom1EntryAnswerResponsePairs = [
   {
-    answer: `You: "Yes."`,
+    answer: `"Yes."`,
     response: [
       `Bunny: "That's great! Let me lead you back to your room so you can finish your recovery."`,
     ],
   },
   {
-    answer: `You: "No."`,
+    answer: `"No."`,
     response: [
       `Bunny: "Uh oh! Let me lead you back to your room so you can finish your recovery."`,
     ],
@@ -161,11 +161,11 @@ export const seRoom3EntryMessage2 = [
 
 export const seRoom3EntryAnswerResponsePairs = [
   {
-    answer: `You: "I'm not sure. Where am I?"`,
+    answer: `"I'm not sure. Where am I?"`,
     response: seRoom3EntryMessage2,
   },
   {
-    answer: `You: "I want to keep wondering around."`,
+    answer: `"I want to keep wondering around."`,
     response: seRoom3EntryMessage2,
   },
 ];
