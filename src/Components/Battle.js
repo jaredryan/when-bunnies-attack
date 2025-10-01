@@ -63,18 +63,9 @@ const Battle = ({
     }, 3000);
   }, [enemy.name]);
 
-  // You win!
-  useEffect(() => {
-    if (enemy.hasDied) {
-      setIsPlayersTurn(true);
-      setTurnIsFinished(false);
-      setText(messages.winInBattleMessage(enemy.name));
-    }
-  }, [enemy.hasDied, enemy.name]);
-
   // Enemy turn
   useEffect(() => {
-    if (!isPlayersTurn && turnIsFinished) {
+    if (!isPlayersTurn && turnIsFinished && !enemy.hasDied) {
       setTurnIsFinished(false);
       const text = enemy.attack(player);
       if (player.hasDied) {
@@ -129,6 +120,7 @@ const Battle = ({
                 setBattleIsOver(true)
                 setTimeout(() => lostBattle(), 2000);
               } else if (enemy.hasDied) {
+                setText(messages.winInBattleMessage(enemy.name));
                 setBattleIsOver(true)
                 setTimeout(() => wonBattle(), 2000);
               }
