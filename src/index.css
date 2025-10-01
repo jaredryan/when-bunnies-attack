@@ -307,7 +307,7 @@ dialog {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  max-height: min(calc(var(--vh, 1vh) * 100 - 48px * 2), 550px);
+  max-height: calc(var(--vh, 1vh) * 100 - 48px * 2);
 }
 
 dialog.open {
@@ -403,9 +403,13 @@ dialog::backdrop {
       -ms-flex-align: start;
           align-items: flex-start;
   gap: 12px;
+  position: relative;
 }
 
 .mapLegend {
+  left: 0;
+  top: 0;
+  position: absolute;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -457,7 +461,7 @@ dialog::backdrop {
   height: 50px !important;
   padding: 16px;
   border-radius: 50%;
-  background-color: var(--secondarylight);
+  background-color: var(--secondary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -467,18 +471,37 @@ dialog::backdrop {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transition: background-color 0.5s;
+       -o-transition: background-color 0.5s;
+          transition: background-color 0.5s;
 }
 
-.row.verticalConnectors .room {
-  height: 25px !important;
+.room.interactive {
+  cursor: pointer;
 }
 
 .room.active {
-  background-color: var(--primarylight);
+  background-color: var(--primary);
 }
 
 .room.visible {
   background-color: var(--tertiary);
+}
+
+.room.interactive:hover {
+  background-color: var(--secondarylight);
+}
+
+.room.active.interactive:hover {
+  background-color: var(--primarylight);
+}
+
+.room.visible.interactive:hover {
+  background-color: var(--backgroundsecondary);
+}
+
+.row.verticalConnectors .room {
+  height: 25px !important;
 }
 
 .connector {
@@ -908,13 +931,19 @@ dialog.battleModal::backdrop {
   position: relative;
 }
 
-dialog.battleModal button.secondary,
-.inventoryPopup button.secondary {
-  background-color: var(--secondary);
+.mapModal h3 {
+  margin-bottom: 24px;
 }
 
 dialog.battleModal button.secondary,
-.inventoryPopup button.secondary:hover {
+.inventoryPopup button.secondary,
+.mapModal button.secondary {
+  background-color: var(--secondary);
+}
+
+dialog.battleModal button.secondary:hover,
+.inventoryPopup button.secondary:hover,
+.mapModal button.secondary:hover {
   background-color: var(--secondarylight);
 }
 

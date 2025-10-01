@@ -4,10 +4,10 @@ const decisionLoop = ({
   player,
   area,
   areas,
-  setNextArea,
   setText,
   setPrimaryActions,
   setEncounter,
+  setIsChoosingNextArea,
 }) => {
   // Let the story control text and actions until it's done
   let { text, actions, encounter } = area.runStory({
@@ -56,24 +56,8 @@ const decisionLoop = ({
         name: messages.leaveAreaButton,
         execute: () => {
           setText(messages.leaveRoomPrompt);
-          setPrimaryActions([
-            ...newAreas.map((availableArea) => ({
-              name: availableArea.name,
-              execute: () => {
-                setText(messages.travelToRoomMessage(availableArea.name));
-                setPrimaryActions([]);
-                setNextArea(availableArea)
-              },
-            })),
-            {
-              name: messages.stayInAreaButton,
-              execute: () => {
-                setText(messages.stayInRoomMessage);
-                setPrimaryActions([])
-              },
-              className: "secondary",
-            },
-          ]);
+          setPrimaryActions([])
+          setIsChoosingNextArea(true);
         },
       };
 

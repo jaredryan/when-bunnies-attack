@@ -1,5 +1,7 @@
 import Modal from "./Modal";
 
+import messages from "../Messages";
+
 // MAP
 
 //                   FE (8)
@@ -22,36 +24,65 @@ const mapIcon = (
 );
 
 const generateSetOfVisitableAreas = (areas) => {
-  const visitableAreas = new Set()
+  const visitableAreas = new Set();
   for (const area of areas) {
     if (area.visited) {
+      visitableAreas.add(area.number);
       for (const index of area.connectedAreas) {
-        visitableAreas.add(index)
+        visitableAreas.add(index);
       }
     }
   }
 
-  return visitableAreas
-}
+  return visitableAreas;
+};
 
-const generateMap = (currentArea, areas) => {
-  const visitableAreas = generateSetOfVisitableAreas(areas)
+const generateMap = ({
+  currentArea,
+  areas,
+  setNextArea,
+  isChoosingNextArea,
+  cancelMap,
+}) => {
+  const visitableAreas = generateSetOfVisitableAreas(areas);
 
   const generateRoom = (area) => {
     const classNames = ["room"];
     let content = "";
-    
+
     if (area.visited) {
       content = area.mapName;
       if (currentArea.name === area.name) {
         classNames.push("active");
       }
+      if (isChoosingNextArea) classNames.push("interactive");
     } else if (visitableAreas.has(area.number)) {
       content = area.mapName;
       classNames.push("visible");
+      if (isChoosingNextArea) classNames.push("interactive");
     } else {
       classNames.push("placeholder");
     }
+
+    if (classNames.includes("interactive")) {
+      return (
+        <div
+          role="button"
+          tabIndex="0"
+          className={classNames.join(" ")}
+          onClick={() => {
+            if (currentArea.name === area.name) {
+              cancelMap()
+            } else {
+              setNextArea(area)
+            }
+          }}
+        >
+          <p>{content}</p>
+        </div>
+      );
+    }
+    
 
     return (
       <div className={classNames.join(" ")}>
@@ -64,7 +95,7 @@ const generateMap = (currentArea, areas) => {
     areaIndex,
     connectedIndex,
     type,
-    checkInverse = false,
+    checkInverse = false
   ) => {
     let area = areas[areaIndex];
     let connectionIndex = connectedIndex;
@@ -90,6 +121,20 @@ const generateMap = (currentArea, areas) => {
 
   const map = (
     <div className="map">
+      <ul className="mapLegend">
+        <li>
+          <div className="primary" />
+          <p>You are here</p>
+        </li>
+        <li>
+          <div className="secondary" />
+          <p>Visited</p>
+        </li>
+        <li>
+          <div className="tertiary" />
+          <p>Available</p>
+        </li>
+      </ul>
       <div className="exit row">
         <div className="room placeholder" />
         <div className="horizontal connector placeholder" />
@@ -133,7 +178,7 @@ const generateMap = (currentArea, areas) => {
             1,
             4,
             "horizontal",
-            true,
+            true
           )}
         />
         {generateRoom(areas[4])}
@@ -152,7 +197,7 @@ const generateMap = (currentArea, areas) => {
             3,
             4,
             "vertical",
-            true,
+            true
           )}
         />
         <div className="vertical connector placeholder" />
@@ -173,25 +218,41 @@ const generateMap = (currentArea, areas) => {
   return map;
 };
 
-const MapButton = (props) => (
-  <>
-    <Modal open={props.open} onClose={props.onCancel} className="mapModal">
-      <ul className="mapLegend">
-        <li><div className="primary" /><p>You are here</p></li>
-        <li><div className="secondary" /><p>Visited</p></li>
-        <li><div className="tertiary" /><p>Available</p></li>
-      </ul>
-      {generateMap(props.area, props.areas)}
-      <div className="buttonContainer">
-        <button autoFocus onClick={props.onCancel}>
-          Close
-        </button>
-      </div>
-    </Modal>
-    <button className="map" onClick={props.openModal} aria-label="Map">
-      {mapIcon}
-    </button>
-  </>
-);
+const MapButton = ({
+  open,
+  isChoosingNextArea,
+  stayInArea,
+  setNextArea,
+  openModal,
+  onCancel,
+  areas,
+  currentArea,
+}) => {
+  const cancelMap = () => {
+    onCancel();
+    if (isChoosingNextArea) stayInArea();
+  };
+
+  return (
+    <>
+      <Modal open={open} onClose={cancelMap} className="mapModal">
+        {!isChoosingNextArea ? null : <h3>{messages.leaveRoomMapPrompt}</h3>}
+        
+        {generateMap({ currentArea, areas, setNextArea, isChoosingNextArea, cancelMap })}
+        <div className="buttonContainer">
+          <button
+            onClick={cancelMap}
+            className="primary"
+          >
+            {isChoosingNextArea ? "Stay" : "Close"}
+          </button>
+        </div>
+      </Modal>
+      <button className="map" onClick={openModal} aria-label="Map">
+        {mapIcon}
+      </button>
+    </>
+  );
+};
 
 export default MapButton;

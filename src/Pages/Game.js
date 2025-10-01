@@ -15,6 +15,7 @@ const Game = ({ endGame }) => {
   // Components
 
   const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
+  const [isChoosingNextArea, setIsChoosingNextArea] = useState(false);
   const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
   const [inventoryIsClosing, setInventoryIsClosing] = useState(false);
   const [inventoryIsOpening, setInventoryIsOpening] = useState(false);
@@ -111,15 +112,13 @@ const Game = ({ endGame }) => {
         player,
         area,
         areas,
-        setNextArea: (area) => setArea(area),
         setText,
         setPrimaryActions,
         setEncounter,
+        setIsChoosingNextArea,
       });
     }
   }
-
-  console.log({ showActions, primaryActions });
 
   return (
     <div className={`gameContainer pagePadding${runEncounter ? ' fadeToBackground' : ' fadeIn'}`}>
@@ -188,14 +187,16 @@ const Game = ({ endGame }) => {
               player,
               area,
               areas,
-              setNextArea: (area) => setArea(area),
               setText,
               setPrimaryActions,
               setEncounter,
+              setIsChoosingNextArea,
             });
           } else if (encounter) {
             // If encounter is in place, run it after dialogue is finished
             setRunEncounter(true);
+          } else if (isChoosingNextArea) {
+            setMapModalIsOpen(true)
           } else if (primaryActions && primaryActions.length) {
             // If actions are available, show them, now dialogue is done
             isLoopRunning.current = false;
@@ -208,10 +209,10 @@ const Game = ({ endGame }) => {
               player,
               area,
               areas,
-              setNextArea: (area) => setArea(area),
               setText,
               setPrimaryActions,
               setEncounter,
+              setIsChoosingNextArea,
             });
           }
         }}
@@ -237,10 +238,21 @@ const Game = ({ endGame }) => {
               <h3 className="attribute">Map:</h3>
               <MapButton
                 open={mapModalIsOpen}
+                isChoosingNextArea={isChoosingNextArea}
+                stayInArea={() => {
+                  setIsChoosingNextArea(false)
+                  setText(messages.stayInRoomMessage)
+                }}
+                setNextArea={(area) => {
+                  setIsChoosingNextArea(false)
+                  setMapModalIsOpen(false)
+                  setText(messages.travelToRoomMessage(area.name))
+                  setArea(area)
+                }}
                 openModal={() => setMapModalIsOpen(true)}
                 onCancel={() => setMapModalIsOpen(false)}
                 areas={areas}
-                area={area}
+                currentArea={area}
               />
             </div>
             <div className="attributeRow">

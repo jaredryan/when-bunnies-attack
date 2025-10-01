@@ -1,6 +1,7 @@
 export const freeExplorationPrompt = [`What do you want to do?`];
 export const leaveAreaButton = "Leave the Area"
-export const leaveRoomPrompt = [`You decided to leave the area. Where do you want to go?`]
+export const leaveRoomPrompt = [`You decided to leave the area.`]
+export const leaveRoomMapPrompt = `Click on the area you want to go.`
 export const travelToRoomMessage = (areaName) => [`You went to ${areaName}.`]
 export const stayInAreaButton = "Stay"
 export const stayInRoomMessage = [`You changed your mind and stayed in the area.`]
@@ -264,6 +265,7 @@ const allMessages = {
   freeExplorationPrompt,
   leaveAreaButton,
   leaveRoomPrompt,
+  leaveRoomMapPrompt,
   travelToRoomMessage,
   stayInAreaButton,
   stayInRoomMessage,
