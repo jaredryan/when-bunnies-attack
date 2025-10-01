@@ -101,6 +101,8 @@ button {
   font-weight: 400;
   padding: 6px 18px;
   font-size: 18px;
+  -webkit-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
   transition: background-color 0.5s;
   min-width: 115px;
 }
@@ -179,10 +181,19 @@ dialog button.secondary:hover {
 
 .pageContainer {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .pagePadding {
@@ -196,8 +207,12 @@ dialog button.secondary:hover {
 
 .pageContainer > .gameContainer, .battleModalContent {
   max-width: calc(400px + 96px);
-  flex-grow: 1;
-  justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .titleContainer {
@@ -212,17 +227,31 @@ dialog button.secondary:hover {
 }
 
 .dialogueOptions {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   gap: 16px;
   margin-top: 24px;
 }
 
 .actionContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   gap: 8px;
   /* height: 158px; if not accounting for Leave the Area */
   height: 185px; /* accounting for leaving the area, 5 thin slots in East Room */
@@ -231,18 +260,24 @@ dialog button.secondary:hover {
 button.map {
   width: 30px;
   height: 30px;
-  padding: 4px;
+  padding: 0;
   margin: 0;
   border-radius: 50%;
   min-width: unset;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 button.map svg {
-  width: fit-content;
-  height: fit-content;
+  width: 21px;
+  height: 21px;
 }
 
 .actionContainer > li,
@@ -267,16 +302,28 @@ dialog {
   padding: 24px;
   border: none;
   border-radius: 6px;
-  box-shadow: 0px 4px 10px -4px black;
+  -webkit-box-shadow: 0px 4px 10px -4px black;
+          box-shadow: 0px 4px 10px -4px black;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   max-height: min(calc(100vh - 48px * 3), 550px);
 }
 
 dialog.open {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 dialog button.xButton {
@@ -290,47 +337,88 @@ dialog button.xButton {
   height: 20px;
   width: 20px;
   min-width: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 dialog .scrollableHistory {
   overflow: scroll;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 dialog button {
   margin: 32px auto 0;
 }
 
+dialog::-webkit-backdrop {
+  background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+
 dialog::backdrop {
   background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
-  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
 }
 
 .buttonContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   gap: 0;
   width: 100%;
-  justify-content: space-around;
-  align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .map {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   gap: 12px;
 }
 
 .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 12px;
 }
 
@@ -340,9 +428,15 @@ dialog::backdrop {
   padding: 16px;
   border-radius: 50%;
   background-color: var(--secondarylight);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .row.verticalConnectors .room {
@@ -380,47 +474,84 @@ dialog::backdrop {
 }
 
 .gameContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 48px;
   position: relative;
 }
 
 .twoColumns {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   gap: 48px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .column {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 24px;
   width: 50%;
 }
 
 .left {
-  align-items: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .right {
-  align-items: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .status {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   width: 100%;
   gap: 8px;
 }
 
 .attributeRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   height: 30px;
 }
@@ -437,9 +568,16 @@ dialog::backdrop {
   width: 100%;
   max-width: 400px;
   bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .inventoryPopup {
@@ -449,11 +587,19 @@ dialog::backdrop {
   position: relative;
   width: calc(100% - 2px * 2);
   height: calc(100% - 2px * 2);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 12px;
-  box-shadow: 0px 0px 2px 0px black;
+  -webkit-box-shadow: 0px 0px 2px 0px black;
+          box-shadow: 0px 0px 2px 0px black;
   background-color: white;
 }
 
@@ -462,9 +608,15 @@ button.closeInventory {
   margin: 0;
   width: 100%;
   height: 32.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 button.closeInventory svg {
@@ -473,9 +625,16 @@ button.closeInventory svg {
 }
 
 .inventoryList {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   text-align: left;
   gap: 6px;
   width: 100%;
@@ -491,6 +650,8 @@ button.closeInventory svg {
     left: 0;
     right: 0;
     height: 48px; /* Height of the gradient overlay */
+    background: -o-linear-gradient(bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 1)), to(rgba(255, 255, 255, 0)));
     background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
     pointer-events: none; /* Allows interaction with content beneath */
 }
@@ -504,11 +665,20 @@ button.closeInventory svg {
 }
 
 .inventoryList .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 6px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 100%;
 }
 
@@ -519,13 +689,17 @@ button.closeInventory svg {
 }
 
 .inventoryList.battle .item {
-  align-items: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   text-align: left;
 }
 
 .inventoryList .itemName {
   text-align: left;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 .inventoryList.battle button {
@@ -550,9 +724,16 @@ button.closeInventory svg {
 }
 
 .actionMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .actionMenu h3 {
@@ -569,6 +750,8 @@ button.closeInventory svg {
 /* Tooltip text */
 .tooltipText {
   visibility: hidden; /* Hidden by default */
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
   max-width: 176px;
   background-color: black;
@@ -605,22 +788,31 @@ button.closeInventory svg {
   max-width: 100vw;
   border-radius: 0;
   background-color: transparent;
-  animation: show-background 0.001s forwards 1.5s;
+  -webkit-animation: show-background 0.001s forwards 1.5s;
+          animation: show-background 0.001s forwards 1.5s;
 }
 
 dialog.battleModal {
   padding: 0 !important;
 }
 
+dialog.battleModal::-webkit-backdrop {
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
+
 dialog.battleModal::backdrop {
   background-color: transparent;
-  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
 }
 
 .battleModalContent {
   visibility: hidden;
   opacity: 0;
-  animation: appear 0.001s forwards 1.5s;
+  -webkit-animation: appear 0.001s forwards 1.5s;
+          animation: appear 0.001s forwards 1.5s;
 }
 
 .battleTransitionOverlay {
@@ -645,26 +837,37 @@ dialog.battleModal::backdrop {
 }
 
 .fade-black {
-  animation: fade-black 3s forwards;
+  -webkit-animation: fade-black 3s forwards;
+          animation: fade-black 3s forwards;
 }
 
 .pixel-shrink {
-  animation: pixel-shrink 3s forwards;
+  -webkit-animation: pixel-shrink 3s forwards;
+          animation: pixel-shrink 3s forwards;
 }
 
 .wipe-horizontal {
-  animation: wipe-horizontal 3s forwards;
+  -webkit-animation: wipe-horizontal 3s forwards;
+          animation: wipe-horizontal 3s forwards;
 }
 
 .wipe-vertical {
-  animation: wipe-vertical 3s forwards;
+  -webkit-animation: wipe-vertical 3s forwards;
+          animation: wipe-vertical 3s forwards;
 }
 
 .battleModalContent {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 24px;
   position: relative;
 }
@@ -689,17 +892,31 @@ dialog.battleModal button.tertiary:hover {
 
 .enemyStatus,
 .playerStatus {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 24px;
   width: 100%;
 }
 
 .attributes {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .enemyStatus .attributeRow,
@@ -712,29 +929,46 @@ dialog.battleModal h2 {
 }
 
 .battleModalContent .actionsMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 24px;
   width: 100%;
   max-width: 300px;
 }
 
 .battleModalContent .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   width: 100%;
   gap: 16px;
-  justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .battleModalContent .actions.showFlee {
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .battleModalContent .actions button {
   margin: 0;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   min-width: 87px;
   width: 33%;
   max-width: 120px;
@@ -757,6 +991,8 @@ dialog.battleModal h2 {
   left: 0;
   z-index: 3;
   background-color: transparent;
+  -webkit-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
   transition: background-color 0.5s;
 }
 
@@ -766,24 +1002,46 @@ dialog.battleModal h2 {
 }
 
 .gameContainer.fadeToBackground {
-  animation: disappear 0.001s forwards 1.5s;
+  -webkit-animation: disappear 0.001s forwards 1.5s;
+          animation: disappear 0.001s forwards 1.5s;
 }
 
 .battleModal.fadeOut {
   opacity: 1;
-  animation: fade-out 1s forwards 1.5s;
-  animation-name: fade-out;
-  animation-duration: 1s;
-  animation-delay: 1s;
-  animation-fill-mode: forwards;
+  -webkit-animation: fade-out 1s forwards 1.5s;
+          animation: fade-out 1s forwards 1.5s;
+  -webkit-animation-name: fade-out;
+          animation-name: fade-out;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .gameContainer.fadeIn {
   opacity: 0;
-  animation-name: fade-in;
-  animation-duration: 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
+  -webkit-animation-name: fade-in;
+          animation-name: fade-in;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes show-background {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: var(--background);
+  }
 }
 
 @keyframes show-background {
@@ -798,6 +1056,17 @@ dialog.battleModal h2 {
   }
 }
 
+@-webkit-keyframes appear {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 @keyframes appear {
   0% {
     opacity: 0;
@@ -806,6 +1075,15 @@ dialog.battleModal h2 {
   100% {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -818,6 +1096,15 @@ dialog.battleModal h2 {
   }
 }
 
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes fade-out {
   0% {
     opacity: 1;
@@ -827,33 +1114,88 @@ dialog.battleModal h2 {
   }
 }
 
-@keyframes wipe-horizontal {
+@-webkit-keyframes wipe-horizontal {
   0% {
-    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
     opacity: 1;
   }
   50% {
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
     opacity: 1;
   }
   100% {
-    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
     opacity: 1;
+  }
+}
+
+@keyframes wipe-horizontal {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes pixel-shrink {
+  0% {
+    -webkit-transform: scale(0.05);
+            transform: scale(0.05);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 0;
   }
 }
 
 @keyframes pixel-shrink {
   0% {
-    transform: scale(0.05);
+    -webkit-transform: scale(0.05);
+            transform: scale(0.05);
     opacity: 1;
   }
   50% {
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
     opacity: 1;
   }
   100% {
-    transform: scale(0);
+    -webkit-transform: scale(0);
+            transform: scale(0);
     opacity: 0;
+  }
+}
+
+@-webkit-keyframes fade-black {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -870,18 +1212,48 @@ dialog.battleModal h2 {
   }
 }
 
-@keyframes wipe-vertical {
+@-webkit-keyframes wipe-vertical {
   0% {
-    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
     opacity: 1;
   }
   50% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
     opacity: 1;
   }
   100% {
-    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
     opacity: 1;
+  }
+}
+
+@keyframes wipe-vertical {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -903,54 +1275,110 @@ dialog.battleModal h2 {
 }
 
 .inventoryPopup {
-  animation: slide-up 0.5s forwards;
+  -webkit-animation: slide-up 0.5s forwards;
+          animation: slide-up 0.5s forwards;
 }
 
 .inventoryPopup.exiting {
-  animation: slide-down 0.5s forwards;
+  -webkit-animation: slide-down 0.5s forwards;
+          animation: slide-down 0.5s forwards;
 }
 
 .primaryActionButton {
-  animation: slide-left 0.5s forwards;
+  -webkit-animation: slide-left 0.5s forwards;
+          animation: slide-left 0.5s forwards;
 }
 
 .primaryActionButton.exiting {
-  animation: slide-right 0.5s forwards;
+  -webkit-animation: slide-right 0.5s forwards;
+          animation: slide-right 0.5s forwards;
+}
+
+@-webkit-keyframes slide-up {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
 @keyframes slide-up {
   0% {
-    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
   }
   100% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes slide-down {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
   }
 }
 
 @keyframes slide-down {
   0% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
   100% {
-    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+@-webkit-keyframes slide-left {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
 }
 
 @keyframes slide-left {
   0% {
-    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
   100% {
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
 }
 
 @keyframes slide-right {
   0% {
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
   100% {
-    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
 }
 
