@@ -12,13 +12,13 @@
   --primarylight: orange;
   --secondary: lightgreen;
   --secondarylight: palegreen;
-  --tertiary: grey;
-  --tertiarylight: darkgrey;
-  --background: black;
-  --backgroundrgb: 0, 0, 0;
-  --backgroundsecondary: rgb(50, 50, 50);
-  --backgroundsecondaryrgb: 50, 50, 50;
-  --font: white;
+  --tertiary: blanchedalmond;
+  --tertiarylight: cornsilk;
+  --background: white;
+  --backgroundrgb: 255, 255, 255;
+  --backgroundsecondary: cornsilk;
+  --backgroundsecondaryrgb: 255, 248, 220;
+  --font: black;
   --primaryfont: darkorange;
   
 
@@ -245,9 +245,17 @@ dialog button.secondary:hover {
           align-items: center;
 }
 
-.pageContainer, dialog.battleModal {
+/* Use this to add a background image in all situations */
+/* .pageContainer, dialog.battleModal {
   background: url("./Images/space.jpg") no-repeat center center;
   background-size: cover;
+} */
+
+.battleModalContent, .gameContainer {
+  overflow: hidden;
+  /* Turn this back on if I want the map / items overlay to
+    be just inside the container instead of entire page */
+  /* position: relative; */
 }
 
 .pagePadding {
@@ -276,6 +284,41 @@ dialog button.secondary:hover {
   background-color: rgba(var(--backgroundrgb), 0.7);
   border-radius: 6px;
 }
+
+.modalBackgroundOverlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: transparent;
+  -webkit-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+.modalBackgroundOverlay.visible {
+  display: block;
+  background-color: rgba(var(--backgroundsecondaryrgb), 0.5);
+}
+
+dialog::backdrop {
+  background: none;
+}
+
+/* dialog::-webkit-backdrop {
+  background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+
+dialog::backdrop {
+  background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+} */
 
 dialog.battleModal.open {
   /* background-color: transparent !important; */
@@ -424,18 +467,6 @@ dialog .scrollableHistory {
 
 dialog button {
   margin: 32px auto 0;
-}
-
-dialog::-webkit-backdrop {
-  background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-}
-
-dialog::backdrop {
-  background-color: rgba(var(--backgroundsecondaryrgb), 0.7);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
 }
 
 .buttonContainer {
@@ -618,7 +649,6 @@ dialog::backdrop {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 48px;
-  position: relative;
 }
 
 .twoColumns {
@@ -1006,7 +1036,6 @@ dialog.battleModal::backdrop {
       -ms-flex-align: center;
           align-items: center;
   gap: 24px;
-  position: relative;
 }
 
 .mapModal h3 {
