@@ -14,13 +14,32 @@ import messages from "../Messages";
 const Game = ({ endGame }) => {
   // Components
 
-  const [mapModalIsOpen, setMapModalIsOpen] = useState(false);
+  const [mapIsOpen, setMapIsOpen] = useState(false);
+  const [mapIsClosing, setMapIsClosing] = useState(false);
+  const [mapIsOpening, setMapIsOpening] = useState(false);
   const [isChoosingNextArea, setIsChoosingNextArea] = useState(false);
   const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
   const [inventoryIsClosing, setInventoryIsClosing] = useState(false);
   const [inventoryIsOpening, setInventoryIsOpening] = useState(false);
   const isLoopRunning = useRef(false);
   const isNewArea = useRef(false);
+
+  const closeMap = () => {
+    setMapIsClosing(true)
+    setTimeout(() => {
+      setIsChoosingNextArea(false);
+      setMapIsClosing(false);
+      setMapIsOpen(false)
+    }, 750);
+  }
+
+  const openMap = () => {
+    setMapIsOpening(true)
+    setTimeout(() => {
+      setMapIsOpening(false);
+      setMapIsOpen(true)
+    }, 750);
+  }
 
   const closeInventory = () => {
     setInventoryIsClosing(true)
@@ -196,7 +215,7 @@ const Game = ({ endGame }) => {
             // If encounter is in place, run it after dialogue is finished
             setRunEncounter(true);
           } else if (isChoosingNextArea) {
-            setMapModalIsOpen(true)
+            openMap()
           } else if (primaryActions && primaryActions.length) {
             // If actions are available, show them, now dialogue is done
             isLoopRunning.current = false;
@@ -217,7 +236,7 @@ const Game = ({ endGame }) => {
           }
         }}
         resetBox={resetDialogueForNewArea()}
-        paused={mapModalIsOpen}
+        paused={mapIsOpen || mapIsOpening}
       />
       <div className="twoColumns">
         <div className="left column">
@@ -237,22 +256,23 @@ const Game = ({ endGame }) => {
             <div className="attributeRow">
               <h3 className="attribute">Map:</h3>
               <MapButton
-                open={mapModalIsOpen}
+                open={mapIsOpen}
                 isChoosingNextArea={isChoosingNextArea}
                 stayInArea={() => {
-                  setIsChoosingNextArea(false)
+                  closeMap()
                   setText(messages.stayInRoomMessage)
                 }}
                 setNextArea={(area) => {
-                  setIsChoosingNextArea(false)
-                  setMapModalIsOpen(false)
+                  closeMap()
                   setText(messages.travelToRoomMessage(area.name))
                   setArea(area)
                 }}
-                openModal={() => setMapModalIsOpen(true)}
-                onCancel={() => setMapModalIsOpen(false)}
+                openModal={openMap}
+                onCancel={closeMap}
                 areas={areas}
                 currentArea={area}
+                mapIsOpening={mapIsOpening}
+                mapIsClosing={mapIsClosing}
               />
             </div>
             <div className="attributeRow">

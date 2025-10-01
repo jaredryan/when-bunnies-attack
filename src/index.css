@@ -83,6 +83,10 @@ h2 {
   margin-top: 48px;
 }
 
+h3 {
+  font-size: 20px;
+}
+
 p {
   margin-bottom: 16px;
 }
@@ -1354,6 +1358,12 @@ dialog.battleModal h2 {
   overflow: hidden;
 }
 
+dialog.mapModal,
+dialog.history {
+  top: 100%;
+  translate: -50% 0%;
+}
+
 .inventoryPopup {
   -webkit-animation: slide-up 0.5s forwards;
           animation: slide-up 0.5s forwards;
@@ -1364,7 +1374,20 @@ dialog.battleModal h2 {
           animation: slide-down 0.5s forwards;
 }
 
+dialog.mapModal,
+dialog.history {
+  -webkit-animation: map-slide-up 0.7s forwards;
+          animation: map-slide-up 0.7s forwards;
+}
+
+dialog.mapModal.exiting,
+dialog.history.exiting {
+  -webkit-animation: map-slide-down 0.7s forwards;
+          animation: map-slide-down 0.7s forwards;
+}
+
 .primaryActionButton {
+  padding: 4px 18px;
   text-align: left;
   -webkit-animation: slide-left 0.5s forwards;
           animation: slide-left 0.5s forwards;
@@ -1416,6 +1439,51 @@ dialog.battleModal h2 {
   100% {
     -webkit-transform: translateY(100%);
             transform: translateY(100%);
+  }
+}
+
+@-webkit-keyframes map-slide-up {
+  
+  0% {
+    top: 100%;
+    translate: -50% 0%;
+  }
+  100% {
+    top: 50%;
+    translate: -50% -50%;
+  }
+}
+
+@keyframes map-slide-up {
+  0% {
+    top: 100%;
+    translate: -50% 0%;
+  }
+  100% {
+    top: 50%;
+    translate: -50% -50%;
+  }
+}
+
+@-webkit-keyframes map-slide-down {
+  0% {
+    top: 50%;
+    translate: -50% -50%;
+  }
+  100% {
+    top: 100%;
+    translate: -50% 0%;
+  }
+}
+
+@keyframes map-slide-down {
+  0% {
+    top: 50%;
+    translate: -50% -50%;
+  }
+  100% {
+    top: 100%;
+    translate: -50% 0%;
   }
 }
 

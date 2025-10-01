@@ -227,6 +227,8 @@ const MapButton = ({
   onCancel,
   areas,
   currentArea,
+  mapIsOpening,
+  mapIsClosing,
 }) => {
   const cancelMap = () => {
     onCancel();
@@ -235,7 +237,7 @@ const MapButton = ({
 
   return (
     <>
-      <Modal open={open} onClose={cancelMap} className="mapModal">
+      <Modal open={mapIsOpening || open} onClose={cancelMap} className={`mapModal${mapIsClosing ? ' exiting' : ''}`}>
         {!isChoosingNextArea ? null : <h3>{messages.leaveRoomMapPrompt}</h3>}
         {generateMap({ currentArea, areas, setNextArea, isChoosingNextArea, cancelMap })}
         <div className="buttonContainer">

@@ -89,7 +89,25 @@ const DialogueBox = ({
   const [timeoutId, setTimeoutId] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIsOpen, setHistoryIsOpen] = useState(false);
+  const [historyIsClosing, setHistoryIsClosing] = useState(false);
+  const [historyIsOpening, setHistoryIsOpening] = useState(false);
   const scrollRef = useRef(null);
+
+  const closeHistory = () => {
+    setHistoryIsClosing(true)
+    setTimeout(() => {
+      setHistoryIsClosing(false);
+      setHistoryIsOpen(false)
+    }, 750);
+  }
+
+  const openHistory = () => {
+    setHistoryIsOpening(true)
+    setTimeout(() => {
+      setHistoryIsOpening(false);
+      setHistoryIsOpen(true)
+    }, 750);
+  }
 
   // Reset state when lines prop changes
   useEffect(() => {
@@ -145,7 +163,10 @@ const DialogueBox = ({
           <History
             history={history}
             open={historyIsOpen}
-            setOpen={setHistoryIsOpen}
+            historyIsOpening={historyIsOpening}
+            historyIsClosing={historyIsClosing}
+            openHistory={openHistory}
+            closeHistory={closeHistory}
           />
           <button
             className="next"
