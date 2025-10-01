@@ -210,7 +210,7 @@ export const escape7EntryMessage = [
   `"Thank God, I'm out of there. But...uh...now what?"`,
   `"Only one way out? This can't possibly go well."`,
   `Maybe if you weren't so exhausted, you could try to clear your own path.`,
-  `Beyond that, you don't know if or when backup bunnies will arrive might come out from the fortress.`,
+  `Beyond that, you don't know if backup might come out from the fortress.`,
   `You just need to get out of there is quick as you can, and hope for the best.`,
   `You quietly curse, then take a deep breath.`,
   `"Doesn't look like I have much choice. Let's just get this over with."`,
