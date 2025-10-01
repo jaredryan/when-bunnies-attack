@@ -178,7 +178,7 @@ export const lootRoom5 = new Event(
   [
     [carrot, carrot, carrot],
     [
-      `At you started sifting through the treasury, you realized that gold would just weigh you down.`, 
+      `As you started sifting through the treasury, you realized that gold would just weigh you down.`, 
       `You find a few small coins, and grab a few carrots for the road.`,
     ],
   ],
@@ -253,7 +253,7 @@ export const checkRoom8 = new Event(
   displayMessage,
   [
     [
-      `You look around. You see a militaristic bunny and a mid-sized machine...it looks like a tank, but bunny-sized, around 3 feet tall.`,
+      `You look around. You see a militaristic bunny and a machine...it looks like a tank, but bunny-sized, around 3 feet tall.`,
       `It's watching you carefully, and standing between you and the path out.`,
       `If you want to escape the forest, you'll have to fight it.`,
     ],

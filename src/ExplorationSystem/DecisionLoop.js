@@ -69,7 +69,7 @@ const decisionLoop = ({
               name: messages.stayInAreaButton,
               execute: () => {
                 setText(messages.stayInRoomMessage);
-                setPrimaryActions([]);
+                setPrimaryActions([])
               },
               className: "secondary",
             },

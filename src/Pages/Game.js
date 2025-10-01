@@ -122,7 +122,7 @@ const Game = ({ endGame }) => {
   console.log({ showActions, primaryActions });
 
   return (
-    <div className="gameContainer">
+    <div className={`gameContainer pagePadding${runEncounter ? ' fadeToBackground' : ' fadeIn'}`}>
       <InventoryList 
         player={player}
         setText={setText}
@@ -146,17 +146,22 @@ const Game = ({ endGame }) => {
             const savedEnemy = encounter?.enemy;
             setRunEncounter(false);
             setEncounter(null);
-            setText([
-              ...messages.winBattleMessage(savedEnemy.name),
-              ...savedEnemy.reward(player),
-            ]);
-            isLoopRunning.current = false;
+            setTimeout(() => {
+              setText([
+                ...messages.winBattleMessage(savedEnemy.name),
+                ...savedEnemy.reward(player),
+              ]);
+              isLoopRunning.current = false;
+            }, 2000)
           }}
           fledBattle={() => {
             setRunEncounter(false);
             setEncounter(null);
+            setTimeout(() => {
+              setText(messages.fleeSuccessMessage);
+              isLoopRunning.current = false;
+            }, 2000)
             setText(messages.fleeSuccessMessage);
-            isLoopRunning.current = false;
           }}
           lostBattle={() => {
             setRunEncounter(false);

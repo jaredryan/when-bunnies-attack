@@ -1,5 +1,5 @@
 const Winner = (props) => (
-  <div className="winnerContainer">
+  <div className="winnerContainer pagePadding">
     <h1>
       When Bunnies <span className="emphasis">Lose</span>
     </h1>

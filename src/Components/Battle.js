@@ -25,6 +25,7 @@ const Battle = ({
   const [text, setText] = useState([]);
   const [isPlayersTurn, setIsPlayersTurn] = useState(true);
   const [turnIsFinished, setTurnIsFinished] = useState(false);
+  const [battleIsOver, setBattleIsOver] = useState(false);
   const [inventoryIsOpen, setInventoryIsOpen] = useState(false);
   const [inventoryIsClosing, setInventoryIsClosing] = useState(false);
   const [inventoryIsOpening, setInventoryIsOpening] = useState(false);
@@ -65,9 +66,11 @@ const Battle = ({
   // You win!
   useEffect(() => {
     if (enemy.hasDied) {
-      wonBattle();
+      setIsPlayersTurn(true);
+      setTurnIsFinished(false);
+      setText(messages.winInBattleMessage(enemy.name));
     }
-  }, [enemy.hasDied, wonBattle]);
+  }, [enemy.hasDied, enemy.name]);
 
   // Enemy turn
   useEffect(() => {
@@ -86,7 +89,7 @@ const Battle = ({
   return (
     <Modal
       open={true}
-      className="battleModal"
+      className={`battleModal${battleIsOver ? ' fadeOut' : ''}`}
       noClose={true}
       style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
@@ -94,10 +97,10 @@ const Battle = ({
         className={`battleTransitionOverlay${animationClass}`}
         style={{ height: "calc(var(--vh, 1vh) * 100)" }}
       />
-      <div className="battleModalContent">
+      <div className="battleModalContent pagePadding">
         <div
           className={`battleModalContentOverlay${
-            inventoryIsOpen ? " visible" : ""
+            (inventoryIsOpen || inventoryIsOpening) ? " visible" : ""
           }`}
         />
         <div className="enemyStatus">
@@ -123,7 +126,11 @@ const Battle = ({
             onDone={() => {
               setTurnIsFinished(true);
               if (player.hasDied) {
+                setBattleIsOver(true)
                 setTimeout(() => lostBattle(), 2000);
+              } else if (enemy.hasDied) {
+                setBattleIsOver(true)
+                setTimeout(() => wonBattle(), 2000);
               }
             }}
             windowOnly
@@ -157,7 +164,7 @@ const Battle = ({
                 setText(text);
               }}
               className="primary"
-              disabled={!isPlayersTurn || !turnIsFinished}
+              disabled={!isPlayersTurn || !turnIsFinished || battleIsOver}
             >
               Attack
             </button>
@@ -170,7 +177,7 @@ const Battle = ({
                 }
               }}
               className="secondary"
-              disabled={!isPlayersTurn || !turnIsFinished}
+              disabled={!isPlayersTurn || !turnIsFinished || battleIsOver}
             >
               Items
             </button>
@@ -183,11 +190,13 @@ const Battle = ({
                   const { text, success } = fleeAttempt();
                   setText(text);
                   if (success) {
-                    fledBattle();
+                    setBattleIsOver(true);
+                    setIsPlayersTurn(true);
+                    setTimeout(() => fledBattle(), 2000);
                   }
                 }}
                 className="tertiary"
-                disabled={!isPlayersTurn || !turnIsFinished}
+                disabled={!isPlayersTurn || !turnIsFinished || battleIsOver}
               >
                 Flee
               </button>

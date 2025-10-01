@@ -1,5 +1,5 @@
 const Title = (props) => (
-  <div className="titleContainer">
+  <div className="titleContainer pagePadding">
     <h1>When Bunnies Attack</h1>
     <h2>A short and not-so-sweet text-based adventure</h2>
     <p>

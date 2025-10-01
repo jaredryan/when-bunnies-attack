@@ -22,10 +22,13 @@ function Enemy(name, hp, attackPower, reward) {
   };
 
   this.takeDamage = function (damage) {
-    this.hp -= damage;
-
-    if (this.hp <= 0) {
+    let newHp = this.hp - damage;
+    
+    if (newHp < 0) {
+      this.hp = 0
       this.hasDied = true;
+    } else {
+      this.hp = newHp
     }
   };
 }
