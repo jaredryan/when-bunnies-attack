@@ -2,7 +2,7 @@ import Modal from "./Modal";
 
 const History = ({ history, open, setOpen}) => (
   <>
-    <Modal open={open} onClose={() => setOpen(false)}>
+    <Modal open={open} onClose={() => setOpen(false)} className="history">
       <div className="scrollableHistory">
         {history.map((line, index) => (
           <p key={line + index}>{line}</p>
