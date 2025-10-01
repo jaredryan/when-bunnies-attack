@@ -24,7 +24,7 @@ function Enemy(name, hp, attackPower, reward) {
   this.takeDamage = function (damage) {
     let newHp = this.hp - damage;
     
-    if (newHp < 0) {
+    if (newHp <= 0) {
       this.hp = 0
       this.hasDied = true;
     } else {
