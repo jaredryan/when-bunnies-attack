@@ -10,14 +10,17 @@
   box-sizing: border-box;
   --primary: darkorange;
   --primarylight: orange;
-  --secondarylight: palegreen;
-  --background: white;
-  --tertiary: blanchedalmond;
-  --backgroundsecondary: cornsilk;
-  --backgroundsecondaryrgb: 255, 248, 220;
-  --font: black;
-  --primaryfont: darkorange;
   --secondary: lightgreen;
+  --secondarylight: palegreen;
+  --tertiary: grey;
+  --tertiarylight: darkgrey;
+  --background: black;
+  --backgroundrgb: 0, 0, 0;
+  --backgroundsecondary: rgb(50, 50, 50);
+  --backgroundsecondaryrgb: 50, 50, 50;
+  --font: white;
+  --primaryfont: darkorange;
+  
 
   color: var(--font);
 }
@@ -28,6 +31,10 @@
 
 * a {
   color: inherit;
+}
+
+body {
+  background-color: var(--background);
 }
 
 body,
@@ -201,7 +208,7 @@ dialog button.secondary {
 .dialogueOptions button:hover,
 dialog button.xButton:hover,
 dialog button.secondary:hover {
-  background-color: var(--backgroundsecondary);
+  background-color: var(--tertiarylight);
 }
 
 @media (max-width: 1000px) {
@@ -238,6 +245,11 @@ dialog button.secondary:hover {
           align-items: center;
 }
 
+.pageContainer, dialog.battleModal {
+  background: url("./Images/space.jpg") no-repeat center center;
+  background-size: cover;
+}
+
 .pagePadding {
   padding: 48px;
 }
@@ -249,9 +261,6 @@ dialog button.secondary:hover {
 
 .pageContainer > .gameContainer, .battleModalContent {
   max-width: calc(400px + 96px);
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -261,11 +270,31 @@ dialog button.secondary:hover {
   text-align: center;
 }
 
+.battleModalContent,
+.titleContainer,
+.gameContainer {
+  background-color: rgba(var(--backgroundrgb), 0.7);
+  border-radius: 6px;
+}
+
+dialog.battleModal.open {
+  /* background-color: transparent !important; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+dialog {
+  background-color: var(--background);
+}
+
 .dialogueContainer {
   height: 200px;
   overflow: scroll;
   background-color: var(--backgroundsecondary);
   padding: 20px;
+  border-radius: 6px;
 }
 
 .dialogueOptions {
@@ -547,7 +576,7 @@ dialog::backdrop {
 }
 
 .room.visible.interactive:hover {
-  background-color: var(--backgroundsecondary);
+  background-color: var(--tertiarylight);
 }
 
 .row.verticalConnectors .room {
@@ -558,7 +587,7 @@ dialog::backdrop {
   width: 25px;
   height: 25px;
   border-radius: 0 !important;
-  background-color: black;
+  background-color: var(--font);
 }
 
 .connector.room.vertical {
@@ -711,7 +740,7 @@ dialog::backdrop {
   gap: 12px;
   -webkit-box-shadow: 0px 0px 2px 0px black;
           box-shadow: 0px 0px 2px 0px black;
-  background-color: white;
+  background-color: var(--background);
 }
 
 button.closeInventory {
@@ -761,9 +790,9 @@ button.closeInventory svg {
     left: 0;
     right: 0;
     height: 48px; /* Height of the gradient overlay */
-    background: -o-linear-gradient(bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-    background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 1)), to(rgba(255, 255, 255, 0)));
-    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background: -o-linear-gradient(bottom, rgba(var(--backgroundrgb), 1) 0%, rgba(var(--backgroundrgb), 0) 100%);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(var(--backgroundrgb), 1)), to(rgba(var(--backgroundrgb), 0)));
+    background: linear-gradient(to top, rgba(var(--backgroundrgb), 1) 0%, rgba(var(--backgroundrgb), 0) 100%);
     pointer-events: none; /* Allows interaction with content beneath */
 }
 
@@ -1001,7 +1030,7 @@ dialog.battleModal button.tertiary {
 }
 
 dialog.battleModal button.tertiary:hover {
-  background-color: var(--backgroundsecondary);
+  background-color: var(--tertiarylight);
 }
 
 .enemyStatus,
