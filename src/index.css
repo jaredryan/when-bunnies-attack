@@ -253,25 +253,117 @@ dialog button.secondary:hover {
 }
 
 /* Use this to add a background image in all situations */
-/* .pageContainer, dialog.battleModal {
-  background: url("./Images/space.jpg") no-repeat center center;
+.pageContainer, dialog.battleModal {
   background-size: cover;
-} */
+  background-image: url("./Images/home.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition-timing-function: ease;
+  transition-property: background-image;
+}
+
+.pageContainer {
+  transition-duration: 1s;
+  transition-delay: 0s;
+}
+
+dialog.battleModal {
+  transition-duration: 0.01s;
+  transition-delay: 1.5s;
+}
+
+.pageContainer.SW, dialog.battleModal.SW {
+  background-image: url("./Images/SW.jpg");
+}
+
+.pageContainer.SE, dialog.battleModal.SE {
+  background-image: url("./Images/SE.jpg");
+}
+
+.pageContainer.W, dialog.battleModal.W {
+  background-image: url("./Images/W.jpg");
+}
+
+.pageContainer.Lab, dialog.battleModal.Lab {
+  background-image: url("./Images/Lab.jpg");
+}
+
+.pageContainer.E, dialog.battleModal.E {
+  background-image: url("./Images/E.jpg");
+}
+
+.pageContainer.NE, dialog.battleModal.NE {
+  background-image: url("./Images/NE.jpg");
+}
+
+.pageContainer.TR, dialog.battleModal.TR {
+  background-image: url("./Images/TR.jpg");
+}
+
+.pageContainer.Path, dialog.battleModal.Path {
+  background-image: url("./Images/Path.jpg");
+}
+
+.pageContainer.Exit, dialog.battleModal.Exit {
+  background-image: url("./Images/Exit.jpg");
+}
+
+.enemyInfoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.enemyImage { 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 64px;
+  min-height: 64px;
+}
+
+
+.Bunny {
+  background-image: url("./Images/Bunny.jpg");
+}
+
+.SoldierBunny {
+  background-image: url("./Images/SoldierBunny.jpg");
+}
+
+.CaptainWhiskers {
+  background-image: url("./Images/CaptainWhiskers.jpg");
+}
+
+.BobtheBunny {
+  background-image: url("./Images/BobtheBunny.jpg");
+}
+
+.ScientistBunny {
+  background-image: url("./Images/ScientistBunny.jpg");
+}
+
 
 .battleModalContent, .gameContainer {
   overflow: hidden;
+  width: 100%;
   /* Turn this back on if I want the map / items overlay to
     be just inside the container instead of entire page */
-  /* position: relative; */
+  position: relative;
 }
 
 .pagePadding {
   padding: 48px;
 }
 
+.winnerContainer, .titleContainer, .loserContainer {
+  margin: 48px;
+}
+
 .pageContainer > * {
   max-width: 730px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .pageContainer > .gameContainer, .battleModalContent {
@@ -288,7 +380,7 @@ dialog button.secondary:hover {
 .battleModalContent,
 .titleContainer,
 .gameContainer {
-  background-color: rgba(var(--backgroundrgb), 0.7);
+  background-color: rgba(var(--backgroundrgb), 0.8);
   border-radius: 6px;
 }
 
@@ -1091,9 +1183,17 @@ dialog.battleModal button.tertiary:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  align-items: center;
   gap: 24px;
   width: 100%;
+}
+
+.playerStatus {
   max-width: 180px;
+}
+
+.enemyStatus {
+
 }
 
 .attributes {
@@ -1643,6 +1743,11 @@ dialog.history.exiting {
 }
 
 @media (max-width: 750px) {
+  h2,
+  button.gameButton {
+    font-size: 22px;
+  }
+
   .pageContainer > .gameContainer,
   .battleModalContent {
     max-width: calc(400px + 36px * 2);
@@ -1655,10 +1760,27 @@ dialog.history.exiting {
   .pagePadding {
     padding: 36px;
   }
+
+  .winnerContainer, .titleContainer, .loserContainer {
+    margin: 36px;
+  }
 }
 
 @media (max-width: 480px) {
   h1 {
     font-size: 40px;
+  }
+
+  h2,
+  button.gameButton {
+    font-size: 20px;
+  }
+
+  .pagePadding {
+    padding: 24px;
+  }
+
+  .winnerContainer, .titleContainer, .loserContainer {
+    margin: 24px;
   }
 }

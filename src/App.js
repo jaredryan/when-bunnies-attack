@@ -10,6 +10,7 @@ import useViewportHeight from "./Components/useViewportHeight";
 const App = () => {
   const [gameInProgress, setGameInProgress] = useState(false);
   const [hasWon, setHasWon] = useState(null);
+  const [className, setClassName] = useState('');
 
   useViewportHeight();
 
@@ -49,13 +50,13 @@ const App = () => {
 
   let page = <Title startGame={startGame} />;
 
-  if (gameInProgress) page = <Game endGame={endGame} />;
+  if (gameInProgress) page = <Game endGame={endGame} setClassName={setClassName} />;
   else if (hasWon === false) page = <Loser startGame={restartGame} />;
   else if (hasWon === true) page = <Winner startGame={restartGame} />;
 
   return (
     <div
-      className="pageContainer"
+      className={`pageContainer${className ? ` ${className}` : ''}`}
       style={{ minHeight: "calc(var(--vh, 1vh) * 100)" }}
     >
       {page}

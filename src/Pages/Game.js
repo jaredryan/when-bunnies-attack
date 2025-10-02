@@ -11,7 +11,7 @@ import decisionLoop from "../ExplorationSystem/DecisionLoop";
 
 import messages from "../Messages";
 
-const Game = ({ endGame }) => {
+const Game = ({ endGame, setClassName }) => {
   // Components
 
   const [mapIsOpen, setMapIsOpen] = useState(false);
@@ -25,42 +25,45 @@ const Game = ({ endGame }) => {
   const isNewArea = useRef(false);
 
   const closeMap = () => {
-    setMapIsClosing(true)
+    setMapIsClosing(true);
     setTimeout(() => {
       setIsChoosingNextArea(false);
       setMapIsClosing(false);
-      setMapIsOpen(false)
+      setMapIsOpen(false);
     }, 750);
-  }
+  };
 
   const openMap = () => {
-    setMapIsOpening(true)
+    setMapIsOpening(true);
     setTimeout(() => {
       setMapIsOpening(false);
-      setMapIsOpen(true)
+      setMapIsOpen(true);
     }, 750);
-  }
+  };
 
   const closeInventory = () => {
-    setInventoryIsClosing(true)
+    setInventoryIsClosing(true);
     setTimeout(() => {
       setInventoryIsClosing(false);
-      setInventoryIsOpen(false)
+      setInventoryIsOpen(false);
     }, 500);
-  }
+  };
 
   const openInventory = () => {
-    setInventoryIsOpening(true)
+    setInventoryIsOpening(true);
     setTimeout(() => {
       setInventoryIsOpening(false);
-      setInventoryIsOpen(true)
+      setInventoryIsOpen(true);
     }, 500);
-  }
+  };
 
   // Initialization
   const player = useMemo(() => new Player(), []);
 
   const [area, setArea] = useState(areas[0]);
+  const [pageContainerClassName, setPageContainerClassName] = useState(
+    areas[0].mapName
+  );
   const [text, setText] = useState([]);
   const [showActions, setShowActions] = useState(false);
   const [primaryActions, setPrimaryActions] = useState([]);
@@ -75,13 +78,18 @@ const Game = ({ endGame }) => {
     }
   }, [player.hasWon, player.hasDied, endGame]);
 
+  useEffect(
+    () => setClassName(pageContainerClassName),
+    [setClassName, pageContainerClassName]
+  );
+
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
-    isNewArea.current = true
+    isNewArea.current = true;
   }, [area, player]);
 
   const mapActions = (actions = []) =>
-    (!showActions || isNewArea.current)
+    !showActions || isNewArea.current
       ? null
       : actions.map((action) => (
           <li key={action.name} className="primaryActionListItem">
@@ -95,7 +103,7 @@ const Game = ({ endGame }) => {
               }}
               className={`primaryActionButton${
                 triggeringAction ? " exiting" : ""
-              }${action.className ? ` ${action.className}` : ''}`}
+              }${action.className ? ` ${action.className}` : ""}`}
             >
               {action.name}
             </button>
@@ -140,8 +148,12 @@ const Game = ({ endGame }) => {
   }
 
   return (
-    <div className={`gameContainer pagePadding${runEncounter ? ' fadeToBackground' : ' fadeIn'}`}>
-      <InventoryList 
+    <div
+      className={`gameContainer pagePadding${
+        runEncounter ? " fadeToBackground" : " fadeIn"
+      }`}
+    >
+      <InventoryList
         player={player}
         setText={setText}
         inventoryIsOpen={inventoryIsOpen}
@@ -160,6 +172,7 @@ const Game = ({ endGame }) => {
           player={player}
           enemy={encounter?.enemy}
           noRetreat={encounter?.noRetreat}
+          className={pageContainerClassName}
           wonBattle={() => {
             const savedEnemy = encounter?.enemy;
             setRunEncounter(false);
@@ -170,7 +183,7 @@ const Game = ({ endGame }) => {
                 ...savedEnemy.reward(player),
               ]);
               isLoopRunning.current = false;
-            }, 2000)
+            }, 2000);
           }}
           fledBattle={() => {
             setRunEncounter(false);
@@ -178,7 +191,7 @@ const Game = ({ endGame }) => {
             setTimeout(() => {
               setText(messages.fleeSuccessMessage);
               isLoopRunning.current = false;
-            }, 2000)
+            }, 2000);
             setText(messages.fleeSuccessMessage);
           }}
           lostBattle={() => {
@@ -215,7 +228,7 @@ const Game = ({ endGame }) => {
             // If encounter is in place, run it after dialogue is finished
             setRunEncounter(true);
           } else if (isChoosingNextArea) {
-            openMap()
+            openMap();
           } else if (primaryActions && primaryActions.length) {
             // If actions are available, show them, now dialogue is done
             isLoopRunning.current = false;
@@ -259,13 +272,14 @@ const Game = ({ endGame }) => {
                 open={mapIsOpen}
                 isChoosingNextArea={isChoosingNextArea}
                 stayInArea={() => {
-                  closeMap()
-                  setText(messages.stayInRoomMessage)
+                  closeMap();
+                  setText(messages.stayInRoomMessage);
                 }}
                 setNextArea={(area) => {
-                  closeMap()
-                  setText(messages.travelToRoomMessage(area.name))
-                  setArea(area)
+                  closeMap();
+                  setText(messages.travelToRoomMessage(area.name));
+                  setPageContainerClassName(area.mapName);
+                  setArea(area);
                 }}
                 openModal={openMap}
                 onCancel={closeMap}
@@ -281,9 +295,9 @@ const Game = ({ endGame }) => {
                 className="map"
                 onClick={() => {
                   if (inventoryIsOpen) {
-                    closeInventory()
+                    closeInventory();
                   } else {
-                    openInventory()
+                    openInventory();
                   }
                 }}
                 aria-label="Toggle inventory"
@@ -305,7 +319,9 @@ const Game = ({ endGame }) => {
         </div>
         <div className="right column">
           <div className="actionMenu">
-            <div className="headerContainer"><h3>Actions:</h3></div>
+            <div className="headerContainer">
+              <h3>Actions:</h3>
+            </div>
             <ul className="actionContainer primary">
               {mapActions(primaryActions)}
             </ul>

@@ -155,7 +155,7 @@ const DialogueBox = ({
             }
           }}
           reset={resetBox}
-          paused={paused || historyIsOpen}
+          paused={paused || historyIsOpen || historyIsOpening}
         />
       </div>
       {windowOnly ? null : (

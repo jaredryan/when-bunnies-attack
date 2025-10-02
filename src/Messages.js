@@ -121,7 +121,7 @@ export const wRoom1EntryAnswerResponsePairs = [
     ],
   },
   {
-    answer: `You: "Where am I?"`,
+    answer: `"Where am I?"`,
     response: [
       `Bunny: "Oh no, you must have hit your head. Let me lead you back to your room."`,
     ],

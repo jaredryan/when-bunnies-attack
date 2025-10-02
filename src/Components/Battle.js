@@ -21,6 +21,7 @@ const Battle = ({
   lostBattle,
   fledBattle,
   noRetreat = false,
+  className,
 }) => {
   const [text, setText] = useState([]);
   const [isPlayersTurn, setIsPlayersTurn] = useState(true);
@@ -80,7 +81,7 @@ const Battle = ({
   return (
     <Modal
       open={true}
-      className={`battleModal${battleIsOver ? ' fadeOut' : ''}`}
+      className={`battleModal${battleIsOver ? ' fadeOut' : ''}${className ? ` ${className}` : ''}`}
       noClose={true}
       style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
@@ -96,18 +97,21 @@ const Battle = ({
         />
         <div className="enemyStatus">
           <h2>{enemy.name}</h2>
-          <div className="attributes">
-            <div className="attributeRow">
-              <h3 className="attribute">HP:</h3>
-              <h3 className="value">
-                {enemy.hp} / {enemy.maxHp}
-              </h3>
-            </div>
-            <div className="attributeRow">
-              <h3 className="attribute">Attack:</h3>
-              <h3 className="value">
-                {enemy.attackPower[0]} - {enemy.attackPower[1]}
-              </h3>
+          <div className="enemyInfoContainer">
+            <div className={`enemyImage ${enemy.name.split(/[\s,]+/).join('')}`} />
+            <div className="attributes">
+              <div className="attributeRow">
+                <h3 className="attribute">HP:</h3>
+                <h3 className="value">
+                  {enemy.hp} / {enemy.maxHp}
+                </h3>
+              </div>
+              <div className="attributeRow">
+                <h3 className="attribute">Attack:</h3>
+                <h3 className="value">
+                  {enemy.attackPower[0]} - {enemy.attackPower[1]}
+                </h3>
+              </div>
             </div>
           </div>
         </div>
