@@ -321,6 +321,7 @@ dialog.battleModal {
   background-position: center center;
   min-width: 64px;
   min-height: 64px;
+  border-radius: 6px;
 }
 
 

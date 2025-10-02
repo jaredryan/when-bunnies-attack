@@ -280,6 +280,7 @@ const Game = ({ endGame, setClassName }) => {
                   setText(messages.travelToRoomMessage(area.name));
                   setPageContainerClassName(area.mapName);
                   setArea(area);
+                  area.visit();
                 }}
                 openModal={openMap}
                 onCancel={closeMap}
