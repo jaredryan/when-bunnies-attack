@@ -304,8 +304,16 @@ dialog.battleModal {
   background-image: url("./Images/Path.jpg");
 }
 
+.pageContainer.Walk, dialog.battleModal.Walk {
+  background-image: url("./Images/Walk.jpg");
+}
+
 .pageContainer.Exit, dialog.battleModal.Exit {
   background-image: url("./Images/Exit.jpg");
+}
+
+.pageContainer.HasWon, dialog.battleModal.HasWon {
+  background-image: url("./Images/HasWon.jpg");
 }
 
 .enemyInfoContainer {
@@ -333,16 +341,28 @@ dialog.battleModal {
   background-image: url("./Images/SoldierBunny.jpg");
 }
 
+.ScientistBunny {
+  background-image: url("./Images/ScientistBunny.jpg");
+}
+
+.BunnyWalk {
+  background-image: url("./Images/BunnyWalk.jpg");
+}
+
+.SoldierBunnyWalk {
+  background-image: url("./Images/SoldierBunnyWalk.jpg");
+}
+
+.ScientistBunnyWalk {
+  background-image: url("./Images/ScientistBunnyWalk.jpg");
+}
+
 .CaptainWhiskers {
   background-image: url("./Images/CaptainWhiskers.jpg");
 }
 
 .BobtheBunny {
   background-image: url("./Images/BobtheBunny.jpg");
-}
-
-.ScientistBunny {
-  background-image: url("./Images/ScientistBunny.jpg");
 }
 
 
@@ -380,7 +400,9 @@ dialog.battleModal {
 
 .battleModalContent,
 .titleContainer,
-.gameContainer {
+.gameContainer,
+.winnerContainer,
+.loserContainer {
   background-color: rgba(var(--backgroundrgb), 0.8);
   border-radius: 6px;
 }

@@ -8,6 +8,7 @@ const decisionLoop = ({
   setPrimaryActions,
   setEncounter,
   setIsChoosingNextArea,
+  setPageContainerClassName,
 }) => {
   // Let the story control text and actions until it's done
   let { text, actions, encounter } = area.runStory({
@@ -35,7 +36,7 @@ const decisionLoop = ({
             text = [],
             actions = [],
             encounter = null,
-          } = area.runEvent(player, eventIndex);
+          } = area.runEvent(player, eventIndex, setPageContainerClassName);
           setText(text);
           setPrimaryActions(actions);
           setEncounter(encounter);

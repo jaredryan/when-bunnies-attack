@@ -143,6 +143,7 @@ const Game = ({ endGame, setClassName }) => {
         setPrimaryActions,
         setEncounter,
         setIsChoosingNextArea,
+        setPageContainerClassName,
       });
     }
   }
@@ -177,22 +178,17 @@ const Game = ({ endGame, setClassName }) => {
             const savedEnemy = encounter?.enemy;
             setRunEncounter(false);
             setEncounter(null);
-            setTimeout(() => {
-              setText([
-                ...messages.winBattleMessage(savedEnemy.name),
-                ...savedEnemy.reward(player),
-              ]);
-              isLoopRunning.current = false;
-            }, 2000);
+            setText([
+              ...messages.winBattleMessage(savedEnemy.name),
+              ...savedEnemy.reward(player),
+            ]);
+            isLoopRunning.current = false;
           }}
           fledBattle={() => {
             setRunEncounter(false);
             setEncounter(null);
-            setTimeout(() => {
-              setText(messages.fleeSuccessMessage);
-              isLoopRunning.current = false;
-            }, 2000);
             setText(messages.fleeSuccessMessage);
+            isLoopRunning.current = false;
           }}
           lostBattle={() => {
             setRunEncounter(false);
@@ -223,6 +219,7 @@ const Game = ({ endGame, setClassName }) => {
               setPrimaryActions,
               setEncounter,
               setIsChoosingNextArea,
+              setPageContainerClassName,
             });
           } else if (encounter) {
             // If encounter is in place, run it after dialogue is finished
@@ -245,11 +242,14 @@ const Game = ({ endGame, setClassName }) => {
               setPrimaryActions,
               setEncounter,
               setIsChoosingNextArea,
+              setPageContainerClassName,
             });
           }
         }}
         resetBox={resetDialogueForNewArea()}
         paused={mapIsOpen || mapIsOpening}
+        setHasWonImage={() => setPageContainerClassName('HasWon')}
+        alreadySetHasWonImage={pageContainerClassName === 'HasWon'}
       />
       <div className="twoColumns">
         <div className="left column">

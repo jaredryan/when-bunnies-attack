@@ -17,8 +17,8 @@ function Enemy(name, hp, attackPower, reward) {
     return [`${this.name} attacks! You took ${damage} damage.`];
   };
 
-  this.reward = function (player) {
-    return reward(player);
+  this.reward = function (player, setPageContainerClassName) {
+    return reward(player, setPageContainerClassName);
   };
 
   this.takeDamage = function (damage) {

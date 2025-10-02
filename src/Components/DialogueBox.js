@@ -10,6 +10,8 @@ export const Typewriter = ({
   scrollRef,
   reset,
   paused,
+  setHasWonImage,
+  alreadySetHasWonImage,
 }) => {
   const [displayed, setDisplayed] = useState("");
   const [history, setHistory] = useState([]);
@@ -28,6 +30,11 @@ export const Typewriter = ({
 
     const endTyping = () => {
       onDone?.();
+
+      if (displayed?.includes('meadow') && setHasWonImage && !alreadySetHasWonImage) {
+        setHasWonImage()
+      }
+
       setDisplayed("");
       setHistory([...history, text]);
       indexRef.current = -1;
@@ -63,7 +70,7 @@ export const Typewriter = ({
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text, speed, skip, history, onDone, done, scrollRef, paused]);
+  }, [text, speed, skip, history, onDone, done, scrollRef, paused, alreadySetHasWonImage, setHasWonImage, displayed]);
 
   let textToDisplay = history;
   if (displayed) textToDisplay = [...textToDisplay, displayed];
@@ -82,6 +89,8 @@ const DialogueBox = ({
   resetBox,
   windowOnly = false,
   paused = false,
+  setHasWonImage,
+  alreadySetHasWonImage,
 }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
@@ -156,6 +165,8 @@ const DialogueBox = ({
           }}
           reset={resetBox}
           paused={paused || historyIsOpen || historyIsOpening}
+          setHasWonImage={setHasWonImage}
+          alreadySetHasWonImage={alreadySetHasWonImage}
         />
       </div>
       {windowOnly ? null : (

@@ -179,7 +179,7 @@ export const lootRoom5 = new Event(
     [carrot, carrot, carrot],
     [
       `As you started sifting through the treasury, you realized that gold would just weigh you down.`, 
-      `You find a few small coins, and grab a few carrots for the road.`,
+      `You take a handful of coins, and grab a few carrots for the road.`,
     ],
   ],
   true,

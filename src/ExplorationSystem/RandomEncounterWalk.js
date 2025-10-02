@@ -6,7 +6,8 @@ import soldierBunny from "../Entities/Enemies/SoldierBunny";
 import messages from '../Messages'
 
 // The Final Escape Special Event
-const randomEncounterWalk = (areas, _player) => {
+const randomEncounterWalk = (areas, _player, setPageContainerClassName) => {
+  setPageContainerClassName("Walk")
   const forestPathArea = areas[7];
   const forestExit = areas[8];
 

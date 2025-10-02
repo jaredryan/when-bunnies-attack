@@ -35,10 +35,10 @@ export const wonGameMessage = (hasCarrot) => {
   ]
 
   const middle = hasCarrot ? [
-    "Fine...",
+    `"Fine..."`,
     `You pull a carrot out of your bag and kneel down.`,
-    "Here you go, little buddy.",
-    "You get up with a small smile.",
+    `"Here you go, little buddy."`,
+    `You get up with a small smile.`,
   ] : [
     `"Awww...sorry little guy. I don't have anything."`,
   ]
@@ -77,9 +77,8 @@ export const wonGameMessage = (hasCarrot) => {
 export const swRoom0EntryMessage1 = [
   `"Ughhh...my head hurts."`,
   `As you wake up, you look around, and see that you are in a drab room.`,
-  `Oh so very drab.`,
   `"Clearly, the designer of this room watched a lot of HGTV."`,
-  `So very grey. And beige. With a splash of sage green on the bedstand. It's borderline sterile.`,
+  `Grey. And beige. Neutral wood. So very...neutral. It's borderline sterile.`,
   `It's just as off-putting as the headache you've got, which just reminded you that it's here to stay.`,
   `"Well, this sucks. And uh...I don't exactly remember how I got here, and I don't know this room."`,
   `Unsure if you just partied too hard last night or got kidnapped, you scratch your head.`,

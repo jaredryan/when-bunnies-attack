@@ -6,8 +6,8 @@ function Event(name, consequence, argumentsArray, removable, nextEvent) {
   this.removable = removable;
   this.nextEvent = nextEvent;
 
-  this.trigger = (player) => {
-    return this.consequence(...this.arguments, player);
+  this.trigger = (player, setPageContainerClassName) => {
+    return this.consequence(...this.arguments, player, setPageContainerClassName);
   };
 }
 

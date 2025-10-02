@@ -98,7 +98,7 @@ const Battle = ({
         <div className="enemyStatus">
           <h2>{enemy.name}</h2>
           <div className="enemyInfoContainer">
-            <div className={`enemyImage ${enemy.name.split(/[\s,]+/).join('')}`} />
+            <div className={`enemyImage ${enemy.name.split(/[\s,]+/).join('')}${className === "Walk" ? "Walk" : ''}`} />
             <div className="attributes">
               <div className="attributeRow">
                 <h3 className="attribute">HP:</h3>

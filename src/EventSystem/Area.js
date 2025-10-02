@@ -20,7 +20,7 @@ function Area(name, mapName, connectedAreas, number, events, story, visited = fa
       : { text: null, actions: [], encounter: null };
   };
 
-  this.runEvent = (player, eventIndex) => {
+  this.runEvent = (player, eventIndex, setPageContainerClassName) => {
     const event = this.events[eventIndex];
 
     // Handle event list in area: if it's a one-time shot or leads
@@ -31,7 +31,7 @@ function Area(name, mapName, connectedAreas, number, events, story, visited = fa
       this.events.splice(eventIndex, 1);
     }
 
-    return event.trigger(player);
+    return event.trigger(player, setPageContainerClassName);
   };
 }
 
