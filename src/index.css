@@ -27,9 +27,18 @@
   --backgroundsecondaryrgb: 255, 248, 220;
   --font: black;
   --primaryfont: darkorange;
-  
 
   color: var(--font);
+}
+
+.dark, .dark * {
+  --background: black;
+  --backgroundrgb: 0, 0, 0;
+  --backgroundsecondary: rgb(55, 55, 55);
+  --backgroundsecondaryrgb: 55, 55, 55;
+  --tertiary: grey;
+  --tertiarylight: darkgrey;
+  --font: white;
 }
 
 *:focus {
@@ -403,7 +412,7 @@ dialog.battleModal {
 .gameContainer,
 .winnerContainer,
 .loserContainer {
-  background-color: rgba(var(--backgroundrgb), 0.8);
+  background-color: rgba(var(--backgroundrgb), 0.875);
   border-radius: 6px;
 }
 
@@ -1115,16 +1124,6 @@ dialog.battleModal::backdrop {
   opacity: 0;
   -webkit-animation: appear 0.001s forwards 1.5s;
           animation: appear 0.001s forwards 1.5s;
-}
-
-.battleTransitionOverlay {
-  background-color: black;
-  z-index: 2;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
 }
 
 .battleTransitionOverlay {
