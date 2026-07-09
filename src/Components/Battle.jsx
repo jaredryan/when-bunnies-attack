@@ -106,6 +106,9 @@ const Battle = ({
                   {enemy.hp} / {enemy.maxHp}
                 </h3>
               </div>
+              <div className={`hpBar${enemy.hp / enemy.maxHp <= 0.25 ? ' critical' : ''}`}>
+                <div className="hpBarFill" style={{ width: `${Math.max(0, (enemy.hp / enemy.maxHp) * 100)}%` }} />
+              </div>
               <div className="attributeRow">
                 <h3 className="attribute">Attack:</h3>
                 <h3 className="value">
@@ -140,6 +143,9 @@ const Battle = ({
               <h3 className="value">
                 {player.hp} / {player.maxHp}
               </h3>
+            </div>
+            <div className={`hpBar player${player.hp / player.maxHp <= 0.25 ? ' critical' : ''}`}>
+              <div className="hpBarFill" style={{ width: `${Math.max(0, (player.hp / player.maxHp) * 100)}%` }} />
             </div>
             <div className="attributeRow">
               <h3 className="attribute">Attack:</h3>

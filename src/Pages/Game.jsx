@@ -78,10 +78,9 @@ const Game = ({ endGame, setClassName }) => {
     }
   }, [player.hasWon, player.hasDied, endGame]);
 
-  useEffect(
-    () => setClassName(pageContainerClassName),
-    [setClassName, pageContainerClassName]
-  );
+  useEffect(() => {
+    setClassName(pageContainerClassName);
+  }, [setClassName, pageContainerClassName]);
 
   // every time the area changes, rerun decision loop with new area
   useEffect(() => {
@@ -198,6 +197,10 @@ const Game = ({ endGame, setClassName }) => {
           }}
         />
       )}
+      <div className="journalHeader">
+        <span className="journalEyebrow">Field Note</span>
+        <h3 className="journalRoomName">{area.name}</h3>
+      </div>
       <DialogueBox
         lines={text || []}
         onDone={() => {
@@ -293,7 +296,7 @@ const Game = ({ endGame, setClassName }) => {
             <div className="attributeRow">
               <h3 className="attribute">Items:</h3>
               <button
-                className="map"
+                className="satchel-toggle"
                 onClick={() => {
                   if (inventoryIsOpen) {
                     closeInventory();

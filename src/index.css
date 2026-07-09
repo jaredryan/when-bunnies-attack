@@ -15,18 +15,50 @@
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  --primary: darkorange;
-  --primarylight: orange;
-  --secondary: lightgreen;
-  --secondarylight: palegreen;
-  --tertiary: blanchedalmond;
-  --tertiarylight: cornsilk;
-  --background: white;
-  --backgroundrgb: 255, 255, 255;
-  --backgroundsecondary: cornsilk;
-  --backgroundsecondaryrgb: 255, 248, 220;
-  --font: black;
-  --primaryfont: darkorange;
+
+  /* Tier 1 — World / Field Guide base (used everywhere) */
+  --parchment: #EAE0C8;
+  --parchment-lt: #F4EEDA;
+  --ink: #2B2620;
+  --forest: #3F5D42;
+  --forest-light: #4F7054;
+  --rust: #A34428;
+  --rust-dark: #7A331D;
+  --brass: #A6822E;
+  --brass-light: #B99A4A;
+  --slate: #6E6455;
+  --slate-light: #8B8171;
+
+  /* Tier 2 — Bunny Pop accent (sparing: battle, enemy cards, danger states) */
+  --blush: #EDB6C2;
+  --mint: #AEDCC9;
+  --lavender: #C9B8E0;
+  --pop-red: #E24B4B;
+  --pop-red-dark: #7A1F1F;
+
+  /* Motif — stamps/labels/warnings, borrowed sparingly */
+  --caution: #D9A93B;
+  --steel: #7C8079;
+
+  /* Type */
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Vollkorn', serif;
+  --font-utility: 'Special Elite', monospace;
+
+  /* Existing variable names, repointed to the new palette so every
+     selector that already references them updates automatically. */
+  --primary: var(--forest);
+  --primarylight: var(--forest-light);
+  --secondary: var(--brass);
+  --secondarylight: var(--brass-light);
+  --tertiary: var(--slate);
+  --tertiarylight: var(--slate-light);
+  --background: var(--parchment-lt);
+  --backgroundrgb: 244, 238, 218;
+  --backgroundsecondary: var(--parchment);
+  --backgroundsecondaryrgb: 234, 224, 200;
+  --font: var(--ink);
+  --primaryfont: var(--rust);
 
   color: var(--font);
 }
@@ -43,6 +75,23 @@
 
 *:focus {
   outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+.room.interactive:focus-visible {
+  outline: 3px solid var(--rust);
+  outline-offset: 3px;
 }
 
 * a {
@@ -145,6 +194,13 @@ button.gameButton {
   color: var(--font);
   margin: 24px auto 0;
   padding: 8px 24px;
+  font-family: var(--font-utility);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 2px solid var(--ink);
+  -webkit-box-shadow: 0 3px 0 rgba(43, 38, 32, 0.3);
+          box-shadow: 0 3px 0 rgba(43, 38, 32, 0.3);
 }
 
 button:disabled {
@@ -166,11 +222,22 @@ button:disabled {
 }
 
 .actionContainer.primary button {
-  min-height: 32px;
+  min-height: 36px;
   line-height: 22px;
-  /* border-bottom: 1px solid var(--primarylight);  */
   background-color: transparent;
-  /* border-radius: 10px; */
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  text-align: left;
+  padding-left: 20px;
+  position: relative;
+}
+
+.actionContainer.primary button::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--rust);
 }
 
 .actionContainer.primary button::after {
@@ -183,16 +250,27 @@ button:disabled {
           transform: translateX(-50%);
   width: calc(100% - 10px);
   height: 1px;
-  background-color: var(--primarylight);
+  background-image: linear-gradient(to right, rgba(43, 38, 32, 0.25) 40%, transparent 0%);
+  background-position: bottom;
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+  background-color: transparent;
 }
-
 
 .actionContainer.primary li:last-child button {
   /* border-bottom: none; */
 }
 
-.actionContainer.primary button:hover {
-  background-color: var(--primarylight);
+.actionContainer.primary button:hover,
+.actionContainer.primary button:focus-visible {
+  background-color: rgba(166, 130, 46, 0.12);
+}
+
+.dialogueOptions button {
+  font-family: var(--font-utility);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 button.gameButton,
@@ -208,11 +286,51 @@ button.primary:hover {
 }
 
 button.map {
-  background-color: var(--secondary);
+  background-color: var(--forest);
+  border: 2px solid var(--ink);
+  box-shadow: 0 2px 0 rgba(43, 38, 32, 0.3);
 }
 
 button.map:hover {
-  background-color: var(--secondarylight);
+  background-color: var(--forest-light);
+}
+
+button.map svg path {
+  fill: var(--parchment-lt);
+}
+
+button.satchel-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+  min-width: unset;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--brass);
+  border: 2px solid var(--ink);
+  box-shadow: 0 2px 0 rgba(43, 38, 32, 0.3);
+}
+
+button.satchel-toggle:hover {
+  background-color: var(--brass-light);
+}
+
+button.satchel-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+button.satchel-toggle svg path {
+  fill: var(--ink);
 }
 
 .dialogueOptions button,
@@ -261,68 +379,116 @@ dialog button.secondary:hover {
           align-items: center;
 }
 
-/* Use this to add a background image in all situations */
-.pageContainer, dialog.battleModal {
-  background-size: cover;
-  background-image: url("./Images/home.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  transition-timing-function: ease;
-  transition-property: background-image;
+/* Backdrop imagery lives on ::before so it can be blurred/tinted
+   independently of the journal panel and battle UI sitting on top. */
+.pageContainer,
+dialog.battleModal {
+  position: relative;
+  overflow: hidden;
 }
 
-.pageContainer {
+.pageContainer::before,
+dialog.battleModal::before {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("./Images/home.jpg");
+  filter: blur(7px) saturate(0.55) brightness(0.62) sepia(0.22);
+  transition-timing-function: ease;
+  transition-property: background-image;
+  z-index: 0;
+}
+
+.pageContainer::before {
   transition-duration: 1s;
   transition-delay: 0s;
 }
 
-dialog.battleModal {
+dialog.battleModal::before {
   transition-duration: 0.01s;
   transition-delay: 1.5s;
+  filter: blur(9px) saturate(0.45) brightness(0.58) grayscale(0.2);
 }
 
-.pageContainer.SW, dialog.battleModal.SW {
+.pageContainer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  mix-blend-mode: multiply;
+  background: linear-gradient(160deg, rgba(63, 93, 66, 0.5), rgba(43, 38, 32, 0.72)),
+    radial-gradient(ellipse at center, transparent 30%, rgba(10, 8, 6, 0.55) 100%);
+}
+
+dialog.battleModal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(163, 68, 40, 0.16);
+  mix-blend-mode: multiply;
+}
+
+.pageContainer > *,
+dialog.battleModal > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pageContainer.SW::before, dialog.battleModal.SW::before {
   background-image: url("./Images/SW.jpg");
 }
 
-.pageContainer.SE, dialog.battleModal.SE {
+.pageContainer.SE::before, dialog.battleModal.SE::before {
   background-image: url("./Images/SE.jpg");
 }
 
-.pageContainer.W, dialog.battleModal.W {
+.pageContainer.W::before, dialog.battleModal.W::before {
   background-image: url("./Images/W.jpg");
 }
 
-.pageContainer.Lab, dialog.battleModal.Lab {
+.pageContainer.Lab::before, dialog.battleModal.Lab::before {
   background-image: url("./Images/Lab.jpg");
 }
 
-.pageContainer.E, dialog.battleModal.E {
+.pageContainer.E::before, dialog.battleModal.E::before {
   background-image: url("./Images/E.jpg");
 }
 
-.pageContainer.NE, dialog.battleModal.NE {
+.pageContainer.NE::before, dialog.battleModal.NE::before {
   background-image: url("./Images/NE.jpg");
 }
 
-.pageContainer.TR, dialog.battleModal.TR {
+.pageContainer.TR::before, dialog.battleModal.TR::before {
   background-image: url("./Images/TR.jpg");
 }
 
-.pageContainer.Path, dialog.battleModal.Path {
+.pageContainer.Path::before, dialog.battleModal.Path::before {
   background-image: url("./Images/Path.jpg");
 }
 
-.pageContainer.Walk, dialog.battleModal.Walk {
+.pageContainer.Walk::before, dialog.battleModal.Walk::before {
   background-image: url("./Images/Walk.jpg");
 }
 
-.pageContainer.Exit, dialog.battleModal.Exit {
+.pageContainer.Exit::before, dialog.battleModal.Exit::before {
   background-image: url("./Images/Exit.jpg");
 }
 
-.pageContainer.HasWon, dialog.battleModal.HasWon {
+.pageContainer.HasWon::before, dialog.battleModal.HasWon::before {
   background-image: url("./Images/HasWon.jpg");
+}
+
+.pageContainer.HasWon::before {
+  filter: blur(3px) saturate(1.05) brightness(1.02);
+}
+
+.pageContainer.HasWon::after {
+  background: linear-gradient(180deg, rgba(244, 238, 218, 0.1), rgba(244, 238, 218, 0.6) 85%);
+  mix-blend-mode: normal;
 }
 
 .enemyInfoContainer {
@@ -332,13 +498,14 @@ dialog.battleModal {
   gap: 40px;
 }
 
-.enemyImage { 
+.enemyImage {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   min-width: 64px;
   min-height: 64px;
-  border-radius: 6px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
 }
 
 
@@ -405,6 +572,106 @@ dialog.battleModal {
 
 .titleContainer {
   text-align: center;
+  padding: 40px 36px;
+  border: 2px solid var(--brass);
+  outline: 1px solid rgba(166, 130, 46, 0.4);
+  outline-offset: -10px;
+}
+
+.titleContainer h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.titleContainer h2 {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 20px;
+}
+
+.loserContainer {
+  padding: 40px 36px;
+  border: 2px solid var(--rust);
+}
+
+.loserContainer h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.loserContainer h2 {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 20px;
+}
+
+.loserContainer::before {
+  content: 'CASE FILE: CLOSED';
+  display: block;
+  font-family: var(--font-utility);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+  margin-bottom: 12px;
+}
+
+.winnerContainer {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.winnerContainer .releaseStage,
+.winnerContainer .caseFileStage {
+  transition: opacity 0.8s ease;
+}
+
+.winnerContainer.release .releaseStage {
+  opacity: 1;
+}
+
+.winnerContainer.release .caseFileStage {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.winnerContainer.settled .releaseStage {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.winnerContainer.settled .caseFileStage {
+  opacity: 1;
+}
+
+.winnerContainer .releaseStage p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.caseFileEyebrow {
+  font-family: var(--font-utility);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 8px;
+}
+
+.winnerContainer .caseFileStage h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 .battleModalContent,
@@ -412,8 +679,52 @@ dialog.battleModal {
 .gameContainer,
 .winnerContainer,
 .loserContainer {
-  background-color: rgba(var(--backgroundrgb), 0.875);
-  border-radius: 6px;
+  background-color: rgba(var(--backgroundrgb), 0.97);
+  border: 1px solid rgba(43, 38, 32, 0.18);
+  border-radius: 3px;
+  box-shadow: 0 14px 34px rgba(10, 8, 6, 0.4);
+}
+
+.gameContainer {
+  position: relative;
+  transform: rotate(-0.35deg);
+}
+
+.gameContainer::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 34px;
+  width: 46px;
+  height: 14px;
+  background: rgba(166, 130, 46, 0.4);
+  transform: rotate(-3deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.journalHeader {
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.journalEyebrow {
+  display: block;
+  font-family: var(--font-utility);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 2px;
+}
+
+.journalRoomName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  text-align: left;
+  border-bottom: 1px solid rgba(43, 38, 32, 0.18);
+  padding-bottom: 8px;
 }
 
 .modalBackgroundOverlay {
@@ -480,8 +791,18 @@ dialog {
   height: 200px;
   overflow: scroll;
   background-color: var(--backgroundsecondary);
-  padding: 20px;
-  border-radius: 6px;
+  padding: 18px 20px;
+  border-radius: 3px;
+  border: 1px solid rgba(43, 38, 32, 0.12);
+  box-shadow: inset 0 1px 3px rgba(43, 38, 32, 0.1);
+  font-family: var(--font-body);
+}
+
+.dialogueContainer .gameLog {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
 }
 
 .dialogueOptions {
@@ -554,10 +875,11 @@ dialog {
   max-width: 400px;
   width: calc(100% - 48px * 2);
   padding: 24px;
-  border: none;
-  border-radius: 6px;
-  -webkit-box-shadow: 0px 4px 10px -4px black;
-          box-shadow: 0px 4px 10px -4px black;
+  border: 2px solid var(--brass);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 10px 28px rgba(10, 8, 6, 0.45);
+          box-shadow: 0 10px 28px rgba(10, 8, 6, 0.45);
+  background-color: var(--background);
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -588,6 +910,7 @@ dialog button.xButton {
   padding: 0;
   font-size: 14px;
   border-radius: 50%;
+  border: 1.5px solid var(--ink);
   height: 20px;
   width: 20px;
   min-width: 20px;
@@ -646,6 +969,10 @@ dialog button {
           align-items: flex-start;
   gap: 12px;
   position: relative;
+  padding: 8px;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(166, 130, 46, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(163, 68, 40, 0.05), transparent 40%);
 }
 
 .mapLegend {
@@ -682,15 +1009,24 @@ dialog button {
 }
 
 .mapLegend li div.primary {
-  background-color: var(--primary);
+  background-color: var(--forest);
+  border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
 }
 
 .mapLegend li div.secondary {
-  background-color: var(--secondary);
+  background-color: var(--parchment-lt);
+  border: 2px solid var(--slate);
+  border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
 }
 
 .mapLegend li div.tertiary {
-  background-color: var(--tertiary);
+  background-color: transparent;
+  border: 2px dashed var(--brass);
+  border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
+}
+
+.mapLegend li div {
+  border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
 }
 
 .row {
@@ -711,11 +1047,12 @@ dialog button {
 }
 
 .room {
-  width: 50px !important;
-  height: 50px !important;
-  padding: 16px;
-  border-radius: 50%;
-  background-color: var(--secondary);
+  width: 54px !important;
+  height: 54px !important;
+  padding: 8px;
+  border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
+  background-color: var(--parchment-lt);
+  border: 2px solid var(--slate);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -725,9 +1062,14 @@ dialog button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transition: background-color 0.5s;
-       -o-transition: background-color 0.5s;
-          transition: background-color 0.5s;
+  -webkit-transition: background-color 0.3s, border-color 0.3s;
+       -o-transition: background-color 0.3s, border-color 0.3s;
+          transition: background-color 0.3s, border-color 0.3s;
+  font-family: var(--font-utility);
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink);
 }
 
 .room.interactive {
@@ -735,23 +1077,37 @@ dialog button {
 }
 
 .room.active {
-  background-color: var(--primary);
+  background-color: var(--forest);
+  border-color: var(--ink);
+  color: var(--parchment-lt);
 }
 
 .room.visible {
-  background-color: var(--tertiary);
+  background-color: transparent;
+  border-style: dashed;
+  border-color: var(--brass);
+  color: var(--brass);
 }
 
-.room.interactive:hover {
-  background-color: var(--secondarylight);
+.room.placeholder {
+  background-color: transparent;
+  border: 1px dotted rgba(43, 38, 32, 0.2);
+  color: transparent;
 }
 
-.room.active.interactive:hover {
-  background-color: var(--primarylight);
+.room.interactive:hover,
+.room.interactive:focus-visible {
+  background-color: rgba(166, 130, 46, 0.18);
 }
 
-.room.visible.interactive:hover {
-  background-color: var(--tertiarylight);
+.room.active.interactive:hover,
+.room.active.interactive:focus-visible {
+  background-color: var(--forest-light);
+}
+
+.room.visible.interactive:hover,
+.room.visible.interactive:focus-visible {
+  background-color: rgba(166, 130, 46, 0.12);
 }
 
 .row.verticalConnectors .room {
@@ -762,7 +1118,7 @@ dialog button {
   width: 25px;
   height: 25px;
   border-radius: 0 !important;
-  background-color: var(--font);
+  background-color: transparent;
 }
 
 .connector.room.vertical {
@@ -778,6 +1134,16 @@ dialog button {
 .horizontal {
   height: 6px !important;
   padding: 0;
+}
+
+.horizontal.connector:not(.placeholder) {
+  height: 4px !important;
+  background-image: repeating-linear-gradient(to right, var(--slate) 0, var(--slate) 6px, transparent 6px, transparent 12px);
+}
+
+.vertical.connector.room:not(.placeholder) {
+  width: 4px !important;
+  background-image: repeating-linear-gradient(to bottom, var(--slate) 0, var(--slate) 6px, transparent 6px, transparent 12px);
 }
 
 .placeholder {
@@ -871,6 +1237,50 @@ dialog button {
   font-weight: 500;
 }
 
+.status {
+  border-top: 1px dashed rgba(43, 38, 32, 0.25);
+  padding-top: 12px;
+}
+
+.attributeRow .attribute {
+  font-family: var(--font-utility);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 400;
+}
+
+.attributeRow .value {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.hpBar {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(43, 38, 32, 0.15);
+  overflow: hidden;
+  margin: 2px 0 4px;
+}
+
+.hpBar .hpBarFill {
+  height: 100%;
+  background-color: var(--forest);
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.hpBar.player .hpBarFill {
+  background-color: var(--brass);
+}
+
+.hpBar.critical .hpBarFill {
+  background-color: var(--pop-red);
+}
+
 .inventoryContainer {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -895,8 +1305,9 @@ dialog button {
 }
 
 .inventoryPopup {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top: 3px solid var(--brass);
   top: 2px;
   position: relative;
   width: calc(100% - 2px * 2);
@@ -912,9 +1323,20 @@ dialog button {
       -ms-flex-align: center;
           align-items: center;
   gap: 12px;
-  -webkit-box-shadow: 0px 0px 2px 0px black;
-          box-shadow: 0px 0px 2px 0px black;
+  -webkit-box-shadow: 0 -6px 20px rgba(10, 8, 6, 0.3);
+          box-shadow: 0 -6px 20px rgba(10, 8, 6, 0.3);
   background-color: var(--background);
+}
+
+.satchelHeader {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  width: calc(100% - 48px);
+  border-bottom: 2px solid var(--brass);
+  padding-bottom: 8px;
+  text-align: left;
 }
 
 button.closeInventory {
@@ -994,6 +1416,8 @@ button.closeInventory svg {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted rgba(43, 38, 32, 0.25);
 }
 
 .inventoryList .empty {
@@ -1014,6 +1438,15 @@ button.closeInventory svg {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.inventoryList .itemDescription {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--slate);
 }
 
 .inventoryList.battle button {
@@ -1030,11 +1463,14 @@ button.closeInventory svg {
 }
 
 .inventoryList .item button {
-  font-size: 16px;
-  padding: 6px;
-  width: 44px;
-  min-width: 44px;
-  /* height: 44px; */
+  font-family: var(--font-utility);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 8px 6px;
+  width: 52px;
+  min-width: 52px;
+  border-radius: 3px;
 }
 
 .actionMenu {
@@ -1097,6 +1533,7 @@ button.closeInventory svg {
   height: unset;
   max-height: unset;
   max-width: 100vw;
+  border: none;
   border-radius: 0;
   background-color: transparent;
   -webkit-animation: show-background 0.001s forwards 1.5s;
@@ -1174,6 +1611,11 @@ dialog.battleModal::backdrop {
 
 .mapModal h3 {
   margin-bottom: 24px;
+  font-family: var(--font-utility);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rust);
 }
 
 dialog.battleModal button.secondary,
@@ -1214,8 +1656,41 @@ dialog.battleModal button.tertiary:hover {
   max-width: 180px;
 }
 
-.enemyStatus {
+.playerStatus h2 {
+  font-family: var(--font-display);
+  font-size: 16px;
+}
 
+.enemyStatus {
+  background: linear-gradient(180deg, #F7DDE3, var(--blush));
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 16px 18px;
+  -webkit-box-shadow: 0 8px 20px rgba(10, 8, 6, 0.4);
+          box-shadow: 0 8px 20px rgba(10, 8, 6, 0.4);
+  position: relative;
+  max-width: 280px;
+}
+
+.enemyStatus::before {
+  content: '\26A0 HOSTILE';
+  position: absolute;
+  top: -12px;
+  right: 14px;
+  background: var(--pop-red);
+  color: #fff;
+  font-family: var(--font-utility);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.enemyStatus h2 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  text-align: left;
+  margin-bottom: 8px;
 }
 
 .attributes {
@@ -1295,6 +1770,23 @@ dialog.battleModal h2 {
 
 .battleMessage .dialogueContainer {
   height: 142px;
+  -webkit-box-shadow: 0 6px 16px rgba(10, 8, 6, 0.35);
+          box-shadow: 0 6px 16px rgba(10, 8, 6, 0.35);
+}
+
+.battleModalContent .actions button.primary {
+  background-color: var(--rust);
+}
+
+.battleModalContent .actions button.primary:hover {
+  background-color: var(--rust-dark);
+}
+
+.battleModalContent .actions button {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .battleModalContentOverlay {
@@ -1786,6 +2278,14 @@ dialog.history.exiting {
   .winnerContainer, .titleContainer, .loserContainer {
     margin: 36px;
   }
+
+  .enemyStatus {
+    max-width: 220px;
+  }
+
+  .journalRoomName {
+    font-size: 17px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1804,5 +2304,16 @@ dialog.history.exiting {
 
   .winnerContainer, .titleContainer, .loserContainer {
     margin: 24px;
+  }
+
+  .room {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 8px;
+  }
+
+  .enemyStatus {
+    max-width: 200px;
+    padding: 12px 14px;
   }
 }

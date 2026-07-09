@@ -14,7 +14,9 @@ const App = () => {
 
   useViewportHeight();
 
-  useEffect(() => window.scrollTo(0, 0), [gameInProgress, hasWon]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [gameInProgress, hasWon]);
 
   const startGame = () => {
     setGameInProgress(true);

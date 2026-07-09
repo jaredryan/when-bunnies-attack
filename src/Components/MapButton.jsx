@@ -65,16 +65,24 @@ const generateMap = ({
     }
 
     if (classNames.includes("interactive")) {
+      const activateRoom = () => {
+        if (currentArea.name === area.name) {
+          cancelMap()
+        } else {
+          setNextArea(area)
+        }
+      };
+
       return (
         <div
           role="button"
           tabIndex="0"
           className={classNames.join(" ")}
-          onClick={() => {
-            if (currentArea.name === area.name) {
-              cancelMap()
-            } else {
-              setNextArea(area)
+          onClick={activateRoom}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              activateRoom();
             }
           }}
         >
