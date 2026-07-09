@@ -184,7 +184,7 @@ const DialogueBox = ({
             onClick={handleSkip}
             disabled={done && current >= lines.length - 1}
           >
-            Skip
+            <span className="btnText">Skip</span>
           </button>
         </div>
       )}

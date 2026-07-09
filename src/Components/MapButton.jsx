@@ -253,7 +253,7 @@ const MapButton = ({
             onClick={cancelMap}
             className="primary"
           >
-            {isChoosingNextArea ? "Stay" : "Close"}
+            <span className="btnText">{isChoosingNextArea ? "Stay" : "Close"}</span>
           </button>
         </div>
       </Modal>

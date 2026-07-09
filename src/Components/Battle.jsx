@@ -70,7 +70,7 @@ const Battle = ({
       setTurnIsFinished(false);
       const text = enemy.attack(player);
       if (player.hasDied) {
-        setText([...text, messages.dieInBattleMessage]);
+        setText([...text, ...messages.dieInBattleMessage]);
       } else {
         setText([...text, messages.battleTurnStartPrompt]);
         setIsPlayersTurn(true);
@@ -83,12 +83,8 @@ const Battle = ({
       open={true}
       className={`battleModal${battleIsOver ? ' fadeOut' : ''}${className ? ` ${className}` : ''}`}
       noClose={true}
-      style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
-      <div
-        className={`battleTransitionOverlay${animationClass}`}
-        style={{ height: "calc(var(--vh, 1vh) * 100)" }}
-      />
+      <div className={`battleTransitionOverlay${animationClass}`} />
       <div className="battleModalContent pagePadding">
         <div
           className={`battleModalContentOverlay${
@@ -167,7 +163,7 @@ const Battle = ({
               className="primary"
               disabled={!isPlayersTurn || !turnIsFinished || battleIsOver}
             >
-              Attack
+              <span className="btnText">Attack</span>
             </button>
             <button
               onClick={() => {
@@ -180,7 +176,7 @@ const Battle = ({
               className="secondary"
               disabled={!isPlayersTurn || !turnIsFinished || battleIsOver}
             >
-              Items
+              <span className="btnText">Items</span>
             </button>
             {noRetreat ? null : (
               <button
@@ -199,7 +195,7 @@ const Battle = ({
                 className="tertiary"
                 disabled={!isPlayersTurn || !turnIsFinished || battleIsOver}
               >
-                Flee
+                <span className="btnText">Flee</span>
               </button>
             )}
           </div>

@@ -148,6 +148,7 @@ const Game = ({ endGame, setClassName }) => {
   }
 
   return (
+    <>
     <div
       className={`gameContainer pagePadding${
         runEncounter ? " fadeToBackground" : " fadeIn"
@@ -167,38 +168,8 @@ const Game = ({ endGame, setClassName }) => {
           !!area.story.length
         }
       />
-      {runEncounter && (
-        <Battle
-          player={player}
-          enemy={encounter?.enemy}
-          noRetreat={encounter?.noRetreat}
-          className={pageContainerClassName}
-          wonBattle={() => {
-            const savedEnemy = encounter?.enemy;
-            setRunEncounter(false);
-            setEncounter(null);
-            setText([
-              ...messages.winBattleMessage(savedEnemy.name),
-              ...savedEnemy.reward(player),
-            ]);
-            isLoopRunning.current = false;
-          }}
-          fledBattle={() => {
-            setRunEncounter(false);
-            setEncounter(null);
-            setText(messages.fleeSuccessMessage);
-            isLoopRunning.current = false;
-          }}
-          lostBattle={() => {
-            setRunEncounter(false);
-            setEncounter(null);
-            isLoopRunning.current = false;
-            endGame(false);
-          }}
-        />
-      )}
       <div className="journalHeader">
-        <span className="journalEyebrow">Field Note</span>
+        <span className="journalEyebrow">Location</span>
         <h3 className="journalRoomName">{area.name}</h3>
       </div>
       <DialogueBox
@@ -280,10 +251,16 @@ const Game = ({ endGame, setClassName }) => {
                 }}
                 setNextArea={(area) => {
                   closeMap();
-                  setText(messages.travelToRoomMessage(area.name));
-                  setPageContainerClassName(area.mapName);
-                  setArea(area);
-                  area.visit();
+                  // Delay the actual travel until the map modal has
+                  // finished its close animation (750ms, see closeMap),
+                  // so the newly-unlocked rooms don't visibly pop in
+                  // on the map while it's still closing.
+                  setTimeout(() => {
+                    setText(messages.travelToRoomMessage(area.name));
+                    setPageContainerClassName(area.mapName);
+                    setArea(area);
+                    area.visit();
+                  }, 750);
                 }}
                 openModal={openMap}
                 onCancel={closeMap}
@@ -333,6 +310,37 @@ const Game = ({ endGame, setClassName }) => {
         </div>
       </div>
     </div>
+    {runEncounter && (
+      <Battle
+        player={player}
+        enemy={encounter?.enemy}
+        noRetreat={encounter?.noRetreat}
+        className={pageContainerClassName}
+        wonBattle={() => {
+          const savedEnemy = encounter?.enemy;
+          setRunEncounter(false);
+          setEncounter(null);
+          setText([
+            ...messages.winBattleMessage(savedEnemy.name),
+            ...savedEnemy.reward(player),
+          ]);
+          isLoopRunning.current = false;
+        }}
+        fledBattle={() => {
+          setRunEncounter(false);
+          setEncounter(null);
+          setText(messages.fleeSuccessMessage);
+          isLoopRunning.current = false;
+        }}
+        lostBattle={() => {
+          setRunEncounter(false);
+          setEncounter(null);
+          isLoopRunning.current = false;
+          endGame(false);
+        }}
+      />
+    )}
+    </>
   );
 };
 

@@ -9,10 +9,10 @@ const History = ({ history, open, openHistory, closeHistory, historyIsOpening, h
         ))}
       </div>
       <button autoFocus onClick={closeHistory}>
-        Close
+        <span className="btnText">Close</span>
       </button>
     </Modal>
-    <button onClick={openHistory}>History</button>
+    <button onClick={openHistory}><span className="btnText">History</span></button>
   </>
 );
 

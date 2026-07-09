@@ -57,7 +57,7 @@ const InventoryList = ({
                 disabled={disabled}
                 className="primary"
               >
-                Use
+                <span className="btnText">Use</span>
               </button>
             </li>
           ))}

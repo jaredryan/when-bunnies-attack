@@ -26,8 +26,10 @@
   --rust-dark: #7A331D;
   --brass: #A6822E;
   --brass-light: #B99A4A;
+  --brass-lighter: #C6A85E;
   --slate: #6E6455;
   --slate-light: #8B8171;
+  --slate-dark: #564D40;
 
   /* Tier 2 — Bunny Pop accent (sparing: battle, enemy cards, danger states) */
   --blush: #EDB6C2;
@@ -44,6 +46,28 @@
   --font-display: 'Fraunces', serif;
   --font-body: 'Vollkorn', serif;
   --font-utility: 'Special Elite', monospace;
+
+  /* Semantic button colors. Every pairing below is verified >= 4.5:1
+     contrast (WCAG AA for normal text). Backgrounds that need light
+     text (forest/rust/slate) get darker hover shades so contrast can
+     only improve; brass needs the *lightened* variant as its default
+     because plain --brass fails contrast with both ink and parchment
+     text, so its hover goes lighter still, for the same reason. */
+  --button-primary-bg: var(--forest);
+  --button-primary-bg-hover: var(--forest-light);
+  --button-primary-fg: var(--parchment-lt);
+
+  --button-secondary-bg: var(--brass-light);
+  --button-secondary-bg-hover: var(--brass-lighter);
+  --button-secondary-fg: var(--ink);
+
+  --button-tertiary-bg: var(--slate);
+  --button-tertiary-bg-hover: var(--slate-dark);
+  --button-tertiary-fg: var(--parchment-lt);
+
+  --button-danger-bg: var(--rust);
+  --button-danger-bg-hover: var(--rust-dark);
+  --button-danger-fg: var(--parchment-lt);
 
   /* Existing variable names, repointed to the new palette so every
      selector that already references them updates automatically. */
@@ -77,21 +101,17 @@
   outline: none;
 }
 
+/* Halo focus ring: a light inner ring plus a dark outer ring, so the
+   indicator reads against any background in this app — parchment
+   panels, dark battle backdrops, and every button color between. */
 *:focus-visible {
-  outline: 2px solid var(--rust);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--parchment-lt), 0 0 0 4px var(--ink);
   border-radius: 2px;
 }
 
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--rust);
-  outline-offset: 3px;
-}
-
 .room.interactive:focus-visible {
-  outline: 3px solid var(--rust);
-  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--parchment-lt), 0 0 0 5px var(--ink);
 }
 
 * a {
@@ -123,21 +143,22 @@ ul {
 p,
 li,
 button {
-  font-family: "Muli", sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 16px;
 }
 
 p,
 li {
-  line-height: 22px;
+  line-height: 26px;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: "Roboto Slab", serif;
+  font-family: var(--font-display);
+  font-weight: 600;
   text-align: center;
   margin: 0;
 }
@@ -205,7 +226,26 @@ button.gameButton {
 
 button:disabled {
   background-color: lightgray !important;
+  /* Buttons default to light (parchment) text for the primary/tertiary/
+     danger variants, which reads fine on forest/slate/rust but fails
+     contrast against this light gray disabled background. Force dark
+     text here regardless of variant; .btnText inherits it via `color:
+     inherit`, so this reaches the span too. */
+  color: var(--ink) !important;
   cursor: default;
+}
+
+/* Special Elite's vertical metrics sit oddly within a normal line box.
+   Nudging the whole button down would shift its border/background too,
+   so button labels are wrapped in a span and only the text is nudged. */
+.btnText {
+  display: inline-block;
+  position: relative;
+  top: 1.5px;
+  /* Same `* { color }` direct-match issue as room text and the
+     xButton icon: without this, the span ignores the button's color
+     and always renders in the default ink. */
+  color: inherit;
 }
 
 .actionMenu .headerContainer {
@@ -276,27 +316,28 @@ button:disabled {
 button.gameButton,
 dialog.dialog button,
 button.primary {
-  background-color: var(--primary);
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-fg);
 }
 
 button.gameButton:hover,
 dialog.dialog button:hover,
 button.primary:hover {
-  background-color: var(--primarylight);
+  background-color: var(--button-primary-bg-hover);
 }
 
 button.map {
-  background-color: var(--forest);
+  background-color: var(--button-primary-bg);
   border: 2px solid var(--ink);
   box-shadow: 0 2px 0 rgba(43, 38, 32, 0.3);
 }
 
 button.map:hover {
-  background-color: var(--forest-light);
+  background-color: var(--button-primary-bg-hover);
 }
 
 button.map svg path {
-  fill: var(--parchment-lt);
+  fill: var(--button-primary-fg);
 }
 
 button.satchel-toggle {
@@ -315,13 +356,13 @@ button.satchel-toggle {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: var(--brass);
+  background-color: var(--button-secondary-bg);
   border: 2px solid var(--ink);
   box-shadow: 0 2px 0 rgba(43, 38, 32, 0.3);
 }
 
 button.satchel-toggle:hover {
-  background-color: var(--brass-light);
+  background-color: var(--button-secondary-bg-hover);
 }
 
 button.satchel-toggle svg {
@@ -330,19 +371,20 @@ button.satchel-toggle svg {
 }
 
 button.satchel-toggle svg path {
-  fill: var(--ink);
+  fill: var(--button-secondary-fg);
 }
 
 .dialogueOptions button,
 dialog button.xButton,
 dialog button.secondary {
-  background-color: var(--tertiary);
+  background-color: var(--button-tertiary-bg);
+  color: var(--button-tertiary-fg);
 }
 
 .dialogueOptions button:hover,
 dialog button.xButton:hover,
 dialog button.secondary:hover {
-  background-color: var(--tertiarylight);
+  background-color: var(--button-tertiary-bg-hover);
 }
 
 @media (max-width: 1000px) {
@@ -391,12 +433,19 @@ dialog.battleModal {
 dialog.battleModal::before {
   content: '';
   position: absolute;
-  inset: -24px;
+  inset: 0;
+  /* Deliberately no negative inset and no transform:scale here. Either
+     one makes this pseudo-element's painted/visual bounds exceed its
+     own box, and inside dialog.battleModal (a flex container) that
+     extra "ink overflow" throws off the flex centering of
+     .battleModalContent during battle — confirmed by isolated testing.
+     At this blur radius (3-4px) a plain inset:0 has no visible edge
+     softness worth trading that stability for. */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url("./Images/home.jpg");
-  filter: blur(7px) saturate(0.55) brightness(0.62) sepia(0.22);
+  filter: blur(3px) saturate(0.85) brightness(0.8) sepia(0.1);
   transition-timing-function: ease;
   transition-property: background-image;
   z-index: 0;
@@ -410,7 +459,7 @@ dialog.battleModal::before {
 dialog.battleModal::before {
   transition-duration: 0.01s;
   transition-delay: 1.5s;
-  filter: blur(9px) saturate(0.45) brightness(0.58) grayscale(0.2);
+  filter: blur(4px) saturate(0.8) brightness(0.75) grayscale(0.08);
 }
 
 .pageContainer::after {
@@ -419,8 +468,8 @@ dialog.battleModal::before {
   inset: 0;
   z-index: 0;
   mix-blend-mode: multiply;
-  background: linear-gradient(160deg, rgba(63, 93, 66, 0.5), rgba(43, 38, 32, 0.72)),
-    radial-gradient(ellipse at center, transparent 30%, rgba(10, 8, 6, 0.55) 100%);
+  background: linear-gradient(160deg, rgba(63, 93, 66, 0.22), rgba(43, 38, 32, 0.35)),
+    radial-gradient(ellipse at center, transparent 45%, rgba(10, 8, 6, 0.4) 100%);
 }
 
 dialog.battleModal::after {
@@ -428,12 +477,12 @@ dialog.battleModal::after {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: rgba(163, 68, 40, 0.16);
+  background: rgba(163, 68, 40, 0.12);
   mix-blend-mode: multiply;
 }
 
 .pageContainer > *,
-dialog.battleModal > * {
+dialog.battleModal .battleModalContent {
   position: relative;
   z-index: 1;
 }
@@ -499,6 +548,9 @@ dialog.battleModal > * {
 }
 
 .enemyImage {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -570,12 +622,20 @@ dialog.battleModal > * {
           justify-content: center;
 }
 
-.titleContainer {
-  text-align: center;
+.titleContainer, .winnerContainer, .loserContainer {
   padding: 40px 36px;
   border: 2px solid var(--brass);
   outline: 1px solid rgba(166, 130, 46, 0.4);
   outline-offset: -10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleContainer p,
+.winnerContainer p,
+.loserContainer p {
+  max-width: 560px;
 }
 
 .titleContainer h1 {
@@ -590,6 +650,8 @@ dialog.battleModal > * {
   text-transform: uppercase;
   color: var(--rust);
   margin-bottom: 20px;
+  position: relative;
+  top: 2px;
 }
 
 .loserContainer {
@@ -609,67 +671,23 @@ dialog.battleModal > * {
   text-transform: uppercase;
   color: var(--rust);
   margin-bottom: 20px;
-}
-
-.loserContainer::before {
-  content: 'CASE FILE: CLOSED';
-  display: block;
-  font-family: var(--font-utility);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--slate);
-  margin-bottom: 12px;
-}
-
-.winnerContainer {
   position: relative;
-  min-height: 420px;
-  overflow: hidden;
-}
-
-.winnerContainer .releaseStage,
-.winnerContainer .caseFileStage {
-  transition: opacity 0.8s ease;
-}
-
-.winnerContainer.release .releaseStage {
-  opacity: 1;
-}
-
-.winnerContainer.release .caseFileStage {
-  opacity: 0;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.winnerContainer.settled .releaseStage {
-  opacity: 0;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.winnerContainer.settled .caseFileStage {
-  opacity: 1;
-}
-
-.winnerContainer .releaseStage p {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.7;
+  top: 2px;
 }
 
 .caseFileEyebrow {
   font-family: var(--font-utility);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--forest);
   margin-bottom: 8px;
+  position: relative;
+  top: 2px;
+  align-self: flex-start;
 }
 
-.winnerContainer .caseFileStage h1 {
+.winnerContainer h1 {
   font-family: var(--font-display);
   font-weight: 700;
 }
@@ -705,13 +723,12 @@ dialog.battleModal > * {
 
 .journalHeader {
   text-align: left;
-  margin-bottom: 12px;
 }
 
 .journalEyebrow {
   display: block;
   font-family: var(--font-utility);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rust);
@@ -833,11 +850,11 @@ dialog {
 }
 
 button.map {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   padding: 0;
   margin: 0;
-  border-radius: 50%;
+  border-radius: 6px;
   min-width: unset;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -851,8 +868,8 @@ button.map {
 }
 
 button.map svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .actionContainer > li,
@@ -902,6 +919,10 @@ dialog.open {
           justify-content: space-between;
 }
 
+dialog button.xButton path {
+  color: var(--button-tertiary-fg);
+}
+
 dialog button.xButton {
   position: absolute;
   top: 4px;
@@ -911,9 +932,11 @@ dialog button.xButton {
   font-size: 14px;
   border-radius: 50%;
   border: 1.5px solid var(--ink);
-  height: 20px;
-  width: 20px;
-  min-width: 20px;
+  background-color: var(--button-tertiary-bg);
+  color: var(--button-tertiary-fg);
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1010,18 +1033,19 @@ dialog button {
 
 .mapLegend li div.primary {
   background-color: var(--forest);
+  border: 2px solid var(--ink);
   border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
 }
 
 .mapLegend li div.secondary {
-  background-color: var(--parchment-lt);
-  border: 2px solid var(--slate);
+  background-color: rgba(166, 130, 46, 0.16);
+  border: 2px solid var(--ink);
   border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
 }
 
 .mapLegend li div.tertiary {
   background-color: transparent;
-  border: 2px dashed var(--brass);
+  border: 2px dashed var(--slate);
   border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
 }
 
@@ -1051,8 +1075,8 @@ dialog button {
   height: 54px !important;
   padding: 8px;
   border-radius: 46% 54% 58% 42% / 54% 44% 56% 46%;
-  background-color: var(--parchment-lt);
-  border: 2px solid var(--slate);
+  background-color: rgba(166, 130, 46, 0.16);
+  border: 2px solid var(--ink);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1066,7 +1090,7 @@ dialog button {
        -o-transition: background-color 0.3s, border-color 0.3s;
           transition: background-color 0.3s, border-color 0.3s;
   font-family: var(--font-utility);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   text-align: center;
   color: var(--ink);
@@ -1082,16 +1106,29 @@ dialog button {
   color: var(--parchment-lt);
 }
 
+/* The universal `* { color }` reset directly targets the <p> inside
+   each room (a direct match always wins over inheritance, regardless
+   of the ancestor's specificity), so room text needs its own explicit
+   color per state rather than inheriting from .room/.room.active/etc. */
+.room p {
+  color: inherit;
+  position: relative;
+  top: 2px;
+}
+
 .room.visible {
   background-color: transparent;
   border-style: dashed;
-  border-color: var(--brass);
-  color: var(--brass);
+  border-color: var(--slate);
+  color: var(--ink);
 }
 
+/* Unknown/unreached rooms are not earned yet — no outline, no label,
+   no hint that a room exists there. The box stays in the DOM only to
+   hold the grid position. */
 .room.placeholder {
   background-color: transparent;
-  border: 1px dotted rgba(43, 38, 32, 0.2);
+  border: none;
   color: transparent;
 }
 
@@ -1124,7 +1161,17 @@ dialog button {
 .connector.room.vertical {
   width: 6px !important;
   padding: 0;
-  margin: 0 22px;
+  margin: 0 25px;
+}
+
+/* MapButton.js reuses the "room" class on vertical connectors purely
+   to borrow a width value. Strip out .room's blob/border/fill styling
+   here so connectors render as clean lines instead of tiny map-tiles. */
+.connector.room {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .vertical {
@@ -1138,12 +1185,12 @@ dialog button {
 
 .horizontal.connector:not(.placeholder) {
   height: 4px !important;
-  background-image: repeating-linear-gradient(to right, var(--slate) 0, var(--slate) 6px, transparent 6px, transparent 12px);
+  background-color: var(--slate);
 }
 
 .vertical.connector.room:not(.placeholder) {
   width: 4px !important;
-  background-image: repeating-linear-gradient(to bottom, var(--slate) 0, var(--slate) 6px, transparent 6px, transparent 12px);
+  background-color: var(--slate);
 }
 
 .placeholder {
@@ -1158,7 +1205,7 @@ dialog button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 48px;
+  gap: 24px;
 }
 
 .twoColumns {
@@ -1173,6 +1220,8 @@ dialog button {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  border-top: 1px dashed rgba(43, 38, 32, 0.25);
+  padding-top: 16px;
 }
 
 .column {
@@ -1189,8 +1238,8 @@ dialog button {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  min-width: 120px;
-  width: 120px;
+  min-width: 100px;
+  width: 100px;
 }
 
 .right {
@@ -1230,25 +1279,22 @@ dialog button {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  height: 32px;
+  height: 35px;
 }
 
 .attributeRow .value {
   font-weight: 500;
 }
 
-.status {
-  border-top: 1px dashed rgba(43, 38, 32, 0.25);
-  padding-top: 12px;
-}
-
 .attributeRow .attribute {
   font-family: var(--font-utility);
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--slate);
   font-weight: 400;
+  position: relative;
+  top: 2px;
 }
 
 .attributeRow .value {
@@ -1287,7 +1333,7 @@ dialog button {
   position: absolute;
   z-index: 4;
   width: 100%;
-  max-width: 400px;
+  max-width: 404px;
   bottom: 0;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -1307,7 +1353,6 @@ dialog button {
 .inventoryPopup {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  border-top: 3px solid var(--brass);
   top: 2px;
   position: relative;
   width: calc(100% - 2px * 2);
@@ -1464,7 +1509,7 @@ button.closeInventory svg {
 
 .inventoryList .item button {
   font-family: var(--font-utility);
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   padding: 8px 6px;
@@ -1529,13 +1574,19 @@ button.closeInventory svg {
 }
 
 .battleModal {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  translate: 0 0;
   width: 100vw;
-  height: unset;
-  max-height: unset;
-  max-width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  max-width: none;
+  max-height: none;
   border: none;
   border-radius: 0;
   background-color: transparent;
+  overflow: hidden;
   -webkit-animation: show-background 0.001s forwards 1.5s;
           animation: show-background 0.001s forwards 1.5s;
 }
@@ -1566,11 +1617,11 @@ dialog.battleModal::backdrop {
 .battleTransitionOverlay {
   background-color: black;
   z-index: 2;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  pointer-events: none;
   opacity: 0;
 }
 
@@ -1609,6 +1660,13 @@ dialog.battleModal::backdrop {
   gap: 24px;
 }
 
+.mapModal button.primary {
+  font-family: var(--font-utility);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
 .mapModal h3 {
   margin-bottom: 24px;
   font-family: var(--font-utility);
@@ -1616,26 +1674,30 @@ dialog.battleModal::backdrop {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--rust);
+  position: relative;
+  top: 2px;
 }
 
 dialog.battleModal button.secondary,
 .inventoryPopup button.secondary,
 .mapModal button.secondary {
-  background-color: var(--secondary);
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-fg);
 }
 
 dialog.battleModal button.secondary:hover,
 .inventoryPopup button.secondary:hover,
 .mapModal button.secondary:hover {
-  background-color: var(--secondarylight);
+  background-color: var(--button-secondary-bg-hover);
 }
 
 dialog.battleModal button.tertiary {
-  background-color: var(--tertiary);
+  background-color: var(--button-tertiary-bg);
+  color: var(--button-tertiary-fg);
 }
 
 dialog.battleModal button.tertiary:hover {
-  background-color: var(--tertiarylight);
+  background-color: var(--button-tertiary-bg-hover);
 }
 
 .enemyStatus,
@@ -1680,7 +1742,7 @@ dialog.battleModal button.tertiary:hover {
   background: var(--pop-red);
   color: #fff;
   font-family: var(--font-utility);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   padding: 3px 8px;
   border-radius: 3px;
@@ -1775,11 +1837,12 @@ dialog.battleModal h2 {
 }
 
 .battleModalContent .actions button.primary {
-  background-color: var(--rust);
+  background-color: var(--button-danger-bg);
+  color: var(--button-danger-fg);
 }
 
 .battleModalContent .actions button.primary:hover {
-  background-color: var(--rust-dark);
+  background-color: var(--button-danger-bg-hover);
 }
 
 .battleModalContent .actions button {
@@ -2307,9 +2370,10 @@ dialog.history.exiting {
   }
 
   .room {
-    width: 42px !important;
-    height: 42px !important;
-    font-size: 8px;
+    width: 46px !important;
+    height: 46px !important;
+    padding: 4px;
+    font-size: 12px;
   }
 
   .enemyStatus {
