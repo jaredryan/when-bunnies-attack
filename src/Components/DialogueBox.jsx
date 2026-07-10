@@ -1,6 +1,21 @@
 import { useState, useEffect, useRef, memo } from "react";
 import History from "./History";
 
+// Presentation-only classifier: does this line of dialogue read as
+// narration or as a quoted/spoken aside, and if spoken, whose voice is
+// it in? Doesn't touch message content, decision loop, or timing —
+// just tells the renderer which classNames to add to a line.
+const SPEAKER_PATTERN = /^([A-Za-z][A-Za-z\s]{0,30}):\s*"/;
+
+export const classifyDialogueLine = (line = "") => {
+  const hasQuote = line.includes('"');
+  const speakerMatch = line.match(SPEAKER_PATTERN);
+  const speaker = speakerMatch ? speakerMatch[1].trim() : null;
+  const isExternalSpeaker = !!speaker && speaker.toLowerCase() !== "you";
+
+  return { hasQuote, speaker, isExternalSpeaker };
+};
+
 export const Typewriter = ({
   text,
   speed,
@@ -72,14 +87,30 @@ export const Typewriter = ({
     return () => clearInterval(interval);
   }, [text, speed, skip, history, onDone, done, scrollRef, paused, alreadySetHasWonImage, setHasWonImage, displayed]);
 
-  let textToDisplay = history;
-  if (displayed) textToDisplay = [...textToDisplay, displayed];
+  // Pair each rendered chunk with the *complete* line it belongs to, not
+  // just the characters typed so far — classification (quote/speaker
+  // styling) has to be known from the first character, using the full
+  // line (`text`), or the indent/highlight would visibly pop in mid-type
+  // once enough characters of a quote mark or speaker prefix had appeared.
+  let entries = history.map((line) => ({ content: line, fullText: line }));
+  if (displayed) entries = [...entries, { content: displayed, fullText: text }];
 
-  return textToDisplay.map((content, index) => (
-    <p key={content + index} className="gameLog">
-      {content}
-    </p>
-  ));
+  return entries.map(({ content, fullText }, index) => {
+    const { hasQuote, isExternalSpeaker } = classifyDialogueLine(fullText);
+    const className = [
+      "gameLog",
+      hasQuote && "quoted",
+      isExternalSpeaker && "externalSpeaker",
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+    return (
+      <p key={content + index} className={className}>
+        {content}
+      </p>
+    );
+  });
 };
 
 const DialogueBox = ({

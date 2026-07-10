@@ -1083,6 +1083,27 @@ dialog {
   color: var(--ink);
 }
 
+/* Spoken/quoted lines read as a journal marginalia aside — indented
+   and italicized — distinct from plain narration above. Applies to
+   any quoted line regardless of speaker (self-talk, "You:", or an
+   NPC), so the base treatment always uses ink; only the border/wash
+   accent below changes for an external speaker. */
+.dialogueContainer .gameLog.quoted {
+  margin-left: 16px;
+  padding: 2px 12px;
+  border-left: 2px solid rgba(43, 38, 32, 0.18);
+}
+
+/* External speaker (NPC/bunny) gets a subtle Bunny Pop accent on top
+   of the quote treatment — a tinted rule + wash, not the text color
+   itself, since these pastels don't have enough contrast to use as
+   foreground text on parchment. */
+.dialogueContainer .gameLog.quoted.externalSpeaker {
+  border-left-color: var(--mint);
+  background-color: rgba(174, 220, 201, 0.15);
+  border-radius: 0 3px 3px 0;
+}
+
 .dialogueOptions {
   display: -webkit-box;
   display: -ms-flexbox;
