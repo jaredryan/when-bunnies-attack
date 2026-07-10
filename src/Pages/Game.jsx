@@ -174,6 +174,7 @@ const Game = ({ endGame, setClassName }) => {
       </div>
       <DialogueBox
         lines={text || []}
+        hasEncounter={!!encounter}
         onDone={() => {
           // After text is done, check if player has won, and for encounters
           // and actions

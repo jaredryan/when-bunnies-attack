@@ -1104,6 +1104,15 @@ dialog {
   border-radius: 0 3px 3px 0;
 }
 
+/* The final line of dialogue right before a battle starts — the bunny
+   (never the player, see isYou check) turning openly hostile. */
+.dialogueContainer .gameLog.quoted.threatening {
+  border-left-color: var(--pop-red);
+  background-color: rgba(226, 75, 75, 0.12);
+  border-radius: 0 3px 3px 0;
+  color: var(--pop-red-dark);
+}
+
 .dialogueOptions {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1975,8 +1984,7 @@ dialog.battleModal button.tertiary:hover {
   background-color: var(--button-tertiary-bg-hover);
 }
 
-.enemyStatus,
-.playerStatus {
+.enemyStatus, .playerStatus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1985,8 +1993,15 @@ dialog.battleModal button.tertiary:hover {
       -ms-flex-direction: column;
           flex-direction: column;
   align-items: center;
-  gap: 24px;
   width: 100%;
+}
+
+.playerStatus {
+  gap: 24px;
+}
+
+.enemyStatus {
+  gap: 4px;
 }
 
 .playerStatus {

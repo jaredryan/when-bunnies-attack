@@ -27,6 +27,7 @@ export const Typewriter = ({
   paused,
   setHasWonImage,
   alreadySetHasWonImage,
+  finalEncounterLineText = null,
 }) => {
   const [displayed, setDisplayed] = useState("");
   const [history, setHistory] = useState([]);
@@ -96,11 +97,20 @@ export const Typewriter = ({
   if (displayed) entries = [...entries, { content: displayed, fullText: text }];
 
   return entries.map(({ content, fullText }, index) => {
-    const { hasQuote, isExternalSpeaker } = classifyDialogueLine(fullText);
+    const { hasQuote, speaker, isExternalSpeaker } = classifyDialogueLine(fullText);
+    const isYou = speaker?.toLowerCase() === "you";
+    // Matched by content, not "is this currently typing" — a positional
+    // check loses the flag the instant this line finishes and moves from
+    // `displayed` into history, which happens right as the battle
+    // triggers. The bunnies get to be threatening, not the player — a
+    // "You:" line never turns red even if it's the last pre-battle line.
+    const isThreatening =
+      hasQuote && !isYou && finalEncounterLineText != null && fullText === finalEncounterLineText;
     const className = [
       "gameLog",
       hasQuote && "quoted",
-      isExternalSpeaker && "externalSpeaker",
+      hasQuote && isThreatening && "threatening",
+      hasQuote && isExternalSpeaker && !isThreatening && "externalSpeaker",
     ]
       .filter(Boolean)
       .join(" ");
@@ -122,6 +132,7 @@ const DialogueBox = ({
   paused = false,
   setHasWonImage,
   alreadySetHasWonImage,
+  hasEncounter = false,
 }) => {
   const [current, setCurrent] = useState(0);
   const [done, setDone] = useState(false);
@@ -175,6 +186,11 @@ const DialogueBox = ({
     }
   };
 
+  // Identified by content rather than "is this the current index" so the
+  // flag survives a line moving from displayed → Typewriter's internal
+  // history (which happens right as the battle triggers).
+  const finalEncounterLineText = hasEncounter ? lines[lines.length - 1] : null;
+
   return (
     <div className="dialogueBoxContainer">
       <div ref={scrollRef} className="dialogueContainer">
@@ -184,6 +200,7 @@ const DialogueBox = ({
           skip={skip}
           done={done}
           scrollRef={scrollRef}
+          finalEncounterLineText={finalEncounterLineText}
           onDone={() => {
             setDone(true);
             setHistory((h) => [...h, lines[current]]);
@@ -228,6 +245,7 @@ const arePropsEqual = (prevProps, nextProps) =>
   prevProps.speed === nextProps.speed &&
   prevProps.resetBox === nextProps.resetBox &&
   prevProps.windowOnly === nextProps.windowOnly &&
-  prevProps.paused === nextProps.paused;
+  prevProps.paused === nextProps.paused &&
+  prevProps.hasEncounter === nextProps.hasEncounter;
 
 export default memo(DialogueBox, arePropsEqual);
