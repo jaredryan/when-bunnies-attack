@@ -968,6 +968,15 @@ dialog.battleModal .battleModalContent {
 .gameContainer {
   position: relative;
   transform: rotate(-0.35deg);
+  /* Otherwise the journal card touches the screen edges once the
+     viewport gets narrower than its max-width — Title/Winner/Loser
+     already reserve this same breathing room, gameContainer didn't.
+     width has to shrink to match, since the shared width:100% rule
+     above would otherwise overflow the parent once margin is added
+     on top of it (margin is never included in a percentage width). */
+  width: calc(100% - 96px);
+  margin-left: 48px;
+  margin-right: 48px;
 }
 
 .gameContainer::before {
@@ -2648,6 +2657,12 @@ dialog.history.exiting {
     margin: 36px;
   }
 
+  .gameContainer {
+    width: calc(100% - 72px);
+    margin-left: 36px;
+    margin-right: 36px;
+  }
+
   .enemyStatus {
     max-width: 220px;
   }
@@ -2690,6 +2705,12 @@ dialog.history.exiting {
 
   .winnerContainer, .titleContainer, .loserContainer {
     margin: 24px;
+  }
+
+  .gameContainer {
+    width: calc(100% - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
   }
 
   .room {
