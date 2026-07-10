@@ -225,90 +225,75 @@ const Game = ({ endGame, setClassName }) => {
         setHasWonImage={() => setPageContainerClassName('HasWon')}
         alreadySetHasWonImage={pageContainerClassName === 'HasWon'}
       />
-      <div className="twoColumns">
-        <div className="left column">
-          <div className="status">
-            <div className="attributeRow">
-              <h3 className="attribute">HP:</h3>
-              <h3 className="value">
-                {player.hp} / {player.maxHp}
-              </h3>
-            </div>
-            <div className="attributeRow">
-              <h3 className="attribute">Attack:</h3>
-              <h3 className="value">
-                {player.attackPower[0]} - {player.attackPower[1]}
-              </h3>
-            </div>
-            <div className="attributeRow">
-              <h3 className="attribute">Map:</h3>
-              <MapButton
-                open={mapIsOpen}
-                isChoosingNextArea={isChoosingNextArea}
-                stayInArea={() => {
-                  closeMap();
-                  setText(messages.stayInRoomMessage);
-                }}
-                setNextArea={(area) => {
-                  closeMap();
-                  // Delay the actual travel until the map modal has
-                  // finished its close animation (750ms, see closeMap),
-                  // so the newly-unlocked rooms don't visibly pop in
-                  // on the map while it's still closing.
-                  setTimeout(() => {
-                    setText(messages.travelToRoomMessage(area.name));
-                    setPageContainerClassName(area.mapName);
-                    setArea(area);
-                    area.visit();
-                  }, 750);
-                }}
-                openModal={openMap}
-                onCancel={closeMap}
-                areas={areas}
-                currentArea={area}
-                mapIsOpening={mapIsOpening}
-                mapIsClosing={mapIsClosing}
-              />
-            </div>
-            <div className="attributeRow">
-              <h3 className="attribute">Items:</h3>
-              <button
-                className="satchel-toggle"
-                onClick={() => {
-                  if (inventoryIsOpen) {
-                    closeInventory();
-                  } else {
-                    openInventory();
-                  }
-                }}
-                aria-label="Toggle inventory"
-              >
-                {inventoryIsOpen ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                    {/* <!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
-                    <path d="M88 289.6L64.4 360.2L64.4 160C64.4 124.7 93.1 96 128.4 96L267.1 96C280.9 96 294.4 100.5 305.5 108.8L343.9 137.6C349.4 141.8 356.2 144 363.1 144L480.4 144C515.7 144 544.4 172.7 544.4 208L544.4 224L179 224C137.7 224 101 250.4 87.9 289.6zM509.8 512L131 512C98.2 512 75.1 479.9 85.5 448.8L133.5 304.8C140 285.2 158.4 272 179 272L557.8 272C590.6 272 613.7 304.1 603.3 335.2L555.3 479.2C548.8 498.8 530.4 512 509.8 512z" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                    {/* <!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
-                    <path d="M512 512L128 512C92.7 512 64 483.3 64 448L64 272L576 272L576 448C576 483.3 547.3 512 512 512zM576 224L64 224L64 160C64 124.7 92.7 96 128 96L266.7 96C280.5 96 294 100.5 305.1 108.8L343.5 137.6C349 141.8 355.8 144 362.7 144L512 144C547.3 144 576 172.7 576 208L576 224z" />
-                  </svg>
-                )}
-              </button>
-            </div>
-          </div>
+      <div className="ledger">
+        <div className="ledgerStat">
+          <span className="attribute">HP</span>
+          <span className="value">
+            {player.hp} / {player.maxHp}
+          </span>
         </div>
-        <div className="right column">
-          <div className="actionMenu">
-            <div className="headerContainer">
-              <h3>Actions:</h3>
-            </div>
-            <ul className="actionContainer primary">
-              {mapActions(primaryActions)}
-            </ul>
-          </div>
+        <div className="ledgerStat">
+          <span className="attribute">Attack</span>
+          <span className="value">
+            {player.attackPower[0]} - {player.attackPower[1]}
+          </span>
+        </div>
+        <div className="ledgerButtons">
+          <MapButton
+            open={mapIsOpen}
+            isChoosingNextArea={isChoosingNextArea}
+            stayInArea={() => {
+              closeMap();
+              setText(messages.stayInRoomMessage);
+            }}
+            setNextArea={(area) => {
+              closeMap();
+              // Delay the actual travel until the map modal has
+              // finished its close animation (750ms, see closeMap),
+              // so the newly-unlocked rooms don't visibly pop in
+              // on the map while it's still closing.
+              setTimeout(() => {
+                setText(messages.travelToRoomMessage(area.name));
+                setPageContainerClassName(area.mapName);
+                setArea(area);
+                area.visit();
+              }, 750);
+            }}
+            openModal={openMap}
+            onCancel={closeMap}
+            areas={areas}
+            currentArea={area}
+            mapIsOpening={mapIsOpening}
+            mapIsClosing={mapIsClosing}
+          />
+          <button
+            className="satchel-toggle"
+            onClick={() => {
+              if (inventoryIsOpen) {
+                closeInventory();
+              } else {
+                openInventory();
+              }
+            }}
+            aria-label="Toggle inventory"
+          >
+            {inventoryIsOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                {/* <!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                <path d="M88 289.6L64.4 360.2L64.4 160C64.4 124.7 93.1 96 128.4 96L267.1 96C280.9 96 294.4 100.5 305.5 108.8L343.9 137.6C349.4 141.8 356.2 144 363.1 144L480.4 144C515.7 144 544.4 172.7 544.4 208L544.4 224L179 224C137.7 224 101 250.4 87.9 289.6zM509.8 512L131 512C98.2 512 75.1 479.9 85.5 448.8L133.5 304.8C140 285.2 158.4 272 179 272L557.8 272C590.6 272 613.7 304.1 603.3 335.2L555.3 479.2C548.8 498.8 530.4 512 509.8 512z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                {/* <!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                <path d="M512 512L128 512C92.7 512 64 483.3 64 448L64 272L576 272L576 448C576 483.3 547.3 512 512 512zM576 224L64 224L64 160C64 124.7 92.7 96 128 96L266.7 96C280.5 96 294 100.5 305.1 108.8L343.5 137.6C349 141.8 355.8 144 362.7 144L512 144C547.3 144 576 172.7 576 208L576 224z" />
+              </svg>
+            )}
+          </button>
         </div>
       </div>
+      <ul className="actionContainer primary">
+        {mapActions(primaryActions)}
+      </ul>
     </div>
     {runEncounter && (
       <Battle

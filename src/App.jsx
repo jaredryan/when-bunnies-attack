@@ -11,6 +11,7 @@ const App = () => {
   const [gameInProgress, setGameInProgress] = useState(false);
   const [hasWon, setHasWon] = useState(null);
   const [className, setClassName] = useState('');
+  const [titleShowingCover, setTitleShowingCover] = useState(true);
 
   useViewportHeight();
 
@@ -50,15 +51,29 @@ const App = () => {
     setHasWon(hasWon);
   };
 
-  let page = <Title startGame={startGame} />;
+  let page = <Title startGame={startGame} onCoverChange={setTitleShowingCover} />;
+  let isTitlePage = true;
 
-  if (gameInProgress) page = <Game endGame={endGame} setClassName={setClassName} />;
-  else if (hasWon === false) page = <Loser startGame={restartGame} />;
-  else if (hasWon === true) page = <Winner startGame={restartGame} />;
+  if (gameInProgress) {
+    page = <Game endGame={endGame} setClassName={setClassName} />;
+    isTitlePage = false;
+  } else if (hasWon === false) {
+    page = <Loser startGame={restartGame} />;
+    isTitlePage = false;
+  } else if (hasWon === true) {
+    page = <Winner startGame={restartGame} />;
+    isTitlePage = false;
+  }
+
+  // Title's cover keeps the blurred room-photo backdrop (like gameplay);
+  // its Contents flip side, and Winner/Loser, read as flat "case file"
+  // pages instead.
+  const showFlatBackdrop =
+    !gameInProgress && (!isTitlePage || !titleShowingCover);
 
   return (
     <div
-      className={`pageContainer${className ? ` ${className}` : ''}`}
+      className={`pageContainer${className ? ` ${className}` : ''}${showFlatBackdrop ? ' flatBackdrop' : ''}`}
       style={{ minHeight: "calc(var(--vh, 1vh) * 100)" }}
     >
       {page}

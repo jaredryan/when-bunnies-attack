@@ -2,15 +2,16 @@ const Loser = (props) => (
   <div className="loserContainer pagePadding">
     <div className="caseFileEyebrow">Case File: Closed</div>
     <h1>
-      When Bunnies <span className="emphasis">Win</span>
+      Specimen Contained
     </h1>
-    <h2>Oof. Looks like they got you.</h2>
-    <div>
-      <p>
+    <hr className="caseFileDivider" />
+    <div className="caseFileEyebrow">Details</div>
+    <ul>
+      <li>
         Don't worry. Many others thought: "It's just a harmless little bunny...",
         then promptly died. You're not alone.
-      </p>
-      <p>
+      </li>
+      <li>
         Some even went so far as to use something as barbaric as the "
         <a
           href="https://www.youtube.com/watch?v=tgj3nZWtOfA"
@@ -21,13 +22,14 @@ const Loser = (props) => (
           holy hand grenade
         </a>
         ." How unsettling. Here, we're refined: we use knives and swords instead.
-        And we have a very handy <span className="emphasis">Restart</span> button
+        And we have a very handy <span className="emphasis">Escape</span> button
         below.
-      </p>
-      <button className="gameButton" onClick={props.startGame}>
-        <span className="btnText">Restart Game</span>
-      </button>
-    </div>
+      </li>
+    </ul>
+    <hr className="caseFileDivider" />
+    <button className="gameButton" onClick={props.startGame}>
+      <span className="btnText">Escape</span>
+    </button>
   </div>
 );
 

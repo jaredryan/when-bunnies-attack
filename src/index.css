@@ -27,6 +27,10 @@
   --brass: #A6822E;
   --brass-light: #B99A4A;
   --brass-lighter: #C6A85E;
+  /* Darker than --brass specifically so it's readable as small text on
+     parchment (~5:1) — plain --brass reads fine as a border/accent but
+     fails contrast as foreground text (see button comment below). */
+  --brass-dark: #7F5E1D;
   --slate: #6E6455;
   --slate-light: #8B8171;
   --slate-dark: #564D40;
@@ -208,7 +212,6 @@ button {
   -webkit-transition: background-color 0.5s;
   -o-transition: background-color 0.5s;
   transition: background-color 0.5s;
-  min-width: 115px;
 }
 
 button.gameButton {
@@ -246,19 +249,6 @@ button:disabled {
      xButton icon: without this, the span ignores the button's color
      and always renders in the default ink. */
   color: inherit;
-}
-
-.actionMenu .headerContainer {
-  height: 32px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .actionContainer.primary button {
@@ -306,11 +296,32 @@ button:disabled {
   background-color: rgba(166, 130, 46, 0.12);
 }
 
-.dialogueOptions button {
+.dialogueOptions button,
+.stampButton {
   font-family: var(--font-utility);
   font-size: 12px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  background-color: transparent;
+  color: var(--slate);
+  border: 1px solid var(--slate);
+  padding: 4px 10px;
+  border-radius: 2px;
+  min-width: 78px;
+}
+
+.dialogueOptions button:hover,
+.dialogueOptions button:focus-visible,
+.stampButton:hover,
+.stampButton:focus-visible {
+  background-color: rgba(110, 100, 85, 0.1);
+}
+
+.dialogueOptions button:disabled,
+.stampButton:disabled {
+  background-color: transparent !important;
+  border-color: rgba(110, 100, 85, 0.35);
+  color: rgba(110, 100, 85, 0.5) !important;
 }
 
 button.gameButton,
@@ -374,14 +385,12 @@ button.satchel-toggle svg path {
   fill: var(--button-secondary-fg);
 }
 
-.dialogueOptions button,
 dialog button.xButton,
 dialog button.secondary {
   background-color: var(--button-tertiary-bg);
   color: var(--button-tertiary-fg);
 }
 
-.dialogueOptions button:hover,
 dialog button.xButton:hover,
 dialog button.secondary:hover {
   background-color: var(--button-tertiary-bg-hover);
@@ -400,7 +409,11 @@ dialog button.secondary:hover {
   }
 }
 
-.emphasis {
+.winnerContainer .emphasis {
+  color: var(--forest);
+}
+
+.loserContainer .emphasis {
   color: var(--primaryfont);
 }
 
@@ -419,6 +432,10 @@ dialog button.secondary:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  /* Lets the Title card's page-turn animation (a child rotateY
+     transform) render with 3D depth instead of flattening. */
+  -webkit-perspective: 1400px;
+          perspective: 1400px;
 }
 
 /* Backdrop imagery lives on ::before so it can be blurred/tinted
@@ -540,6 +557,20 @@ dialog.battleModal .battleModalContent {
   mix-blend-mode: normal;
 }
 
+/* Title/Winner/Loser read as calm, conclusive "case file" pages —
+   no room photo behind them. The page itself goes a shade deeper
+   than the card (parchment vs. the card's parchment-lt) so the card
+   still reads as a distinct object sitting on the page, rather than
+   blending into a background of the same tone. */
+.pageContainer.flatBackdrop::before,
+.pageContainer.flatBackdrop::after {
+  content: none;
+}
+
+.pageContainer.flatBackdrop {
+  background-color: var(--parchment);
+}
+
 .enemyInfoContainer {
   display: flex;
   flex-direction: row;
@@ -638,9 +669,40 @@ dialog.battleModal .battleModalContent {
   max-width: 560px;
 }
 
+/* Lab-notes style list: dash-prefixed lines instead of paragraphs. */
+.titleContainer ul,
+.winnerContainer ul,
+.loserContainer ul {
+  width: 100%;
+  max-width: 560px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.titleContainer ul li,
+.winnerContainer ul li,
+.loserContainer ul li {
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.titleContainer ul li::before,
+.winnerContainer ul li::before,
+.loserContainer ul li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--rust);
+}
+
 .titleContainer h1 {
   font-family: var(--font-display);
   font-weight: 700;
+  align-self: flex-start;
+  text-align: left;
 }
 
 .titleContainer h2 {
@@ -654,6 +716,135 @@ dialog.battleModal .battleModalContent {
   top: 2px;
 }
 
+/* Front cover: minimal, title + tagline only, so they get more room to
+   breathe and read bigger than the shared title/eyebrow treatment. */
+.titlePanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Cover sits on the room-photo backdrop (see .flatBackdrop toggling in
+   App.jsx) as a smaller, contained plate rather than a full-bleed card —
+   a dark, semi-transparent panel so light title text reads over the
+   photo, distinct from Contents/Winner/Loser's flat parchment card. */
+.titleContainer.titleCover {
+  position: relative;
+  max-width: 650px;
+  background-color: rgba(43, 38, 32, 0.85);
+  box-shadow: 0 14px 34px rgba(10, 8, 6, 0.5);
+}
+
+.titleContainer {
+  padding-left: 56px !important;
+  padding-right: 56px !important;
+}
+
+.titleContainer.titleCover h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 72px;
+  margin-bottom: 24px;
+  color: var(--parchment-lt);
+  line-height: 80px;
+  align-self: center;
+  text-align: center;
+}
+
+.titleContainer.titleCover h2 {
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  margin-bottom: 0;
+  color: var(--brass);
+}
+
+/* Mounted at the card's right edge, vertically centered — reminiscent
+   of a page corner you'd grab to turn to the next page. */
+.titleCover .flipButton {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  min-width: unset;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--button-danger-bg);
+  color: var(--button-danger-fg);
+  border: 2px solid var(--ink);
+  box-shadow: 0 2px 0 rgba(43, 38, 32, 0.3);
+}
+
+.titleCover .flipButton:hover {
+  background-color: var(--button-danger-bg-hover);
+}
+
+/* Eyebrow and Back share a row so Back naturally sits flush with the
+   same padding-driven inset as everything else, at any breakpoint —
+   no hardcoded offset to keep in sync with the container's padding. */
+.titleContentsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: -2px;
+}
+
+.titleContentsHeader .caseFileEyebrow {
+  margin-bottom: 0;
+}
+
+.titleContents .backButton {
+  margin: 0;
+}
+
+/* Whole-card page-turn: hinges from the left edge (like a book's
+   spine) and swaps the cover/contents markup at the midpoint, when
+   the card is edge-on and effectively invisible. */
+.titleContainer.flipping {
+  -webkit-animation: page-turn 0.6s ease-in-out;
+          animation: page-turn 0.6s ease-in-out;
+  -webkit-transform-origin: left center;
+      -ms-transform-origin: left center;
+          transform-origin: left center;
+}
+
+@-webkit-keyframes page-turn {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  50% {
+    -webkit-transform: rotateY(90deg);
+            transform: rotateY(90deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+
+@keyframes page-turn {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
 .loserContainer {
   padding: 40px 36px;
   border: 2px solid var(--rust);
@@ -662,6 +853,8 @@ dialog.battleModal .battleModalContent {
 .loserContainer h1 {
   font-family: var(--font-display);
   font-weight: 700;
+  align-self: flex-start;
+  text-align: left;
 }
 
 .loserContainer h2 {
@@ -687,18 +880,87 @@ dialog.battleModal .battleModalContent {
   align-self: flex-start;
 }
 
+/* Contents stays neutral/optimistic rather than borrowing Winner's
+   forest — it uses Title's own brass identity (matches the card
+   border) since the outcome hasn't happened yet. */
+.titleContents .caseFileEyebrow {
+  color: var(--brass-dark);
+}
+
+.titleContents .gameButton {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-fg);
+}
+
+.titleContents .gameButton:hover {
+  background-color: var(--button-secondary-bg-hover);
+}
+
+.caseFileDivider {
+  width: 100%;
+  max-width: 560px;
+  border: none;
+  border-top: 1px dashed rgba(43, 38, 32, 0.25);
+  margin: 18px 0;
+}
+
 .winnerContainer h1 {
   font-family: var(--font-display);
   font-weight: 700;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.titleContents h1, .winnerContainer h1, .loserContainer h1 {
+  margin: 0;
+}
+
+.titleContents .gameButton,
+.loserContainer .gameButton,
+.winnerContainer .gameButton {
+  margin-top: 0;
+}
+
+.loserContainer .gameButton {
+  background-color: var(--button-danger-bg);
+  color: var(--button-danger-fg);
+}
+
+.loserContainer .gameButton:hover {
+  background-color: var(--button-danger-bg-hover);
+}
+
+/* Title's plate uses brass by default (the shared rule above); Winner
+   and Loser get their own tone so the three "case file" pages read as
+   distinct outcomes rather than three copies of the same frame. */
+.winnerContainer {
+  border-color: var(--forest);
+  outline-color: rgba(63, 93, 66, 0.4);
+}
+
+.loserContainer {
+  outline: 1px solid rgba(163, 68, 40, 0.4);
+  outline-offset: -10px;
+}
+
+.loserContainer .caseFileEyebrow {
+  color: var(--rust);
 }
 
 .battleModalContent,
+.gameContainer {
+  background-color: rgba(var(--backgroundrgb), 0.97);
+  border: 1px solid rgba(43, 38, 32, 0.18);
+  border-radius: 3px;
+  box-shadow: 0 14px 34px rgba(10, 8, 6, 0.4);
+}
+
+/* Title/Winner/Loser keep their own outset border color (brass/forest/
+   rust, set above) — only the background/shadow are shared here. */
 .titleContainer,
-.gameContainer,
 .winnerContainer,
 .loserContainer {
   background-color: rgba(var(--backgroundrgb), 0.97);
-  border: 1px solid rgba(43, 38, 32, 0.18);
   border-radius: 3px;
   box-shadow: 0 14px 34px rgba(10, 8, 6, 0.4);
 }
@@ -807,11 +1069,10 @@ dialog {
 .dialogueContainer {
   height: 200px;
   overflow: scroll;
-  background-color: var(--backgroundsecondary);
-  padding: 18px 20px;
-  border-radius: 3px;
-  border: 1px solid rgba(43, 38, 32, 0.12);
-  box-shadow: inset 0 1px 3px rgba(43, 38, 32, 0.1);
+  /* No boxed treatment — the journal entry reads as part of the page
+     itself, not a separate text field pasted onto it. */
+  background-color: transparent;
+  padding: 0;
   font-family: var(--font-body);
 }
 
@@ -830,23 +1091,27 @@ dialog {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 16px;
-  margin-top: 24px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .actionContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 12px;
-  min-height: 175px;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 8px;
+  /* Reserve room for up to 2 rows of tickets so the panel doesn't jump
+     when actions slide in/out. */
+  min-height: 80px;
 }
 
 button.map {
@@ -872,12 +1137,8 @@ button.map svg {
   height: 20px;
 }
 
-.actionContainer > li,
 .actionContainer > li > button {
   width: 100%;
-}
-
-.actionContainer > li > button {
   min-width: unset;
   font-size: 16px;
 }
@@ -993,9 +1254,6 @@ dialog button {
   gap: 12px;
   position: relative;
   padding: 8px;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(166, 130, 46, 0.06), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(163, 68, 40, 0.05), transparent 40%);
 }
 
 .mapLegend {
@@ -1024,6 +1282,15 @@ dialog button {
       -ms-flex-align: center;
           align-items: center;
   gap: 8px;
+}
+
+.mapLegend li p {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  margin-bottom: 0;
+  position: relative;
+  top: 2px;
 }
 
 .mapLegend li div {
@@ -1208,7 +1475,10 @@ dialog button {
   gap: 24px;
 }
 
-.twoColumns {
+/* Single horizontal ledger row (HP, Attack, Map, Items) below the
+   dialogue — replaces the old two-column status/actions split, which
+   wasted the panel's width on a narrow fixed-width sidebar. */
+.ledger {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1216,15 +1486,17 @@ dialog button {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  gap: 32px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-top: 1px dashed rgba(43, 38, 32, 0.25);
   padding-top: 16px;
 }
 
-.column {
+.ledgerStat {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1232,36 +1504,34 @@ dialog button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  gap: 2px;
 }
 
-.left {
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  min-width: 100px;
-  width: 100px;
+.ledgerStat .attribute {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--slate);
+  position: relative;
+  top: 2px;
 }
 
-.right {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  max-width: 200px;
+.ledgerStat .value {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
 }
 
-.status {
+.ledgerButtons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  width: 100%;
-  gap: 12px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
 }
 
 .attributeRow {
@@ -1472,9 +1742,6 @@ button.closeInventory svg {
 }
 
 .inventoryList.battle .item {
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
   text-align: left;
 }
 
@@ -1491,7 +1758,9 @@ button.closeInventory svg {
 .inventoryList .itemDescription {
   font-family: var(--font-body);
   font-size: 12.5px;
+  line-height: 1.3;
   color: var(--slate);
+  margin-bottom: 0;
 }
 
 .inventoryList.battle button {
@@ -1512,24 +1781,9 @@ button.closeInventory svg {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  padding: 8px 6px;
-  width: 52px;
-  min-width: 52px;
+  padding: 6px 10px;
   border-radius: 3px;
-}
-
-.actionMenu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 12px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  min-width: unset;
 }
 
 .tooltip {
@@ -1832,6 +2086,12 @@ dialog.battleModal h2 {
 
 .battleMessage .dialogueContainer {
   height: 142px;
+  /* Unlike the main journal page, this floats directly over the
+     blurred battle backdrop rather than an opaque card, so it keeps
+     its own solid background for legibility. */
+  background-color: var(--backgroundsecondary);
+  padding: 14px 16px;
+  border-radius: 4px;
   -webkit-box-shadow: 0 6px 16px rgba(10, 8, 6, 0.35);
           box-shadow: 0 6px 16px rgba(10, 8, 6, 0.35);
 }
@@ -2177,13 +2437,13 @@ dialog.history.exiting {
 .primaryActionButton {
   padding: 4px 18px;
   text-align: left;
-  -webkit-animation: slide-left 0.5s forwards;
-          animation: slide-left 0.5s forwards;
+  -webkit-animation: slide-up 0.5s forwards;
+          animation: slide-up 0.5s forwards;
 }
 
 .primaryActionButton.exiting {
-  -webkit-animation: slide-right 0.5s forwards;
-          animation: slide-right 0.5s forwards;
+  -webkit-animation: slide-down 0.5s forwards;
+          animation: slide-down 0.5s forwards;
 }
 
 @-webkit-keyframes slide-up {
@@ -2338,6 +2598,11 @@ dialog.history.exiting {
     padding: 36px;
   }
 
+  .titleContainer {
+    /* padding-left: 44px !important;
+    padding-right: 44px !important; */
+  }
+
   .winnerContainer, .titleContainer, .loserContainer {
     margin: 36px;
   }
@@ -2348,6 +2613,23 @@ dialog.history.exiting {
 
   .journalRoomName {
     font-size: 17px;
+  }
+}
+
+@media (max-width: 530px) {
+  .titleContainer {
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+  }
+
+  /* Too little room beside the title text at this width for an
+     edge-mounted button — drop it into normal flow instead. */
+  .titleCover .flipButton {
+    position: static;
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    margin: 24px auto 0;
   }
 }
 

@@ -248,14 +248,16 @@ const MapButton = ({
       <Modal open={mapIsOpening || open} onClose={cancelMap} className={`mapModal${mapIsClosing ? ' exiting' : ''}`}>
         {!isChoosingNextArea ? null : <h3>{messages.leaveRoomMapPrompt}</h3>}
         {generateMap({ currentArea, areas, setNextArea, isChoosingNextArea, cancelMap })}
-        <div className="buttonContainer">
-          <button
-            onClick={cancelMap}
-            className="primary"
-          >
-            <span className="btnText">{isChoosingNextArea ? "Stay" : "Close"}</span>
-          </button>
-        </div>
+        {!isChoosingNextArea ? null : (
+          <div className="buttonContainer">
+            <button
+              onClick={cancelMap}
+              className="primary"
+            >
+              <span className="btnText">Stay</span>
+            </button>
+          </div>
+        )}
       </Modal>
       <button className="map" onClick={openModal} aria-label="Map">
         {mapIcon}
