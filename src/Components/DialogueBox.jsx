@@ -226,6 +226,7 @@ const DialogueBox = ({
             historyIsClosing={historyIsClosing}
             openHistory={openHistory}
             closeHistory={closeHistory}
+            finalEncounterLineText={finalEncounterLineText}
           />
           <button
             className="next"

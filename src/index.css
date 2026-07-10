@@ -1076,7 +1076,8 @@ dialog {
   font-family: var(--font-body);
 }
 
-.dialogueContainer .gameLog {
+.dialogueContainer .gameLog,
+.scrollableHistory .gameLog {
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.6;
@@ -1087,8 +1088,10 @@ dialog {
    and italicized — distinct from plain narration above. Applies to
    any quoted line regardless of speaker (self-talk, "You:", or an
    NPC), so the base treatment always uses ink; only the border/wash
-   accent below changes for an external speaker. */
-.dialogueContainer .gameLog.quoted {
+   accent below changes for an external speaker. Same treatment in the
+   History modal's scrollback, so it reads consistently there too. */
+.dialogueContainer .gameLog.quoted,
+.scrollableHistory .gameLog.quoted {
   margin-left: 16px;
   padding: 2px 12px;
   border-left: 2px solid rgba(43, 38, 32, 0.18);
@@ -1098,7 +1101,8 @@ dialog {
    of the quote treatment — a tinted rule + wash, not the text color
    itself, since these pastels don't have enough contrast to use as
    foreground text on parchment. */
-.dialogueContainer .gameLog.quoted.externalSpeaker {
+.dialogueContainer .gameLog.quoted.externalSpeaker,
+.scrollableHistory .gameLog.quoted.externalSpeaker {
   border-left-color: var(--mint);
   background-color: rgba(174, 220, 201, 0.15);
   border-radius: 0 3px 3px 0;
@@ -1106,7 +1110,8 @@ dialog {
 
 /* The final line of dialogue right before a battle starts — the bunny
    (never the player, see isYou check) turning openly hostile. */
-.dialogueContainer .gameLog.quoted.threatening {
+.dialogueContainer .gameLog.quoted.threatening,
+.scrollableHistory .gameLog.quoted.threatening {
   border-left-color: var(--pop-red);
   background-color: rgba(226, 75, 75, 0.12);
   border-radius: 0 3px 3px 0;
